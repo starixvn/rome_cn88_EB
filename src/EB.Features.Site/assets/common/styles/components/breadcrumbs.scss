@@ -1,0 +1,19 @@
+﻿.breadcrumb {
+    background: none;
+    border-radius: 0;
+    padding: 0;
+    overflow: hidden;
+    margin: 0;    
+
+    li {
+        color: #2980b9;
+        position: relative;
+        font-size: 12px;
+
+        + li:before {
+            content: '\276F';
+            color: #333;
+            padding: 0 8px;
+        }
+    }
+}

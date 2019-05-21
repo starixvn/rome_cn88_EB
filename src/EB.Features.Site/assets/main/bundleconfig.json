@@ -1,0 +1,82 @@
+﻿[
+  {
+    "outputFileName": "bundles/default.css",
+    "inputFiles": [
+      "styles/site.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/default-index.css",
+    "inputFiles": [
+      "styles/site.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/default-index.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/default/index-manager.js"
+    ]
+  },
+  
+  {
+    "outputFileName": "bundles/password/change-password.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/aes.js",
+      "scripts/security-helper.js",
+      "scripts/password/change-password.js"
+    ]
+  },
+  {
+    "outputFileName": "bundles/securitycode/change-securitycode.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/aes.js",
+      "scripts/security-helper.js",
+      "scripts/securitycode/change-securitycode.js"
+    ]
+  },
+  {
+    "outputFileName": "bundles/securitycode/verify-securitycode.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/aes.js",
+      "scripts/security-helper.js",
+      "scripts/securitycode/verify-securitycode.js"
+    ]
+  },
+  {
+    "outputFileName": "bundles/home-index.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/home/index-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "bundles/home-index.css",
+    "inputFiles": [
+      "styles/home.css"
+    ]
+  },
+  
+  {
+    "outputFileName": "bundles/security/change-password.css",
+    "inputFiles": [
+      "styles/security/change-password.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/error-page.css",
+    "inputFiles": [
+      "styles/error-page.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/auth/kickout.js",
+    "inputFiles": [
+      "scripts/site-infrastructure.js",
+      "scripts/auth/kickout.js"
+    ]
+  }
+]

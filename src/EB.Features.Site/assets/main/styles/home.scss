@@ -1,0 +1,191 @@
+﻿@import "variables";
+
+body {
+    padding: 20px;
+}
+
+.page-title {
+    line-height: 38px;
+    padding: 0 0 8px;
+}
+
+.two-cols {
+    display: table;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.col {
+    float: left;
+    width: 50%;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    &:first-child {
+        padding-left: 0;
+    }
+
+    &:last-child {
+        padding-right: 0;
+    }
+}
+
+.page {
+    width: 1240px;
+}
+
+// Table
+
+.tbl-style2 {
+    width: 100%;
+}
+
+.tbl-style2 tbody td,
+.tbl-style2 tfoot td {
+    padding: 12px 12px;
+}
+
+.important-announcement,
+.general-announcement {
+    width: 100%;
+
+    .tbl-style2 tbody td,
+    .tbl-style2 tfoot td {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+}
+
+.col-date {
+    width: 140px;
+}
+
+.date-box {
+    height: 40px;
+    padding: 3px 10px;
+    background: #27a67b;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 16px;
+    font-size: 13px;
+}
+
+// Status colors
+.status-active {
+    color: #27a67b;
+}
+
+.status-inactive {
+    color: #8a8a8a;
+}
+
+.status-view {
+    color: #3b3b3b;
+}
+
+.status-suspended {
+    color: #7e1414;
+}
+
+// Announcement
+
+.announcement-title {
+    padding-bottom: 12px;
+    font-size: 16px;
+}
+
+%group {
+    font-weight: bold;
+    line-height: 30px;
+    padding: 0 16px;
+    border-bottom: 1px solid #bfbfbf;
+}
+
+.group-highlight {
+    @extend %group;
+    background-color: #ffe3e2;
+}
+
+.group-date {
+    @extend %group;
+    background-color: #f4f1f1;
+}
+
+.msg-contents {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e5e5e5;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    [class^="icon"] {
+        position: absolute;
+        left: 0;
+        top: 1px;
+        font-size: 14px;
+    }
+    
+    .message {
+        display: table;
+        width: 100%;
+
+        &.public,
+        &.public [class^="icon"] {
+            color: $msg-public;
+        }
+
+        &.private,
+        &.private [class^="icon"] {
+            color: $msg-private;
+        }
+
+        &.special,
+        &.special [class^="icon"] {
+            color: $msg-special;
+        }
+
+        .time,
+        .msg-content {
+            display: table-cell;
+            line-height: 18px;
+        }
+
+        .time {
+            position: relative;
+            width: 132px;
+            padding-left: 24px;
+        }
+
+        .full-content {
+            display: none;
+            line-height: 18px;
+        }
+    }
+}
+
+.view-more {
+    line-height: 30px;
+    background-color: #dedede;
+    text-align: center;
+    color: #333333;
+    font-weight: bold;
+
+    &:hover {
+        background-color: darken(#dedede, 5%);
+        cursor: pointer;
+    }
+
+    .icon-chevron-down {
+        position: relative;
+        top: 2px;
+        margin-left: -2px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+}
+
+.announcements .no-info {
+    padding-bottom: 16px;
+    text-align: center;
+}

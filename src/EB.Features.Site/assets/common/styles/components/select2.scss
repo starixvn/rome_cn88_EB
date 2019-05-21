@@ -1,0 +1,45 @@
+﻿@import "../abstracts/_variables.scss";
+@import "../abstracts/_mixins.scss";
+
+.select2-container--default {
+
+    .select2-dropdown {
+        border-color: $dropdown-border;
+        z-index: 100;
+        @include effect-normal;
+    }
+
+    .select2-selection--single {
+        border-radius: 0;
+        border: 1px solid $border-color;
+        box-shadow: none;
+
+        .select2-selection__rendered {
+            color: $text-color;
+            line-height: 30px;
+        }
+    }
+
+    .select2-results__option {
+        line-height: 16px;
+    }
+
+    .select2-results__option[aria-selected=true], .select2-results__option--highlighted[aria-selected=true] {
+        background-color: $dropdown-bg-active;
+        color: $dropdown-color-active;
+    }
+
+    .select2-results__option--highlighted[aria-selected=false] {
+        background-color: $dropdown-bg-hover;
+        color: $dropdown-color;
+    }
+}
+
+
+.select2-container {
+    line-height: 20px;
+    width: 300px;
+}
+.select2-container .select2-selection--single {
+    height: $height-normal;
+}

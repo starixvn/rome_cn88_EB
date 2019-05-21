@@ -1,0 +1,168 @@
+﻿$icon-version: joh3s3;
+$font-family: Arial, Tahoma, sans-serif;
+$font-size: 13px;
+
+$text-color: #3b3b3b;
+$text-red-color: #9d1c1c;
+
+$link-color: #0072bb;
+$link-hover-color: #B10918;
+
+$border-color: #c8c8c8;
+$border-color-dark: #cecece;
+
+$tab-color: #666;
+$tab-active-color: #c0392b;
+$tab-line: #c0392b;
+
+$height-normal: 30px;
+$height-mobile: 36px;
+
+$btn-bg: #fff;
+$btn-color: #212121;
+$btn-bg-hover: #e1e1e1;
+$btn-color-hover: #212121;
+$btn-bg-hover: darken($btn-bg, 5%);
+
+$btn-submit-bg: #27a67b;
+$btn-submit-color: #fff;
+$btn-submit-bg-hover: darken($btn-submit-bg, 5%);
+
+$btn-secondary-bg: #ca9d48;
+$btn-secondary-color: #fff;
+$btn-secondary-bg-hover: darken($btn-secondary-bg, 5%);
+$btn-secondary-color-hover: #fff;
+$btn-submit-color-hover: #fff;
+
+$btn-back-bg: #d2d2d2;
+$btn-back-color: #3b3b3b;
+$btn-back-bg-hover: darken($btn-back-bg, 5%);
+$btn-back-color-hover: #3b3b3b;
+
+
+$btn-cancel-bg: #ffffff;
+$btn-cancel-color: #737373;
+$btn-cancel-bg-hover: darken($btn-cancel-bg, 5%);
+$btn-cancel-color-hover: #fff;
+$btn-cancel-border-color: #d2d2d2;
+
+
+$dropdown-color: $text-color;
+$dropdown-color-disable: #888;
+$dropdown-bg: #fff;
+$dropdown-bg-hover: #ddd;
+$dropdown-bg-active: #337AB7;
+$dropdown-color-active: #fff;
+$dropdown-border: $border-color;
+
+$table-red-color: #B50000;
+$table-td-hover-color: #f8eb95;
+$table-border-color: #d1d1d1;
+$table-header-bg-color: #666;
+$table-header-color: #fff;
+$table-subheader-bg-color: #3f3f3f;
+$table-subheader-color: #fff;
+$table-compopent-height: 22px;
+$table-compopent-height-large: 28px;
+$table-even-bg: #eae9ee;
+$table-odd-bg: #fff;
+$table-footer-bg: #7f3d1d;
+$table-footer-color: #fff;
+$table-league-bg: #f3f5e0;
+$table-live-bg: #f9ceae;
+
+$table2-header-bg-color: #f5f1f2;
+$table2-header-color: #3b3b3b;
+$table2-header-border-color: #bfbfbf;
+$table2-border-color: #e5e5e5;
+
+$paging-bg: #fff;
+$paging-btn-bg: #979797;
+$paging-btn-color: #fff;
+$paging-btn-bg-hover: #676767;
+$paging-border: #cecece;
+
+$msg-success-bg: #e7fff7;
+$msg-success-color: #2da57e;
+$msg-success-border: #62f1c3;
+
+$msg-info-bg: #f17507;
+$msg-info-color: #4885b4;
+$msg-info-border: #fdd8b7;
+
+$msg-warning-bg: #ffeede;
+$msg-warning-color: #f17507;
+$msg-warning-border: #fdd8b7;
+$msg-warning-icon-color: #f17507;
+
+$msg-error-bg: #ffe2e2;
+$msg-error-color: #7b0f0f;
+$msg-error-border: #fabbbb;
+
+$status-closed: #ccc7ba;
+$status-closedby-pwd-others-bg: #ccc7ba;
+$status-closedby-admin-bg: #b3a2c7;
+$status-closedby-upline-bg: #f79646;
+$status-closedby-otp-sc-bg: #86c5e4;
+$status-suspended: #f8ded7;
+$status-disabled: #A0A97A;
+$status-live: #ffddcc;
+
+$msg-private: #18910b;
+$msg-special: #9d1c1c;
+$msg-public: #333;
+
+$icon-color: #888;
+$icon-color-dark: #333;
+$icon-hover-color: #e38514;
+$icon-disable-color: lighten($icon-color, 20%);
+
+$filter-error-border-color: #e9322d;
+
+// Devices 
+$screen-device-lower768: 767px;
+$screen-device-greater768: 768px;
+$screen-device-greater1024: 1024px;
+
+$content-gutter-width: 24px; // padding-left: 12px; padding-right: 12px;
+$conent-device-lower768: (767px - $content-gutter-width);
+$conent-device-greater768: (768px - $content-gutter-width);
+$conent-device-greater1024: (1024px - $content-gutter-width);
+
+$popup-bg: #fff;
+$popup-border: $border-color;
+
+$pt-col-height: 30px;
+$pt-col-height-has-padding: 24px; // padding top/bottom: 2px
+$pt-col-height-large: 34px;
+$pt-col-height-has-padding-large: 28px;
+$pt-component-height: 22px;
+$pt-component-height-large: 24px;
+$pt-col-highlight-bg: #fae7d3;
+$pt-icon-edit-color: #fff;
+$pt-icon-edit-color-active: #67b4fb;
+$pt-icon-copy-color: #fff;
+$pt-icon-copy-color-active: #67b4fb;
+$pt-icon-copy-color-active-dark: #368ad8;
+$pt-bg: #f8f0e5;
+$pt-border-color: $border-color-dark;
+
+// hint tooltip 
+$hint-success-bg: #dfffe1;
+$hint-success-color: #333;
+$hint-success-border-color: #14b22a;
+$hint-success-border-radius: 2px;
+
+$hint-warning-bg: #FFFFCC;
+$hint-warning-color: #333;
+$hint-warning-border-color: #CC9933;
+$hint-warning-border-radius: 2px;
+
+$hint-error-bg: #ffe8e8;
+$hint-error-color: #333;
+$hint-error-border-color: #e9322d;
+$hint-error-border-radius: 2px;
+
+// Tooltip
+$tooltip-arrow-color: #ececec;
+$tooltip-border: #ccc;

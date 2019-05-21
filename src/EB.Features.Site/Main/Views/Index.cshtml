@@ -1,0 +1,46 @@
+﻿@model IndexViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=@Model.InitialScaleViewPort, user-scalable=yes">
+    <link rel="shortcut icon" type="image/x-icon" href="~/favico.ico" />
+    @StaticResources.RenderStyles("~/assets/common/bundles/common/common")
+    @StaticResources.RenderStyles("~/assets/common/bundles/site-cn88/default")
+    @StaticResources.RenderStyles("~/assets/main/bundles/default-index")
+</head>
+<body>
+    <div id="header">
+        @Html.Partial("~/Main/Views/HeaderNav.cshtml", Model)
+    </div>
+    <nav class="menubar" id="">
+        @Html.Action("MenuBar")
+    </nav>
+    <main class="content" id="content" data-default-url="@Model.DefaultPath">
+        <iframe frameborder="0" id="main" width="100%" height="100%" scrolling="auto" name="main" marginwidth="0" marginheight="0" allowtransparency="true" class="iframe-content"></iframe>
+    </main>
+    <div id="mainPopup" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="icon icon-close close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe width="100%" height="100%" frameborder="0" class="embed-responsive-item" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("~/Main/Views/HiddenFields.cshtml", Model)
+    @Html.Hidden("errorMessage", "Error")
+    @StaticResources.RenderScripts("~/assets/common/bundles/common/common")
+    @StaticResources.RenderScripts("~/assets/common/bundles/site-cn88/default")
+    @StaticResources.RenderScripts("~/assets/main/bundles/default-index")
+</body>
+</html>

@@ -1,0 +1,119 @@
+﻿@import '_variables.scss';
+@import '_mixins.scss';
+
+body {
+	background-color: transparent;
+}
+
+.popup-modal {
+	padding: 20px 0;
+
+	.msg {
+		margin-top: 0;
+		width: 100%;
+	}
+
+	.form-group {
+		line-height: 28px;
+		margin-bottom: 6px;
+		margin-top: 0 !important;
+		padding-left: 0;
+		padding-right: 0;
+
+		[class^="col"] {
+			padding-left: 0;
+			padding-right: 0;
+		}
+	}
+
+	.textbox {
+		@include box-shadow-multiple(none);
+		border: none;
+		border: 1px solid $border-color;
+		/*width: 41.66667%;*/
+		height: $height-normal;
+		background: none;
+		color: $text-color;
+		text-align: right;
+		/*padding-right: 10px;*/
+		width: 100%;
+	}
+
+	.credit-range {
+		padding-left: 10px !important;
+	}
+
+	.value {
+		padding-right: 8px;
+		text-align: right;
+	}
+
+	.list-button {
+		padding: 12px 0 20px;
+		text-align: center;
+
+		[class^='btn'] {
+			float: right;
+			line-height: 28px;
+		}
+
+		.btn-submit {
+			margin-right: 0;
+		}
+	}
+
+	.number-red {
+		color: #ff0000;
+	}
+
+	.status-label{
+		text-align: right;	
+		margin-right: 10px;
+	}
+}
+
+@media only screen and (max-device-width: $screen-device-lower768) {
+	body {
+		font-size: calculateScale($font-size);
+	}
+
+	.msg {
+		padding: calculateScale(8px) calculateScale(8px) calculateScale(8px) calculateScale(36px);
+		margin: calculateScale(12px) 0;
+
+		&:before {
+			font-size: calculateScale(24px);
+			line-height: calculateScale(20px);
+			left: calculateScale(8px);
+			top: calculateScale(8px);
+		}
+	}
+
+	.popup-modal .form-group {
+		line-height: calculateScale(28px);
+		margin-bottom: calculateScale(6px);
+	}
+
+	.popup-modal .textbox {
+		height: calculateScale(28px);
+		line-height: calculateScale(28px);
+		padding-left: calculateScale(8px);
+		border-width: calculateScale(1px);
+		font-size: calculateScale($font-size);
+
+		&:focus {
+			border-width: 0 0 calculateScale(1px) 0;
+		}
+	}
+
+	.popup-modal .list-button {
+		padding: calculateScale(12px) 0 calculateScale(20px);
+	}
+
+	[class^="btn"] {
+		height: calculateScale(28px);
+		margin-right: calculateScale(8px);
+		padding-left: calculateScale(16px);
+		padding-right: calculateScale(16px);
+	}
+}

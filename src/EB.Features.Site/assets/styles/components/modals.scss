@@ -1,0 +1,115 @@
+﻿@import '../abstracts/_variables.scss';
+@import '../abstracts/_mixins.scss';
+@import '../components/buttons.scss';
+
+
+.modal[id^="page-popup"] {
+    position: absolute !important;
+}
+
+#page-popup, .modal {
+    height: auto;
+    @include effect-special;
+}
+
+#modal-draggable-mask {
+    border: dashed 2px #dfdfdf;
+    background-color: transparent;
+    z-index: 2000;
+    border-style: dotted;
+    cursor: move;
+}
+
+.modal-dialog {
+    margin: 112px auto 0;
+
+    &.ex-modal {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.modal-content {
+    border: none;
+    margin: auto;
+    height: 100%;
+    @include border-radius(1px);
+
+    .modal-header {
+        padding: 0;
+        border-bottom: none;
+        background-color: #7e1414;
+        min-height: 41px;
+
+        .icon-close, .close {
+            position: absolute;
+            right: 0;
+            top: 2px;
+            width: 40px;
+            height: 41px;
+            margin-right: 0;
+            color: #fff;
+            opacity: 1;
+            font-size: 12px;
+            font-weight: normal;
+            background-color: #630f0f;
+            text-align: center;
+            outline: none;
+            z-index: 9999;
+        }
+        .close {
+            font-size: 0;
+            &:before {
+                font-family: 'CN88Icon';
+                content: "\e90e";
+                font-size: 12px;
+            }
+        }
+
+        .modal-title {
+            color: #fff;
+            padding: 11px 16px;
+            cursor: move;
+            font-size: 14px;
+            text-transform: uppercase;
+
+            .popup-title:empty {
+                height: 20px;
+                display: block;
+            }
+        }
+    }
+
+    .modal-body {
+        padding: 16px 20px;
+        line-height: 22px;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+
+    .modal-footer {
+        border-top: none;
+        padding: 12px 16px 20px;
+
+        button:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.bootbox .modal-header .modal-title {
+    cursor: default;
+}
+
+@media only screen and (max-device-width : $screen-device-lower768) {
+    .popup-guidelines {
+        width: 95% !important;
+    }
+}
+
+
+@media \0screen\,screen\9 {
+    .modal-dialog {
+        margin: 0 auto !important;
+    }
+}

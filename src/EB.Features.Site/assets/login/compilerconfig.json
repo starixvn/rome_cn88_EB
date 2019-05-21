@@ -1,0 +1,26 @@
+﻿[
+  {
+    "outputFile": "styles/vendors-extensions/login/bootstrap-ex.css",
+    "inputFile": "styles/vendors-extensions/login/bootstrap-ex.scss"
+  },
+  {
+    "outputFile": "styles/vendors/bootstrap.css",
+    "inputFile": "styles/vendors/bootstrap.scss"
+  },
+  {
+    "outputFile": "styles/themes/default.css",
+    "inputFile": "styles/themes/default.scss"
+  },
+  {
+    "outputFile": "styles/themes/event.css",
+    "inputFile": "styles/themes/event.scss"
+  },
+  {
+    "outputFile": "styles/pages/um.css",
+    "inputFile": "styles/pages/um.scss"
+  },
+  {
+    "outputFile": "styles/pages/error3.css",
+    "inputFile": "styles/pages/error3.scss"
+  }
+]

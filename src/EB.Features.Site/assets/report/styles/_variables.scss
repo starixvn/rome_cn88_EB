@@ -1,0 +1,33 @@
+﻿$font-family: Arial, Tahoma, sans-serif;
+$font-size: 13px;
+
+$text-color: #333;
+$text-red-color: #9d1c1c;
+
+$link-color: #045ace;
+$link-hover-color: #F60;
+
+$border-color: #dfdfdf;
+$border-color-dark: #cecece;
+
+$height-normal: 30px;
+$height-mobile: 36px;
+
+$icon-color: #888;
+$icon-color-dark: #333;
+$icon-hover-color: #e38514;
+$icon-disable-color: lighten($icon-color, 20%);
+
+$paging-bg: #fff;
+$paging-item-color: #131212;
+$paging-item-color-hover: #ff0000;
+$paging-item-bg-hover: #ee6e73;
+$paging-border: #666;
+
+// Devices
+$screen-device-lower768: 767px;
+$screen-device-greater768: 768px;
+$screen-device-greater1024: 1024px;
+
+$font-size-mobile: 10.5px;
+$font-size-mobile-input: 16px;

@@ -1,0 +1,16 @@
+﻿@using EB.Features.Shared.Resources
+@using EB.Features.Site.Shared.ViewModels.Components
+@helper Render(PagerViewModel model)
+{
+if (model?.TotalRecords > 0)
+{
+        <div id="report-pager"
+             data-labelpage="@AppResources.Page"
+             data-labelof="@AppResources.of"
+             data-labeldisplayitems="@AppResources.Pager_DisplayItems"
+             data-pageindex="@model.PageIndex"
+             data-pagesize="@model.PageSize"
+             data-totalrecords="@model.TotalRecords">
+        </div>
+}
+}

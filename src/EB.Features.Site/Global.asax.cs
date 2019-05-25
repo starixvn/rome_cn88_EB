@@ -1,4 +1,4 @@
-﻿using EB.Features.ReportsShared;
+﻿using EB.Features.Shared.Configuration;
 using EB.Features.Site.App_Start;
 using EB.Features.Site.Shared;
 using Fanex.Data;
@@ -32,14 +32,14 @@ namespace EB.Features.Site
             DependencyConfig.Init();
             ModelBinders.Binders.DefaultBinder = new QueryEntityModelBinder();
 
-            //DbSettingProviderManager
-            //    .StartNewSession()
-            //    .Use(new OldConnectionStringProvider())
-            //    .UseDefaultDbSettingProvider(resourcePath: AppSettings.StoredProcedurePath)
-            //    .Use((settingKey, commandTimeout) => new WrappingExceptionObjectDb(settingKey, commandTimeout))
-            //    .Run();
+            DbSettingProviderManager
+                .StartNewSession()
+                .Use(new OldConnectionStringProvider())
+                .UseDefaultDbSettingProvider(resourcePath: AppSettings.StoredProcedurePath)
+                .Use((settingKey, commandTimeout) => new WrappingExceptionObjectDb(settingKey, commandTimeout))
+                .Run();
 
-            //GlobalFilters.Filters.Add(new CheckUMFilter());
+            GlobalFilters.Filters.Add(new CheckUMFilter());
 
             StaticResources.Init(GetBuildVersion());
 

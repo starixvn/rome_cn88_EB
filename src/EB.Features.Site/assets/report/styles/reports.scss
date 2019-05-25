@@ -1,0 +1,723 @@
+﻿@import "_variables.scss";
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #ecf0f1;
+    min-height: 100%;
+    height: unset;
+    display: flex;
+}
+
+.wager-report {
+    padding: 20px;
+}
+
+.filter-container {
+    margin-bottom: 20px;
+    background-color: #fff0d7;
+
+    .tab-content {
+        padding: 20px;
+    }
+
+    .filter {
+        padding-top: 0;
+    }
+
+    .page-title {
+        padding: 19px 20px;
+        font-size: 18px;
+        margin-bottom: 0;
+    }
+}
+
+.tblSettlementSummary,
+.tblAccountingSheet {
+    > tbody > tr:last-child > td {
+        border-bottom: none;
+    }
+}
+
+.result-container {
+    background-color: #fff;
+}
+
+.create-form {
+    margin-top: 15px;
+
+    .form-group {
+        margin: 0 0 15px;
+
+        &.list-buttons {
+            width: 350px;
+            text-align: right;
+
+            .btn-submit {
+                margin-right: 0;
+            }
+        }
+
+        &.btn-ex-group {
+            .btn-default, .btn-secondary {
+                width: 172px;
+            }
+        }
+
+        .btn-default, .btn-secondary {
+            width: 112px;
+            margin-right: 4px;
+        }
+    }
+
+    .form-group .control.date {
+        margin-left: 0;
+        width: 158px;
+    }
+
+    .from-date-box > label {
+        display: none;
+    }
+
+    .multiselect.btn-default {
+        width: 350px;
+    }
+
+    .multiselect .multiselect-selected-text {
+        width: 100%;
+    }
+}
+
+.dropdown .dropdown-toggle {
+    width: 350px;
+    padding-left: 10px;
+    text-align: left;
+}
+
+.dropdown-menu {
+    min-width: 170px;
+}
+
+.filter-container .multiselect-container.dropdown-menu {
+    width: 350px;
+}
+
+.tbl-noborder {
+    width: 100%;
+
+    .reportNo {
+        padding-right: 6px;
+    }
+
+    .current {
+        background: #d7f4ff;
+    }
+}
+
+.title-report-detail {
+    padding: 0;
+    border-bottom: 1px solid #ddd;
+    line-height: 56px;
+    margin-bottom: 0;
+
+    .nav-tabs {
+        float: left;
+        border-bottom: none;
+    }
+
+    .nav-tabs > li > a {
+        line-height: inherit;
+        padding: 0 16px;
+    }
+
+    .report-name {
+        padding-right: 24px;
+    }
+
+    .breadcrumb-container {
+        float: right;
+
+        .tooltip.bottom {
+            margin-top: -4px;
+            right: 18px;
+            left: unset !important;
+        }
+
+        .tooltip-arrow {
+            margin-left: 8px;
+        }
+
+        .tooltip-arrow:after {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+        }
+
+        .tooltip-arrow:after {
+            content: '';
+            border-width: 4px;
+            border-bottom-color: #ececec !important;
+            bottom: -6px;
+            border-top-width: 0;
+            margin-left: -4px;
+        }
+    }
+
+    .breadcrumb,
+    .icon-excel {
+        float: right;
+    }
+
+    .icon-excel {
+        position: relative;
+        top: 18px;
+        margin-left: 20px;
+    }
+}
+
+.icon-history {
+    font-size: 16px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.message-modal {
+    box-shadow: none;
+    position: relative;
+
+    .modal-dialog {
+        background-color: #ececec;
+        margin-top: 7px !important;
+    }
+
+    .modal-dialog:before {
+        content: '';
+        display: inline-block;
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+        border-bottom: 6px solid #ccc;
+        top: -4px;
+        right: 20px;
+        position: absolute;
+        z-index: 99999;
+    }
+
+    .modal-dialog:after {
+        content: '';
+        display: inline-block;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #ececec;
+        top: -3px;
+        right: 21px;
+        position: absolute;
+        z-index: 99999;
+    }
+
+    .modal-content {
+        box-shadow: none;
+        background-color: inherit;
+        padding: 0 8px;
+        border: 1px solid #ccc;
+
+        .modal-header .icon-close {
+            background: transparent;
+            color: #3b3b3b;
+            width: unset;
+            height: unset;
+            right: 8px;
+            top: 12px;
+
+            &:before {
+                font-size: 10px;
+                font-weight: bold;
+            }
+        }
+
+        .modal-body {
+            padding: 0 20px 0 0;
+
+            .item-history {
+                padding: 6px 0;
+
+                &:not(:first-child) {
+                    border-top: 1px solid #ccc;
+                }
+            }
+        }
+    }
+}
+
+.report-form {
+    padding-top: 16px;
+
+    .form-group {
+        vertical-align: bottom;
+
+        > label {
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .control.date {
+            margin: 0;
+        }
+    }
+}
+
+.incomplete-settlement {
+    color: #c0392b;
+}
+
+.complete-settlement {
+    color: #27a67b;
+}
+
+.icon-sort-arrow-up {
+    display: inline-block;
+    transform: rotate(180deg);
+}
+
+.tblSettlementSummary {
+    > thead > tr {
+        &:first-child th {
+            border: none;
+            padding-bottom: 4px;
+            color: #333;
+        }
+
+        &:nth-child(2) th {
+            padding: 4px 0 10px;
+            font-size: 12px;
+        }
+
+        > th {
+            font-weight: normal;
+            text-align: center;
+
+            [class*="-settlement"] {
+                padding-bottom: 8px;
+            }
+        }
+    }
+
+    > tbody > tr > td {
+        text-align: center;
+
+        &:first-child {
+            text-align: left;
+            padding: 12px;
+            width: 150px;
+        }
+    }
+}
+
+.nav-tabs > li.report-name:hover:after {
+    width: 0;
+}
+
+.report-detail {
+    padding: 0 20px;
+    background-color: #fff;
+    width: 100%;
+}
+
+.tbl-report {
+    border-top: 1px solid #c8c8c8;
+
+    > thead > tr > th {
+        border-width: 1px;
+        font-weight: normal;
+        padding: 13px 8px;
+    }
+
+    > tbody > tr > td, > tfoot > tr > td {
+        padding: 7px 8px;
+
+        &.profit-margin span {
+            color: #000;
+            padding-left: 10px;
+            &.negative-value{
+                color: #B50000;
+            }
+        }
+    }
+
+    > thead > tr.total > th {
+        color: #fff;
+        background-color: #2C3E50;
+        padding: 7px 8px;
+        text-transform: uppercase;
+    }
+
+    .negative-value {
+        color: #B50000;
+    }
+
+    > thead > tr.total > th.negative-value {
+        color: #ffbeb4;
+    }
+}
+
+.tblAccountingSheet {
+    > thead > tr > th {
+        text-align: center;
+        font-weight: normal;
+        color: #3b3b3b;
+    }
+
+    > tbody > tr > td {
+        text-align: left;
+        padding: 12px;
+    }
+}
+
+.old-report {
+    .menubar {
+        height: 39px;
+    }
+
+    .list-menu {
+        overflow: hidden;
+        width: 100%;
+
+        .menu-item {
+            float: left;
+            border: none;
+
+            &:first-child {
+                background: inherit;
+            }
+        }
+    }
+
+    .sub-menu {
+        padding: 0;
+        background-color: #fff;
+    }
+
+    .new-page-content {
+        min-width: 424px;
+    }
+
+    #tblAccountingSheet {
+        width: 100%;
+        white-space: nowrap;
+    }
+
+    .create-form {
+        padding: 0 20px;
+        margin-top: 0;
+    }
+}
+
+.report-detail .accountingsheet-control {
+    .multiselect .multiselect-selected-text {
+        width: 180px;
+    }
+
+    .dropdown-menu {
+        width: 212px;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .wager-report {
+        .filter-container {
+            width: 400px;
+            margin-right: 20px;
+        }
+
+        .result-container {
+            width: 480px;
+        }
+
+        .filter-container, .result-container {
+            display: inline-block;
+            vertical-align: top;
+        }
+    }
+}
+
+// For Phone
+body.phone {
+    background-color: #fff;
+
+    .result-tabs {
+        display: none;
+    }
+
+    .wager-report {
+        width: 100%;
+        padding: 0;
+
+        .nav-tabs {
+            margin-top: 10px;
+        }
+
+        .btn-group {
+            width: 100%;
+        }
+    }
+
+    .nav.nav-tabs > li > a {
+        padding: 7px 14px 7px;
+    }
+
+    .tab-content > .tab-pane {
+        padding: 12px;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .create-form .btn-group,
+    .btn-group {
+        width: 100%;
+
+        button.multiselect {
+            width: 100%;
+            text-align: left;
+        }
+    }
+
+    .create-form {
+        margin-top: 0;
+        padding: 0 12px;
+
+        .from-date-box,
+        .to-date-box {
+            width: 49.9% !important;
+            float: left;
+        }
+
+        .from-date-box {
+            padding-right: 20px;
+        }
+
+        .from-date-box > label {
+            display: none;
+        }
+
+        .to-date-box {
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .to-date-box label {
+            position: absolute;
+            left: -5px;
+            top: 8px;
+        }
+
+        .form-group .control.date {
+            width: 100%;
+        }
+
+        select {
+            width: 100%;
+            background: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group.list-buttons {
+            width: 100%;
+        }
+
+        .form-group.has-two-buttons .btn-quick-choice {
+            float: left;
+            width: 48%;
+            margin-right: 0;
+
+            &:first-child {
+                margin-right: 4%;
+            }
+        }
+
+        .form-group.has-three-buttons .btn-quick-choice {
+            float: left;
+            width: 30.5%;
+            margin-right: 4%;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+
+        .form-group.list-buttons {
+            margin-top: 20px;
+        }
+
+        .form-group.list-buttons [class^="btn"] {
+            float: left;
+            width: 48%;
+        }
+
+        .form-group.list-buttons .btn-default {
+            margin-right: 4%;
+        }
+    }
+
+    .tblSettlementSummary {
+        > thead > tr th {
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: transparent;
+        }
+
+        > tbody > tr > td {
+            padding: 8px 0;
+
+            &:first-child {
+                width: 120px;
+                padding: 8px 0;
+            }
+        }
+    }
+
+    .tblAccountingSheet {
+        > thead > tr th {
+            padding-top: 0;
+            padding-bottom: 10px;
+            background-color: transparent;
+        }
+
+        > tbody > tr > td {
+            padding: 8px 0;
+        }
+
+        .reportNo {
+            padding-right: 4px;
+        }
+    }
+    // Settled Wager
+    .page-title-mobile {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .report-form {
+        padding: 12px;
+
+        .form-group .control.date {
+            width: 100%;
+        }
+
+        .btn-submit {
+            width: 100%;
+        }
+
+        .from-date-box .bootstrap-datetimepicker-widget.dropdown-menu {
+            right: 0 !important;
+            left: auto !important;
+
+            &:before {
+                left: auto;
+                right: 6px;
+            }
+
+            &:after {
+                left: auto;
+                right: 7px;
+            }
+        }
+    }
+
+    .tbl-report {
+        border-top: none;
+
+        > thead > tr.total > th {
+            padding: 13px 8px;
+            color: #3B3B3B;
+            font-weight: bold;
+            background-color: #ECF4E2;
+        }
+
+        > thead > tr.total > th.negative-value {
+            color: #B50000;
+        }
+
+        .username {
+            min-width: 71px;
+        }
+
+        .username .downline-link {
+            display: block;
+            word-break: break-all;
+        }
+
+        .stack-row .negative-value {
+            color: #3B3B3B;
+
+            .st-cell-value {
+                color: #B50000;
+            }
+        }
+
+        .st-cell-label .more-info:before {
+            margin-top: -8px;
+            font-size: 16px;
+        }
+    }
+
+    .wager-report .tab-content.main-content {
+        padding: 12px;
+    }
+
+    .pagination {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    &.old-report {
+        .menubar {
+            display: none;
+        }
+
+        .new-page-content {
+            top: 0;
+            min-width: 100%;
+
+            .create-filter {
+                padding-top: 0;
+            }
+
+            .nav-tabs > li {
+                width: 50%;
+            }
+        }
+
+        .old-report-filter {
+            .page-title {
+                display: none;
+            }
+
+            .nav-tabs {
+                display: none;
+            }
+
+            #dropdown-wagerRptType {
+                width: 100%;
+            }
+
+            .create-form {
+                padding: 0;
+            }
+
+            #wagerReport {
+                padding: 0 0 15px;
+            }
+        }
+    }
+}
+

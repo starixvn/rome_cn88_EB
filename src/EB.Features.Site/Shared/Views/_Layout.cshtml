@@ -1,0 +1,21 @@
+﻿@{
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <meta name="format-detection" content="telephone=no">
+    <title>@ViewBag.Title</title>
+    @StaticResources.RenderStyles("~/assets/common/bundles/common/common")
+    @StaticResources.RenderStyles("~/assets/common/bundles/site-features/default")
+    @RenderSection("Styles", required: false)
+</head>
+<body @Html.Raw(EB.Features.Site.Shared.Helpers.BrowserManager.BuildMobileHtmlClass())>
+    @RenderBody()
+    @StaticResources.RenderScripts("~/assets/common/bundles/common/common")
+    @StaticResources.RenderScripts("~/assets/common/bundles/site-features/default")
+    @RenderSection("Scripts", required: false)
+    @*@Html.Raw(Fanex.Logging.LogManager.RenderJavascriptLogger())*@
+</body>
+</html>

@@ -1,5 +1,9 @@
 ﻿using EB.Features.Main.Services;
+using EB.Features.Reports.Services;
+using EB.Features.Shared.DataAccesses;
+using EB.Features.Shared.Services;
 using EB.Features.Site.Shared;
+using Fanex.Data.Repository;
 using Fanex.NAP.Core.Context;
 using Fanex.NAP.Core.Service.Impl;
 using Fanex.NAP.Core.Service.Interface;
@@ -30,9 +34,12 @@ namespace EB.Features.Site.App_Start
             var container = new Container();
 
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+
             RegisterMediator(container);
             RegisterNapConfiguration(container);
             RegisterMainModule(container);
+            RegisterShareModule(container);
+            RegisterReportModule(container);
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
@@ -43,6 +50,22 @@ namespace EB.Features.Site.App_Start
             container.Verify();
 
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+        }
+
+        private static void RegisterShareModule(Container container)
+        {
+            container.Register<IDynamicRepository, DynamicRepository>();
+            container.Register<SportGroupDataAccess, SportGroupDataAccessImpl>();
+            container.Register<BettypeGroupService, BettypeGroupServiceImpl>();
+            container.Register<CacheRefService, CacheRefServiceImpl>();
+            container.Register<ReportDateService, ReportDateServiceImpl>();
+            container.Register<SportGroupService, SportGroupServiceImpl>();
+        }
+
+        private static void RegisterReportModule(Container container)
+        {
+            container.Register<IHouseWinLossService, HouseWinLossService>();
+            container.Register<IMatchWinLossService, MatchWinLossService>();
         }
 
         private static void RegisterMainModule(Container container)

@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "styles/reports.css",
+    "inputFile": "styles/reports.scss"
+  },
+  {
+    "outputFile": "styles/security.css",
+    "inputFile": "styles/security.scss"
+  }
+]

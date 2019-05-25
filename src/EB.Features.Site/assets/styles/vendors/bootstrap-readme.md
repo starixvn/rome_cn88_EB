@@ -1,1 +1,0 @@
-excluded some componenets (such as glyphicon, thumbnail, jumbnails, badges, progress-bars, well, tooltip, popovers, carousel, pagination, pager) in bootstrap file 

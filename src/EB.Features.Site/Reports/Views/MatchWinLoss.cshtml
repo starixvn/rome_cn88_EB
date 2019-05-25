@@ -1,17 +1,168 @@
-﻿@{
-    Layout = null;
+﻿@using EB.Features.Shared.Extensions;
+
+@model MatchWinLossReportViewModel
+@{
+    Layout = "~/Shared/Views/_Layout.cshtml";
+    ViewBag.Title = "Match Win Loss Report";
+}
+@section Styles {
+    @StaticResources.RenderStyles("~/assets/report/bundles/reports")
+}
+<div class="report-detail wager-report">
+    <form class="form-inline filter report-form" role="form" id="report-form">
+        @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+        @RenderDatePicker()
+        @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
+        @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
+        <div class="form-group">
+            <label>
+                @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
+                Exclude Test Data
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="@AppResources.Submit" class="btn-submit" />
+        </div>
+    </form>
+    <div class="tab-content main-content" id="tab-main-content">
+        <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
+            <thead class="tableFloatingHeaderOriginal">
+                <tr>
+                    <th class="text-left header"> Bet Type</th>
+                    <th class="text-right header"> Wagers</th>
+                    <th class="text-right header"> Stake</th>
+                    <th class="text-right header"> Valid Stake</th>
+                    <th class="text-right header"> Member Income</th>
+                    <th class="text-right header"> House Income</th>
+                    <th class="text-right header"> Headline Stoke</th>
+                    <th class="text-right header"> Headline Stoke %</th>
+                </tr>
+                @if (Model.IsShowTotalRow)
+                {
+                    <tr class="total">
+                        <th class="text-right header">Grand Total</th>
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Wagers, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @ReportHtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "settlement", true)
+                    </tr>
+                }
+            </thead>
+            @foreach (var row in Model.ReportData.GroupBy(i => i.MatchId))
+            {
+                var firstRowOfGroup = row.ToList();
+                <tr class="match-title-row">
+                    <td class="text-left col-username" colspan="8">
+                        <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
+                        @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().EventInfo))
+                        {
+                            <span class="match-title">@firstRowOfGroup.First().EventInfo</span>
+                        }
+                    </td>
+                </tr>
+
+                foreach (var betType in row)
+                {
+                    <tr>
+                        <td class="text-left">@betType.BetTypeGroupName</td>
+                        @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.HeadlineStock, "settlement")
+
+                        @ReportHtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    </tr>
+                }
+
+            }
+
+            @if (Model.Parlay != null)
+            {
+                <tr class="match-title-row">
+                    <td class="text-left col-username" colspan="8">
+                        <span class="league-title" title="@Model.Parlay.LeagueName">@Model.Parlay.LeagueName</span>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">@Model.Parlay.BetTypeGroupName</td>
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Wagers, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Stake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.ValidStake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.MemberIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HeadlineResult, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HeadlineStock, "settlement")
+
+                    @ReportHtmlHelpers.RenderStockPercentCell(Model.Parlay.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                </tr>
+            }
+            @if (Model.IsShowTotalRow)
+            {
+                <tfoot>
+                    <tr class="total">
+                        <th class="text-right header">Grand Total</th>
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalHeadlineStockPercent, "settlement")
+                    </tr>
+                </tfoot>
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td id="no-data-row" colspan="8"
+                            data-isNoInfo="true"
+                            align="center">
+                            No Information Is Available
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+
+
+</div>
+
+
+@section Scripts{
+    @StaticResources.RenderScripts("~/assets/report/bundles/matchwinloss")
+    <script>
+        var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items.GroupBy(i => i.SportTypeGroup)));
+    </script>
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Report Page</title>
-</head>
-<body>
-    <div>
-    Match Win loss
+@helper RenderDatePicker()
+{
+    <div class="form-group from-date-box">
+        <label>Date</label>
+        <div class="control date">
+            <div id="date-container"
+                 class="input-group date fromdate"
+                 data-mindate="@Model.ReportFilterViewModel.DatePickerViewModel.MinDate.ToShortDate()"
+                 data-maxdate="@Model.ReportFilterViewModel.DatePickerViewModel.MaxDate.ToShortDate()"
+                 data-curentdate="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()">
+                <input type="text"
+                       id="date"
+                       name="Date"
+                       readonly="readonly"
+                       autocomplete="off"
+                       class="ui_nexdatepicker_datetextbox ui_nexdatepicker_fromdate form-control"
+                       value="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()" />
+                <span class="input-group-addon">
+                    <span class="icon-calendar" id="fdate_trigger"></span>
+                </span>
+            </div>
+        </div>
     </div>
-</body>
-</html>
+}

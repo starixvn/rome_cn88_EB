@@ -51,6 +51,6 @@ namespace EB.Features.Site.Shared
             }
 
             return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
-        }        
+        }
     }
 }

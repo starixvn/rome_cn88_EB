@@ -1,0 +1,20 @@
+﻿[
+  {
+    "outputFileName": "bundles/reports.css",
+    "inputFiles": [
+      "styles/reports.css"
+    ]
+  },
+  {
+    "outputFileName": "bundles/matchwinloss.js",
+    "inputFiles": [
+      "components/link-builder.js",
+      "components/single-selection-dropdown.js",
+      "components/daterangepicker.js",
+      "components/client-pager.js",
+      "components/sort.js",
+      "components/filter-toggle.js",
+      "scripts/matchwinloss.js"
+    ]
+  }
+]

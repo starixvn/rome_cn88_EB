@@ -16,9 +16,7 @@ namespace EB.Features.Site.Reports
 {
     public class MainController : BaseController
     {
-        private readonly IMenuService menuService;
-
-        private const string MainViewsPath = "~/Main/Views";
+        private const string ViewsPath = "~/Main/Views";
 
         public MainController(IMediator mediator)
             : base(mediator)
@@ -26,9 +24,9 @@ namespace EB.Features.Site.Reports
         }
 
         public async Task<ActionResult> Index(IndexQuery query)
-            => await ViewAsync(query, $"{MainViewsPath}/Index.cshtml");
+            => await ViewAsync(query, $"{ViewsPath}/Index.cshtml");
 
         public async Task<ActionResult> MenuBar(MenuBarQuery query)
-            => await ViewAsync(query, $"{MainViewsPath}/MenuBar.cshtml");
+            => await ViewAsync(query, $"{ViewsPath}/MenuBar.cshtml");
     }
 }

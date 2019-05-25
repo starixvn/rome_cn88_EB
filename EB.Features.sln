@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Reports", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Main", "src\EB.Features.Main\EB.Features.Main.csproj", "{F172E8CE-BEBF-463B-B20C-C5FF24ECEE03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Shared", "EB.Features.Shared\EB.Features.Shared.csproj", "{E31EBBB6-C646-4491-AC72-FF249AFECF16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Shared", "src\EB.Features.Shared\EB.Features.Shared.csproj", "{E31EBBB6-C646-4491-AC72-FF249AFECF16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

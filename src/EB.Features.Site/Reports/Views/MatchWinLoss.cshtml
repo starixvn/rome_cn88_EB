@@ -1,4 +1,5 @@
 ﻿@using EB.Features.Shared.Extensions;
+@using EB.Features.Shared.Constants;
 
 @model MatchWinLossReportViewModel
 @{
@@ -9,6 +10,15 @@
     @StaticResources.RenderStyles("~/assets/report/bundles/reports")
 }
 <div class="report-detail wager-report">
+    <div class="page-title title-report-detail">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="report-name">@ViewBag.Title</li>           
+        </ul>
+        <div class="breadcrumb-container">
+            <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>            
+        </div>
+    </div>
+
     <form class="form-inline filter report-form" role="form" id="report-form">
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
         @RenderDatePicker()
@@ -24,6 +34,14 @@
             <input type="submit" value="@AppResources.Submit" class="btn-submit" />
         </div>
     </form>
+
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("Excel","Reports")">
+        @Html.Hidden("Date", Model.Query.Date)
+        @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
+        @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
+        @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
+    </form>
+
     <div class="tab-content main-content" id="tab-main-content">
         <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
@@ -45,7 +63,7 @@
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Stake, "settlement")
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.ValidStake, "settlement")
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HouseIncome, "settlement")
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
                         @ReportHtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "settlement", true)
                     </tr>
@@ -59,12 +77,12 @@
                         <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
                         @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().EventInfo))
                         {
-                            <span class="match-title">@firstRowOfGroup.First().EventInfo</span>
+                            <span class="match-title">@("     >>>     " + firstRowOfGroup.First().EventInfo)</span>
                         }
                     </td>
                 </tr>
 
-                foreach (var betType in row)
+                foreach (var betType in Model.MajorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
                 {
                     <tr>
                         <td class="text-left">@betType.BetTypeGroupName</td>
@@ -72,11 +90,41 @@
                         @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
                         @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
                         @HtmlHelpers.RenderNumberCell(betType.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(betType.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.HouseIncome, "settlement")
                         @HtmlHelpers.RenderNumberCell(betType.HeadlineStock, "settlement")
 
                         @ReportHtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
                     </tr>
+                }
+                if (Model.MinorBetType.Any(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                {
+                    var a = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId));
+                    <tr>
+                        <td class="text-left">@(">>")Others</td>
+                        @HtmlHelpers.RenderNumberCell(a.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.HeadlineStock, "settlement")
+
+                        @ReportHtmlHelpers.RenderStockPercentCell(a.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    </tr>
+
+                    foreach (var betType in Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                    {
+                        <tr style="display:none">
+                            <td class="text-left">@betType.BetTypeGroupName</td>
+                            @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.MemberIncome, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.HouseIncome, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.HeadlineStock, "settlement")
+
+                            @ReportHtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                        </tr>
+                    }
                 }
 
             }
@@ -85,7 +133,7 @@
             {
                 <tr class="match-title-row">
                     <td class="text-left col-username" colspan="8">
-                        <span class="league-title" title="@Model.Parlay.LeagueName">@Model.Parlay.LeagueName</span>                        
+                        <span class="league-title" title="@Model.Parlay.LeagueName">@Model.Parlay.LeagueName</span>
                     </td>
                 </tr>
                 <tr>
@@ -94,7 +142,7 @@
                     @HtmlHelpers.RenderNumberCell(Model.Parlay.Stake, "settlement")
                     @HtmlHelpers.RenderNumberCell(Model.Parlay.ValidStake, "settlement")
                     @HtmlHelpers.RenderNumberCell(Model.Parlay.MemberIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HeadlineResult, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HouseIncome, "settlement")
                     @HtmlHelpers.RenderNumberCell(Model.Parlay.HeadlineStock, "settlement")
 
                     @ReportHtmlHelpers.RenderStockPercentCell(Model.Parlay.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
@@ -109,7 +157,7 @@
                         @HtmlHelpers.RenderNumberCell(Model.TotalRow.Stake, "settlement")
                         @HtmlHelpers.RenderNumberCell(Model.TotalRow.ValidStake, "settlement")
                         @HtmlHelpers.RenderNumberCell(Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineResult, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseIncome, "settlement")
                         @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
                         @HtmlHelpers.RenderNumberCell(Model.TotalHeadlineStockPercent, "settlement")
                     </tr>
@@ -151,7 +199,7 @@
                  class="input-group date fromdate"
                  data-mindate="@Model.ReportFilterViewModel.DatePickerViewModel.MinDate.ToShortDate()"
                  data-maxdate="@Model.ReportFilterViewModel.DatePickerViewModel.MaxDate.ToShortDate()"
-                 data-curentdate="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()">
+                 data-currentdate="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()">
                 <input type="text"
                        id="date"
                        name="Date"

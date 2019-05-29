@@ -1,4 +1,5 @@
 ﻿using EB.Features.Shared.Model;
+using EB.Features.Site.Reports.ViewModel;
 using Fanex.NAP.Core.Web.Attribute;
 using MediatR;
 using Resources;
@@ -52,5 +53,19 @@ namespace EB.Features.Site.Shared
 
             return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
         }
+
+        protected async Task<FileContentResult> ExcelView(IRequest<ExcelFileViewModel> message)
+        {
+            var baseQuery = message as BaseQuery;
+            if (baseQuery != null && !baseQuery.IsValid())
+            {
+                return GetExcelContent(new ExcelFileViewModel(InvalidExcelFileName, new byte[] { }));
+            }
+
+            return GetExcelContent(await mediator.Send(message));
+        }
+
+        private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)
+            => File(viewModel.Content, viewModel.ContentType, viewModel.Name);
     }
 }

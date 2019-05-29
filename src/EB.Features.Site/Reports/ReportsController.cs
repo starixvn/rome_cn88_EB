@@ -27,5 +27,7 @@ namespace EB.Features.Site.Reports
         public async Task<ActionResult> MatchWinLoss(MatchWinLossQuery query)
             => await ViewAsync(query, $"{ViewsPath}/MatchWinLoss.cshtml");
 
+        public async Task<ActionResult> ExportMatchWinLoss(MatchWinLossExcelQuery query)
+            => await ExcelView(query);
     }
 }

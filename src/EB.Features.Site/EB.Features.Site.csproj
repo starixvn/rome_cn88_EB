@@ -727,7 +727,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
     <Compile Include="Reports\ReportsHandler.cs" />
+    <Compile Include="Reports\Request\MatchWinLossExcelQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLossQuery.cs" />
+    <Compile Include="Reports\ViewModel\ExcelFileViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
     <Compile Include="Shared\BaseController.cs" />

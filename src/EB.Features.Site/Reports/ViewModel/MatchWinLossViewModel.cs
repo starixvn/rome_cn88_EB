@@ -45,26 +45,37 @@ namespace EB.Features.Site.Reports.ViewModel
                 liveStatusSelectionViewModel,
                 allBetTypesSelectionViewModel);
             ReportData = reportData.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
+
+            MajorBetType = ReportData.Where(i => BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
+            MinorBetType = ReportData.Where(i => !BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
+
             Parlay = reportData.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
             TotalRow = Sum(reportData);
+            Query = query;
         }
+
+        public MatchWinLossQuery Query { get; }
+
+        public IEnumerable<MatchWinLossViewModel> ReportData { get; }
 
         public MatchWinLossFilterViewModel ReportFilterViewModel { get; }
 
-        public IEnumerable<MatchWinLossViewModel> ReportData { get; }
+        public IEnumerable<MatchWinLossViewModel> MajorBetType { get; }
+
+        public IEnumerable<MatchWinLossViewModel> MinorBetType { get; }
 
         public MatchWinLossViewModel Parlay { get; }
 
         public MatchWinLossModel TotalRow { get; }
 
-        public bool IsShowTotalRow => ReportData.Any();
+        public bool IsShowTotalRow => MajorBetType.Any();
 
         public decimal TotalHeadlineStockPercent => 100;
 
-        private MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
+        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
         {
             var total = new MatchWinLossViewModel();
-            foreach(var match in matchs)
+            foreach (var match in matchs)
             {
                 total = total.Add(match);
             }

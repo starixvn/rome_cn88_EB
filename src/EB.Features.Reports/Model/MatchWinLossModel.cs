@@ -22,7 +22,7 @@ namespace EB.Features.Reports.Model
             decimal stake, 
             decimal validStake,
             decimal memberIncome, 
-            decimal headlineResult, 
+            decimal houseIncome, 
             decimal headlineStock)
         {
             LeagueId = leagueId;
@@ -34,8 +34,8 @@ namespace EB.Features.Reports.Model
             Stake = stake;
             ValidStake = validStake;
             MemberIncome = memberIncome;
-            HeadlineResult = headlineResult;
-            HeadlineStock = headlineResult;
+            HouseIncome = houseIncome;
+            HeadlineStock = HouseIncome;
         }
         public int LeagueId { get; }
 
@@ -55,7 +55,7 @@ namespace EB.Features.Reports.Model
 
         public decimal MemberIncome { get; protected set; }
 
-        public decimal HeadlineResult { get; protected set; }
+        public decimal HouseIncome { get; protected set; }
 
         public decimal HeadlineStock { get; protected set; }
     }

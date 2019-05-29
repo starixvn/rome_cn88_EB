@@ -24,7 +24,7 @@ namespace EB.Features.Reports.ViewModel
             model.Stake,
             model.ValidStake,
             model.MemberIncome,
-            model.HeadlineResult,
+            model.HouseIncome,
             model.HeadlineStock)
         {
 
@@ -42,7 +42,7 @@ namespace EB.Features.Reports.ViewModel
             Stake += match.Stake;
             ValidStake += match.ValidStake;
             MemberIncome += match.MemberIncome;
-            HeadlineResult += match.HeadlineResult;
+            HouseIncome += match.HouseIncome;
             HeadlineStock += match.HeadlineStock;
 
             return this;

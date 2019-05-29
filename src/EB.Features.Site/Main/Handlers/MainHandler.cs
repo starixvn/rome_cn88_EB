@@ -1,15 +1,10 @@
-﻿using EB.Features.Main.Model;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using EB.Features.Main.Model;
 using EB.Features.Main.Services;
 using EB.Features.Site.Main.Requests;
 using EB.Features.Site.Main.ViewModel;
-using Fanex.NAP.Core.Web.Session;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace EB.Features.Site.Main.Handlers
 {

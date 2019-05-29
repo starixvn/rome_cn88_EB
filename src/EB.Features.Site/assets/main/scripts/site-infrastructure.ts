@@ -131,8 +131,7 @@ class SiteInfrastructure {
 
         const isInternalElement = (<HTMLInputElement>top.document.getElementById("IsInternal"));
         const isInternal = isInternalElement ? isInternalElement.value : "0";
-
-        index.location.href = "/Login/Logout";
+        index.location.href = $("#mainRootPath").val() + "/Login/Logout";
         siteInfrastructure.localStorage.clear();
 
         if (isInternal === "1") {

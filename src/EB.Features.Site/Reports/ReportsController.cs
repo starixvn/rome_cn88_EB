@@ -1,12 +1,9 @@
-﻿using EB.Features.Site.Reports.Request;
+﻿using System.Threading.Tasks;
+using System.Web.Mvc;
+using EB.Features.Site.Reports.Request;
+using EB.Features.Site.Reports.Request.HouseWinLoss;
 using EB.Features.Site.Shared;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 
 namespace EB.Features.Site.Reports
 {
@@ -19,10 +16,11 @@ namespace EB.Features.Site.Reports
         {
         }
 
-        public ActionResult HouseWinLoss()
-        {
-            return View("~/Reports/Views/HouseWinLoss.cshtml");
-        }
+        public async Task<ActionResult> HouseWinLoss(HouseWinLossQuery query)
+          => await ViewAsync(query, $"{ViewsPath}/HouseWinLoss.cshtml");
+
+        public async Task<ActionResult> ExportHouseWinLoss(HouseWinLossExcelQuery query)
+            => await ExcelView(query);
 
         public async Task<ActionResult> MatchWinLoss(MatchWinLossQuery query)
             => await ViewAsync(query, $"{ViewsPath}/MatchWinLoss.cshtml");

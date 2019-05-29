@@ -1,9 +1,7 @@
-﻿using Fanex.NAP.Core.Web.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web;
+using Alpha.Web.Helpers;
+using EB.Features.Shared.Configuration;
+using Fanex.NAP.Core.Web.Session;
 
 namespace EB.Features.Site.Main.ViewModel
 {
@@ -16,7 +14,10 @@ namespace EB.Features.Site.Main.ViewModel
             this.currentSession = currentSession;
         }
 
-        public string MainRootPath => ("~/Main");
+        public string MainRootPath
+            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath)
+            ? string.Empty :
+            AppPathHelper.GetAppPath(AppSettings.EBAppPath, "~/");
 
         public double InitialScaleViewPort
         {
@@ -39,5 +40,11 @@ namespace EB.Features.Site.Main.ViewModel
         public string DefaultPath => HttpContext.Current.Response.ApplyAppPathModifier("/Home/Index");
 
         public string CustName => currentSession.Username;
+
+        public static string GetPath(string path)
+            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath) ? "~/" : AppPathHelper.GetAppPath(AppSettings.EBAppPath, path);
+
+        public static string GetMenuLink(string path)
+            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath) ? path : "/" + GetPath("~" + path);
     }
 }

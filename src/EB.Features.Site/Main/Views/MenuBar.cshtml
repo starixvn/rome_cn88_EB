@@ -17,7 +17,7 @@
             else
             {
                 <li class="menu-item" id="menu-@(menuItem.ResourceKey.ToUpper())">
-                    <a class="txt-item menu-opener parent-menu redirect-item" href="@menuItem.Link" target="main">@menuItem.DisplayName</a>
+                    <a class="txt-item menu-opener parent-menu redirect-item" href="@IndexViewModel.GetMenuLink(menuItem.Link)" target="main">@menuItem.DisplayName</a>
                 </li>
             }
         }
@@ -30,7 +30,7 @@
                 @foreach (var subMenuItem in menuItem.VisibileSubMenus)
                 {
                     <li class="sub-menu-item " data-submenu="@(subMenuItem.ResourceKey.ToLower())">
-                        <a href="@subMenuItem.Link" target="main" class="redirect-item" id="sub-menu-@(subMenuItem.ResourceKey.ToUpper())">
+                        <a href="@IndexViewModel.GetMenuLink(subMenuItem.Link)" target="main" class="redirect-item" id="sub-menu-@(subMenuItem.ResourceKey.ToUpper())">
                             @subMenuItem.DisplayName
                         </a>
                     </li>
@@ -39,18 +39,4 @@
 
         }
     }
-    @*<li class="menu-item" id="menu-2">
-                <a class="txt-item menu-opener parent-menu redirect-item" href="/Home/Index" target="main">Home</a>
-            </li>
-            <li class="menu-item active" id="menu-1">
-                <a class="txt-item menu-opener parent-menu active" href="javascript:void(0);">Report</a>
-            </li>
-        </ul>
-                <ul class="sub-menu " data-main-menu="menu-1">
-                        <li class="sub-menu-item" data-submenu="2">
-                            <a href="subMenuItem.Link" target="main" class="redirect-item" id="sub-menu-2">
-                                Match Winloss Report
-                            </a>
-                        </li>
-                </ul>*@
 </section>

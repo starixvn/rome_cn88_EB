@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EB.Features.Shared.Configuration
 {
@@ -23,6 +19,8 @@ namespace EB.Features.Shared.Configuration
         public static string StoredProcedurePath => GetConfigValue("StoredProcedurePath");
 
         public static string RemoteRefURL => GetConfigValue("RemoteRefURL");
+
+        public static string EBAppPath => GetConfigValue("EBAppPath");
 
         public static bool IsTest => GetConfigValue("LocalTest") == "1";
 

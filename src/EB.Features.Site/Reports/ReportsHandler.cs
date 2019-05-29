@@ -1,20 +1,21 @@
-﻿using EB.Features.Reports.Params;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports.Request;
+using EB.Features.Site.Reports.Request.HouseWinLoss;
 using EB.Features.Site.Reports.ViewModel;
+using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
 using EB.Features.Site.Shared.ViewModels;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace EB.Features.Site.Reports
 {
-    public class ReportsHandler: IRequestHandler<MatchWinLossQuery, MatchWinLossReportViewModel>
+    public class ReportsHandler: IRequestHandler<MatchWinLossQuery, MatchWinLossReportViewModel>,
+        IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>
     {
         private readonly SportGroupService sportGroupService;
         private readonly BettypeGroupService betTypeService;
@@ -54,6 +55,11 @@ namespace EB.Features.Site.Reports
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 reportData,
                 BuildBetTypeSelectListItems(allBetTypes, 0));
+        }
+
+        public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
+        {
+            return new HouseWinLossReportViewModel();
         }
 
         protected internal IEnumerable<SelectListItemExt> BuildSportGroupSelectListItems(

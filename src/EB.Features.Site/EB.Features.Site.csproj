@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
@@ -587,6 +588,28 @@
     </Content>
     <Content Include="assets\login\styles\vendors\bootstrap.css" />
     <Content Include="assets\login\styles\vendors\bootstrap.min.css" />
+    <Content Include="assets\main\bundles\auth\kickout.js" />
+    <Content Include="assets\main\bundles\auth\kickout.min.js" />
+    <Content Include="assets\main\bundles\default-index.css" />
+    <Content Include="assets\main\bundles\default-index.js" />
+    <Content Include="assets\main\bundles\default-index.min.css" />
+    <Content Include="assets\main\bundles\default-index.min.js" />
+    <Content Include="assets\main\bundles\default.css" />
+    <Content Include="assets\main\bundles\default.min.css" />
+    <Content Include="assets\main\bundles\error-page.css" />
+    <Content Include="assets\main\bundles\error-page.min.css" />
+    <Content Include="assets\main\bundles\home-index.css" />
+    <Content Include="assets\main\bundles\home-index.js" />
+    <Content Include="assets\main\bundles\home-index.min.css" />
+    <Content Include="assets\main\bundles\home-index.min.js" />
+    <Content Include="assets\main\bundles\password\change-password.js" />
+    <Content Include="assets\main\bundles\password\change-password.min.js" />
+    <Content Include="assets\main\bundles\securitycode\change-securitycode.js" />
+    <Content Include="assets\main\bundles\securitycode\change-securitycode.min.js" />
+    <Content Include="assets\main\bundles\securitycode\verify-securitycode.js" />
+    <Content Include="assets\main\bundles\securitycode\verify-securitycode.min.js" />
+    <Content Include="assets\main\bundles\security\change-password.css" />
+    <Content Include="assets\main\bundles\security\change-password.min.css" />
     <Content Include="assets\main\scripts\auth\kickout.js" />
     <Content Include="assets\main\scripts\default\index-manager.js" />
     <Content Include="assets\main\scripts\home\index-manager.js" />
@@ -1129,7 +1152,14 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-    </PostBuildEvent>
+      cd $(ProjectDir)
+      cd ..
+      cd ..
+      cd build
+      assets.build.cmd
+      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

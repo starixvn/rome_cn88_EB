@@ -12,3 +12,4 @@ input[type=radio].disabled, input[type=radio]:disabled {
 label[disabled] {
   cursor: not-allowed;
   opacity: 0.6; }
+

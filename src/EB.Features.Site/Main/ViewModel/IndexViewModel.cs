@@ -14,10 +14,7 @@ namespace EB.Features.Site.Main.ViewModel
             this.currentSession = currentSession;
         }
 
-        public string MainRootPath
-            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath)
-            ? string.Empty :
-            AppPathHelper.GetAppPath(AppSettings.EBAppPath, "~/");
+        public string MainRootPath => HttpContext.Current.Response.ApplyAppPathModifier("~/");
 
         public double InitialScaleViewPort
         {

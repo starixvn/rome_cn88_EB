@@ -18,7 +18,7 @@ namespace EB.Features.Main.Services
             foreach (var napMenuItem in napMenuItems.Where(i => i.Parent == null))
             {
                 var menuItem = new MenuItem(napMenuItem);
-                var napSubMenuItems = napMenuItems.Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id);                
+                var napSubMenuItems = napMenuItems.Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id);
                 menuItem.SubMenus = napSubMenuItems.Select(i => new MenuItem(i)).ToList();
 
                 menuItems.Add(menuItem);

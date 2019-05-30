@@ -1,9 +1,9 @@
-﻿using EB.Features.Shared.Constants;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using EB.Features.Shared.Constants;
+using EB.Features.Shared.Resources;
 
 namespace EB.Features.Shared.Model
 {
@@ -31,12 +31,12 @@ namespace EB.Features.Shared.Model
         {
             if (Id == SportGroupConstants.ParlaySportGroupId)
             {
-                return "SharedResources.Parlay";
+                return AppResources.Parlay;
             }
 
             if (Id == SportGroupConstants.VirtualSportsGroupId)
             {
-                return "SharedResources.VirtualSports";
+                return AppResources.VirtualSports;
             }
 
             var stringBuilder = new StringBuilder();

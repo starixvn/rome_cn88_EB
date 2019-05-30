@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NapMenuItem = Fanex.NAP.Core.Models.MenuItem;
 
 namespace EB.Features.Main.Model
@@ -27,27 +25,15 @@ namespace EB.Features.Main.Model
 
         public string ResourceKey { get; set; }
 
-        public string DisplayName
-        {
-            get
-            {
-                //return getDisplayName != null ? getDisplayName() : "SitemapLabels.ResourceManager.GetString(ResourceKey);
-                return getDisplayName != null ? getDisplayName() : MainResource.ResourceManager.GetString(ResourceKey);
-            }
-        }
-
         public virtual string Link { get; set; }
-
-        public bool ShowSubMenus => SubMenus != null && SubMenus.Any();
 
         public List<MenuItem> SubMenus { get; set; }
 
-        public IEnumerable<MenuItem> VisibileSubMenus
-        {
-            get
-            {
-                return SubMenus;
-            }
-        }
+        public string DisplayName
+            => getDisplayName != null ? getDisplayName() : MainResource.ResourceManager.GetString(ResourceKey);
+
+        public bool ShowSubMenus => SubMenus != null && SubMenus.Any();
+
+        public IEnumerable<MenuItem> VisibileSubMenus => SubMenus;
     }
 }

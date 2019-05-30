@@ -1,12 +1,9 @@
-﻿using EB.Features.Shared.Criteria;
+﻿using System;
+using System.Collections.Generic;
+using EB.Features.Shared.Criteria;
 using EB.Features.Shared.DataAccesses;
 using EB.Features.Shared.Model;
 using Fanex.Caching;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EB.Features.Shared.Services
 {

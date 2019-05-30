@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Extensions
+﻿namespace EB.Features.Shared.Extensions
 {
     public static class NumberExtensions
     {

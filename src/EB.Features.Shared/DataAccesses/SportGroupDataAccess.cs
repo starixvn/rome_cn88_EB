@@ -1,12 +1,10 @@
-﻿using EB.Features.Shared.Model;
-using Fanex.Data;
-using Fanex.Data.Repository;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EB.Features.Shared.Model;
 using Fanex.Common;
+using Fanex.Data;
+using Fanex.Data.Repository;
 
 namespace EB.Features.Shared.DataAccesses
 {

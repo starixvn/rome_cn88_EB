@@ -2,7 +2,8 @@
   {
     "outputFileName": "bundles/reports.css",
     "inputFiles": [
-      "styles/reports.css"
+      "styles/reports.css",
+      "styles/reports.override.css"
     ]
   },
   {

@@ -722,6 +722,12 @@
     <Content Include="assets\report\styles\reports.min.css">
       <DependentUpon>reports.css</DependentUpon>
     </Content>
+    <Content Include="assets\report\styles\reports.override.css">
+      <DependentUpon>reports.override.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.override.min.css">
+      <DependentUpon>reports.override.css</DependentUpon>
+    </Content>
     <Content Include="assets\report\styles\security.css">
       <DependentUpon>security.scss</DependentUpon>
     </Content>
@@ -771,6 +777,7 @@
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
+    <Compile Include="Reports\ReportsExcelHandler.cs" />
     <Compile Include="Reports\ReportsHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
@@ -1116,6 +1123,7 @@
     <Content Include="assets\report\bundleconfig.json" />
     <Content Include="App_Code\Reports\ReportHtmlHelpers.cshtml" />
     <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
+    <Content Include="assets\report\styles\reports.override.scss" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

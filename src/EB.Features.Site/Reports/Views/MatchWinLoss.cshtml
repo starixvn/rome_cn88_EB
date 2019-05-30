@@ -58,7 +58,7 @@
                 @if (Model.IsShowTotalRow)
                 {
                     <tr class="total">
-                        <th class="text-right header">Grand Total</th>
+                        <th class="text-left header">Grand Total</th>
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Wagers, "settlement")
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Stake, "settlement")
                         @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.ValidStake, "settlement")
@@ -77,7 +77,7 @@
                         <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
                         @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().EventInfo))
                         {
-                            <span class="match-title">@("     >>>     " + firstRowOfGroup.First().EventInfo)</span>
+                            <span class="match-title">@firstRowOfGroup.First().EventInfo</span>
                         }
                     </td>
                 </tr>
@@ -100,7 +100,7 @@
                 {
                     var a = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId));
                     <tr>
-                        <td class="text-left">@(">>")Others</td>
+                        <td class="text-left">Others</td>
                         @HtmlHelpers.RenderNumberCell(a.Wagers, "settlement")
                         @HtmlHelpers.RenderNumberCell(a.Stake, "settlement")
                         @HtmlHelpers.RenderNumberCell(a.ValidStake, "settlement")

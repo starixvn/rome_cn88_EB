@@ -776,6 +776,7 @@
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
     <Compile Include="Reports\ReportsExcelHandler.cs" />
     <Compile Include="Reports\ReportsHandler.cs" />

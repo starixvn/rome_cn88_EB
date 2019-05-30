@@ -82,10 +82,10 @@ namespace EB.Features.Site.App_Start
             container.Register(typeof(IAsyncRequestHandler<,>), assemblies);
             container.Register(typeof(ICancellableAsyncRequestHandler<>), assemblies);
 
-            container.RegisterCollection(typeof(INotificationHandler<>), assemblies);
-            container.RegisterCollection(typeof(IAsyncNotificationHandler<>), assemblies);
-            container.RegisterCollection(typeof(ICancellableAsyncNotificationHandler<>), assemblies);
-            container.RegisterCollection(typeof(IPipelineBehavior<,>), assemblies);
+            container.Collection.Register(typeof(INotificationHandler<>), assemblies);
+            container.Collection.Register(typeof(IAsyncNotificationHandler<>), assemblies);
+            container.Collection.Register(typeof(ICancellableAsyncNotificationHandler<>), assemblies);
+            container.Collection.Register(typeof(IPipelineBehavior<,>), assemblies);
 
             container.RegisterSingleton(new SingleInstanceFactory(container.GetInstance));
             container.RegisterSingleton(new MultiInstanceFactory(container.GetAllInstances));
@@ -107,5 +107,5 @@ namespace EB.Features.Site.App_Start
             container.Register<ICurrentSession, CurrentSession>();
             container.Register<IMaintenanceService, MaintenanceService>();
         }
-    } 
+    }
 }

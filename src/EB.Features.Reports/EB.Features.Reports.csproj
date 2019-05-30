@@ -126,7 +126,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HouseWinLossService.cs" />
     <Compile Include="Services\MatchWinLossService.cs" />
-    <Compile Include="Services\ReportsWorkbook.cs" />
+    <Compile Include="Services\MatchWinLossWorkbook.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

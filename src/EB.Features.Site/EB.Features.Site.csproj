@@ -613,10 +613,6 @@
     <Content Include="assets\login\styles\pages\error3.min.css" />
     <Content Include="assets\login\styles\pages\um.css" />
     <Content Include="assets\login\styles\pages\um.min.css" />
-    <Content Include="assets\login\styles\pages\um2.css" />
-    <Content Include="assets\login\styles\pages\um2.min.css" />
-    <Content Include="assets\login\styles\pages\um3.css" />
-    <Content Include="assets\login\styles\pages\um3.min.css" />
     <Content Include="assets\login\styles\themes\default.css" />
     <Content Include="assets\login\styles\themes\default.min.css" />
     <Content Include="assets\login\styles\themes\event.css" />
@@ -768,6 +764,11 @@
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_GlobalResources\ReportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="App_GlobalResources\Resource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -778,7 +779,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
-    <Compile Include="Reports\ReportsExcelHandler.cs" />
+    <Compile Include="Reports\ExcelBaseHandler.cs" />
+    <Compile Include="Reports\MatchWinLossExcelHandler.cs" />
     <Compile Include="Reports\ReportsHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
@@ -1006,8 +1008,6 @@
     <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="assets\login\styles\pages\error3.scss" />
     <Content Include="assets\login\styles\pages\um.scss" />
-    <Content Include="assets\login\styles\pages\um2.scss" />
-    <Content Include="assets\login\styles\pages\um3.scss" />
     <Content Include="assets\login\styles\themes\default.scss" />
     <Content Include="assets\login\styles\themes\default2.scss" />
     <Content Include="assets\login\styles\themes\default3.scss" />
@@ -1125,6 +1125,7 @@
     <Content Include="App_Code\Reports\ReportHtmlHelpers.cshtml" />
     <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
     <Content Include="assets\report\styles\reports.override.scss" />
+    <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -1174,6 +1175,12 @@
     <Content Include="App_GlobalResources\Resource.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ReportResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <PropertyGroup>

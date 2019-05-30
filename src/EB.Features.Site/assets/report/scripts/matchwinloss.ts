@@ -4,6 +4,7 @@ var betTypes: any = betTypes;
 class MatchWinLossReport {
     $: JQueryStatic;
     $reportForm: JQuery;
+    $exportExcelForm: JQuery;
     $dateContainer: JQuery;
     sportGroupSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
@@ -34,6 +35,7 @@ class MatchWinLossReport {
 
     public cacheDOMElements() {
         this.$reportForm = this.$("#report-form");
+        this.$exportExcelForm = this.$("#export-excel-form");
         this.$dateContainer = this.$("#date-container");
     }
 
@@ -44,7 +46,27 @@ class MatchWinLossReport {
             maxDate: this.$dateContainer.data("maxdate"),
             defaultDate: this.$dateContainer.data("curentdate")
         });
+
+        $(".group").click(function (): void {
+            let $this: JQuery = $(this);
+            let icon: JQuery = $this.find(".group-name-wrapper").children().first();
+            let children: any = $this.siblings(`.childrow-${$this.data("leagueid")}`);
+
+            if (icon.hasClass("icon-chevron-down")) {
+                icon.removeClass().addClass("icon-chevron-right");
+                children.addClass("hide");
+            } else {
+                icon.removeClass().addClass("icon-chevron-down");
+                children.removeClass("hide");
+            }
+        });
+
+        this.$("#icon-excel").on("click", this.onExportExcel);
     }
+
+    onExportExcel = () => {
+        this.$exportExcelForm.submit();
+    };
 
     onReportSubmit = () => {
         this.sportGroupSelectionComponent.updateSelectedValue();

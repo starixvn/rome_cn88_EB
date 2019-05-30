@@ -72,6 +72,8 @@
             @foreach (var row in Model.ReportData.GroupBy(i => i.MatchId))
             {
                 var firstRowOfGroup = row.ToList();
+                var subTotal = Model.Sum(firstRowOfGroup);
+
                 <tr class="match-title-row">
                     <td class="text-left col-username" colspan="8">
                         <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
@@ -96,11 +98,17 @@
                         @ReportHtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
                     </tr>
                 }
+
                 if (Model.MinorBetType.Any(m => m.MatchId == firstRowOfGroup.First().MatchId))
                 {
                     var a = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId));
-                    <tr>
-                        <td class="text-left">Others</td>
+                    <tr class="group" data-leagueid="@firstRowOfGroup.First().MatchId">
+                        <td class="col-event-span-desktop text-left">
+                            <span class="group-name-wrapper">
+                                <span class="icon-chevron-right"></span>
+                                <span class="group-name">Others </span>
+                            </span>
+                        </td>
                         @HtmlHelpers.RenderNumberCell(a.Wagers, "settlement")
                         @HtmlHelpers.RenderNumberCell(a.Stake, "settlement")
                         @HtmlHelpers.RenderNumberCell(a.ValidStake, "settlement")
@@ -113,8 +121,8 @@
 
                     foreach (var betType in Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
                     {
-                        <tr style="display:none">
-                            <td class="text-left">@betType.BetTypeGroupName</td>
+                        <tr class="childrow-@firstRowOfGroup.First().MatchId hide">
+                            <td class="text-left child">@betType.BetTypeGroupName</td>
                             @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
                             @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
                             @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
@@ -127,6 +135,17 @@
                     }
                 }
 
+                <tr class="sub-total-row">
+                    <td class="text-left">Sub Total</td>
+                    @HtmlHelpers.RenderNumberCell(subTotal.Wagers, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.Stake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.ValidStake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.MemberIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.HouseIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.HeadlineStock, "settlement")
+
+                    @ReportHtmlHelpers.RenderStockPercentCell(subTotal.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                </tr>
             }
 
             @if (Model.Parlay != null)

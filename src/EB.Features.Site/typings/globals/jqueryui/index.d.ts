@@ -160,6 +160,8 @@ declare namespace JQueryUI {
          * The format for parsed and displayed dates. For a full list of the possible formats see the formatDate function.
          */
         dateFormat?: string;
+        allowInputToggle: boolean;
+        format?: string;
         /**
          * The list of long day names, starting from Sunday, for use as requested via the dateFormat option.
          */

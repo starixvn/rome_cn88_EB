@@ -40,12 +40,14 @@ class MatchWinLossReport {
     }
 
     public registerEvents() {
-        this.$reportForm.submit(this.onReportSubmit);
+        this.$reportForm.submit(this.onReportSubmit); 
         this.$dateContainer.datepicker({
+            allowInputToggle: true,
             minDate: this.$dateContainer.data("mindate"),
             maxDate: this.$dateContainer.data("maxdate"),
-            defaultDate: this.$dateContainer.data("curentdate")
-        });
+            defaultDate: this.$dateContainer.data("curentdate"),
+            format:'YYYY-MM-DD'
+        }); 
 
         $(".group").click(function (): void {
             let $this: JQuery = $(this);

@@ -40,7 +40,7 @@ class MatchWinLossReport {
     }
 
     public registerEvents() {
-        this.$reportForm.submit(this.onReportSubmit); debugger;
+        this.$reportForm.submit(this.onReportSubmit);
         this.$dateContainer.datepicker({
             minDate: this.$dateContainer.data("mindate"),
             defaultDate: this.$dateContainer.data("currentdate"),

@@ -27,11 +27,16 @@
     text-align: left;
     text-transform: uppercase;
 }
+.report-detail {
+    padding-bottom: 50px;
+}
 
 .tbl-report {
-    .bettype{
+
+    .bettype {
         width: 400px;
     }
+
     .child {
         padding-left: 30px;
     }
@@ -46,10 +51,24 @@
             top: -3px;
         }
     }
+
+    > tfoot > tr.total {
+        color: #fff;
+        background-color: #2C3E50;
+        padding: 7px 8px;
+        text-transform: uppercase;
+    }
 }
 
 .sub-total-row {
     background-color: #eae9ee;
     color: #394e6e;
     font-weight: bold;
+}
+
+.title-report-detail {
+    .report-name {
+        font-weight: bold;
+        font-size: 20px;
+    }
 }

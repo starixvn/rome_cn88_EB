@@ -343,10 +343,18 @@ body {
         &.profit-margin span {
             color: #000;
             padding-left: 10px;
-            &.negative-value{
+
+            &.negative-value {
                 color: #B50000;
             }
         }
+    }
+
+    > tfoot > tr.total > th {
+        color: #fff;
+        background-color: #2C3E50;
+        padding: 7px 8px;
+        text-transform: uppercase;
     }
 
     > thead > tr.total > th {

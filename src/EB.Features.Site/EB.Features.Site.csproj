@@ -1122,7 +1122,6 @@
     <Content Include="assets\report\styles\_variables.scss" />
     <Content Include="assets\report\compilerconfig.json" />
     <Content Include="assets\report\bundleconfig.json" />
-    <Content Include="App_Code\Reports\ReportHtmlHelpers.cshtml" />
     <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
     <Content Include="assets\report\styles\reports.override.scss" />
     <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />

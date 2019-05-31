@@ -18,9 +18,9 @@ namespace EB.Features.Shared.Services
 
     public class CacheRefServiceImpl : CacheRefService
     {
-        private const string BetTypeNameCacheKey = "CN88.Features.Shared.Services.CacheRefServiceImpl.BetTypeName";
-        private const string LeagueNameCacheKey = "CN88.Features.Shared.Services.CacheRefServiceImpl.LeagueName";
-        private const string TeamNameCacheKey = "CN88.Features.Shared.Services.CacheRefServiceImpl.TeamName";
+        private const string BetTypeNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.BetTypeName";
+        private const string LeagueNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.LeagueName";
+        private const string TeamNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.TeamName";
 
         private readonly IRemotingRefService remotingRefService;
 

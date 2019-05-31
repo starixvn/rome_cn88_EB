@@ -15,7 +15,7 @@ namespace EB.Features.Shared.Services
 
     public class BettypeGroupServiceImpl : BettypeGroupService
     {
-        private const string BetTypesCacheKey = "CN88.Features.Shared.Services.Bettypes";
+        private const string BetTypesCacheKey = "EB.Features.Shared.Services.Bettypes";
 
         private readonly IDynamicRepository dynamicRepository;
         private readonly CacheRefService cacheRefService;

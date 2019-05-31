@@ -14,7 +14,7 @@ namespace EB.Features.Shared.Services
 
     public class SportGroupServiceImpl : SportGroupService
     {
-        private const string SportGroupsCacheKey = "CN88.Features.Shared.Services.SportServiceImpl.SportGroups";
+        private const string SportGroupsCacheKey = "EB.Features.Shared.Services.SportServiceImpl.SportGroups";
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
         private readonly CacheRefService cacheRefService;

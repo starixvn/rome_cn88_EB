@@ -137,10 +137,10 @@ namespace EB.Features.Site.Reports
               footerEndIndex: 9);
 
         private string GetReportTitle(MatchWinLossExcelQuery query)
-            => $"{ReportResources.MatchWinLossReport} {query.Date.ToShortDate()}";
+            => $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
 
         private string GetExcelFileName(MatchWinLossExcelQuery query)
-            => $"Match Win Loss-{query.Date.ToShortDate()}";
+            => $"Match Win Loss - {query.Date.ToShortDate()}";
 
         public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
         {

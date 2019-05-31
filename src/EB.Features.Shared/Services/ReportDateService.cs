@@ -19,8 +19,8 @@ namespace EB.Features.Shared.Services
 
     public class ReportDateServiceImpl : ReportDateService
     {
-        private const string BalanceUpDayAndMoveBetsDayCacheKey = "CN88.Features.Shared.Services.ReportDateServiceImpl.BalanceUpDayAndMoveBetsDay";
-        private const string ArchiveDateCacheKey = "CN88.Features.Shared.Services.ReportDateServiceImpl.ArchiveDate";
+        private const string BalanceUpDayAndMoveBetsDayCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.BalanceUpDayAndMoveBetsDay";
+        private const string ArchiveDateCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.ArchiveDate";
 
         private readonly IDynamicRepository dynamicRepository;
 

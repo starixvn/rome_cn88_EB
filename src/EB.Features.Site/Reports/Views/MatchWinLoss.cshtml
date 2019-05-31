@@ -35,7 +35,7 @@
         </div>
     </form>
 
-    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("Excel","Reports")">
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportMatchWinLoss","Reports")">
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
@@ -46,7 +46,7 @@
         <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
                 <tr>
-                    <th class="text-left header"> Bet Type</th>
+                    <th class="text-left header bettype"> Bet Type</th>
                     <th class="text-right header"> Wagers</th>
                     <th class="text-right header"> Stake</th>
                     <th class="text-right header"> Valid Stake</th>

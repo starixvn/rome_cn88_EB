@@ -20,8 +20,6 @@ namespace EB.Features.Shared.Configuration
 
         public static string RemoteRefURL => GetConfigValue("RemoteRefURL");
 
-        public static string EBAppPath => GetConfigValue("EBAppPath");
-
         public static bool IsTest => GetConfigValue("LocalTest") == "1";
 
         public static string GetConfigValue(string configName) => AppSettingValues[configName];

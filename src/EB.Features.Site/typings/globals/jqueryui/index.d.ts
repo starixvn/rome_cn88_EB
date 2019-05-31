@@ -81,7 +81,7 @@ declare namespace JQueryUI {
         disabled?: boolean;
         icons?: any;
         label?: string;
-        text?: string|boolean;
+        text?: string | boolean;
         click?: (event?: Event) => void;
     }
 
@@ -161,7 +161,6 @@ declare namespace JQueryUI {
          */
         format?: string;
         allowInputToggle?: boolean;
-        format?: string;
         inline?: boolean;
         /**
          * The list of long day names, starting from Sunday, for use as requested via the dateFormat option.
@@ -362,7 +361,7 @@ declare namespace JQueryUI {
         width?: any; // number or string
         zIndex?: number;
 
-		open?: DialogEvent;
+        open?: DialogEvent;
         close?: DialogEvent;
     }
 
@@ -612,12 +611,12 @@ declare namespace JQueryUI {
     }
 
     interface SelectableEvents {
-        selected? (event: Event, ui: { selected?: Element; }): void;
-        selecting? (event: Event, ui: { selecting?: Element; }): void;
-        start? (event: Event, ui: any): void;
-        stop? (event: Event, ui: any): void;
-        unselected? (event: Event, ui: { unselected: Element; }): void;
-        unselecting? (event: Event, ui: { unselecting: Element; }): void;
+        selected?(event: Event, ui: { selected?: Element; }): void;
+        selecting?(event: Event, ui: { selecting?: Element; }): void;
+        start?(event: Event, ui: any): void;
+        stop?(event: Event, ui: any): void;
+        unselected?(event: Event, ui: { unselected: Element; }): void;
+        unselecting?(event: Event, ui: { unselecting: Element; }): void;
     }
 
     interface Selectable extends Widget, SelectableOptions {

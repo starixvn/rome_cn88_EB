@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using App_GlobalResources
+<!DOCTYPE html>
 <html>
 <head>
     <title>Login</title>
@@ -27,7 +28,7 @@
                 </div>
             </div>
 
-            <h1 class="title login-text">@Resources.Resource.Login</h1>
+            <h1 class="title login-text">@SiteResources.Login</h1>
 
             <div class="rowlg msg-error" errCode="Model.ErrCode" id="divMessage">@ViewBag.Message</div>
             <div class="rowlg">
@@ -44,7 +45,7 @@
             <div class="rowlg checkbox">
                 <label>
                     <input name="chb-showpass" type="checkbox" id="hdnPassword" tabindex="3" onclick="ShowPassword()" />
-                    <span id="lbShowPass">@Resources.Resource.ShowPassword</span>
+                    <span id="lbShowPass">@SiteResources.ShowPassword</span>
                 </label>
             </div>
 

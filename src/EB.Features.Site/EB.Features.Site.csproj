@@ -769,10 +769,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="App_GlobalResources\Resource.Designer.cs">
+    <Compile Include="App_GlobalResources\SiteResources.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
+      <DependentUpon>SiteResources.resx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\LoggingManager.cs" />
@@ -1172,9 +1172,9 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_GlobalResources\Resource.resx">
+    <Content Include="App_GlobalResources\SiteResources.resx">
       <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <LastGenOutput>SiteResources.designer.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <ItemGroup>

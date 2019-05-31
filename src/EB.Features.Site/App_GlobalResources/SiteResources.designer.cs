@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources {
+namespace App_GlobalResources
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -19,115 +20,139 @@ namespace Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option or rebuild the Visual Studio project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Web.Application.StronglyTypedResourceProxyBuilder", "14.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resource {
-        
+    public class SiteResources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resource() {
+        public SiteResources()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.Resource", global::System.Reflection.Assembly.Load("App_GlobalResources"));
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Resources.SiteResources", global::System.Reflection.Assembly.Load("App_GlobalResources"));
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Change Password.
         /// </summary>
-        internal static string ChangePassword {
-            get {
+        public static string ChangePassword
+        {
+            get
+            {
                 return ResourceManager.GetString("ChangePassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Change Security Code.
         /// </summary>
-        internal static string ChangeSecurityCode {
-            get {
+        public static string ChangeSecurityCode
+        {
+            get
+            {
                 return ResourceManager.GetString("ChangeSecurityCode", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid input.
         /// </summary>
-        internal static string Invalidinput {
-            get {
+        public static string Invalidinput
+        {
+            get
+            {
                 return ResourceManager.GetString("Invalidinput", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Invalid Username or Password.
         /// </summary>
-        internal static string Invalid_Username_or_Password {
-            get {
+        public static string Invalid_Username_or_Password
+        {
+            get
+            {
                 return ResourceManager.GetString("Invalid_Username_or_Password", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
-        internal static string Login {
-            get {
+        public static string Login
+        {
+            get
+            {
                 return ResourceManager.GetString("Login", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to LogOut.
         /// </summary>
-        internal static string Logout {
-            get {
+        public static string Logout
+        {
+            get
+            {
                 return ResourceManager.GetString("Logout", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Show password.
         /// </summary>
-        internal static string ShowPassword {
-            get {
+        public static string ShowPassword
+        {
+            get
+            {
                 return ResourceManager.GetString("ShowPassword", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to You have no authorization.
         /// </summary>
-        internal static string You_have_no_authorization {
-            get {
+        public static string You_have_no_authorization
+        {
+            get
+            {
                 return ResourceManager.GetString("You_have_no_authorization", resourceCulture);
             }
         }

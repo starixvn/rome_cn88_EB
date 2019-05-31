@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using App_GlobalResources;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Models;
@@ -90,21 +91,21 @@ namespace EB.Features.Site
                                 : returnUrl;
                             return Redirect(redirectUrl);
                         }
-                        ViewBag.Message = Resource.You_have_no_authorization;
+                        ViewBag.Message = SiteResources.You_have_no_authorization;
                     }
                     else
                     {
-                        ViewBag.Message = Resource.Invalid_Username_or_Password;
+                        ViewBag.Message = SiteResources.Invalid_Username_or_Password;
                     }
                 }
                 else
                 {
-                    ViewBag.Message = Resource.Invalid_Username_or_Password;
+                    ViewBag.Message = SiteResources.Invalid_Username_or_Password;
                 }
             }
             else
             {
-                ViewBag.Message = Resource.Invalidinput;
+                ViewBag.Message = SiteResources.Invalidinput;
             }
 
             return View();

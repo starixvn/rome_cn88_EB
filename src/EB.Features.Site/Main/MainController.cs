@@ -1,16 +1,8 @@
-﻿using EB.Features.Main.Services;
-using EB.Features.Site.Main.Requests;
-using EB.Features.Site.Main.ViewModel;
-using EB.Features.Site.Shared;
-using Fanex.NAP.Core.Web.Attribute;
-using Fanex.NAP.Core.Web.Session;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Threading.Tasks;
 using System.Web.Mvc;
+using EB.Features.Site.Main.Requests;
+using EB.Features.Site.Shared;
+using MediatR;
 
 namespace EB.Features.Site.Reports
 {

@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using App_GlobalResources;
 
 namespace EB.Features.Site.Shared
 {
@@ -36,7 +37,7 @@ namespace EB.Features.Site.Shared
         {
             if (!(message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, Resource.You_have_no_authorization));
+                return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
             }
 
             return Json(mediator.Send(message), jsonRequestBehavior);
@@ -48,7 +49,7 @@ namespace EB.Features.Site.Shared
         {
             if (!(message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, Resource.You_have_no_authorization));
+                return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
             }
 
             return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);

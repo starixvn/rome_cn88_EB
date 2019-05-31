@@ -46,7 +46,7 @@ namespace EB.Features.Reports.Services
 
         private IEnumerable<MatchWinLossViewModel> BuildViewModel(IEnumerable<MatchWinLossModel> reportData)
         {
-            var matchs = new List<MatchWinLossViewModel>();
+            var matches = new List<MatchWinLossViewModel>();
             foreach (var row in reportData)
             {
                 var match = new MatchWinLossViewModel(row);
@@ -64,10 +64,10 @@ namespace EB.Features.Reports.Services
                     match.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
                 }
 
-                matchs.Add(match);
+                matches.Add(match);
             }
 
-            return matchs;
+            return matches;
         }
 
     }

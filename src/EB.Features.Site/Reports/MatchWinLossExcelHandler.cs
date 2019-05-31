@@ -142,10 +142,10 @@ namespace EB.Features.Site.Reports
         private string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
 
-        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
+        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matches)
         {
             var total = new MatchWinLossViewModel();
-            foreach (var match in matchs)
+            foreach (var match in matches)
             {
                 total = total.Add(match);
             }

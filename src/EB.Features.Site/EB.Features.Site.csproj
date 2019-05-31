@@ -791,11 +791,12 @@
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
     <Compile Include="Shared\BaseController.cs" />
+    <Compile Include="Shared\BrowserHelperImpl.cs" />
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" />
     <Compile Include="Shared\Helpers\StaticResources.cs" />
     <Compile Include="Home\HomeController.cs" />
-    <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Login\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -806,6 +807,8 @@
     <Compile Include="Main\MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ReportsController.cs" />
+    <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
+    <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DateRangePickerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\PagerViewModel.cs" />
@@ -813,7 +816,7 @@
     <Compile Include="Shared\ViewModels\SelectListItemExt.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Login\Views\web.config" />
     <Content Include="assets\login\bundleconfig.json" />
     <Content Include="assets\login\compilerconfig.json" />
     <Content Include="Home\Views\web.config" />
@@ -1129,7 +1132,7 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="Reports\Views\HouseWinLoss.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Login\Views\Index.cshtml" />
     <Content Include="typings\globals\bootstrap\typings.json" />
     <Content Include="typings\globals\jasmine-jquery\typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
@@ -1150,9 +1153,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EB.Features.Shared\EB.Features.Shared.csproj">
       <Project>{e31ebbb6-c646-4491-ac72-ff249afecf16}</Project>

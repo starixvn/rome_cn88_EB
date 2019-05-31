@@ -315,4 +315,13 @@
   <data name="Yesterday" xml:space="preserve">
     <value>Yesterday</value>
   </data>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
+  </data>
+  <data name="MasterAgent" xml:space="preserve">
+    <value>Master Agent</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline</value>
+  </data>
 </root>

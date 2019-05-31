@@ -1,8 +1,12 @@
-﻿using EB.Features.Main.Services;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using System.Web.Mvc;
+using EB.Features.Main.Services;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.DataAccesses;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Shared;
+using EB.Features.Site.Shared.Helpers;
 using Fanex.Data.Repository;
 using Fanex.NAP.Core.Context;
 using Fanex.NAP.Core.Service.Impl;
@@ -11,19 +15,11 @@ using Fanex.NAP.Core.Web.Context;
 using Fanex.NAP.Core.Web.Session;
 using Fanex.RemotingRef;
 using MediatR;
-using MediatR.Pipeline;
 using ONEbook.UM.Services;
 using ONEbook.UM.Services.Impl;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
 
 namespace EB.Features.Site.App_Start
 {
@@ -60,6 +56,7 @@ namespace EB.Features.Site.App_Start
             container.Register<CacheRefService, CacheRefServiceImpl>();
             container.Register<ReportDateService, ReportDateServiceImpl>();
             container.Register<SportGroupService, SportGroupServiceImpl>();
+            container.RegisterSingleton<BrowserHelper, BrowserHelperImpl>();
         }
 
         private static void RegisterReportModule(Container container)

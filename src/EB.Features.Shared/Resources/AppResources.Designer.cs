@@ -19,7 +19,7 @@ namespace EB.Features.Shared.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -169,6 +169,15 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Headline.
+        /// </summary>
+        public static string Headline {
+            get {
+                return ResourceManager.GetString("Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In-Play.
         /// </summary>
         public static string InPlay {
@@ -219,6 +228,15 @@ namespace EB.Features.Shared.Resources {
         public static string Market {
             get {
                 return ResourceManager.GetString("Market", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Agent.
+        /// </summary>
+        public static string MasterAgent {
+            get {
+                return ResourceManager.GetString("MasterAgent", resourceCulture);
             }
         }
         
@@ -552,6 +570,15 @@ namespace EB.Features.Shared.Resources {
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super.
+        /// </summary>
+        public static string Super {
+            get {
+                return ResourceManager.GetString("Super", resourceCulture);
             }
         }
         

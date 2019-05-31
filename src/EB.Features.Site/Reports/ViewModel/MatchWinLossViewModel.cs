@@ -72,10 +72,10 @@ namespace EB.Features.Site.Reports.ViewModel
 
         public decimal TotalHeadlineStockPercent => 100;
 
-        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
+        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matches)
         {
             var total = new MatchWinLossViewModel();
-            foreach (var match in matchs)
+            foreach (var match in matches)
             {
                 total = total.Add(match);
             }

@@ -31,7 +31,7 @@ namespace EB.Features.Reports.Services
         MatchWinLossWorkbook SetRowMappers(
             Mapper<MatchWinLossViewModel> betTypeRowMapper,
             Mapper<MatchWinLossViewModel> subTotalRowMapper,
-            Mapper<MatchWinLossViewModel> grandTotalRowMapper); 
+            Mapper<MatchWinLossViewModel> grandTotalRowMapper);
 
     }
 
@@ -84,7 +84,7 @@ namespace EB.Features.Reports.Services
 
         public MatchWinLossWorkbook SetRowMappers(
             Mapper<MatchWinLossViewModel> betTypeRowMapper,
-            Mapper<MatchWinLossViewModel> subTotalRowMapper,            
+            Mapper<MatchWinLossViewModel> subTotalRowMapper,
             Mapper<MatchWinLossViewModel> grandTotalRowMapper)
         {
             BetTypeRowMapper = betTypeRowMapper;
@@ -150,7 +150,7 @@ namespace EB.Features.Reports.Services
             EvenRowTemplate = sheet.GetRow(currentRowIndex++);
             SubTotalRowTemplate = sheet.GetRow(currentRowIndex++);
             SystemParlayRowTemplate = sheet.GetRow(currentRowIndex++);
-            
+
 
             return GetSheetAt(ReportSheetIndex);
         }
@@ -262,10 +262,10 @@ namespace EB.Features.Reports.Services
             FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
         }
 
-        private MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
+        private MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matches)
         {
             var total = new MatchWinLossViewModel();
-            foreach (var match in matchs)
+            foreach (var match in matches)
             {
                 total = total.Add(match);
             }

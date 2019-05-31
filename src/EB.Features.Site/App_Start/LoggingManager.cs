@@ -1,14 +1,11 @@
-﻿using Fanex.Logging;
+﻿using System.Collections.Generic;
+using System.Configuration;
+using Fanex.Logging;
 using Fanex.Logging.Extensions;
 using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Extensions.Web;
 using Fanex.Logging.RabbitMQ;
 using Fanex.Logging.Sentry.RavenClient;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Web;
 
 namespace EB.Features.Site.App_Start
 {
@@ -24,10 +21,9 @@ namespace EB.Features.Site.App_Start
             var sentryUrl = ConfigurationManager.AppSettings["Fanex.Logging:SentryUrl"];
             if (!string.IsNullOrWhiteSpace(sentryUrl))
             {
-                logEngines.Add(new SentryLogging(new SentryEngineOptions
-                {
-                    Dsn = new SharpRaven.Dsn(sentryUrl)
-                }, $"/bundles/common/raven.min.js"));
+                logEngines.Add(new SentryLogging(
+                    new SentryEngineOptions { Dsn = new SharpRaven.Dsn(sentryUrl) },
+                    $"/bundles/common/raven.min.js"));
             }
 
             LogManager

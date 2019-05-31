@@ -1,4 +1,11 @@
-﻿using Fanex.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Models;
@@ -9,14 +16,6 @@ using Fanex.NAP.Core.Web.Context;
 using Fanex.NAP.Core.Web.Session;
 using ONEbook.UM.Services;
 using Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
 
 namespace EB.Features.Site
 {
@@ -48,6 +47,7 @@ namespace EB.Features.Site
             this.maintenanceService = maintenanceService;
             hashAlgorithm = new SHA256Managed();
         }
+
         [AllowAnonymous]
         [HttpGet]
         public ActionResult Index()
@@ -60,7 +60,7 @@ namespace EB.Features.Site
 
             ClearAllCookie();
 
-            return View();
+            return View("~/Login/Views/Index.cshtml");
         }
 
         [HttpPost]
@@ -125,7 +125,7 @@ namespace EB.Features.Site
 
             return Json(isKickedOut);
         }
-        
+
         public ActionResult Offline()
         {
             var downTime = maintenanceService.GetUnderMaintenanceTime();

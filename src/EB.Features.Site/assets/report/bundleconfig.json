@@ -15,6 +15,7 @@
       "components/client-pager.js",
       "components/sort.js",
       "components/filter-toggle.js",
+      "../shared/scripts/components/date-picker.js",
       "scripts/matchwinloss.js"
     ]
   }

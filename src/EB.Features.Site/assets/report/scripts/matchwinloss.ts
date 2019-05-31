@@ -5,24 +5,26 @@ class MatchWinLossReport {
     $: JQueryStatic;
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
-    $dateContainer: JQuery;
     sportGroupSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     pagerComponent: ClientPagerComponent;
+    datePickerComponent: DatePickerComponent;
 
     constructor($: JQueryStatic,
         sportGroupSelectionComponent: SingleSelectionDropdownComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         pagerComponent: ClientPagerComponent,
-        toggleHandler: ToggleHandler) {
+        toggleHandler: ToggleHandler,
+        datePickerComponent: DatePickerComponent) {
         this.$ = $;
         this.sportGroupSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.pagerComponent = pagerComponent;
         this.pagerComponent.pageList = this.pagerComponent.smallPageList;
+        this.datePickerComponent = datePickerComponent;
     }
 
     init = () => {
@@ -36,17 +38,11 @@ class MatchWinLossReport {
     public cacheDOMElements() {
         this.$reportForm = this.$("#report-form");
         this.$exportExcelForm = this.$("#export-excel-form");
-        this.$dateContainer = this.$("#date-container");
     }
 
     public registerEvents() {
         this.$reportForm.submit(this.onReportSubmit);
-        this.$dateContainer.datepicker({
-            allowInputToggle: true,
-            minDate: this.$dateContainer.data("mindate"),
-            defaultDate: this.$dateContainer.data("currentdate"),
-            format: 'YYYY-MM-DD'
-        }); 
+        this.datePickerComponent.render(new DatePickerOption($, "date-container"));
 
         $(".group").click(function (): void {
             let $this: JQuery = $(this);
@@ -80,8 +76,6 @@ class MatchWinLossReport {
         this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
     }
-
-    
 
     onchangeSportType(): void {
         let sportType = this.sportGroupSelectionComponent.$dropdown.val();
@@ -121,7 +115,8 @@ $(function () {
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new ClientPagerComponent($),
-        new ToggleHandler($));
+        new ToggleHandler($),
+        new DatePickerComponent());
 
     matchWinLossReport.init();
 })

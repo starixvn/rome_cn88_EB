@@ -1,9 +1,6 @@
-﻿using Fanex.NAP.Core.Models;
+﻿using System.Collections.Generic;
+using Fanex.NAP.Core.Models;
 using Fanex.NAP.Core.Web.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace EB.Features.Site.Shared
 {
@@ -11,12 +8,12 @@ namespace EB.Features.Site.Shared
     {
         public BaseQuery(ICurrentSession currentSession)
         {
-            this.currentSession = currentSession;
+            CurrentSession = currentSession;
         }
 
-        public ICurrentSession currentSession { get; }
+        public ICurrentSession CurrentSession { get; }
 
-        public IList<MenuItem> MenuList => currentSession.MenuItemList;
+        public IList<MenuItem> MenuList => CurrentSession.MenuItemList;
 
         public virtual bool IsValid() => true;
     }

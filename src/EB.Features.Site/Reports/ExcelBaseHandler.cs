@@ -1,22 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Web;
-using EB.Features.Reports.Params;
-using EB.Features.Reports.Services;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Model;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Services;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Reports.Request.HouseWinLoss;
-using EB.Features.Site.Reports.ViewModel;
-using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
-using EB.Features.Site.Shared.ViewModels;
-using MediatR;
-using ONEbook.SpreadSheets;
 
 namespace EB.Features.Site.Reports
 {
@@ -33,7 +17,7 @@ namespace EB.Features.Site.Reports
         }
 
         internal Func<string, bool> IsFileExist { get; set; } = File.Exists;
-                
+
 
         protected internal virtual string GetExcelTemplatePath(string templateName, string fileExtension = "xls")
         {

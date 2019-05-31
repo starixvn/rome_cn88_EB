@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Reports.Model
+﻿namespace EB.Features.Reports.Model
 {
     public class MatchWinLossModel
     {
@@ -13,16 +7,16 @@ namespace EB.Features.Reports.Model
 
         }
 
-        public MatchWinLossModel(int leagueId, 
-            int matchId, 
-            int homeId, 
-            int awayId, 
-            int bettype, 
-            int wager, 
-            decimal stake, 
+        public MatchWinLossModel(int leagueId,
+            int matchId,
+            int homeId,
+            int awayId,
+            int bettype,
+            int wager,
+            decimal stake,
             decimal validStake,
-            decimal memberIncome, 
-            decimal houseIncome, 
+            decimal memberIncome,
+            decimal houseIncome,
             decimal headlineStock)
         {
             LeagueId = leagueId;
@@ -37,6 +31,7 @@ namespace EB.Features.Reports.Model
             HouseIncome = houseIncome;
             HeadlineStock = HouseIncome;
         }
+
         public int LeagueId { get; }
 
         public int MatchId { get; }

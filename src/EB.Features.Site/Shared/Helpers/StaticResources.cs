@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
+﻿using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -93,7 +91,7 @@ namespace EB.Features.Site.Shared
             public static IHtmlString Render(params string[] paths)
             {
                 return RenderScript(paths.Select(path => $"{path}{minText}.js?v={staticResourcesVersion}").ToArray());
-            }            
+            }
         }
 
         public static class AssetStyles

@@ -1,14 +1,10 @@
-﻿using EB.Features.Reports.Params;
+﻿using System;
+using EB.Features.Reports.Params;
 using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EB.Features.Reports.Criteria
 {
-    public class MatchWinLossCriteria: CriteriaBase
+    public class MatchWinLossCriteria : CriteriaBase
     {
         public MatchWinLossCriteria(MatchWinLossParam param)
         {

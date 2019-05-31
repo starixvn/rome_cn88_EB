@@ -1,13 +1,11 @@
-﻿using EB.Features.Reports.Model;
-using EB.Features.Reports.ViewModel;
-using ONEbook.SpreadSheets;
-using ONEbook.SpreadSheets.NPOI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EB.Features.Reports.ViewModel;
+using EB.Features.Shared.Resources;
+using ONEbook.SpreadSheets;
+using ONEbook.SpreadSheets.NPOI;
 
 namespace EB.Features.Reports.Services
 {
@@ -128,7 +126,7 @@ namespace EB.Features.Reports.Services
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(MatchTitleRowTemplate);
 
-            var title = "PARLAY";
+            var title = AppResources.Parlay.ToUpperInvariant();
             sheet.SetCellRangeValue(rowIndex, row.FirstCellIndex, rowIndex, row.LastCellIndex - 1, title);
         }
 

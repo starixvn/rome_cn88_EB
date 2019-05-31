@@ -1,15 +1,13 @@
-﻿using EB.Features.Reports.Criteria;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EB.Features.Reports.Criteria;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.ViewModel;
 using EB.Features.Shared.Constants;
+using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EB.Features.Reports.Services
 {
@@ -54,13 +52,13 @@ namespace EB.Features.Reports.Services
 
                 if (match.BetTypeGroup == BetTypeIdConstants.SystemParlay)
                 {
-                    match.LeagueName = "Parlay";
+                    match.LeagueName = AppResources.Parlay;
                 }
                 else
                 {
-                    match.EventInfo = match.BetTypeGroup != BetTypeIdConstants.Outright ?
-                        $"{cacheRefService.GetTeamName(match.HomeId)} v {cacheRefService.GetTeamName(match.AwayId)}"
-                        : string.Empty;
+                    match.EventInfo = match.BetTypeGroup == BetTypeIdConstants.Outright
+                        ? string.Empty
+                        : $"{cacheRefService.GetTeamName(match.HomeId)} v {cacheRefService.GetTeamName(match.AwayId)}";
                     match.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
                 }
 

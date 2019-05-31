@@ -109,6 +109,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\SiteResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SiteResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\BettypeGroupService.cs" />
     <Compile Include="Services\CacheRefService.cs" />
     <Compile Include="Services\ReportDateService.cs" />
@@ -122,6 +127,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.zh-Hans.resx" />
     <EmbeddedResource Include="Resources\AppResources.zh-TW.resx" />
+    <EmbeddedResource Include="Resources\SiteResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SiteResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -6,7 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using App_GlobalResources;
+using EB.Features.Shared.Resources;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Models;
@@ -16,7 +16,6 @@ using Fanex.NAP.Core.Web.Auth;
 using Fanex.NAP.Core.Web.Context;
 using Fanex.NAP.Core.Web.Session;
 using ONEbook.UM.Services;
-using Resources;
 
 namespace EB.Features.Site
 {

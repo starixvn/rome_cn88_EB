@@ -1,16 +1,11 @@
-﻿using EB.Features.Shared.Model;
+﻿using System.Net;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using EB.Features.Shared.Model;
+using EB.Features.Shared.Resources;
 using EB.Features.Site.Reports.ViewModel;
 using Fanex.NAP.Core.Web.Attribute;
 using MediatR;
-using Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
-using App_GlobalResources;
 
 namespace EB.Features.Site.Shared
 {
@@ -35,35 +30,35 @@ namespace EB.Features.Site.Shared
            IRequest<TResponse> message,
            JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.AllowGet)
         {
-            if (!(message as BaseQuery).IsValid())
+            if ((message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
+                return Json(mediator.Send(message), jsonRequestBehavior);
             }
 
-            return Json(mediator.Send(message), jsonRequestBehavior);
+            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
         }
 
         protected async Task<ActionResult> JsonDataAsync<TResponse>(
             IRequest<TResponse> message,
             JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.AllowGet)
         {
-            if (!(message as BaseQuery).IsValid())
+            if ((message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
+                return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
             }
 
-            return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
+            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
         }
 
         protected async Task<FileContentResult> ExcelView(IRequest<ExcelFileViewModel> message)
         {
             var baseQuery = message as BaseQuery;
-            if (baseQuery != null && !baseQuery.IsValid())
+            if (baseQuery == null || baseQuery.IsValid())
             {
-                return GetExcelContent(new ExcelFileViewModel(InvalidExcelFileName, new byte[] { }));
+                return GetExcelContent(await mediator.Send(message));
             }
 
-            return GetExcelContent(await mediator.Send(message));
+            return GetExcelContent(new ExcelFileViewModel(InvalidExcelFileName, new byte[] { }));
         }
 
         private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)

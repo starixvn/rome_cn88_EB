@@ -1,10 +1,5 @@
-﻿using EB.Features.Reports.Params;
-using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using EB.Features.Reports.Params;
 
 namespace EB.Features.Reports.Criteria
 {

@@ -121,7 +121,7 @@
     <value>Home</value>
   </data>
   <data name="HouseWinLoss" xml:space="preserve">
-    <value>House Win Loss</value>
+    <value>Wager Report</value>
   </data>
   <data name="MatchWinLoss" xml:space="preserve">
     <value>Match Win Loss</value>

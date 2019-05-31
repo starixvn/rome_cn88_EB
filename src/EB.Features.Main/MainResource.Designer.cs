@@ -70,7 +70,7 @@ namespace EB.Features.Main {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to House Win Loss.
+        ///   Looks up a localized string similar to Wager Report.
         /// </summary>
         internal static string HouseWinLoss {
             get {

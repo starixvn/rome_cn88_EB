@@ -13,8 +13,7 @@ namespace EB.Features.Reports.Criteria
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
-            //MoveBetsDay = param.MoveBetsDay;
-            MoveBetsDay = new DateTime(2019, 4, 27);
+            MoveBetsDay = param.MoveBetsDay;
         }
 
         public DateTime WinLostDate { get; }

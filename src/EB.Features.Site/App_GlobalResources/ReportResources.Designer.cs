@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to House Win Loss Report.
+        /// </summary>
+        internal static string HouseWinLossReport {
+            get {
+                return ResourceManager.GetString("HouseWinLossReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Win Loss.
         /// </summary>
         internal static string MatchWinLossReport {

@@ -28,14 +28,20 @@ namespace EB.Features.Reports.Services
         }
 
         public IEnumerable<HouseWinLossModel> Get(HouseWinLossParam param)
-            => dynamicRepository.Fetch<HouseWinLossModel>(new HouseWinLossCriteria(param));
+        {            
+            param.ArchiveDate = reportDateService.GetArchiveDate();
+            param.MoveBetsDay = reportDateService.GetMoveBetsDay();
 
+            return param.IsSettled?
+                dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossCriteria(param)):
+                dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossCriteria(param));
+	}
         public IEnumerable<HouseWinLossModel> Get(HouseWinLossOldParam param)
         {
             param.ArchiveDate = reportDateService.GetArchiveDate();
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
 
-            return dynamicRepository.Fetch<HouseWinLossModel>(new HouseWinLossCriteria(param));
+            return dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossCriteria(param));
         }
     }
 }

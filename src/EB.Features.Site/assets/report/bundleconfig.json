@@ -18,5 +18,17 @@
       "../shared/scripts/components/date-picker.js",
       "scripts/matchwinloss.js"
     ]
+  },
+  {
+    "outputFileName": "bundles/housewinloss.js",
+    "inputFiles": [
+      "components/link-builder.js",
+      "components/single-selection-dropdown.js",
+      "components/daterangepicker.js",
+      "components/client-pager.js",
+      "components/sort.js",
+      "components/filter-toggle.js",
+      "scripts/housewinloss.js"
+    ]
   }
 ]

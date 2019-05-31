@@ -86,7 +86,9 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Constants\BetTypeIdConstants.cs" />
+    <Compile Include="Constants\TicketStatusConstants.cs" />
     <Compile Include="Constants\LiveStatusConstants.cs" />
+    <Compile Include="Constants\SiteFunctionKeys.cs" />
     <Compile Include="Constants\SportGroupConstants.cs" />
     <Compile Include="Criteria\GetArchiveDateCriteria.cs" />
     <Compile Include="Criteria\GetBalanceUpDayAndMoveBetsDayCriteria.cs" />

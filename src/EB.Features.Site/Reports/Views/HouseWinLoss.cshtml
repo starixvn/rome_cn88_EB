@@ -1,8 +1,11 @@
-﻿@using EB.Features.Site.Reports.ViewModel.HouseWinLoss
+﻿@using EB.Features.Shared.Extensions;
+@using EB.Features.Shared.Constants;
+@using EB.Features.Site.Reports.ViewModel.HouseWinLoss
+
 @model HouseWinLossReportViewModel
 @{
     Layout = "~/Shared/Views/_Layout.cshtml";
-    ViewBag.Title = "House Win Loss Report";
+    ViewBag.Title = "Wager Report";
 }
 @section Styles {
     @StaticResources.RenderStyles("~/assets/report/bundles/reports")
@@ -16,30 +19,132 @@
             <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
         </div>
     </div>
-</div>
+
+    <form class="form-inline filter report-form" role="form" id="report-form">
+        @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
+        @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+        @RenderDatePicker()
+        @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
+        @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
+
+        <div class="form-group">
+            <label>
+                @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
+                Exclude Test Data
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="@AppResources.Submit" class="btn-submit" />
+        </div>
+    </form>
+
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
+        @Html.Hidden("Date", Model.Query.Date)
+        @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
+        @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
+        @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
+        @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
+    </form>
+
+    <div class="tab-content main-content" id="tab-main-content">
+        <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
+            <thead class="tableFloatingHeaderOriginal">
+                <tr>
+                    <th class="text-left header bettype"> Headline</th>
+                    <th class="text-right header"> Wagers</th>
+                    <th class="text-right header"> Stake</th>
+                    <th class="text-right header"> Valid Stake</th>
+                    <th class="text-right header"> Member Income</th>
+                    <th class="text-right header"> SMA Comm</th>
+                    <th class="text-right header"> House WL</th>
+                    <th class="text-right header"> House Comm</th>
+                    <th class="text-right header"> House Income</th>
+                    <th class="text-right header"> Headline Stock</th>
+                    <th class="text-right header"> Headline Stock %</th>
+                </tr>
+                
+            </thead>
+            @foreach (var row in Model.ReportData)
+            {
+
+            <tr>
+                <td class="text-left">@row.UserName</td>
+                @HtmlHelpers.RenderNumberCell(row.Wagers, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.Stake, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.ValidStake, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.MemberIncome, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.SuperComm, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.HouseWinLoss, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.HouseComm, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.HouseIncome, "settlement")
+                @HtmlHelpers.RenderNumberCell(row.HeadlineStock, "settlement")
+                @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+            </tr>
+            }
+
+            @if (Model.IsShowTotalRow)
+            {
+                <tfoot>
+                    <tr class="total">
+                        <th class="text-right header"></th>
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.SuperComm, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseWinLoss, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseComm, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    </tr>
+                </tfoot>
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td id="no-data-row" colspan="11"
+                            data-isNoInfo="true"
+                            align="center">
+                            No Information Is Available
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
 
 
+@section Scripts{
+    @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")
+    <script>
+        var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items.GroupBy(i => i.SportTypeGroup)));
+    </script>
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@helper RenderDatePicker()
+{
+    <div class="form-group from-date-box">
+        <label>Date</label>
+        <div class="control date">
+            <div id="date-container"
+                 class="input-group date fromdate"
+                 data-mindate="@Model.ReportFilterViewModel.DatePickerViewModel.MinDate.ToShortDate()"
+                 data-maxdate="@Model.ReportFilterViewModel.DatePickerViewModel.MaxDate.ToShortDate()"
+                 data-currentdate="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()">
+                <input type="text"
+                       id="date"
+                       name="Date"
+                       readonly="readonly"
+                       autocomplete="off"
+                       class="ui_nexdatepicker_datetextbox ui_nexdatepicker_fromdate form-control"
+                       value="@Model.ReportFilterViewModel.DatePickerViewModel.CurrentDate.ToShortDate()" />
+                <span class="input-group-addon">
+                    <span class="icon-calendar" id="fdate_trigger"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+}

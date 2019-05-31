@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using EB.Features.Shared.Criteria;
 using EB.Features.Shared.DataAccesses;
@@ -10,6 +11,8 @@ namespace EB.Features.Shared.Services
     public interface SportGroupService
     {
         IEnumerable<SportGroup> GetSportGroups();
+
+        IEnumerable<SportGroup> GetSportGroupsForSportbook();
     }
 
     public class SportGroupServiceImpl : SportGroupService
@@ -32,5 +35,8 @@ namespace EB.Features.Shared.Services
                 SportGroupsCacheKey,
                 () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+
+        public IEnumerable<SportGroup> GetSportGroupsForSportbook()
+            => GetSportGroups().Where(s => s.ProductId != null);
     }
 }

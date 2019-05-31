@@ -23,6 +23,8 @@ namespace EB.Features.Shared.Model
 
         public int Id { get; }
 
+        public int? ProductId { get; }
+
         public IEnumerable<int> DisplaySportIds { get; }
 
         public string DisplayName => GetDisplayName();

@@ -1,12 +1,17 @@
-﻿using System;
-using EB.Features.Reports.Params;
+﻿using EB.Features.Reports.Params;
+using Fanex.Data;
 using Fanex.Data.Repository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EB.Features.Reports.Criteria
 {
-    public class HouseWinLossCriteria : CriteriaBase
+    public class SettledHouseWinLossCriteria : CriteriaBase
     {
-        public HouseWinLossCriteria(HouseWinLossParam param)
+        public SettledHouseWinLossCriteria(HouseWinLossParam param)
         {
             FromDate = param.FromDate;
             ToDate = param.ToDate;
@@ -14,7 +19,15 @@ namespace EB.Features.Reports.Criteria
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
+            //ArchiveDate = param.ArchiveDate;
+            //MoveBetsDay = param.MoveBetsDay;
+            ArchiveDate = new DateTime(2018, 01, 01);
+            MoveBetsDay = new DateTime(2018, 05, 01);
         }
+
+        public DateTime ArchiveDate { get; }
+
+        public DateTime MoveBetsDay { get; }
 
         public DateTime FromDate { get; }
 
@@ -29,9 +42,9 @@ namespace EB.Features.Reports.Criteria
         public bool IsExcludedTest { get; }
 
         public override bool IsValid()
-            => SportTypeGroup > 0 && BetTypeGroup > 0;
+            => true;
 
         public override string GetSettingKey()
-            => "CS_Rpt_Outstanding_Headline";
+            => "CS_Rpt_Winloss_Headline";
     }
 }

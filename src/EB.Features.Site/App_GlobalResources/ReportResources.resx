@@ -132,6 +132,9 @@
   <data name="HouseIncome" xml:space="preserve">
     <value>House Income</value>
   </data>
+  <data name="HouseWinLossReport" xml:space="preserve">
+    <value>House Win Loss Report</value>
+  </data>
   <data name="MatchWinLossReport" xml:space="preserve">
     <value>Match Win Loss</value>
   </data>

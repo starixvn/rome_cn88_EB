@@ -2,9 +2,11 @@
 using System.Linq;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
+using EB.Features.Shared.Constants;
 using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
+using EB.Features.Shared.Utilies;
 using EB.Features.Site.Reports.Request;
 using EB.Features.Site.Reports.Request.HouseWinLoss;
 using EB.Features.Site.Reports.ViewModel;
@@ -14,20 +16,23 @@ using MediatR;
 
 namespace EB.Features.Site.Reports
 {
-    public class ReportsHandler: IRequestHandler<MatchWinLossQuery, MatchWinLossReportViewModel>,
+    public class ReportsHandler : ReportsBaseHandler, IRequestHandler<MatchWinLossQuery, MatchWinLossReportViewModel>,
         IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>
     {
         private readonly SportGroupService sportGroupService;
         private readonly BettypeGroupService betTypeService;
         private readonly IMatchWinLossService matchWinLossService;
+        private readonly IHouseWinLossService houseWinLossService;
         private readonly ReportDateService reportDateService;
 
         public ReportsHandler(
             SportGroupService sportGroupService,
             BettypeGroupService betTypeService,
             IMatchWinLossService matchWinLossService,
-            ReportDateService reportDateService)
+            ReportDateService reportDateService,
+            IHouseWinLossService houseWinLossService)
         {
+            this.houseWinLossService = houseWinLossService;
             this.sportGroupService = sportGroupService;
             this.betTypeService = betTypeService;
             this.matchWinLossService = matchWinLossService;
@@ -36,7 +41,7 @@ namespace EB.Features.Site.Reports
 
         public MatchWinLossReportViewModel Handle(MatchWinLossQuery message)
         {
-            var sportGroups = sportGroupService.GetSportGroups();
+            var sportGroups = sportGroupService.GetSportGroupsForSportbook();
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport(0);
             var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
             var reportData = matchWinLossService.Get(new MatchWinLossParam
@@ -59,40 +64,27 @@ namespace EB.Features.Site.Reports
 
         public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
         {
-            return new HouseWinLossReportViewModel();
-        }
-
-        protected internal IEnumerable<SelectListItemExt> BuildSportGroupSelectListItems(
-            IEnumerable<SportGroup> sportGroups,
-            int userSelectedSportGroupId)
-        {
-            var items = sportGroups.Select(sportGroup => new SelectListItemExt
+            var sportGroups = sportGroupService.GetSportGroupsForSportbook();
+            var allBetTypes = betTypeService.GetBetTypeGroupsBySport(0);
+            var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
+            var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
-                Text = sportGroup.DisplayName,
-                Value = sportGroup.Id.ToString(),
-                Selected = sportGroup.Id == userSelectedSportGroupId
-            }).ToList();
+                IsSettled = message.UserSelectedTicketStatusId == TicketStatusConstants.Settled,
+                BetTypeGroup = message.UserSelectedBetTypeId,
+                IsExcludedTest = message.IsTest,
+                IsLive = message.UserSelectedLiveStatusId,
+                SportTypeGroup = message.UserSelectedSportGroupId,
+                FromDate = message.Date,
+                ToDate = SystemTime.Today
+            });
 
-            items.Insert(0, new SelectListItemExt { Text = AppResources.AllSports, Value = "0", Selected = userSelectedSportGroupId == 0 });
-
-            return items;
-        }
-
-        protected internal IEnumerable<SelectListItemExt> BuildBetTypeSelectListItems(
-            IEnumerable<BetTypeGroup> betTypes,
-            int userSelectedBetTypeId)
-        {
-            var items = betTypes.Select(betType => new SelectListItemExt
-            {
-                SportTypeGroup = betType.SportTypeGroup,
-                Text = betType.DisplayName,
-                Value = betType.Id.ToString(),
-                Selected = betType.Id == userSelectedBetTypeId
-            }).ToList();
-
-            items.Insert(0, new SelectListItemExt { Text = AppResources.AllBetTypes, Value = "0", Selected = userSelectedBetTypeId == 0 });
-
-            return items;
+            return new HouseWinLossReportViewModel(
+                message,
+                reportDateService.GetBalanceUpDay(),
+                BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
+                BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
+                reportData,
+                BuildBetTypeSelectListItems(allBetTypes, 0));
         }
     }
 }

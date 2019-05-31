@@ -325,6 +325,14 @@
     <value>Headline</value>
   </data>
   <data name="Others" xml:space="preserve">
-    <value>Others</value>
+    <value>Others</value></data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Settled" xml:space="preserve">
+    <value>Settled</value>
+  </data>
+  <data name="UnSettled" xml:space="preserve">
+    <value>Unsettled</value>
   </data>
 </root>

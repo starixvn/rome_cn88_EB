@@ -11,22 +11,37 @@
 
         public string UserName { get; }
 
-        public int Wager { get; }
+        public int Wagers { get; private set; }
 
-        public decimal Stake { get; }
+        public decimal Stake { get; private set; }
 
-        public decimal ValidStake { get; }
+        public decimal ValidStake { get; private set; }
 
-        public decimal MemberIncome { get; }
+        public decimal MemberIncome { get; private set; }
 
-        public decimal SuperComm { get; }
+        public decimal SuperComm { get; private set; }
 
-        public decimal HouseWinLoss { get; }
+        public decimal HouseWinLoss { get; private set; }
 
-        public decimal HouseComm { get; }
+        public decimal HouseComm { get; private set; }
 
-        public decimal HouseIncome { get; }
+        public decimal HouseIncome { get; private set; }
 
-        public decimal HeadlineStock { get; }
+        public decimal HeadlineStock { get; private set; }
+
+        public HouseWinLossModel Add(HouseWinLossModel model)
+        {
+            Wagers += model.Wagers;
+            Stake += model.Stake;
+            ValidStake += model.ValidStake;
+            MemberIncome += model.MemberIncome;
+            SuperComm += SuperComm;
+            HouseWinLoss += HouseWinLoss;
+            HouseComm += HouseComm;
+            HouseIncome += model.HouseIncome;
+            HeadlineStock += model.HeadlineStock;
+
+            return this;
+        }
     }
 }

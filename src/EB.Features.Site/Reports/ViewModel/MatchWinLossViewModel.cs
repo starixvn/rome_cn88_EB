@@ -67,7 +67,7 @@ namespace EB.Features.Site.Reports.ViewModel
 
         public MatchWinLossModel TotalRow { get; }
 
-        public bool IsShowTotalRow => MajorBetType.Any();
+        public bool IsShowTotalRow => ReportData.Any();
 
         public decimal TotalHeadlineStockPercent => 100;
 

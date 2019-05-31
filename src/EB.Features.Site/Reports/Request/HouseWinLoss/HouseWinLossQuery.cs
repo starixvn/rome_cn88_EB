@@ -27,6 +27,8 @@
 
         public int UserSelectedLiveStatusId { get; set; }
 
+        public int UserSelectedTicketStatusId { get; set; }
+
         public DateTime Date { get; set; }
 
         public bool IsTest { get; set; }

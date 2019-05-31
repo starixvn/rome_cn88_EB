@@ -38,10 +38,7 @@ namespace EB.Features.Site.Main.ViewModel
 
         public string CustName => currentSession.Username;
 
-        public static string GetPath(string path)
-            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath) ? "~/" : AppPathHelper.GetAppPath(AppSettings.EBAppPath, path);
-
         public static string GetMenuLink(string path)
-            => string.IsNullOrWhiteSpace(AppSettings.EBAppPath) ? path : "/" + GetPath("~" + path);
+            => HttpContext.Current.Response.ApplyAppPathModifier("~" + path);
     }
 }

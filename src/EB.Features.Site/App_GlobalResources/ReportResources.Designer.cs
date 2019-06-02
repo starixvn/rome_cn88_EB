@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back To Current Report.
+        /// </summary>
+        internal static string BackToCurrentReport {
+            get {
+                return ResourceManager.GetString("BackToCurrentReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bet Type.
         /// </summary>
         internal static string BetType {
@@ -75,6 +84,15 @@ namespace Resources {
         internal static string GrandTotal {
             get {
                 return ResourceManager.GetString("GrandTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headline.
+        /// </summary>
+        internal static string Headline {
+            get {
+                return ResourceManager.GetString("Headline", resourceCulture);
             }
         }
         
@@ -97,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to House Comm.
+        /// </summary>
+        internal static string HouseComm {
+            get {
+                return ResourceManager.GetString("HouseComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to House Income.
         /// </summary>
         internal static string HouseIncome {
@@ -106,11 +133,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to House Win Loss Report.
+        ///   Looks up a localized string similar to Wager Report.
         /// </summary>
         internal static string HouseWinLossReport {
             get {
                 return ResourceManager.GetString("HouseWinLossReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to House WL.
+        /// </summary>
+        internal static string HouseWL {
+            get {
+                return ResourceManager.GetString("HouseWL", resourceCulture);
             }
         }
         
@@ -129,6 +165,24 @@ namespace Resources {
         internal static string MemberIncome {
             get {
                 return ResourceManager.GetString("MemberIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can view the report data up to {0}..
+        /// </summary>
+        internal static string NoteViewCurrentReport {
+            get {
+                return ResourceManager.GetString("NoteViewCurrentReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For more historical data, please click .
+        /// </summary>
+        internal static string NoteViewHistory {
+            get {
+                return ResourceManager.GetString("NoteViewHistory", resourceCulture);
             }
         }
         
@@ -160,6 +214,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SMA Comm.
+        /// </summary>
+        internal static string SuperComm {
+            get {
+                return ResourceManager.GetString("SuperComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Valid Stake.
         /// </summary>
         internal static string ValidStake {
@@ -169,11 +232,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View History Report.
+        /// </summary>
+        internal static string ViewHistoryReport {
+            get {
+                return ResourceManager.GetString("ViewHistoryReport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wager.
         /// </summary>
         internal static string Wager {
             get {
                 return ResourceManager.GetString("Wager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wagers.
+        /// </summary>
+        internal static string Wagers {
+            get {
+                return ResourceManager.GetString("Wagers", resourceCulture);
             }
         }
     }

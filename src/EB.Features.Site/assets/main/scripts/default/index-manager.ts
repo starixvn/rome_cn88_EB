@@ -61,7 +61,7 @@
         indexManager.urls.onlineList = $("#OnlineMembersPath").val();
         indexManager.urls.liveChat = indexManager.urls.mainRootPath + "CustomerList/LiveChat";
         indexManager.urls.contactUs = indexManager.urls.mainRootPath + "Help/ContactUs";
-        indexManager.urls.reCheckin = "/Login/ReCheckin";
+        indexManager.urls.reCheckin = indexManager.urls.mainRootPath + "Login/ReCheckin";
         indexManager.urls.changePassword = indexManager.urls.mainRootPath + "Password/ChangePassword";
         indexManager.urls.changeSecurityCode = indexManager.urls.mainRootPath + "SecurityCode/ChangeSecurityCode";
         indexManager.urls.oldReportsPath = $("#OldReportsPath").val();

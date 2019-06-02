@@ -35,9 +35,9 @@
             Stake += model.Stake;
             ValidStake += model.ValidStake;
             MemberIncome += model.MemberIncome;
-            SuperComm += SuperComm;
-            HouseWinLoss += HouseWinLoss;
-            HouseComm += HouseComm;
+            SuperComm += model.SuperComm;
+            HouseWinLoss += model.HouseWinLoss;
+            HouseComm += model.HouseComm;
             HouseIncome += model.HouseIncome;
             HeadlineStock += model.HeadlineStock;
 

@@ -45,7 +45,9 @@ namespace EB.Features.Site.Reports.ViewModel
                 allBetTypesSelectionViewModel);
             ReportData = reportData.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
 
-            MajorBetType = ReportData.Where(i => BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
+            MajorBetType = ReportData
+                .Where(i => BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup))
+                .OrderBy(i => i.BetTypeGroup);
             MinorBetType = ReportData.Where(i => !BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
 
             Parlay = reportData.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
@@ -67,7 +69,7 @@ namespace EB.Features.Site.Reports.ViewModel
 
         public MatchWinLossModel TotalRow { get; }
 
-        public bool IsShowTotalRow => ReportData.Any();
+        public bool IsShowTotalRow => ReportData.Any() || Parlay != null;
 
         public decimal TotalHeadlineStockPercent => 100;
 

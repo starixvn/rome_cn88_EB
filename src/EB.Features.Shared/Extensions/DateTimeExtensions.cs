@@ -8,5 +8,8 @@ namespace EB.Features.Shared.Extensions
 
         public static string ToShortDate(this DateTime dateTime)
             => dateTime.ToString(ShortDate);
+
+        public static DateTime FirstDateOfMonth(this DateTime dateTime)
+            => new DateTime(dateTime.Year, dateTime.Month, 1);
     }
 }

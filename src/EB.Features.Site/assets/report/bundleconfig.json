@@ -3,7 +3,8 @@
     "outputFileName": "bundles/reports.css",
     "inputFiles": [
       "styles/reports.css",
-      "styles/reports.override.css"
+      "styles/reports.override.css",
+      "libs/monthPicker/monPickr-0.0.1.css"
     ]
   },
   {
@@ -28,6 +29,7 @@
       "components/client-pager.js",
       "components/sort.js",
       "components/filter-toggle.js",
+      "libs/monthPicker/monPickr-0.0.1.js",
       "scripts/housewinloss.js"
     ]
   }

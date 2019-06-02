@@ -1,0 +1,1241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FC1FDA84-7A40-4DBA-93B3-A9E73AD7439B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EB.Features.Site</RootNamespace>
+    <AssemblyName>EB.Features.Site</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Alpha.SubAccount, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Alpha.SubAccount.1.0.0\lib\net40\Alpha.SubAccount.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Alpha.Web, Version=1.0.3.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Alpha.Web.1.0.3.3\lib\net461\Alpha.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.1.60.1\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.AspNet, Version=1.6.7.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\dotless.AspNetHandler.1.6.7\lib\net461\dotless.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="dotless.Core, Version=1.6.7.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\dotless.Core.1.6.7\lib\net461\dotless.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EasyNetQ, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EasyNetQ.2.3.3\lib\net451\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Caching, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Caching.2.2.1\lib\net461\Fanex.Caching.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Common, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Common.1.1.0.1\lib\net40\Fanex.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Data.3.0.0\lib\net461\Fanex.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data.CrossCutting.WrappingException, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Data.CrossCutting.WrappingException.1.0.0.3\lib\net461\Fanex.Data.CrossCutting.WrappingException.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data.OldConnectionStringProvider, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Data.OldConnectionStringProvider.1.0.1\lib\net461\Fanex.Data.OldConnectionStringProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Data.Repository, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Data.Repository.3.0.0\lib\net461\Fanex.Data.Repository.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging, Version=2.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.2.0.1\lib\net461\Fanex.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging.Extensions, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.Extensions.1.0.6\lib\net461\Fanex.Logging.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging.Extensions.Database, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.Extensions.Database.1.0.5\lib\net461\Fanex.Logging.Extensions.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging.Extensions.Web, Version=1.0.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.Extensions.Web.1.0.7\lib\net461\Fanex.Logging.Extensions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging.RabbitMQ, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.RabbitMQ.1.0.1\lib\net461\Fanex.Logging.RabbitMQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Logging.Sentry.RavenClient, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Logging.Sentry.RavenClient.1.0.1\lib\net461\Fanex.Logging.Sentry.RavenClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.NAP.Core, Version=1.2.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.NAP.Core.Client.1.2.1.4\lib\net40\Fanex.NAP.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fanex.Products, Version=1.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.Products.1.0.0.5\lib\net461\Fanex.Products.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Fanex.RemotingRef, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Fanex.RemotingRef.1.3.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="MediatR, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MediatR.3.0.1\lib\net45\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagePack, Version=1.7.3.4, Culture=neutral, PublicKeyToken=b4a0369545f0a1be, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MessagePack.1.7.3.4\lib\net45\MessagePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.1.1.1\lib\netstandard1.1\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=1.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.1.1.1\lib\netstandard1.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="ONEbook.SpreadSheets, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.SpreadSheets.1.0.0.1\lib\net461\ONEbook.SpreadSheets.dll</HintPath>
+    </Reference>
+    <Reference Include="ONEbook.SpreadSheets.NPOI, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.SpreadSheets.NPOI.1.0.0.3\lib\net461\ONEbook.SpreadSheets.NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="ONEbook.UM, Version=2.0.2.9, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.UM.2.0.2.9\lib\net40\ONEbook.UM.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpRaven, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpRaven.2.4.0\lib\net45\SharpRaven.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.6.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.4.6.0\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.4.6.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sunplus.Agent.Model.Base, Version=3.0.4.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sunplus.Agent.Model.Base.3.0.4.1\lib\net461\Sunplus.Agent.Model.Base.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sunplus.Agent.Model.Definitions, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sunplus.Agent.Model.Definitions.3.0.2.0\lib\net40\Sunplus.Agent.Model.Definitions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Sunplus.Agent.Utilities, Version=3.0.0.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sunplus.Agent.Utilities.3.0.0.4\lib\net40\Sunplus.Agent.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Console, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Console.4.3.0\lib\net46\System.Console.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Xml.ReaderWriter.4.3.0\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\..\packages\Microsoft.AspNet.Webpages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\SPNames\Local\DB042.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Local\DBAGE.bodb02.xml" />
+    <Content Include="assets\common\bundles\common\common.css" />
+    <Content Include="assets\common\bundles\common\common.js" />
+    <Content Include="assets\common\bundles\common\common.min.css">
+      <DependentUpon>common.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\common\common.min.js">
+      <DependentUpon>common.js</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-cn88\default.css" />
+    <Content Include="assets\common\bundles\site-cn88\default.js" />
+    <Content Include="assets\common\bundles\site-cn88\default.min.css">
+      <DependentUpon>default.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-cn88\default.min.js">
+      <DependentUpon>default.js</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-cn88\error-page.css" />
+    <Content Include="assets\common\bundles\site-cn88\error-page.min.css">
+      <DependentUpon>error-page.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-cn88\security.css" />
+    <Content Include="assets\common\bundles\site-cn88\security.js" />
+    <Content Include="assets\common\bundles\site-cn88\security.min.css">
+      <DependentUpon>security.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-cn88\security.min.js">
+      <DependentUpon>security.js</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-features\default.css" />
+    <Content Include="assets\common\bundles\site-features\default.js" />
+    <Content Include="assets\common\bundles\site-features\default.min.css">
+      <DependentUpon>default.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-features\default.min.js">
+      <DependentUpon>default.js</DependentUpon>
+    </Content>
+    <Content Include="assets\common\bundles\site-features\security.css" />
+    <Content Include="assets\common\bundles\site-features\security.min.css">
+      <DependentUpon>security.css</DependentUpon>
+    </Content>
+    <Content Include="assets\common\js\components\autocomplete\autocomplete.js" />
+    <Content Include="assets\common\js\components\blockui\jquery.blockUI.js" />
+    <Content Include="assets\common\js\components\bootbox\bootbox.js" />
+    <Content Include="assets\common\js\components\bootstrap.nexDatePicker\bootstrap.nexDatePicker.js" />
+    <Content Include="assets\common\js\components\chartjs\chart.js" />
+    <Content Include="assets\common\js\components\coloranimation\jquery.animate-colors.js" />
+    <Content Include="assets\common\js\components\countdown\countdown.js" />
+    <Content Include="assets\common\js\components\countdown\jquery.countdown.ie8.js" />
+    <Content Include="assets\common\js\components\countdown\jquery.countdown.js" />
+    <Content Include="assets\common\js\components\datetimepicker\bootstrap-datetimepicker.es5.js" />
+    <Content Include="assets\common\js\components\datetimepicker\bootstrap-datetimepicker.js" />
+    <Content Include="assets\common\js\components\datetimepicker\datepicker.js" />
+    <Content Include="assets\common\js\components\draggable\tiny-draggable.js" />
+    <Content Include="assets\common\js\components\highlight\jquery.pulse.js" />
+    <Content Include="assets\common\js\components\monthpicker\monPickr-0.0.3.js" />
+    <Content Include="assets\common\js\components\multiselect\bootstrap-multiselect.ie8.es5.js" />
+    <Content Include="assets\common\js\components\multiselect\bootstrap-multiselect.ie8.js" />
+    <Content Include="assets\common\js\components\multiselect\bootstrap-multiselect.js" />
+    <Content Include="assets\common\js\components\pagination\jquery.draggable.js" />
+    <Content Include="assets\common\js\components\pagination\jquery.linkbutton.js" />
+    <Content Include="assets\common\js\components\pagination\jquery.pagination.js" />
+    <Content Include="assets\common\js\components\pagination\jquery.parser.js" />
+    <Content Include="assets\common\js\components\pagination\jquery.resizable.js" />
+    <Content Include="assets\common\js\components\popup-manager\popup-manager.js" />
+    <Content Include="assets\common\js\components\resizable\resizable.js" />
+    <Content Include="assets\common\js\components\scrollbar\jquery.mCustomScrollbar.concat.js" />
+    <Content Include="assets\common\js\components\scrollbar\jquery.mCustomScrollbar.js" />
+    <Content Include="assets\common\js\components\secure-hashing\sha1.js" />
+    <Content Include="assets\common\js\components\secure-hashing\sha256.js" />
+    <Content Include="assets\common\js\components\select2\select2.js" />
+    <Content Include="assets\common\js\components\shortcut\shortcut.js" />
+    <Content Include="assets\common\js\components\sticky-table-headers\jquery.stickytableheaders.js" />
+    <Content Include="assets\common\js\components\storejs\store.js" />
+    <Content Include="assets\common\js\components\tablesorter\tablesorter.js" />
+    <Content Include="assets\common\js\components\toastr\toastr.js" />
+    <Content Include="assets\common\js\components\typeahead\typeahead.js" />
+    <Content Include="assets\common\js\libs\angular\angular-1.5.3.js" />
+    <Content Include="assets\common\js\libs\bootstrap-material\material.js" />
+    <Content Include="assets\common\js\libs\bootstrap-material\ripples.js" />
+    <Content Include="assets\common\js\libs\bootstrap\affix.js" />
+    <Content Include="assets\common\js\libs\bootstrap\alert.js" />
+    <Content Include="assets\common\js\libs\bootstrap\bootstrap.js" />
+    <Content Include="assets\common\js\libs\bootstrap\button.js" />
+    <Content Include="assets\common\js\libs\bootstrap\carousel.js" />
+    <Content Include="assets\common\js\libs\bootstrap\collapse.js" />
+    <Content Include="assets\common\js\libs\bootstrap\dropdown.js" />
+    <Content Include="assets\common\js\libs\bootstrap\modal.js" />
+    <Content Include="assets\common\js\libs\bootstrap\popover.js" />
+    <Content Include="assets\common\js\libs\bootstrap\scrollspy.js" />
+    <Content Include="assets\common\js\libs\bootstrap\tab.js" />
+    <Content Include="assets\common\js\libs\bootstrap\tooltip.js" />
+    <Content Include="assets\common\js\libs\bootstrap\transition.js" />
+    <Content Include="assets\common\js\libs\cleave\cleave.js" />
+    <Content Include="assets\common\js\libs\clipboard\clipboard.js" />
+    <Content Include="assets\common\js\libs\hammer\hammer.js" />
+    <Content Include="assets\common\js\libs\hammer\jquery.hammer.js" />
+    <Content Include="assets\common\js\libs\jquery\jquery-1.11.3.js" />
+    <Content Include="assets\common\js\libs\jquery\jquery.cookie.js" />
+    <Content Include="assets\common\js\libs\lodash\lodash.core.js" />
+    <Content Include="assets\common\js\libs\mobile\isMobile.js" />
+    <Content Include="assets\common\js\libs\moment\moment.js" />
+    <Content Include="assets\common\js\libs\numeral\numeral.js" />
+    <Content Include="assets\common\js\libs\raven\raven.js" />
+    <Content Include="assets\common\js\libs\storejs\store.js" />
+    <Content Include="assets\common\js\libs\support-IE8\html5shiv.js" />
+    <Content Include="assets\common\js\libs\support-IE8\respond.js" />
+    <Content Include="assets\common\js\libs\support-IE8\sham.js" />
+    <Content Include="assets\common\js\libs\support-IE8\shim.js" />
+    <Content Include="assets\common\js\libs\underscore\underscore-min.js" />
+    <Content Include="assets\common\js\tests\apps\components\bootstrap.nexDatePicker-tests.js" />
+    <Content Include="assets\common\js\tests\libs\jasmine\boot.js" />
+    <Content Include="assets\common\js\tests\libs\jasmine\console.js" />
+    <Content Include="assets\common\js\tests\libs\jasmine\jasmine-html.js" />
+    <Content Include="assets\common\js\tests\libs\jasmine\jasmine.js" />
+    <Content Include="assets\common\js\tests\libs\jquery\jquery-1.11.3.js" />
+    <Content Include="assets\common\styles\base\icon-fonts.css" />
+    <Content Include="assets\common\styles\base\icon-fonts.min.css" />
+    <Content Include="assets\common\styles\base\scaffolding.css" />
+    <Content Include="assets\common\styles\base\scaffolding.min.css" />
+    <Content Include="assets\common\styles\components\accordions.css" />
+    <Content Include="assets\common\styles\components\accordions.min.css" />
+    <Content Include="assets\common\styles\components\alerts.css" />
+    <Content Include="assets\common\styles\components\alerts.min.css" />
+    <Content Include="assets\common\styles\components\blockui.css" />
+    <Content Include="assets\common\styles\components\blockui.min.css" />
+    <Content Include="assets\common\styles\components\bootstrap-multiselect.css" />
+    <Content Include="assets\common\styles\components\bootstrap-multiselect.min.css" />
+    <Content Include="assets\common\styles\components\bootstrap.nexDatePicker.css" />
+    <Content Include="assets\common\styles\components\bootstrap.nexDatePicker.min.css" />
+    <Content Include="assets\common\styles\components\breadcrumbs.css" />
+    <Content Include="assets\common\styles\components\breadcrumbs.min.css" />
+    <Content Include="assets\common\styles\components\buttons.css" />
+    <Content Include="assets\common\styles\components\buttons.min.css" />
+    <Content Include="assets\common\styles\components\calendars.css" />
+    <Content Include="assets\common\styles\components\calendars.min.css" />
+    <Content Include="assets\common\styles\components\checkbox-radio.css" />
+    <Content Include="assets\common\styles\components\checkbox-radio.min.css" />
+    <Content Include="assets\common\styles\components\dropdown.css" />
+    <Content Include="assets\common\styles\components\dropdown.min.css" />
+    <Content Include="assets\common\styles\components\form.css" />
+    <Content Include="assets\common\styles\components\form.min.css" />
+    <Content Include="assets\common\styles\components\icon.css" />
+    <Content Include="assets\common\styles\components\icon.min.css" />
+    <Content Include="assets\common\styles\components\modals.css" />
+    <Content Include="assets\common\styles\components\modals.min.css" />
+    <Content Include="assets\common\styles\components\month-picker.css" />
+    <Content Include="assets\common\styles\components\month-picker.min.css" />
+    <Content Include="assets\common\styles\components\pagination.css" />
+    <Content Include="assets\common\styles\components\pagination.min.css" />
+    <Content Include="assets\common\styles\components\popover.css" />
+    <Content Include="assets\common\styles\components\popover.min.css" />
+    <Content Include="assets\common\styles\components\resizable.css" />
+    <Content Include="assets\common\styles\components\select2.css" />
+    <Content Include="assets\common\styles\components\select2.min.css" />
+    <Content Include="assets\common\styles\components\tables.css" />
+    <Content Include="assets\common\styles\components\tables.min.css" />
+    <Content Include="assets\common\styles\components\tablesorter.css" />
+    <Content Include="assets\common\styles\components\tablesorter.min.css" />
+    <Content Include="assets\common\styles\components\tabs.css" />
+    <Content Include="assets\common\styles\components\tabs.min.css" />
+    <Content Include="assets\common\styles\components\textboxes.css" />
+    <Content Include="assets\common\styles\components\textboxes.min.css" />
+    <Content Include="assets\common\styles\components\tooltip.css" />
+    <Content Include="assets\common\styles\components\tooltip.min.css" />
+    <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\common\styles\fonts\iconalpha\demo-files\demo.js" />
+    <Content Include="assets\common\styles\fonts\iconalpha\demo.html" />
+    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.svg" />
+    <Content Include="assets\common\styles\fonts\iconalpha\Read Me.txt" />
+    <Content Include="assets\common\styles\fonts\iconcn88\demo-files\demo.css" />
+    <Content Include="assets\common\styles\fonts\iconcn88\demo-files\demo.js" />
+    <Content Include="assets\common\styles\fonts\iconcn88\demo.html" />
+    <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.svg" />
+    <Content Include="assets\common\styles\fonts\iconcn88\Read Me.txt" />
+    <Content Include="assets\common\styles\fonts\iconcn88\style.css" />
+    <Content Include="assets\common\styles\images\ajax-loader-8.gif" />
+    <Content Include="assets\common\styles\images\ajax-loader.gif" />
+    <Content Include="assets\common\styles\images\arrow-down.png" />
+    <Content Include="assets\common\styles\images\flag.png" />
+    <Content Include="assets\common\styles\images\flag.svg" />
+    <Content Include="assets\common\styles\images\flag_sprite.png" />
+    <Content Include="assets\common\styles\images\go-hover-icon.png" />
+    <Content Include="assets\common\styles\images\headerbg.png" />
+    <Content Include="assets\common\styles\images\loader3.gif" />
+    <Content Include="assets\common\styles\images\oldbrowser-agent.jpg" />
+    <Content Include="assets\common\styles\images\oldbrowser-agent2.jpg" />
+    <Content Include="assets\common\styles\images\oldbrowser-master.jpg" />
+    <Content Include="assets\common\styles\images\oldbrowser-master2.jpg" />
+    <Content Include="assets\common\styles\images\oldbrowser-super.jpg" />
+    <Content Include="assets\common\styles\images\oldbrowser-super2.jpg" />
+    <Content Include="assets\common\styles\layout\before-home-page\before-home-page.css" />
+    <Content Include="assets\common\styles\layout\before-home-page\before-home-page.min.css" />
+    <Content Include="assets\common\styles\layout\dcs\customizeDCS.css" />
+    <Content Include="assets\common\styles\layout\dcs\customizeDCS.min.css" />
+    <Content Include="assets\common\styles\layout\default-layout\header.css" />
+    <Content Include="assets\common\styles\layout\default-layout\header.min.css" />
+    <Content Include="assets\common\styles\layout\default-layout\navigation.css" />
+    <Content Include="assets\common\styles\layout\default-layout\navigation.min.css" />
+    <Content Include="assets\common\styles\layout\default-layout\sidebar.css" />
+    <Content Include="assets\common\styles\layout\default-layout\sidebar.min.css" />
+    <Content Include="assets\common\styles\themes\customer-status.css" />
+    <Content Include="assets\common\styles\themes\customer-status.min.css" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex.css" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex.min.css" />
+    <Content Include="assets\common\styles\vendors\bootstrap-datetimepicker.css" />
+    <Content Include="assets\common\styles\vendors\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\common\styles\vendors\bootstrap-multiselect.css" />
+    <Content Include="assets\common\styles\vendors\bootstrap-multiselect.min.css" />
+    <Content Include="assets\common\styles\vendors\daterangepicker\daterangepicker.css" />
+    <Content Include="assets\common\styles\vendors\jquery-easyui-1.5\easyui.css" />
+    <Content Include="assets\common\styles\vendors\jquery-easyui-1.5\icon.css" />
+    <Content Include="assets\common\styles\vendors\jquery-easyui-1.5\images\pagination_icons.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_flat_60_4264ac_40x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_flat_75_5476bb_40x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_flat_90_466bb9_40x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_flat_90_aaaaaa_40x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_glass_45_f4f3f1_1x400.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_glass_55_f8da4e_1x400.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_highlight-soft_90_999999_1x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_4264ac_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_c6cddc_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_cbd4e6_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_d0d9ec_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_f7a50d_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\images\ui-icons_fcd113_256x240.png" />
+    <Content Include="assets\common\styles\vendors\jqueryui\jquery-ui-1.9.1.custom.css" />
+    <Content Include="assets\common\styles\vendors\jqueryui\jquery-ui-1.9.1.custom.min.css" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\bg-demo-docs-param.gif" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\demo-spindown-closed.gif" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\demo-spindown-open.gif" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\dropdown-icon.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\icon-left.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\icon-right.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\spindown-closed.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\spindown-open.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\images\sprites.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\monPickr-0.0.3.css" />
+    <Content Include="assets\common\styles\vendors\monthpicker\monPickr-0.0.3.min.css" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-icons_454545_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\smoothness\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_diagonals-medium_20_d34d17_40x40.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_flat_30_cccccc_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_gloss-wave_45_817865_500x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_gloss-wave_60_fece2f_500x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_gloss-wave_70_ffdd57_500x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_gloss-wave_90_fff9e5_500x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_highlight-soft_100_feeebd_1x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-bg_inset-soft_30_ffffff_1x100.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_3d3d3d_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_bd7b00_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_d19405_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_eb990f_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_ed9f26_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_fadc7a_256x240.png" />
+    <Content Include="assets\common\styles\vendors\monthpicker\sunny\images\ui-icons_ffe180_256x240.png" />
+    <Content Include="assets\common\styles\vendors\select2.css" />
+    <Content Include="assets\common\styles\vendors\select2.min.css" />
+    <Content Include="assets\login\bundles\login.css" />
+    <Content Include="assets\login\bundles\login.js" />
+    <Content Include="assets\login\bundles\login.min.css">
+      <DependentUpon>login.css</DependentUpon>
+    </Content>
+    <Content Include="assets\login\bundles\login.min.js">
+      <DependentUpon>login.js</DependentUpon>
+    </Content>
+    <Content Include="assets\login\bundles\um.css" />
+    <Content Include="assets\login\bundles\um.min.css">
+      <DependentUpon>um.css</DependentUpon>
+    </Content>
+    <Content Include="assets\login\scripts\libs\bootstrap\dropdown.js" />
+    <Content Include="assets\login\scripts\libs\cryptojs\CryptoJS.js" />
+    <Content Include="assets\login\scripts\libs\detecas\Detecas.Base64.js" />
+    <Content Include="assets\login\scripts\libs\detecas\Detecas.JSON.js" />
+    <Content Include="assets\login\scripts\libs\flipclock\flipclock.css" />
+    <Content Include="assets\login\scripts\libs\flipclock\flipclock.js" />
+    <Content Include="assets\login\scripts\libs\flipclock\flipclock.min.js" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.js" />
+    <Content Include="assets\login\scripts\libs\storage\store-with-json2.min.js" />
+    <Content Include="assets\login\scripts\login\captcha.js" />
+    <Content Include="assets\login\scripts\login\core.js" />
+    <Content Include="assets\login\scripts\login\login.js" />
+    <Content Include="assets\login\scripts\login\place-holder.js" />
+    <Content Include="assets\login\scripts\login\resources.js" />
+    <Content Include="assets\login\scripts\raven.min.js" />
+    <Content Include="assets\login\scripts\um\um.js" />
+    <Content Include="assets\login\styles\images\crossword.png" />
+    <Content Include="assets\login\styles\images\error3-bg.png" />
+    <Content Include="assets\login\styles\images\sprites.png" />
+    <Content Include="assets\login\styles\images\sprites2.png" />
+    <Content Include="assets\login\styles\images\sprites3.png" />
+    <Content Include="assets\login\styles\images\um3-bg.png" />
+    <Content Include="assets\login\styles\pages\error3.css" />
+    <Content Include="assets\login\styles\pages\error3.min.css" />
+    <Content Include="assets\login\styles\pages\um.css" />
+    <Content Include="assets\login\styles\pages\um.min.css" />
+    <Content Include="assets\login\styles\themes\default.css" />
+    <Content Include="assets\login\styles\themes\default.min.css" />
+    <Content Include="assets\login\styles\themes\event.css" />
+    <Content Include="assets\login\styles\themes\event.min.css" />
+    <Content Include="assets\login\styles\themes\images\bg.jpg" />
+    <Content Include="assets\login\styles\themes\images\bg2.jpg" />
+    <Content Include="assets\login\styles\themes\images\sprites-theme.png" />
+    <Content Include="assets\login\styles\themes\images\sprites-theme2.png" />
+    <Content Include="assets\login\styles\vendors-extensions\login\bootstrap-ex.css">
+      <DependentUpon>bootstrap-ex.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\login\styles\vendors-extensions\login\bootstrap-ex.min.css">
+      <DependentUpon>bootstrap-ex.css</DependentUpon>
+    </Content>
+    <Content Include="assets\login\styles\vendors\bootstrap.css" />
+    <Content Include="assets\login\styles\vendors\bootstrap.min.css" />
+    <Content Include="assets\main\bundles\auth\kickout.js" />
+    <Content Include="assets\main\bundles\auth\kickout.min.js" />
+    <Content Include="assets\main\bundles\default-index.css" />
+    <Content Include="assets\main\bundles\default-index.js" />
+    <Content Include="assets\main\bundles\default-index.min.css" />
+    <Content Include="assets\main\bundles\default-index.min.js" />
+    <Content Include="assets\main\bundles\default.css" />
+    <Content Include="assets\main\bundles\default.min.css" />
+    <Content Include="assets\main\bundles\error-page.css" />
+    <Content Include="assets\main\bundles\error-page.min.css" />
+    <Content Include="assets\main\bundles\home-index.css" />
+    <Content Include="assets\main\bundles\home-index.js" />
+    <Content Include="assets\main\bundles\home-index.min.css" />
+    <Content Include="assets\main\bundles\home-index.min.js" />
+    <Content Include="assets\main\bundles\password\change-password.js" />
+    <Content Include="assets\main\bundles\password\change-password.min.js" />
+    <Content Include="assets\main\bundles\securitycode\change-securitycode.js" />
+    <Content Include="assets\main\bundles\securitycode\change-securitycode.min.js" />
+    <Content Include="assets\main\bundles\securitycode\verify-securitycode.js" />
+    <Content Include="assets\main\bundles\securitycode\verify-securitycode.min.js" />
+    <Content Include="assets\main\bundles\security\change-password.css" />
+    <Content Include="assets\main\bundles\security\change-password.min.css" />
+    <Content Include="assets\main\scripts\auth\kickout.js" />
+    <Content Include="assets\main\scripts\default\index-manager.js" />
+    <Content Include="assets\main\scripts\home\index-manager.js" />
+    <Content Include="assets\main\scripts\password\change-password.js" />
+    <Content Include="assets\main\scripts\securitycode\change-securitycode.js" />
+    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js" />
+    <Content Include="assets\main\styles\error-page.css" />
+    <Content Include="assets\main\styles\error-page.min.css" />
+    <Content Include="assets\main\styles\home.css" />
+    <Content Include="assets\main\styles\home.min.css" />
+    <Content Include="assets\main\styles\images\1F.gif" />
+    <Content Include="assets\main\styles\images\1L.gif" />
+    <Content Include="assets\main\styles\images\firstGoal.gif" />
+    <Content Include="assets\main\styles\images\green-star.gif" />
+    <Content Include="assets\main\styles\images\help\browserWord_txt01.png" />
+    <Content Include="assets\main\styles\images\help\browserWord_txt02.png" />
+    <Content Include="assets\main\styles\images\help\browserWord_txt03.png" />
+    <Content Include="assets\main\styles\images\help\browserWord_txt04.png" />
+    <Content Include="assets\main\styles\images\help\browser_ChromeBTN.png" />
+    <Content Include="assets\main\styles\images\help\browser_FirefoxBTN.png" />
+    <Content Include="assets\main\styles\images\help\browser_Safari.png" />
+    <Content Include="assets\main\styles\images\help\cache_edge01_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_edge01_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_edge02_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_edge02_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_edge03_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_edge03_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_google01_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_google01_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_google02_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_google02_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie01_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie01_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie02_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie02_en.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie03_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\cache_ie03_en.jpg" />
+    <Content Include="assets\main\styles\images\help\screen01_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\screen01_en.jpg" />
+    <Content Include="assets\main\styles\images\help\screen02_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\screen02_en.jpg" />
+    <Content Include="assets\main\styles\images\help\screen03_cn.jpg" />
+    <Content Include="assets\main\styles\images\help\screen03_en.jpg" />
+    <Content Include="assets\main\styles\images\lastGoal.gif" />
+    <Content Include="assets\main\styles\images\note_title.gif" />
+    <Content Include="assets\main\styles\security\change-password.css" />
+    <Content Include="assets\main\styles\security\change-password.min.css" />
+    <Content Include="assets\main\styles\security\create-nickname.css" />
+    <Content Include="assets\main\styles\security\create-nickname.min.css" />
+    <Content Include="assets\main\styles\security\security.css" />
+    <Content Include="assets\main\styles\security\security.min.css" />
+    <Content Include="assets\main\styles\site.css" />
+    <Content Include="assets\main\styles\site.min.css" />
+    <Content Include="assets\report\bundles\housewinloss.js" />
+    <Content Include="assets\report\bundles\housewinloss.min.js">
+      <DependentUpon>housewinloss.js</DependentUpon>
+    </Content>
+    <Content Include="assets\report\bundles\matchwinloss.js" />
+    <Content Include="assets\report\bundles\matchwinloss.min.js">
+      <DependentUpon>matchwinloss.js</DependentUpon>
+    </Content>
+    <Content Include="assets\report\bundles\reports.css" />
+    <Content Include="assets\report\bundles\reports.min.css">
+      <DependentUpon>reports.css</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.css">
+      <DependentUpon>reports.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.min.css">
+      <DependentUpon>reports.css</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.override.css">
+      <DependentUpon>reports.override.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.override.min.css">
+      <DependentUpon>reports.override.css</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\security.css">
+      <DependentUpon>security.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\security.min.css">
+      <DependentUpon>security.css</DependentUpon>
+    </Content>
+    <Content Include="assets\shared\scripts\components\date-picker.js">
+      <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="assets\shared\scripts\components\date-picker.js.map">
+      <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Web.config" />
+    <TypeScriptCompile Include="assets\main\scripts\auth\kickout.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\securitycode\change-securitycode.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\securitycode\verify-securitycode.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
+    <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
+    <TypeScriptCompile Include="assets\report\components\daterangepicker.ts" />
+    <TypeScriptCompile Include="assets\report\components\filter-toggle.ts" />
+    <TypeScriptCompile Include="assets\report\components\link-builder.ts" />
+    <TypeScriptCompile Include="assets\report\components\message.ts" />
+    <TypeScriptCompile Include="assets\report\components\multi-selection-dropdown.ts" />
+    <TypeScriptCompile Include="assets\report\components\pager.ts" />
+    <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
+    <TypeScriptCompile Include="assets\report\components\sort.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\housewinloss.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\core.ts" />
+    <TypeScriptCompile Include="assets\shared\scripts\components\date-picker.ts" />
+    <TypeScriptCompile Include="typings\globals\bootstrap\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jasmine-jquery\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery.blockui\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery.cookie\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jqueryui\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\jquery\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\moment\index.d.ts" />
+    <TypeScriptCompile Include="typings\globals\storejs\index.d.ts" />
+    <TypeScriptCompile Include="typings\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_GlobalResources\ReportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App_Start\DependencyConfig.cs" />
+    <Compile Include="App_Start\LoggingManager.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Main\Requests\IndexQuery.cs" />
+    <Compile Include="Reports\ExcelBaseHandler.cs" />
+    <Compile Include="Reports\HouseWinLossExcelHandler.cs" />
+    <Compile Include="Reports\MatchWinLossExcelHandler.cs" />
+    <Compile Include="Reports\ReportsBaseHandler.cs" />
+    <Compile Include="Reports\ReportsHandler.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
+    <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossQuery.cs" />
+    <Compile Include="Reports\ViewModel\ExcelFileViewModel.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossReportViewModel.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLossFilterViewModel.cs" />
+    <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
+    <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
+    <Compile Include="Shared\BaseController.cs" />
+    <Compile Include="Shared\BrowserHelperImpl.cs" />
+    <Compile Include="Shared\Helpers\BrowserHelper.cs" />
+    <Compile Include="Shared\Helpers\CookieHelper.cs" />
+    <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" />
+    <Compile Include="Shared\Helpers\StaticResources.cs" />
+    <Compile Include="Home\HomeController.cs" />
+    <Compile Include="Login\LoginController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Main\Handlers\MainHandler.cs" />
+    <Compile Include="Shared\BaseQuery.cs" />
+    <Compile Include="Main\Requests\MenuBarQuery.cs" />
+    <Compile Include="Main\ViewModel\IndexViewModel.cs" />
+    <Compile Include="Main\MainController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportsController.cs" />
+    <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
+    <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
+    <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />
+    <Compile Include="Shared\ViewModels\Components\DateRangePickerViewModel.cs" />
+    <Compile Include="Shared\ViewModels\Components\PagerViewModel.cs" />
+    <Compile Include="Shared\ViewModels\Components\SingleSelectionViewModel.cs" />
+    <Compile Include="Shared\ViewModels\SelectListItemExt.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Login\Views\web.config" />
+    <Content Include="assets\login\bundleconfig.json" />
+    <Content Include="assets\login\compilerconfig.json" />
+    <Content Include="Home\Views\web.config" />
+    <Content Include="assets\common\js\libs\bootstrap\readme.md" />
+    <Content Include="assets\common\js\libs\jquery\jquery-1.11.3.min.map" />
+    <Content Include="assets\common\js\tests\chutzpah.json" />
+    <Content Include="assets\common\styles\abstracts\_mixins.scss" />
+    <Content Include="assets\common\styles\abstracts\_variables.scss" />
+    <Content Include="assets\common\styles\base\icon-fonts.scss" />
+    <Content Include="assets\common\styles\base\scaffolding.scss" />
+    <Content Include="assets\common\styles\components\accordions.scss" />
+    <Content Include="assets\common\styles\components\alerts.scss" />
+    <Content Include="assets\common\styles\components\blockui.scss" />
+    <Content Include="assets\common\styles\components\bootstrap-multiselect.scss" />
+    <Content Include="assets\common\styles\components\bootstrap.nexDatePicker.scss" />
+    <Content Include="assets\common\styles\components\breadcrumbs.scss" />
+    <Content Include="assets\common\styles\components\buttons.scss" />
+    <Content Include="assets\common\styles\components\calendars.scss" />
+    <Content Include="assets\common\styles\components\checkbox-radio.scss" />
+    <Content Include="assets\common\styles\components\dropdown.scss" />
+    <Content Include="assets\common\styles\components\form.scss" />
+    <Content Include="assets\common\styles\components\icon.scss" />
+    <Content Include="assets\common\styles\components\modals.scss" />
+    <Content Include="assets\common\styles\components\month-picker.scss" />
+    <Content Include="assets\common\styles\components\pagination.scss" />
+    <Content Include="assets\common\styles\components\popover.scss" />
+    <Content Include="assets\common\styles\components\select2.scss" />
+    <Content Include="assets\common\styles\components\tables.scss" />
+    <Content Include="assets\common\styles\components\tablesorter.scss" />
+    <Content Include="assets\common\styles\components\tabs.scss" />
+    <Content Include="assets\common\styles\components\textboxes.scss" />
+    <Content Include="assets\common\styles\components\tooltip.scss" />
+    <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.eot" />
+    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.ttf" />
+    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.woff" />
+    <Content Include="assets\common\styles\fonts\iconalpha\selection.json" />
+    <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.eot" />
+    <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.ttf" />
+    <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.woff" />
+    <Content Include="assets\common\styles\fonts\iconcn88\selection.json" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Italic.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.eot" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.eot" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff2" />
+    <Content Include="assets\common\styles\layout\before-home-page\before-home-page.scss" />
+    <Content Include="assets\common\styles\layout\before-home-page\before-home-page3.scss" />
+    <Content Include="assets\common\styles\layout\before-home-page\before-home-page4.scss" />
+    <Content Include="assets\common\styles\layout\dcs\customizeDCS.scss" />
+    <Content Include="assets\common\styles\layout\default-layout\header.scss" />
+    <Content Include="assets\common\styles\layout\default-layout\navigation.scss" />
+    <Content Include="assets\common\styles\layout\default-layout\sidebar.scss" />
+    <Content Include="assets\common\styles\themes\customer-status.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex2.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex3.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex4.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins2.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins3.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins4.scss" />
+    <Content Include="assets\common\styles\vendors-extensions\site-viewlogs\bootstrap-ex.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap-readme.md" />
+    <Content Include="assets\common\styles\vendors\bootstrap.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_alerts.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_buttons.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_center-block.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_forms.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_gradients.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_grid.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_hide-text.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_image.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_labels.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_list-group.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_nav-vertical-align.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_opacity.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_pagination.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_panels.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_progress-bar.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_resize.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_responsive-visibility.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_size.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_table-row.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_text-overflow.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\mixins\_vendor-prefixes.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_alerts.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_badges.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_breadcrumbs.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_button-groups.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_buttons.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_carousel.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_close.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_code.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_component-animations.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_dropdowns.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_forms.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_glyphicons.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_grid.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_input-groups.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_jumbotron.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_labels.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_list-group.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_media.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_mixins.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_modals.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_navbar.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_navs.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_normalize.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_pager.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_pagination.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_panels.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_popovers.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_print.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_progress-bars.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_responsive-embed.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_responsive-utilities.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_scaffolding.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_tables.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_theme.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_thumbnails.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_tooltip.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_type.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_utilities.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_variables.scss" />
+    <Content Include="assets\common\styles\vendors\bootstrap\_wells.scss" />
+    <Content Include="assets\common\styles\vendors\toastr\toastr.scss" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
+    <Content Include="assets\login\styles\abstracts\_mixins.scss" />
+    <Content Include="assets\login\styles\abstracts\_variables-event.scss" />
+    <Content Include="assets\login\styles\abstracts\_variables-event2.scss" />
+    <Content Include="assets\login\styles\abstracts\_variables.scss" />
+    <Content Include="assets\login\styles\abstracts\_variables2.scss" />
+    <Content Include="assets\login\styles\abstracts\_variables3.scss" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-Bold.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-BoldItalic.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-ExtraBold.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-ExtraBoldItalic.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-Italic.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-Light.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-LightItalic.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-Regular.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-Semibold.ttf" />
+    <Content Include="assets\login\styles\fonts\opensans\OpenSans-SemiboldItalic.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Bold.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Bold.woff" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Bold.woff2" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Light.eot" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Light.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Light.woff" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Light.woff2" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Medium.eot" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Medium.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Medium.woff" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Medium.woff2" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Regular.eot" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Regular.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Regular.woff" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Regular.woff2" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.eot" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.ttf" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.woff" />
+    <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.woff2" />
+    <Content Include="assets\login\styles\pages\error3.scss" />
+    <Content Include="assets\login\styles\pages\um.scss" />
+    <Content Include="assets\login\styles\themes\default.scss" />
+    <Content Include="assets\login\styles\themes\default2.scss" />
+    <Content Include="assets\login\styles\themes\default3.scss" />
+    <Content Include="assets\login\styles\themes\event.scss" />
+    <Content Include="assets\login\styles\themes\event2.scss" />
+    <Content Include="assets\login\styles\vendors-extensions\login\bootstrap-ex.scss" />
+    <Content Include="assets\login\styles\vendors-extensions\login\_bootstrap-mixins.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_alerts.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_background-variant.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_border-radius.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_buttons.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_center-block.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_clearfix.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_forms.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_gradients.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_grid-framework.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_grid.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_hide-text.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_image.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_labels.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_list-group.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_nav-divider.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_nav-vertical-align.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_opacity.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_pagination.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_panels.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_progress-bar.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_reset-filter.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_reset-text.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_resize.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_responsive-visibility.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_size.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_tab-focus.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_table-row.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_text-emphasis.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_text-overflow.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\mixins\_vendor-prefixes.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_alerts.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_badges.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_breadcrumbs.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_button-groups.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_buttons.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_carousel.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_close.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_code.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_component-animations.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_dropdowns.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_forms.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_glyphicons.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_grid.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_input-groups.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_jumbotron.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_labels.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_list-group.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_media.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_mixins.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_modals.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_navbar.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_navs.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_normalize.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_pager.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_pagination.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_panels.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_popovers.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_print.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_progress-bars.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_responsive-embed.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_responsive-utilities.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_scaffolding.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_tables.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_theme.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_thumbnails.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_tooltip.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_type.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_utilities.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_variables.scss" />
+    <Content Include="assets\login\styles\vendors\bootstrap\_wells.scss" />
+    <Content Include="Home\Views\index2.cshtml" />
+    <Content Include="assets\common\bundleconfig.json" />
+    <Content Include="assets\common\compilerconfig.json" />
+    <Content Include="assets\main\scripts\auth\kickout.js.map" />
+    <Content Include="assets\main\scripts\default\index-manager.js.map" />
+    <Content Include="assets\main\scripts\home\index-manager.js.map" />
+    <Content Include="assets\main\scripts\password\change-password.js.map" />
+    <Content Include="assets\main\scripts\securitycode\change-securitycode.js.map" />
+    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js.map" />
+    <Content Include="assets\main\styles\error-page.scss" />
+    <Content Include="assets\main\styles\home.scss" />
+    <Content Include="assets\main\styles\popup.scss" />
+    <Content Include="assets\main\styles\security\change-password.scss" />
+    <Content Include="assets\main\styles\security\create-nickname.scss" />
+    <Content Include="assets\main\styles\security\security.scss" />
+    <Content Include="assets\main\styles\site.scss" />
+    <Content Include="assets\main\styles\_mixins.scss" />
+    <Content Include="assets\main\styles\_variables.scss" />
+    <Content Include="assets\main\bundleconfig.json" />
+    <Content Include="assets\main\compilerconfig.json" />
+    <Content Include="Main\Views\web.config" />
+    <Content Include="Main\Views\HeaderNav.cshtml" />
+    <Content Include="Main\Views\HiddenFields.cshtml" />
+    <Content Include="Main\Views\Index.cshtml" />
+    <Content Include="Main\Views\MenuBar.cshtml" />
+    <Content Include="App_Code\Components\BetTypeSelection.cshtml" />
+    <Content Include="App_Code\Components\DateRangePicker.cshtml" />
+    <Content Include="App_Code\Components\LiveStatusSelection.cshtml" />
+    <Content Include="App_Code\Components\Pager.cshtml" />
+    <Content Include="App_Code\Components\SportGroupSelection.cshtml" />
+    <Content Include="assets\report\styles\reports.scss" />
+    <Content Include="assets\report\styles\security.scss" />
+    <Content Include="assets\report\styles\_mixins.scss" />
+    <Content Include="assets\report\styles\_variables.scss" />
+    <Content Include="assets\report\compilerconfig.json" />
+    <Content Include="assets\report\bundleconfig.json" />
+    <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
+    <Content Include="assets\report\styles\reports.override.scss" />
+    <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
+<<<<<<< HEAD
+    <Content Include="App_Code\Components\DatePicker.cshtml" />
+=======
+    <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
+>>>>>>> 113828 - Implement House Report -1
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Views\HouseWinLoss.cshtml" />
+    <Content Include="Login\Views\Index.cshtml" />
+    <Content Include="typings\globals\bootstrap\typings.json" />
+    <Content Include="typings\globals\jasmine-jquery\typings.json" />
+    <Content Include="typings\globals\jasmine\typings.json" />
+    <Content Include="typings\globals\jquery.blockui\typings.json" />
+    <Content Include="typings\globals\jquery.cookie\typings.json" />
+    <Content Include="typings\globals\jqueryui\typings.json" />
+    <Content Include="typings\globals\jquery\typings.json" />
+    <Content Include="typings\globals\moment\typings.json" />
+    <Content Include="typings\globals\storejs\typings.json" />
+    <Content Include="Reports\Views\web.config" />
+    <Content Include="Reports\Views\MatchWinLoss.cshtml" />
+    <Content Include="Shared\Views\_Layout.cshtml" />
+    <Content Include="Shared\Views\web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EB.Features.Shared\EB.Features.Shared.csproj">
+      <Project>{e31ebbb6-c646-4491-ac72-ff249afecf16}</Project>
+      <Name>EB.Features.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EB.Features.Main\EB.Features.Main.csproj">
+      <Project>{f172e8ce-bebf-463b-b20c-c5ff24ecee03}</Project>
+      <Name>EB.Features.Main</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EB.Features.Reports\EB.Features.Reports.csproj">
+      <Project>{1bb3b75b-113a-4783-9922-c43ebc2c8fd6}</Project>
+      <Name>EB.Features.Reports</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_GlobalResources\ReportResources.resx">
+      <Generator>GlobalResourceProxyGenerator</Generator>
+      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>51062</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:51062/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

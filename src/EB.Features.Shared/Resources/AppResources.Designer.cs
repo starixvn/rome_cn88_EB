@@ -349,7 +349,7 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sportsbook Parlay.
+        ///   Looks up a localized string similar to Sportsbook  Parlay.
         /// </summary>
         public static string Parlay {
             get {

@@ -64,6 +64,7 @@ namespace EB.Features.Site.App_Start
             container.Register<IHouseWinLossService, HouseWinLossService>();
             container.Register<IMatchWinLossService, MatchWinLossService>();
             container.Register<MatchWinLossWorkbook, MatchWinLossWorkbookImpl>();
+            container.Register<HouseWinLossWorkbook, HouseWinLossWorkbookImpl>();
         }
 
         private static void RegisterMainModule(Container container)

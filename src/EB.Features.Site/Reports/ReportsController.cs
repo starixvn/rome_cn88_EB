@@ -19,19 +19,19 @@ namespace EB.Features.Site.Reports
         {
         }
 
-        //[NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> HouseWinLoss(HouseWinLossQuery query)
           => await ViewAsync(query, $"{ViewsPath}/HouseWinLoss.cshtml");
 
-        //[NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> ExportHouseWinLoss(HouseWinLossExcelQuery query)
             => await ExcelView(query);
 
-        //[NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> MatchWinLoss(MatchWinLossQuery query)
             => await ViewAsync(query, $"{ViewsPath}/MatchWinLoss.cshtml");
 
-        //[NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
+        [NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> ExportMatchWinLoss(MatchWinLossExcelQuery query)
             => await ExcelView(query);
     }

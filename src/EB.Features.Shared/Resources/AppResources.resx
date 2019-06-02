@@ -205,7 +205,7 @@
     <value>Displaying {from} to {to} of {total} items</value>
   </data>
   <data name="Parlay" xml:space="preserve">
-    <value>Sportsbook Parlay</value>
+    <value>Sportsbook  Parlay</value>
   </data>
   <data name="ParlayText" xml:space="preserve">
     <value>Parlay</value>
@@ -325,7 +325,8 @@
     <value>Headline</value>
   </data>
   <data name="Others" xml:space="preserve">
-    <value>Others</value></data>
+    <value>Others</value>
+  </data>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>

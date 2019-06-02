@@ -123,17 +123,26 @@
   <data name="GrandTotal" xml:space="preserve">
     <value>Grand Total</value>
   </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline</value>
+  </data>
   <data name="HeadlineStock" xml:space="preserve">
     <value>Headline Stock</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
     <value>Headline Stock %</value>
   </data>
+  <data name="HouseComm" xml:space="preserve">
+    <value>House Comm</value>
+  </data>
   <data name="HouseIncome" xml:space="preserve">
     <value>House Income</value>
   </data>
   <data name="HouseWinLossReport" xml:space="preserve">
-    <value>House Win Loss Report</value>
+    <value>Wager Report</value>
+  </data>
+  <data name="HouseWL" xml:space="preserve">
+    <value>House WL</value>
   </data>
   <data name="MatchWinLossReport" xml:space="preserve">
     <value>Match Win Loss</value>
@@ -150,10 +159,28 @@
   <data name="SubTotal" xml:space="preserve">
     <value>Sub Total</value>
   </data>
+  <data name="SuperComm" xml:space="preserve">
+    <value>SMA Comm</value>
+  </data>
   <data name="ValidStake" xml:space="preserve">
     <value>Valid Stake</value>
   </data>
   <data name="Wager" xml:space="preserve">
     <value>Wager</value>
+  </data>
+  <data name="Wagers" xml:space="preserve">
+    <value>Wagers</value>
+  </data>
+  <data name="NoteViewHistory" xml:space="preserve">
+    <value>For more historical data, please click </value>
+  </data>
+  <data name="ViewHistoryReport" xml:space="preserve">
+    <value>View History Report</value>
+  </data>
+  <data name="BackToCurrentReport" xml:space="preserve">
+    <value>Back To Current Report</value>
+  </data>
+  <data name="NoteViewCurrentReport" xml:space="preserve">
+    <value>You can view the report data up to {0}.</value>
   </data>
 </root>

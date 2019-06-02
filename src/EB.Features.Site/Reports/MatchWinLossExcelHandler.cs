@@ -75,12 +75,12 @@ namespace EB.Features.Site.Reports
             mapper
                 .Map(A, betTypeWinLoss => betTypeWinLoss.BetTypeGroupName)
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HeadlineStock / totalStock * 100);
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -92,12 +92,12 @@ namespace EB.Features.Site.Reports
             mapper
                 .Map(A, betTypeWinLoss => ReportResources.SubTotal)
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HeadlineStock / totalStock * 100);
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -109,12 +109,12 @@ namespace EB.Features.Site.Reports
             mapper
                 .Map(A, betTypeWinLoss => ReportResources.GrandTotal)
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HeadlineStock / totalStock * 100);
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }

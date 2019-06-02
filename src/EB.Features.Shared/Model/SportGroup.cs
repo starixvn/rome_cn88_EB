@@ -11,19 +11,26 @@ namespace EB.Features.Shared.Model
     {
         private readonly Func<int, string> getSportGroupDisplayName;
 
+        public SportGroup()
+        {
+
+        }
+
         internal SportGroup(
             int id,
+            int productId,
             IEnumerable<int> displaySportIds,
             Func<int, string> getSportGroupDisplayName)
         {
             Id = id;
+            ProductId = productId;
             DisplaySportIds = displaySportIds;
             this.getSportGroupDisplayName = getSportGroupDisplayName;
         }
 
         public int Id { get; }
 
-        public int? ProductId { get; }
+        public int ProductId { get; }
 
         public IEnumerable<int> DisplaySportIds { get; }
 

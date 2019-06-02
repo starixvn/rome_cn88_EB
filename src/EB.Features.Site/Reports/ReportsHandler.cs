@@ -74,8 +74,8 @@ namespace EB.Features.Site.Reports
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.Date,
-                ToDate = SystemTime.Today
+                FromDate = message.FromDate,
+                ToDate = message.ToDate
             });
 
             return new HouseWinLossReportViewModel(

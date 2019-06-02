@@ -6,6 +6,7 @@ class HouseWinLossReport {
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
     $dateContainer: JQuery;
+    $dateRangeContainer: JQuery;
     sportGroupSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
@@ -36,6 +37,7 @@ class HouseWinLossReport {
         this.$reportForm = this.$("#report-form");
         this.$exportExcelForm = this.$("#export-excel-form");
         this.$dateContainer = this.$("#date-container");
+        this.$dateRangeContainer = this.$("#dateRangeContainer");
     }
 
     public registerEvents() {
@@ -45,9 +47,71 @@ class HouseWinLossReport {
             minDate: this.$dateContainer.data("mindate"),
             defaultDate: this.$dateContainer.data("currentdate"),
             format: 'YYYY-MM-DD'
-        }); 
+        });
 
         this.$("#icon-excel").on("click", this.onExportExcel);
+
+        this.$("#ViewHistoryReport").click(() => {
+            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "1" ? "0" : "1");
+            this.switchCalendarType();
+        });
+        this.$("#BackToCurrentReport").click(() => {
+            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "1" ? "0" : "1");
+            this.switchCalendarType();
+        });
+        this.initMonthlyCalendar();
+    }
+
+    switchCalendarType = () => {        
+        if (this.$("#IsHistoricReport").val() == "1") {
+            this.$("#GroupViewHistory").css("display", "none");
+            this.$("#GroupBackToCurrent").css("display", "block");
+            this.$('.from-date-box').css('display', 'none');
+            this.$('.js-month-group').css('display', 'inline-block');
+            this.$("#ticketStatusContainer").css("display", "none");
+        }
+        else {
+            this.$("#ticketStatusContainer").css("display", "inline-block");
+            this.$("#GroupViewHistory").css("display", "block");
+            this.$("#GroupBackToCurrent").css("display", "none");
+            this.$('.from-date-box').css('display', 'inline-block');
+            this.$('.js-month-group').css('display', 'none');
+        }        
+    }
+
+    initMonthlyCalendar = () => {
+        var maxDate = new Date(this.$dateRangeContainer.data("maxdate"));
+        var fromDate = new Date(this.$dateRangeContainer.data("fromdate"));
+        var toDate = new Date(this.$dateRangeContainer.data("todate"));
+
+        this.$("#monPickr1").monPickr({
+            today: fromDate,
+            maxDate: maxDate,
+            showDateRange: true,
+            fromDayId: "fromDay1",
+            toDayId: "toDay1",
+            log: function (msg) {
+                if (typeof console != "undefined")
+                    console.warn(msg);
+            }
+        });
+        
+        
+        this.$("#monPickr1").monPickr("setMonth", fromDate);
+        this.$("#monPickr1").monPickr("setFromDay", fromDate.getDate());
+        this.$("#monPickr1").monPickr("setToDay", toDate.getDate());
+
+        this.switchCalendarType();
+    }
+
+    UpdateFromDateToDate = () => {
+        if (this.$("#IsHistoricReport").val() == "1") {
+            this.$("#fromDate").val(this.$("#monPickr1").monPickr("getFromDate", "MM/dd/yyyy"));
+            this.$("#toDate").val(this.$("#monPickr1").monPickr("getToDate", "MM/dd/yyyy"));
+        } else {
+            this.$("#fromDate").val(this.$("#date").val());
+            this.$("#toDate").val(this.$("#date").val());
+        }
     }
 
     onExportExcel = () => {
@@ -59,6 +123,8 @@ class HouseWinLossReport {
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
         this.ticketStatusSelectionComponent.updateSelectedValue();
+
+        this.UpdateFromDateToDate();
     };
 
     renderComponents(): void {
@@ -67,7 +133,7 @@ class HouseWinLossReport {
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
         this.ticketStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-ticketstatus", "UserSelectedTicketStatusId"));
     }
-    
+
 
     onchangeSportType(): void {
         let sportType = this.sportGroupSelectionComponent.$dropdown.val();

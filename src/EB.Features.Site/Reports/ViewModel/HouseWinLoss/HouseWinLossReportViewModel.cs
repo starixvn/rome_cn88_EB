@@ -1,10 +1,12 @@
 ﻿using EB.Features.Reports.Model;
 using EB.Features.Shared.Constants;
+using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Utilies;
 using EB.Features.Site.Reports.Request.HouseWinLoss;
 using EB.Features.Site.Shared.ViewModels;
 using EB.Features.Site.Shared.ViewModels.Components;
+using Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,10 +43,13 @@ namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
                 });
             var liveStatusSelectionViewModel = new SingleSelectionViewModel(liveStatuses, query.UserSelectedLiveStatusId);
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
-            var datePickerViewModel = new DatePickerViewModel(balanceUpDate, SystemTime.Today, query.Date);
+
+            var datePickerViewModel = new DatePickerViewModel(new DateTime(2019, 1, 1), SystemTime.Today, query.FromDate);
+            var dateRangePickerViewModel = new DateRangePickerViewModel(new DateTime(2019, 1, 1), balanceUpDate, balanceUpDate.FirstDateOfMonth(), query.ToDate >= SystemTime.Today ? balanceUpDate : query.ToDate);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,
+                dateRangePickerViewModel,
                 query.IsTest,
                 sportGroupSelectionViewModel,
                 betTypeSelectionViewModel,
@@ -55,7 +60,10 @@ namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
 
             TotalRow = Sum(reportData);
             Query = query;
+            BalanceUpDate = balanceUpDate;
         }
+
+        private DateTime BalanceUpDate { get; }
 
         public HouseWinLossQuery Query { get; }
 
@@ -66,6 +74,8 @@ namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
         public HouseWinLossModel TotalRow { get; }
 
         public bool IsShowTotalRow => ReportData.Any();
+
+        public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
 
         public HouseWinLossModel Sum(IEnumerable<HouseWinLossModel> matches)
         {

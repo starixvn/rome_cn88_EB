@@ -1,0 +1,214 @@
+﻿@model MatchWinLossReportViewModel
+@{
+    Layout = "~/Shared/Views/_Layout.cshtml";
+    ViewBag.Title = "Match Win Loss Report";
+}
+@section Styles {
+    @StaticResources.RenderStyles("~/assets/report/bundles/reports")
+}
+<div class="report-detail wager-report">
+    <div class="page-title title-report-detail">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="report-name">@ViewBag.Title</li>
+        </ul>
+        <div class="breadcrumb-container">
+            <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
+        </div>
+    </div>
+
+    <form class="form-inline filter report-form" role="form" id="report-form">
+        @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+        @DatePicker.Render(Model.ReportFilterViewModel.DatePickerViewModel)
+        @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
+        @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
+        <div class="form-group">
+            <label>
+                @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
+                @SiteResources.ExcludeTestData
+            </label>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="@AppResources.Submit" class="btn-submit" />
+        </div>
+    </form>
+
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportMatchWinLoss","Reports")">
+        @Html.Hidden("Date", Model.Query.Date)
+        @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
+        @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
+        @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
+    </form>
+
+    <div class="tab-content main-content" id="tab-main-content">
+        <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
+            <thead class="tableFloatingHeaderOriginal">
+                <tr>
+<<<<<<< HEAD
+                    <th class="text-left header bettype">@ReportResources.BetType</th>
+                    <th class="text-right header">@ReportResources.Wager</th>
+                    <th class="text-right header">@ReportResources.Stake</th>
+                    <th class="text-right header">@ReportResources.ValidStake</th>
+                    <th class="text-right header">@ReportResources.MemberIncome</th>
+                    <th class="text-right header">@ReportResources.HouseIncome</th>
+                    <th class="text-right header">@ReportResources.HeadlineStock</th>
+                    <th class="text-right header">@ReportResources.HeadlineStockPercent</th>
+=======
+                    <th class="text-left header bettype"> Bet Type</th>
+                    <th class="text-right header"> Wagers</th>
+                    <th class="text-right header"> Stake</th>
+                    <th class="text-right header"> Valid Stake</th>
+                    <th class="text-right header"> Member Income</th>
+                    <th class="text-right header"> House Income</th>
+                    <th class="text-right header"> Headline Stock</th>
+                    <th class="text-right header"> Headline Stock %</th>
+>>>>>>> 113828 - Implement House Report -1
+                </tr>
+                @if (Model.IsShowTotalRow)
+                {
+                    <tr class="total">
+                        <th class="text-left header">Grand Total</th>
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Wagers, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "settlement", true)
+                    </tr>
+                }
+            </thead>
+            @foreach (var row in Model.ReportData.GroupBy(i => i.MatchId))
+            {
+                var firstRowOfGroup = row.ToList();
+                var subTotal = Model.Sum(firstRowOfGroup);
+
+                <tr class="match-title-row">
+                    <td class="text-left col-username" colspan="8">
+                        <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
+                        @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().EventInfo))
+                        {
+                            <span class="match-title">@firstRowOfGroup.First().EventInfo</span>
+                        }
+                    </td>
+                </tr>
+
+                foreach (var betType in Model.MajorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                {
+                    <tr>
+                        <td class="text-left">@betType.BetTypeGroupName</td>
+                        @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.HeadlineStock, "settlement")
+
+                        @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    </tr>
+                }
+
+                if (Model.MinorBetType.Any(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                {
+                    var a = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId));
+                    <tr class="group" data-leagueid="@firstRowOfGroup.First().MatchId">
+                        <td class="col-event-span-desktop text-left">
+                            <span class="group-name-wrapper">
+                                <span class="icon-chevron-right"></span>
+                                <span class="group-name">@AppResources.Others</span>
+                            </span>
+                        </td>
+                        @HtmlHelpers.RenderNumberCell(a.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(a.HeadlineStock, "settlement")
+
+                        @HtmlHelpers.RenderStockPercentCell(a.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    </tr>
+
+                    foreach (var betType in Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                    {
+                        <tr class="childrow-@firstRowOfGroup.First().MatchId hide">
+                            <td class="text-left child">@betType.BetTypeGroupName</td>
+                            @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.Stake, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.ValidStake, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.MemberIncome, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.HouseIncome, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.HeadlineStock, "settlement")
+
+                            @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                        </tr>
+                    }
+                }
+
+                <tr class="sub-total-row">
+                    <td class="text-left">@ReportResources.SubTotal</td>
+                    @HtmlHelpers.RenderNumberCell(subTotal.Wagers, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.Stake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.ValidStake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.MemberIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.HouseIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.HeadlineStock, "settlement")
+
+                    @HtmlHelpers.RenderStockPercentCell(subTotal.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                </tr>
+            }
+
+            @if (Model.Parlay != null)
+            {
+                <tr class="match-title-row">
+                    <td class="text-left col-username" colspan="8">
+                        <span class="league-title" title="@Model.Parlay.LeagueName">@Model.Parlay.LeagueName</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-left">@Model.Parlay.BetTypeGroupName</td>
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Wagers, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Stake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.ValidStake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.MemberIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HouseIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.HeadlineStock, "settlement")
+
+                    @HtmlHelpers.RenderStockPercentCell(Model.Parlay.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                </tr>
+            }
+            @if (Model.IsShowTotalRow)
+            {
+                <tfoot>
+                    <tr class="total">
+                        <td class="text-right">@ReportResources.GrandTotal</td>
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalHeadlineStockPercent, "settlement")
+                    </tr>
+                </tfoot>
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td id="no-data-row" colspan="8"
+                            data-isNoInfo="true"
+                            align="center">
+                            @AppResources.NoInformationIsAvailable
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    @StaticResources.RenderScripts("~/assets/report/bundles/matchwinloss")
+    <script>
+        var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items.GroupBy(i => i.SportTypeGroup)));
+    </script>
+}

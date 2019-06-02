@@ -15,6 +15,7 @@ namespace EB.Features.Site.Reports.Request
         {
             Date = SystemTime.Today;
             UserSelectedLiveStatusId = LiveStatusConstants.AllMarkets;
+            IsTest = true;
         }
 
         public int UserSelectedSportGroupId { get; set; }

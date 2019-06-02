@@ -29,7 +29,7 @@
             ValidStake = validStake;
             MemberIncome = memberIncome;
             HouseIncome = houseIncome;
-            HeadlineStock = HouseIncome;
+            HeadlineStock = headlineStock;
         }
 
         public int LeagueId { get; }

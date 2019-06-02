@@ -107,7 +107,7 @@ namespace EB.Features.Site
                 ViewBag.Message = SiteResources.Invalidinput;
             }
 
-            return View();
+            return View("~/Login/Views/Index.cshtml");
         }
 
         public ActionResult LogOut()

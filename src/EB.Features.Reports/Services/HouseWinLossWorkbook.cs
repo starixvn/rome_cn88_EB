@@ -46,7 +46,7 @@ namespace EB.Features.Reports.Services
         internal HouseWinLossModel GrandTotal { get; set; }
 
         internal Mapper<HouseWinLossModel> BetTypeRowMapper { get; set; }
-        
+
         internal Mapper<HouseWinLossModel> GrandTotalRowMapper { get; set; }
 
         internal Row OddRowTemplate { get; set; }
@@ -75,7 +75,7 @@ namespace EB.Features.Reports.Services
             GrandTotalRowMapper = grandTotalRowMapper;
             return this;
         }
-        
+
         internal void FillBetTypeWinLoss(
             Sheet sheet,
             int rowIndex,
@@ -93,11 +93,11 @@ namespace EB.Features.Reports.Services
         {
             var sheet = GetSheetAt(TemplateInfo.SheetIndex);
 
-            currentRowIndex = TemplateInfo.BodyStartIndex;
-            GrandTotalRowTemplate = sheet.GetRow(currentRowIndex++);
+            MatchTitleRowTemplate = sheet.GetRow(currentRowIndex++);
+            currentRowIndex = TemplateInfo.BodyStartIndex;            
             OddRowTemplate = sheet.GetRow(currentRowIndex++);
             EvenRowTemplate = sheet.GetRow(currentRowIndex++);
-            MatchTitleRowTemplate = sheet.GetRow(currentRowIndex++);
+            GrandTotalRowTemplate = sheet.GetRow(currentRowIndex++);
 
             return GetSheetAt(ReportSheetIndex);
         }
@@ -163,17 +163,11 @@ namespace EB.Features.Reports.Services
 
             currentRowIndex = TemplateInfo.BodyStartIndex;
 
-            var row = sheet.GetRow(currentRowIndex++);
-            row.CopyCellsFrom(GrandTotalRowTemplate);
-            FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
-
             foreach (var data in NoParlayMatchWinLossDetail)
             {
                 var isEvenRow = false;
-
-                    FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, data);
-                    isEvenRow = !isEvenRow;                
-
+                FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, data);
+                isEvenRow = !isEvenRow;
             }
 
         }

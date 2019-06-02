@@ -27,7 +27,7 @@ namespace EB.Features.Site.Reports
     {
         private readonly SportGroupService sportGroupService;
         private readonly BettypeGroupService betTypeService;
-        private readonly IHouseWinLossService matchWinLossService;
+        private readonly IHouseWinLossService houseWinLossService;
         private readonly ReportDateService reportDateService;
         private readonly HouseWinLossWorkbook workbook;
 
@@ -40,21 +40,22 @@ namespace EB.Features.Site.Reports
         {
             this.sportGroupService = sportGroupService;
             this.betTypeService = betTypeService;
-            this.matchWinLossService = matchWinLossService;
+            this.houseWinLossService = matchWinLossService;
             this.reportDateService = reportDateService;
             this.workbook = workbook;
         }
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            var reportData = matchWinLossService.Get(new HouseWinLossParam
+            var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
+                IsSettled = message.UserSelectedTicketStatusId == TicketStatusConstants.Settled,
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.FromDate,
-                ToDate = SystemTime.Today
+                FromDate = message.Date,
+                ToDate = message.Date
             });
             var totalRow = Sum(reportData);
 
@@ -80,15 +81,15 @@ namespace EB.Features.Site.Reports
             mapper
                 .Map(A, betTypeWinLoss => betTypeWinLoss.UserName)
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm)
-                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome)                
-                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock)
-                .Map(K, betTypeWinLoss => betTypeWinLoss.HeadlineStock / totalStock * 100);
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / 100)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / 100)
+                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / 100)
+                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
+                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
+                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -101,19 +102,19 @@ namespace EB.Features.Site.Reports
                .Map(A, betTypeWinLoss => string.Empty)
                .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake)
-               .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake)
-               .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome)
-               .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm)
-               .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss)
-               .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm)
-               .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome)
-               .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock)
-               .Map(K, betTypeWinLoss => betTypeWinLoss.HeadlineStock / totalStock * 100);
+               .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
+               .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
+               .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / 100)
+               .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / 100)
+               .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / 100)
+               .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
+               .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
+               .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
 
-        
+
         private TemplateInfo GetTemplateInfo(HouseWinLossExcelQuery message)
           => new TemplateInfo(
               GetExcelTemplatePath("HouseWinLossReport"),
@@ -131,7 +132,7 @@ namespace EB.Features.Site.Reports
             => $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {query.FromDate.ToShortDate()}";
 
         private string GetExcelFileName(HouseWinLossExcelQuery query)
-            => $"House Win Loss - {query.FromDate.ToShortDate()}";
+            => $"Wager Report - {query.FromDate.ToShortDate()}";
 
         public HouseWinLossModel Sum(IEnumerable<HouseWinLossModel> matches)
         {

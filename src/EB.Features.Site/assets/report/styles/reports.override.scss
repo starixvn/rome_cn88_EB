@@ -27,6 +27,7 @@
     text-align: left;
     text-transform: uppercase;
 }
+
 .report-detail {
     padding-bottom: 50px;
 }
@@ -57,6 +58,10 @@
         background-color: #2C3E50;
         padding: 7px 8px;
         text-transform: uppercase;
+
+        .negative-value {
+            color: #ffbeb4;
+        }
     }
 }
 
@@ -71,4 +76,91 @@
         font-weight: bold;
         font-size: 20px;
     }
+}
+
+.report-form {
+    .form-group {
+        > label {
+            &.isTest {
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .history {
+        margin-left: 1px;
+        color: #2489ce;
+        cursor: pointer;
+        font-style: italic;
+    }
+
+    .dateRangeContainer {
+        vertical-align: bottom;
+    }
+
+    .note {
+        display: block;
+    }
+}
+
+
+span.selectedMonth {
+    margin-right: 15px;
+    font-size: 13px;
+}
+
+.monPickrWrapParent .monPickrWrap {
+    font-family: Arial, sans-serif;
+    position: relative !important;
+    border-radius: 0 !important;
+    border: none;
+    background: initial;
+}
+
+.monPickrWrapParent .monPickrWrap:hover {
+    box-shadow: none;
+}
+
+.monPickrWrapParent .monPickrWrap .monPickr {
+    height: unset;
+    padding: 5px 2px;
+    border-radius: 0 !important;
+    background: #fff;
+    border: 1px solid #a6a6a6;
+}
+
+.monPickrWrapParent .monPickrWrap .monPickr .prev:before, .monPickrWrapParent .monPickrWrap .monPickr .next:before {
+    font-family: 'CN88Icon';
+    font-size: 20px;
+    color: #000;
+}
+.monPickrWrapParent .monPickrWrap .monPickr .next {
+    top: 4px;
+    right: 6px;
+    left: unset;
+}
+
+
+.selectedDayWrapParent .selectedDayWrap {
+    width: 60px;
+    border-radius: 0 !important;
+}
+
+.selectedDayWrapParent .selectedDayWrap .dayPickr {
+    
+    border-radius: 0 !important;
+    height: 28px;
+    background: #fff;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+
+.selectedDayWrapParent .selectedDayWrap .dayPickr .darr:before {
+   
+    font-size: 19px;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    color: #000;
 }

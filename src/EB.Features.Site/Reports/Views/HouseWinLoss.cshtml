@@ -21,14 +21,40 @@
     </div>
 
     <form class="form-inline filter report-form" role="form" id="report-form">
-        @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
+        <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">
+            @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
+        </div>
+
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+
+        <div class="form-group js-month-group"
+             id="dateRangeContainer"
+             data-mindate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MinDate.ToShortDate()"
+             data-maxdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MaxDate.ToShortDate()"
+             data-fromdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.FromDate.ToShortDate()"
+             data-todate="@Model.ReportFilterViewModel.DateRangePickerViewModel.ToDate.ToShortDate()">
+            <label>Month</label>
+            <div id="monPickr1">
+            </div>
+        </div>
+        <div class="form-group js-month-group">
+            <label>From</label>
+            <div id="fromDay1">
+            </div>
+        </div>
+        <div class="form-group js-month-group">
+            <label>To</label>
+
+            <div id="toDay1">
+            </div>
+
+        </div>
         @RenderDatePicker()
         @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
         @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
 
         <div class="form-group">
-            <label>
+            <label class="isTest">
                 @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
                 Exclude Test Data
             </label>
@@ -36,6 +62,17 @@
         <div class="form-group">
             <input type="submit" value="@AppResources.Submit" class="btn-submit" />
         </div>
+        <div class="form-group note">
+            <div id="GroupViewHistory" class="">
+                <div>@ReportResources.NoteViewHistory <span id="ViewHistoryReport" class="history"><span class="txt-history">@ReportResources.ViewHistoryReport</span></span></div>
+            </div>
+            <div id="GroupBackToCurrent" class="" style="display: none">
+                <div>@Model.NoteMaxDateDescription <span id="BackToCurrentReport" class="history"><span class="txt-history">@ReportResources.BackToCurrentReport</span></span></div>
+            </div>
+        </div>
+        <input type="hidden" name="FromDate" id="fromDate" />
+        <input type="hidden" name="ToDate" id="toDate" />
+        <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport" />
     </form>
 
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
@@ -44,6 +81,7 @@
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
+        @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
     </form>
 
     <div class="tab-content main-content" id="tab-main-content">
@@ -62,24 +100,24 @@
                     <th class="text-right header"> Headline Stock</th>
                     <th class="text-right header"> Headline Stock %</th>
                 </tr>
-                
+
             </thead>
             @foreach (var row in Model.ReportData)
             {
 
-            <tr>
-                <td class="text-left">@row.UserName</td>
-                @HtmlHelpers.RenderNumberCell(row.Wagers, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.Stake, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.ValidStake, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.MemberIncome, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.SuperComm, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.HouseWinLoss, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.HouseComm, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.HouseIncome, "settlement")
-                @HtmlHelpers.RenderNumberCell(row.HeadlineStock, "settlement")
-                @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
-            </tr>
+                <tr>
+                    <td class="text-left">@row.UserName</td>
+                    @HtmlHelpers.RenderNumberCell(row.Wagers, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.Stake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.ValidStake, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome, "settlement")
+                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                </tr>
             }
 
             @if (Model.IsShowTotalRow)
@@ -88,14 +126,14 @@
                     <tr class="total">
                         <th class="text-right header"></th>
                         @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Stake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.ValidStake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.SuperComm, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseWinLoss, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseComm, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome, "settlement")
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock, "settlement")
                         @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
                     </tr>
                 </tfoot>
@@ -114,7 +152,7 @@
             }
         </table>
     </div>
-
+</div>
 
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")
@@ -126,7 +164,7 @@
 
 @helper RenderDatePicker()
 {
-    <div class="form-group from-date-box">
+    <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">
         <label>Date</label>
         <div class="control date">
             <div id="date-container"

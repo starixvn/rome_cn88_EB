@@ -34,9 +34,9 @@ namespace EB.Features.Shared.Services
             => ConfiguredCacheService.GetOrSet(
                 SportGroupsCacheKey,
                 () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
 
         public IEnumerable<SportGroup> GetSportGroupsForSportbook()
-            => GetSportGroups().Where(s => s.ProductId != null);
+            => GetSportGroups().Where(s => s.ProductId != 0);
     }
 }

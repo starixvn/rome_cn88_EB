@@ -29,7 +29,8 @@ namespace EB.Features.Shared.DataAccesses
                         {
                             var group = new SportGroup(
                                 id: Converter.ToInt(reader["SportTypeGroup"]),
-                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),
+                                productId: Converter.ToInt(reader["ProductID"]),
+                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),                                
                                 getSportGroupDisplayName: getSportGroupDisplayName);
 
                             groups.Add(group);

@@ -11,6 +11,7 @@ namespace EB.Features.Site.Reports.ViewModel
     {
         public HouseWinLossFilterViewModel(
             DatePickerViewModel datePickerViewModel,
+            DateRangePickerViewModel dateRangePickerViewModel,
             bool isTest,
             SingleSelectionViewModel sportGroupSelectionViewModel,
             SingleSelectionViewModel betTypeSelectionViewModel,
@@ -24,6 +25,7 @@ namespace EB.Features.Site.Reports.ViewModel
             AllBetTypesSelectionViewModel = allBetTypesSelectionViewModel;
             SportGroupSelectionViewModel = sportGroupSelectionViewModel;
             DatePickerViewModel = datePickerViewModel;
+            DateRangePickerViewModel = dateRangePickerViewModel;
             IsTest = isTest;
         }
 
@@ -38,6 +40,8 @@ namespace EB.Features.Site.Reports.ViewModel
         public SingleSelectionViewModel SportGroupSelectionViewModel { get; }
 
         public DatePickerViewModel DatePickerViewModel { get; }
+
+        public DateRangePickerViewModel DateRangePickerViewModel { get; }
 
         public bool IsTest { get; }
 

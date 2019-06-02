@@ -17,6 +17,8 @@
             Date = SystemTime.Today;
             FromDate = SystemTime.Today;
             ToDate = SystemTime.Today;
+            IsTest = true;
+            //IsHistoricReport = false;
         }
 
         public int ReportType { get; set; }
@@ -33,7 +35,7 @@
 
         public bool IsTest { get; set; }
 
-        public bool IsHistoricReport { get; set; }
+        public int IsHistoricReport { get; set; }
 
         public DateTime FromDate { get; set; }
 

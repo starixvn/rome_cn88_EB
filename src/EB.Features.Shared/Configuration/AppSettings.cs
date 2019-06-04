@@ -22,6 +22,12 @@ namespace EB.Features.Shared.Configuration
 
         public static bool IsTest => GetConfigValue("LocalTest") == "1";
 
+        public static string InternalLogInURLHeadline => GetConfigValue("InternalLogInURLHeadline");
+
+        public static string InternalLogInURL => GetConfigValue("InternalLogInURL");
+
+        public static string InternalLogInUMToken => GetConfigValue("InternalLogInUMToken");
+
         public static string GetConfigValue(string configName) => AppSettingValues[configName];
 
         public static void Verify() => Require(StoredProcedurePath, nameof(StoredProcedurePath));

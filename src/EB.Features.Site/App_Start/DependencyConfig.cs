@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Reflection;
     using System.Web.Mvc;
+    using EB.Features.Main.DataAccesses;
     using EB.Features.Main.Services;
     using EB.Features.Reports.Services;
     using EB.Features.Shared.DataAccesses;
@@ -57,6 +58,9 @@
             container.Register<ReportDateService, ReportDateServiceImpl>();
             container.Register<SportGroupService, SportGroupServiceImpl>();
             container.RegisterSingleton<BrowserHelper, BrowserHelperImpl>();
+
+            container.RegisterSingleton<InternalLoginService, InternalLoginServiceImpl>();
+            container.RegisterSingleton<InternalLoginDataAccess, InternalLoginDataAccessImpl>();
         }
 
         private static void RegisterReportModule(Container container)

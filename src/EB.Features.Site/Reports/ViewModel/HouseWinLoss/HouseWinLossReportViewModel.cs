@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web;
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Shared.Constants;
@@ -77,5 +78,7 @@
         public bool IsShowTotalRow => ReportData.Any();
 
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
+
+        public string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("/InternalLogin/Index");
     }
 }

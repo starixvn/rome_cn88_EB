@@ -167,6 +167,9 @@
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
     </Reference>
+    <Reference Include="RSACryptoPad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RSACryptoPad.1.0.0.0\lib\net40\RSACryptoPad.dll</HintPath>
+    </Reference>
     <Reference Include="SharpRaven, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpRaven.2.4.0\lib\net45\SharpRaven.dll</HintPath>
     </Reference>
@@ -292,6 +295,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\SPNames\Local\DB042.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\SPNames\Local\DBAGE.bodb02.xml" />
     <Content Include="assets\common\bundles\common\common.css" />
     <Content Include="assets\common\bundles\common\common.js" />
@@ -798,6 +802,9 @@
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
+    <Compile Include="Login\InternalLoginController.cs" />
+    <Compile Include="Login\Requests\InternalLoginQuery.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
     <Compile Include="Reports\ExcelBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossExcelHandler.cs" />
@@ -1159,6 +1166,7 @@
     <Content Include="EB.Features.Site.ruleset" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\connectionStrings.config" />
+    <Content Include="Login\Views\InternalLogin.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

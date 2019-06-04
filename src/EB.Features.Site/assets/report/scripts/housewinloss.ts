@@ -7,6 +7,12 @@ class HouseWinLossReport {
     $exportExcelForm: JQuery;
     $dateContainer: JQuery;
     $dateRangeContainer: JQuery;
+
+    $internalLoginForm: JQuery;
+    $internalCustId: JQuery;
+    $internalCustName: JQuery;
+    $internalRoleId: JQuery;
+
     sportGroupSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
@@ -38,6 +44,11 @@ class HouseWinLossReport {
         this.$exportExcelForm = this.$("#export-excel-form");
         this.$dateContainer = this.$("#date-container");
         this.$dateRangeContainer = this.$("#dateRangeContainer");
+
+        this.$internalLoginForm = this.$("#internal-login-form");
+        this.$internalCustId = this.$internalLoginForm.find("#custId");
+        this.$internalCustName = this.$internalLoginForm.find("#custName");
+        this.$internalRoleId = this.$internalLoginForm.find("#roleId");
     }
 
     public registerEvents() {
@@ -60,9 +71,20 @@ class HouseWinLossReport {
             this.switchCalendarType();
         });
         this.initMonthlyCalendar();
+
+        var this$ = this.$;
+        var thisInternalLogin = this.internalLogin;
+        this.$(".lnk-internal").on("click touchend", function () {
+            var elm = this$(this);
+            thisInternalLogin({
+                custId: elm.attr("data-cust-id"),
+                custName: elm.attr("data-cust-name"),
+                roleId: elm.attr("data-role-id")
+            });
+        });
     }
 
-    switchCalendarType = () => {        
+    switchCalendarType = () => {
         if (this.$("#IsHistoricReport").val() == "1") {
             this.$("#GroupViewHistory").css("display", "none");
             this.$("#GroupBackToCurrent").css("display", "block");
@@ -76,7 +98,7 @@ class HouseWinLossReport {
             this.$("#GroupBackToCurrent").css("display", "none");
             this.$('.from-date-box').css('display', 'inline-block');
             this.$('.js-month-group').css('display', 'none');
-        }        
+        }
     }
 
     initMonthlyCalendar = () => {
@@ -91,8 +113,8 @@ class HouseWinLossReport {
             fromDayId: "fromDay1",
             toDayId: "toDay1"
         });
-        
-        
+
+
         this.$("#monPickr1").monPickr("setMonth", fromDate);
         this.$("#monPickr1").monPickr("setFromDay", fromDate.getDate());
         this.$("#monPickr1").monPickr("setToDay", toDate.getDate());
@@ -130,7 +152,6 @@ class HouseWinLossReport {
         this.ticketStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-ticketstatus", "UserSelectedTicketStatusId"));
     }
 
-
     onchangeSportType(): void {
         let sportType = this.sportGroupSelectionComponent.$dropdown.val();
         this.betTypeSelectionComponent.$dropdown.empty();
@@ -159,7 +180,13 @@ class HouseWinLossReport {
             numberDisplayed: 1,
             includeSelectAllOption: false
         });
-    }
+    };
+    internalLogin = (options) => {
+        this.$internalCustId.val(options.custId);
+        this.$internalCustName.val(options.custName);
+        this.$internalRoleId.val(options.roleId);
+        this.$internalLoginForm.submit();
+    };
 }
 
 $(function () {

@@ -1,7 +1,6 @@
 ﻿@using EB.Features.Shared.Extensions;
 @using EB.Features.Shared.Constants;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
-
 @model HouseWinLossReportViewModel
 @{
     Layout = "~/Shared/Views/_Layout.cshtml";
@@ -19,14 +18,11 @@
             <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
         </div>
     </div>
-
     <form class="form-inline filter report-form" role="form" id="report-form">
         <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">
             @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
         </div>
-
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
-
         <div class="form-group js-month-group"
              id="dateRangeContainer"
              data-mindate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MinDate.ToShortDate()"
@@ -44,15 +40,12 @@
         </div>
         <div class="form-group js-month-group">
             <label>To</label>
-
             <div id="toDay1">
             </div>
-
         </div>
         @RenderDatePicker()
         @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
         @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
-
         <div class="form-group">
             <label class="isTest">
                 @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
@@ -74,7 +67,6 @@
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport" />
     </form>
-
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
@@ -83,7 +75,6 @@
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
         @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
     </form>
-
     <div class="tab-content main-content" id="tab-main-content">
         <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
@@ -100,41 +91,43 @@
                     <th class="text-right header"> Headline Stock</th>
                     <th class="text-right header"> Headline Stock %</th>
                 </tr>
-
             </thead>
             @foreach (var row in Model.ReportData)
             {
-
                 <tr>
-                    <td class="text-left">@row.UserName</td>
+                    <td class="text-left">
+                        <a href="javascript:void(0);" class="lnk-internal"
+                           data-cust-id="@row.CustId"
+                           data-cust-name="@row.UserName"
+                           data-role-id="0">@row.UserName</a>
+                    </td>
                     @HtmlHelpers.RenderNumberCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(100, row.Stake)
                     @HtmlHelpers.RenderNumberCell(100, row.ValidStake)
-                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome )
-                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm )
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss )
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm )
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome )
-                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock )
-                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock )
+                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm)
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss)
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm)
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock)
                 </tr>
             }
-
             @if (Model.IsShowTotalRow)
             {
                 <tfoot>
                     <tr class="total">
                         <th class="text-right header"></th>
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome )
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock )
-                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock )
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock)
+                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock)
                     </tr>
                 </tfoot>
             }
@@ -153,15 +146,17 @@
         </table>
     </div>
 </div>
-
+<form id="internal-login-form" method="get" action="@Model.InternalLoginAction" target="_blank">
+    <input type="hidden" id="custId" name="custId" value="" />
+    <input type="hidden" id="custName" name="custName" value="" />
+    <input type="hidden" id="roleId" name="roleId" value="" />
+</form>
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")
     <script>
         var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items.GroupBy(i => i.SportTypeGroup)));
     </script>
 }
-
-
 @helper RenderDatePicker()
 {
     <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">

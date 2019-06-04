@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using EB.Features.Main.Model;
-using EB.Features.Main.Services;
-using EB.Features.Site.Main.Requests;
-using EB.Features.Site.Main.ViewModel;
-using EB.Features.Site.Shared.Helpers;
-using MediatR;
-using Sunplus.Agent.Utilities;
-
-namespace EB.Features.Site.Main.Handlers
+﻿namespace EB.Features.Site.Main.Handlers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using EB.Features.Main.Model;
+    using EB.Features.Main.Services;
+    using EB.Features.Site.Main.Requests;
+    using EB.Features.Site.Main.ViewModel;
+    using EB.Features.Site.Shared.Helpers;
+    using MediatR;
+    using Sunplus.Agent.Utilities;
+
     public class MainHandler :
         IAsyncRequestHandler<IndexQuery, IndexViewModel>,
         IAsyncRequestHandler<MenuBarQuery, IEnumerable<MenuItem>>

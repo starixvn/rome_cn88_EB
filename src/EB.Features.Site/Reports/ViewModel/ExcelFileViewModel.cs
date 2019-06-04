@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.Linq;
-
-namespace EB.Features.Site.Reports.ViewModel
+﻿namespace EB.Features.Site.Reports.ViewModel
 {
+    using System.IO;
+    using System.Linq;
+
     public class ExcelFileViewModel
     {
         public ExcelFileViewModel(string name, byte[] content)

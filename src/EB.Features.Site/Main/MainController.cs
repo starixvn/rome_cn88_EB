@@ -1,11 +1,12 @@
-﻿using System.Threading.Tasks;
-using System.Web.Mvc;
-using EB.Features.Site.Main.Requests;
-using EB.Features.Site.Shared;
-using MediatR;
-
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using EB.Features.Site.Main.Requests;
+    using EB.Features.Site.Shared;
+    using MediatR;
+
+
     public class MainController : BaseController
     {
         private const string ViewsPath = "~/Main/Views";

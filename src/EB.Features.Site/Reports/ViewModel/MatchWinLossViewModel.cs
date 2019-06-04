@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Reports.Model;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Utilies;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Shared.ViewModels;
-using EB.Features.Site.Shared.ViewModels.Components;
-
-namespace EB.Features.Site.Reports.ViewModel
+﻿namespace EB.Features.Site.Reports.ViewModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.Model;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Utilies;
+    using EB.Features.Site.Reports.Request;
+    using EB.Features.Site.Shared.ViewModels;
+    using EB.Features.Site.Shared.ViewModels.Components;
+
     public class MatchWinLossReportViewModel
     {
         public MatchWinLossReportViewModel(

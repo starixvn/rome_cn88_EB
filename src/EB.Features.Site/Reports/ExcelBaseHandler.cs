@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Web;
-
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
+    using System;
+    using System.IO;
+    using System.Web;
+
     public class ExcelBaseHandler
     {
         private const string ExcelTemplateDir = "~/App_Data/ExcelTemplates/{0}.{1}";

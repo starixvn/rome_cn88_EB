@@ -1,13 +1,9 @@
-﻿using EB.Features.Reports.Model;
-using EB.Features.Reports.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Reports.Extension
+﻿namespace EB.Features.Reports.Extension
 {
+    using System.Collections.Generic;
+    using EB.Features.Reports.Model;
+    using EB.Features.Reports.ViewModel;
+
     public static class EnumerableExtensions
     {
         public static MatchWinLossViewModel Sum(this IEnumerable<MatchWinLossViewModel> matches)

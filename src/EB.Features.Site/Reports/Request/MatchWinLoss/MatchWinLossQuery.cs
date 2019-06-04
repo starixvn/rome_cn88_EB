@@ -1,13 +1,13 @@
-﻿using System;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Utilies;
-using EB.Features.Site.Reports.ViewModel;
-using EB.Features.Site.Shared;
-using Fanex.NAP.Core.Web.Session;
-using MediatR;
-
-namespace EB.Features.Site.Reports.Request
+﻿namespace EB.Features.Site.Reports.Request
 {
+    using System;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Utilies;
+    using EB.Features.Site.Reports.ViewModel;
+    using EB.Features.Site.Shared;
+    using Fanex.NAP.Core.Web.Session;
+    using MediatR;
+
     public class MatchWinLossQuery : BaseQuery, IRequest<MatchWinLossReportViewModel>
     {
         public MatchWinLossQuery(ICurrentSession currentSession)

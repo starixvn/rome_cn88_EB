@@ -18,7 +18,6 @@
             FromDate = SystemTime.Today;
             ToDate = SystemTime.Today;
             IsTest = true;
-            //IsHistoricReport = false;
         }
 
         public int ReportType { get; set; }

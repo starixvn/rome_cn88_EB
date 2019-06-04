@@ -1,28 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
-using System.Web.Mvc;
-using EB.Features.Main.Services;
-using EB.Features.Reports.Services;
-using EB.Features.Shared.DataAccesses;
-using EB.Features.Shared.Services;
-using EB.Features.Site.Shared;
-using EB.Features.Site.Shared.Helpers;
-using Fanex.Data.Repository;
-using Fanex.NAP.Core.Context;
-using Fanex.NAP.Core.Service.Impl;
-using Fanex.NAP.Core.Service.Interface;
-using Fanex.NAP.Core.Web.Context;
-using Fanex.NAP.Core.Web.Session;
-using Fanex.RemotingRef;
-using MediatR;
-using ONEbook.UM.Services;
-using ONEbook.UM.Services.Impl;
-using SimpleInjector;
-using SimpleInjector.Integration.Web;
-using SimpleInjector.Integration.Web.Mvc;
-
-namespace EB.Features.Site.App_Start
+﻿namespace EB.Features.Site.App_Start
 {
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Web.Mvc;
+    using EB.Features.Main.Services;
+    using EB.Features.Reports.Services;
+    using EB.Features.Shared.DataAccesses;
+    using EB.Features.Shared.Services;
+    using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Helpers;
+    using Fanex.Data.Repository;
+    using Fanex.NAP.Core.Context;
+    using Fanex.NAP.Core.Service.Impl;
+    using Fanex.NAP.Core.Service.Interface;
+    using Fanex.NAP.Core.Web.Context;
+    using Fanex.NAP.Core.Web.Session;
+    using Fanex.RemotingRef;
+    using MediatR;
+    using ONEbook.UM.Services;
+    using ONEbook.UM.Services.Impl;
+    using SimpleInjector;
+    using SimpleInjector.Integration.Web;
+    using SimpleInjector.Integration.Web.Mvc;
+
     public class DependencyConfig
     {
         public static void Init()

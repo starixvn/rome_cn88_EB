@@ -1,16 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Reports.Criteria;
-using EB.Features.Reports.Model;
-using EB.Features.Reports.Params;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Services;
-using Fanex.Data.Repository;
-
-namespace EB.Features.Reports.Services
+﻿namespace EB.Features.Reports.Services
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.Criteria;
+    using EB.Features.Reports.Model;
+    using EB.Features.Reports.Params;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Services;
+    using Fanex.Data.Repository;
+
     public interface IMatchWinLossService
     {
         IEnumerable<MatchWinLossViewModel> Get(MatchWinLossParam param);

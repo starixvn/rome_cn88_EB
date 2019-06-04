@@ -1,16 +1,12 @@
-﻿using EB.Features.Reports.Model;
-using EB.Features.Reports.ViewModel;
-using ONEbook.SpreadSheets;
-using ONEbook.SpreadSheets.NPOI;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Reports.Services
+﻿namespace EB.Features.Reports.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.Model;
+    using ONEbook.SpreadSheets;
+    using ONEbook.SpreadSheets.NPOI;
+
     public interface HouseWinLossWorkbook
     {
         Workbook<HouseWinLossModel> UseTemplate(TemplateInfo templateInfo);

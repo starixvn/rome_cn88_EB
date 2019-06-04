@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace EB.Features.Reports.Params
+﻿namespace EB.Features.Reports.Params
 {
+    using System;
+
     public class HouseWinLossParam
     {
         public bool IsSettled { get; set; }

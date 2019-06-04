@@ -1,21 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Reports.Params;
-using EB.Features.Reports.Services;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Extensions;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Services;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Reports.ViewModel;
-using MediatR;
-using ONEbook.SpreadSheets;
-using Resources;
-using static ONEbook.SpreadSheets.Column;
-
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.Params;
+    using EB.Features.Reports.Services;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Extensions;
+    using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Services;
+    using EB.Features.Site.Reports.Request;
+    using EB.Features.Site.Reports.ViewModel;
+    using MediatR;
+    using ONEbook.SpreadSheets;
+    using Resources;
+    using static ONEbook.SpreadSheets.Column;
+
     public class MatchWinLossExcelHandler : ExcelBaseHandler, IRequestHandler<MatchWinLossExcelQuery, ExcelFileViewModel>
     {
         private readonly SportGroupService sportGroupService;

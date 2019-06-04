@@ -1,11 +1,12 @@
-﻿using System;
-using System.Web;
-using EB.Features.Site.Main.Requests;
-using EB.Features.Site.Shared.Helpers;
-using Fanex.NAP.Core.Web.Session;
-
-namespace EB.Features.Site.Main.ViewModel
+﻿namespace EB.Features.Site.Main.ViewModel
 {
+    using System;
+    using System.Web;
+    using EB.Features.Site.Main.Requests;
+    using EB.Features.Site.Shared.Helpers;
+    using Fanex.NAP.Core.Web.Session;
+
+
     public class IndexViewModel
     {
         private readonly ICurrentSession currentSession;

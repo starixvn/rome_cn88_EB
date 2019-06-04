@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-using System.Configuration;
-using Fanex.Logging;
-using Fanex.Logging.Extensions;
-using Fanex.Logging.Extensions.Database;
-using Fanex.Logging.Extensions.Web;
-using Fanex.Logging.RabbitMQ;
-using Fanex.Logging.Sentry.RavenClient;
-
-namespace EB.Features.Site.App_Start
+﻿namespace EB.Features.Site.App_Start
 {
+    using System.Collections.Generic;
+    using System.Configuration;
+    using Fanex.Logging;
+    using Fanex.Logging.Extensions;
+    using Fanex.Logging.Extensions.Database;
+    using Fanex.Logging.Extensions.Web;
+    using Fanex.Logging.RabbitMQ;
+    using Fanex.Logging.Sentry.RavenClient;
+
     public static class LoggingManager
     {
         public static void Init()

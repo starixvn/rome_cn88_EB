@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using System.Web.Routing;
-
-namespace EB.Features.Site
+﻿namespace EB.Features.Site
 {
+    using System.Web.Mvc;
+    using System.Web.Routing;
+
     public class RouteConfig
     {
         public static void RegisterRoutes(RouteCollection routes)

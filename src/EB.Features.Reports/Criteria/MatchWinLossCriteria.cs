@@ -1,9 +1,9 @@
-﻿using System;
-using EB.Features.Reports.Params;
-using Fanex.Data.Repository;
-
-namespace EB.Features.Reports.Criteria
+﻿namespace EB.Features.Reports.Criteria
 {
+    using System;
+    using EB.Features.Reports.Params;
+    using Fanex.Data.Repository;
+
     public class MatchWinLossCriteria : CriteriaBase
     {
         public MatchWinLossCriteria(MatchWinLossParam param)

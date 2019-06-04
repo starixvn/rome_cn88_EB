@@ -1,19 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Reports.Params;
-using EB.Features.Reports.Services;
-using EB.Features.Shared.Model;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Services;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Reports.Request.HouseWinLoss;
-using EB.Features.Site.Reports.ViewModel;
-using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
-using EB.Features.Site.Shared.ViewModels;
-using MediatR;
+﻿
 
 namespace EB.Features.Site.Reports
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Shared.Model;
+    using EB.Features.Shared.Resources;
+    using EB.Features.Site.Shared.ViewModels;
+
     public class ReportsBaseHandler
     {
         public ReportsBaseHandler()

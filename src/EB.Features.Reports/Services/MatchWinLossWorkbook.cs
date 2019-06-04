@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Resources;
-using ONEbook.SpreadSheets;
-using ONEbook.SpreadSheets.NPOI;
-
-namespace EB.Features.Reports.Services
+﻿namespace EB.Features.Reports.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared.Resources;
+    using ONEbook.SpreadSheets;
+    using ONEbook.SpreadSheets.NPOI;
+
     public interface MatchWinLossWorkbook
     {
         Workbook<MatchWinLossViewModel> UseTemplate(TemplateInfo templateInfo);

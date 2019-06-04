@@ -1,7 +1,7 @@
-﻿using EB.Features.Reports.Model;
-
-namespace EB.Features.Reports.ViewModel
+﻿namespace EB.Features.Reports.ViewModel
 {
+    using EB.Features.Reports.Model;
+
     public class MatchWinLossViewModel : MatchWinLossModel
     {
         public MatchWinLossViewModel()

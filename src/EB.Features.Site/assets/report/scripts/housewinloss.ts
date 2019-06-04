@@ -89,11 +89,7 @@ class HouseWinLossReport {
             maxDate: maxDate,
             showDateRange: true,
             fromDayId: "fromDay1",
-            toDayId: "toDay1",
-            log: function (msg) {
-                if (typeof console != "undefined")
-                    console.warn(msg);
-            }
+            toDayId: "toDay1"
         });
         
         

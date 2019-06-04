@@ -19,10 +19,8 @@ namespace EB.Features.Reports.Criteria
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
-            //ArchiveDate = param.ArchiveDate;
-            //MoveBetsDay = param.MoveBetsDay;
-            ArchiveDate = new DateTime(2018, 01, 01);
-            MoveBetsDay = new DateTime(2018, 05, 01);
+            ArchiveDate = param.ArchiveDate;
+            MoveBetsDay = param.MoveBetsDay;
         }
 
         public DateTime ArchiveDate { get; }

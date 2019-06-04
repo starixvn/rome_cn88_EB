@@ -178,7 +178,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For more historical data, please click .
+        ///   Looks up a localized string similar to To view more historical data, please click on .
         /// </summary>
         internal static string NoteViewHistory {
             get {

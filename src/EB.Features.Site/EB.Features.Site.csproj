@@ -1156,6 +1156,8 @@
     <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
     <Content Include="EB.Features.Site.ruleset" />
+    <Content Include="Configurations\appSettings.config" />
+    <Content Include="Configurations\connectionStrings.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

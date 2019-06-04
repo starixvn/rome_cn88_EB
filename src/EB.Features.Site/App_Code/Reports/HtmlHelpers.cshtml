@@ -12,7 +12,7 @@
 @helper RenderHeaderNumberCell(decimal cellValue, string cellClass = "", bool isHiddenOnMobile = false)
 {
 
-var value = cellValue.Round();
+    var value = cellValue.Round();
     <th class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
         @FormatNumber(value)
     </th>
@@ -21,7 +21,7 @@ var value = cellValue.Round();
 @helper RenderHeaderNumberCell(int divisor, decimal cellValue, string cellClass = "", bool isHiddenOnMobile = false)
 {
 
-var value = (cellValue / divisor).Round();
+    var value = (cellValue / divisor).Round();
 
     <th class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
         @FormatNumber(value)
@@ -35,9 +35,16 @@ var value = (cellValue / divisor).Round();
     </th>
 }
 
+@helper RenderHeaderNumberCell(int cellValue)
+{
+    <th class="text-right @(cellValue < 0 ? "negative-value" : string.Empty)">
+        @FormatNumber(cellValue)
+    </th>
+}
+
 @helper RenderNumberCell(decimal cellValue, string cellClass = "")
 {
-var value = cellValue.Round();
+    var value = cellValue.Round();
     <td class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass">
         @FormatNumber(value)
     </td>
@@ -52,7 +59,7 @@ var value = cellValue.Round();
 
 @helper RenderNumberCell(int divisor, decimal cellValue, string cellClass = "")
 {
-var value = (cellValue / divisor).Round();
+    var value = (cellValue / divisor).Round();
     <td class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass">
         @FormatNumber(value)
     </td>
@@ -83,6 +90,6 @@ var value = (cellValue / divisor).Round();
 }
 @helper RenderStockPercentCell(decimal stock, decimal totalStock, string cellClass = "")
 {
-var stockPercent = totalStock == 0 ? 0 : stock / totalStock * 100;
+    var stockPercent = totalStock == 0 ? 0 : stock / totalStock * 100;
     @RenderPercentCell(stockPercent, cellClass)
 }

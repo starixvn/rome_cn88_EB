@@ -20,6 +20,7 @@ using MediatR;
 using ONEbook.SpreadSheets;
 using Resources;
 using static ONEbook.SpreadSheets.Column;
+using EB.Features.Reports.Extension;
 
 namespace EB.Features.Site.Reports
 {
@@ -57,7 +58,7 @@ namespace EB.Features.Site.Reports
                 FromDate = message.Date,
                 ToDate = message.Date
             });
-            var totalRow = Sum(reportData);
+            var totalRow = reportData.Sum();
 
             var fileContent = workbook
                 .SetData(reportData, totalRow)
@@ -132,17 +133,6 @@ namespace EB.Features.Site.Reports
             => $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {query.FromDate.ToShortDate()}";
 
         private string GetExcelFileName(HouseWinLossExcelQuery query)
-            => $"Wager Report - {query.FromDate.ToShortDate()}";
-
-        public HouseWinLossModel Sum(IEnumerable<HouseWinLossModel> matches)
-        {
-            var total = new HouseWinLossModel();
-            foreach (var match in matches)
-            {
-                total = total.Add(match);
-            }
-
-            return total;
-        }
+            => $"Wager Report - {query.FromDate.ToShortDate()}";        
     }
 }

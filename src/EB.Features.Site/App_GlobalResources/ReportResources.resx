@@ -172,7 +172,7 @@
     <value>Wagers</value>
   </data>
   <data name="NoteViewHistory" xml:space="preserve">
-    <value>For more historical data, please click </value>
+    <value>To view more historical data, please click on </value>
   </data>
   <data name="ViewHistoryReport" xml:space="preserve">
     <value>View History Report</value>

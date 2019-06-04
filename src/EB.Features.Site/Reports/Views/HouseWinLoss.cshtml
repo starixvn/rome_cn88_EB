@@ -107,16 +107,16 @@
 
                 <tr>
                     <td class="text-left">@row.UserName</td>
-                    @HtmlHelpers.RenderNumberCell(row.Wagers, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.Stake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.ValidStake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock, "settlement")
-                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderNumberCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(100, row.Stake)
+                    @HtmlHelpers.RenderNumberCell(100, row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome )
+                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm )
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss )
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm )
+                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome )
+                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock )
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock )
                 </tr>
             }
 
@@ -125,16 +125,16 @@
                 <tfoot>
                     <tr class="total">
                         <th class="text-right header"></th>
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock, "settlement")
-                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome )
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock )
+                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock )
                     </tr>
                 </tfoot>
             }

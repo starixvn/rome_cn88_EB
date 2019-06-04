@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Main", "src\EB.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EB.Features.Shared", "src\EB.Features.Shared\EB.Features.Shared.csproj", "{E31EBBB6-C646-4491-AC72-FF249AFECF16}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SonarQube", "SonarQube", "{E6C640CD-6FDD-4558-808F-CFDAA8CECA1F}"
+	ProjectSection(SolutionItems) = preProject
+		SonarQube\CN88-EBCSharp.ruleset = SonarQube\CN88-EBCSharp.ruleset
+		SonarQube\EB.Features.slconfig = SonarQube\EB.Features.slconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

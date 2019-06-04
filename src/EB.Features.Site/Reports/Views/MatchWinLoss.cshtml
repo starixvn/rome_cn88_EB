@@ -57,19 +57,21 @@
                 {
                     <tr class="total">
                         <th class="text-left header">Grand Total</th>
-                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Wagers, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.Stake, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.ValidStake, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.HeadlineStock, "settlement")
-                        @HtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "settlement", true)
+                        @HtmlHelpers.RenderHeaderNumberCell(Model.TotalRow.Wagers)
+                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.Stake)
+                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.ValidStake)
+                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.MemberIncome)
+                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.HouseIncome)
+                        @HtmlHelpers.RenderHeaderNumberCell(100, Model.TotalRow.HeadlineStock)
+                        @HtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "", true)
                     </tr>
                 }
             </thead>
-            @foreach (var row in Model.ReportData.GroupBy(i => i.MatchId))
+            @foreach (var row in Model.ReportData.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
             {
                 var firstRowOfGroup = row.ToList();
+                var matchId = firstRowOfGroup.First().MatchId;
+                var leagueId = firstRowOfGroup.First().LeagueId;
                 var subTotal = Model.Sum(firstRowOfGroup);
 
                 <tr class="match-title-row">
@@ -82,67 +84,67 @@
                     </td>
                 </tr>
 
-                foreach (var betType in Model.MajorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                foreach (var betType in Model.MajorBetType.Where(m => m.MatchId == matchId))
                 {
                     <tr>
                         <td class="text-left">@betType.BetTypeGroupName</td>
-                        @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, betType.Stake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, betType.ValidStake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, betType.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, betType.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, betType.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(betType.Wagers)
+                        @HtmlHelpers.RenderNumberCell(100, betType.Stake)
+                        @HtmlHelpers.RenderNumberCell(100, betType.ValidStake)
+                        @HtmlHelpers.RenderNumberCell(100, betType.MemberIncome)
+                        @HtmlHelpers.RenderNumberCell(100, betType.HouseIncome)
+                        @HtmlHelpers.RenderNumberCell(100, betType.HeadlineStock)
 
-                        @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock)
                     </tr>
                 }
 
-                if (Model.MinorBetType.Any(m => m.MatchId == firstRowOfGroup.First().MatchId))
+                if (Model.MinorBetType.Any(m => m.MatchId == matchId))
                 {
-                    var a = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId));
-                    <tr class="group" data-leagueid="@firstRowOfGroup.First().MatchId">
+                    var otherGroup = Model.Sum(Model.MinorBetType.Where(m => m.MatchId == matchId));
+                    <tr class="group" data-leagueid="@($"{leagueId}_{matchId}")">
                         <td class="col-event-span-desktop text-left">
                             <span class="group-name-wrapper">
                                 <span class="icon-chevron-right"></span>
                                 <span class="group-name">@AppResources.Others</span>
                             </span>
                         </td>
-                        @HtmlHelpers.RenderNumberCell(a.Wagers, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, a.Stake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, a.ValidStake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, a.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, a.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, a.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderNumberCell(otherGroup.Wagers)
+                        @HtmlHelpers.RenderNumberCell(100, otherGroup.Stake)
+                        @HtmlHelpers.RenderNumberCell(100, otherGroup.ValidStake)
+                        @HtmlHelpers.RenderNumberCell(100, otherGroup.MemberIncome)
+                        @HtmlHelpers.RenderNumberCell(100, otherGroup.HouseIncome)
+                        @HtmlHelpers.RenderNumberCell(100, otherGroup.HeadlineStock)
 
-                        @HtmlHelpers.RenderStockPercentCell(a.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                        @HtmlHelpers.RenderStockPercentCell(otherGroup.HeadlineStock, Model.TotalRow.HeadlineStock)
                     </tr>
 
-                    foreach (var betType in Model.MinorBetType.Where(m => m.MatchId == firstRowOfGroup.First().MatchId && m.LeagueId == firstRowOfGroup.First().LeagueId))
+                    foreach (var betType in Model.MinorBetType.Where(m => m.MatchId == matchId && m.LeagueId == leagueId))
                     {
-                        <tr class="childrow-@firstRowOfGroup.First().MatchId hide">
+                        <tr class="childrow-@($"{leagueId}_{matchId}") hide">
                             <td class="text-left child">@betType.BetTypeGroupName</td>
-                            @HtmlHelpers.RenderNumberCell(betType.Wagers, "settlement")
-                            @HtmlHelpers.RenderNumberCell(100, betType.Stake, "settlement")
-                            @HtmlHelpers.RenderNumberCell(100, betType.ValidStake, "settlement")
-                            @HtmlHelpers.RenderNumberCell(100, betType.MemberIncome, "settlement")
-                            @HtmlHelpers.RenderNumberCell(100, betType.HouseIncome, "settlement")
-                            @HtmlHelpers.RenderNumberCell(100, betType.HeadlineStock, "settlement")
+                            @HtmlHelpers.RenderNumberCell(betType.Wagers)
+                            @HtmlHelpers.RenderNumberCell(100, betType.Stake)
+                            @HtmlHelpers.RenderNumberCell(100, betType.ValidStake)
+                            @HtmlHelpers.RenderNumberCell(100, betType.MemberIncome)
+                            @HtmlHelpers.RenderNumberCell(100, betType.HouseIncome)
+                            @HtmlHelpers.RenderNumberCell(100, betType.HeadlineStock)
 
-                            @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                            @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.TotalRow.HeadlineStock)
                         </tr>
                     }
                 }
 
                 <tr class="sub-total-row">
                     <td class="text-left">@ReportResources.SubTotal</td>
-                    @HtmlHelpers.RenderNumberCell(subTotal.Wagers, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, subTotal.Stake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, subTotal.ValidStake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, subTotal.MemberIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, subTotal.HouseIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, subTotal.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderNumberCell(subTotal.Wagers)
+                    @HtmlHelpers.RenderNumberCell(100, subTotal.Stake)
+                    @HtmlHelpers.RenderNumberCell(100, subTotal.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(100, subTotal.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(100, subTotal.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(100, subTotal.HeadlineStock)
 
-                    @HtmlHelpers.RenderStockPercentCell(subTotal.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderStockPercentCell(subTotal.HeadlineStock, Model.TotalRow.HeadlineStock)
                 </tr>
             }
 
@@ -155,28 +157,29 @@
                 </tr>
                 <tr>
                     <td class="text-left">@Model.Parlay.BetTypeGroupName</td>
-                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Wagers, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.Stake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.ValidStake, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.MemberIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.HouseIncome, "settlement")
-                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderNumberCell(Model.Parlay.Wagers)
+                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.Stake)
+                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(100, Model.Parlay.HeadlineStock)
 
-                    @HtmlHelpers.RenderStockPercentCell(Model.Parlay.HeadlineStock, Model.TotalRow.HeadlineStock, "settlement")
+                    @HtmlHelpers.RenderStockPercentCell(Model.Parlay.HeadlineStock, Model.TotalRow.HeadlineStock)
                 </tr>
             }
+
             @if (Model.IsShowTotalRow)
             {
                 <tfoot>
                     <tr class="total">
                         <td class="text-left">@ReportResources.GrandTotal</td>
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome, "settlement")
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock, "settlement")
-                        @HtmlHelpers.RenderStockPercentCell(Model.TotalHeadlineStockPercent, Model.TotalHeadlineStockPercent, "settlement")
+                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome)
+                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock)
+                        @HtmlHelpers.RenderStockPercentCell(Model.TotalHeadlineStockPercent, Model.TotalHeadlineStockPercent)
                     </tr>
                 </tfoot>
             }

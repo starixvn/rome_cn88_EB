@@ -10,6 +10,7 @@ using Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using EB.Features.Reports.Extension;
 
 namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
 {
@@ -58,7 +59,7 @@ namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
                 allBetTypesSelectionViewModel);
             ReportData = reportData;
 
-            TotalRow = Sum(reportData);
+            TotalRow = reportData.Sum();
             Query = query;
             BalanceUpDate = balanceUpDate;
         }
@@ -76,16 +77,5 @@ namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
         public bool IsShowTotalRow => ReportData.Any();
 
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
-
-        public HouseWinLossModel Sum(IEnumerable<HouseWinLossModel> matches)
-        {
-            var total = new HouseWinLossModel();
-            foreach (var match in matches)
-            {
-                total = total.Add(match);
-            }
-
-            return total;
-        }
     }
 }

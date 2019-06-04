@@ -36,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -45,6 +46,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Alpha.SubAccount, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -1153,6 +1155,7 @@
     <Content Include="App_Code\Components\DatePicker.cshtml" />
     <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
+    <Content Include="EB.Features.Site.ruleset" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

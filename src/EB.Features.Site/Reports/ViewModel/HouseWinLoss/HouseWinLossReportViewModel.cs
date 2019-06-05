@@ -18,6 +18,8 @@
 
     public class HouseWinLossReportViewModel
     {
+        private readonly DateTime MinDate = new DateTime(2019, 1, 1);
+
         public HouseWinLossReportViewModel(
             HouseWinLossViewModel reportData,
             HouseWinLossQuery query,
@@ -47,8 +49,9 @@
             var liveStatusSelectionViewModel = new SingleSelectionViewModel(liveStatuses, query.UserSelectedLiveStatusId);
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
-            var datePickerViewModel = new DatePickerViewModel(new DateTime(2019, 1, 1), SystemTime.Today, query.FromDate);
-            var dateRangePickerViewModel = new DateRangePickerViewModel(new DateTime(2019, 1, 1), balanceUpDate, balanceUpDate.FirstDateOfMonth(), query.ToDate >= SystemTime.Today ? balanceUpDate : query.ToDate);
+            var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
+            var toDate = query.ToDate >= SystemTime.Today ? balanceUpDate : query.ToDate;
+            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, balanceUpDate, balanceUpDate.FirstDateOfMonth(), toDate);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,

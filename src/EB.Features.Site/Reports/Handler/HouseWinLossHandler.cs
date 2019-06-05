@@ -41,8 +41,8 @@
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.FromDate,
-                ToDate = message.ToDate
+                FromDate = message.IsHistoricReport == 1 ? message.FromDate : message.Date,
+                ToDate = message.IsHistoricReport == 1 ? message.ToDate : message.Date
             });
 
             return new HouseWinLossReportViewModel(

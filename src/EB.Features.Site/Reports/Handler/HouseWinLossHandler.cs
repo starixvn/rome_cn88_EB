@@ -30,7 +30,7 @@
 
         public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
         {
-            var sportGroups = sportGroupService.GetSportGroupsForSportbook();
+            var sportGroups = sportGroupService.GetSportGroups();
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport(0);
             var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
             var reportData = houseWinLossService.Get(new HouseWinLossParam

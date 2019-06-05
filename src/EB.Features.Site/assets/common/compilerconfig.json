@@ -99,10 +99,7 @@
     "outputFile": "styles/vendors-extensions/common/bootstrap-ex.css",
     "inputFile": "styles/vendors-extensions/common/bootstrap-ex.scss"
   },
-  {
-    "outputFile": "styles/layout/dcs/customizeDCS.css",
-    "inputFile": "styles/layout/dcs/customizeDCS.scss"
-  },
+  
   {
     "outputFile": "styles/components/bootstrap.nexDatePicker.css",
     "inputFile": "styles/components/bootstrap.nexDatePicker.scss"

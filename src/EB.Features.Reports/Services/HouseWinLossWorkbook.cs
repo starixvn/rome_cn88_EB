@@ -158,14 +158,12 @@
             }
 
             currentRowIndex = TemplateInfo.BodyStartIndex;
-
+            var isEvenRow = false;
             foreach (var data in NoParlayMatchWinLossDetail)
             {
-                var isEvenRow = false;
                 FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, data);
                 isEvenRow = !isEvenRow;
             }
-
         }
 
         protected override void FillFooterRows(Sheet sheet)

@@ -1,14 +1,11 @@
 ﻿namespace EB.Features.Site.Reports
 {
-    using System.Collections.Generic;
-    using System.Linq;
+    using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
-    using EB.Features.Reports.ViewModel;
-    using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
-    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
@@ -18,23 +15,14 @@
 
     public class MatchWinLossExcelHandler : ExcelBaseHandler, IRequestHandler<MatchWinLossExcelQuery, ExcelFileViewModel>
     {
-        private readonly SportGroupService sportGroupService;
-        private readonly BettypeGroupService betTypeService;
         private readonly IMatchWinLossService matchWinLossService;
-        private readonly ReportDateService reportDateService;
         private readonly MatchWinLossWorkbook workbook;
 
         public MatchWinLossExcelHandler(
-            SportGroupService sportGroupService,
-            BettypeGroupService betTypeService,
             IMatchWinLossService matchWinLossService,
-            ReportDateService reportDateService,
             MatchWinLossWorkbook workbook)
         {
-            this.sportGroupService = sportGroupService;
-            this.betTypeService = betTypeService;
             this.matchWinLossService = matchWinLossService;
-            this.reportDateService = reportDateService;
             this.workbook = workbook;
         }
 
@@ -47,33 +35,42 @@
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
                 WinLossDate = message.Date
-            });
-            var totalRow = Sum(reportData);
-            var noParlayMatchWinLossDetail = reportData.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
-            var parlay = reportData.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
+            });            
 
             var fileContent = workbook
-                .SetData(noParlayMatchWinLossDetail, parlay, totalRow)
+                .SetData(reportData.MatchesHasNoParlay, reportData.Parlay, reportData.Total)
                 .SetRowMappers(
-                    GetBodyRowMapper(totalRow.HeadlineStock),
-                    GetSubRowMapper(totalRow.HeadlineStock),
-                    GetGrandRowMapper(totalRow.HeadlineStock))
-                .UseTemplate(GetTemplateInfo(message))
+                    GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.NormalRow),
+                    GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.SubTotal),
+                    GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
+                .UseTemplate(GetTemplateInfo())
                 .Sheet("ReportData")
                 .Title(GetReportTitle(message))
                 .Header(ReportResources.ResourceManager.GetString)
-                .Footer(totalRow, GetBodyRowMapper(totalRow.HeadlineStock))
+                .Footer(reportData.Total, GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
                 .ExportToBytes();
 
             return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
-        internal static Mapper<MatchWinLossViewModel> GetBodyRowMapper(decimal totalStock)
+        internal static Mapper<MatchWinLossModel> GetRowMapper(decimal totalStock, int rowType)
         {
-            var mapper = new Mapper<MatchWinLossViewModel>();
+            var mapper = new Mapper<MatchWinLossModel>();
+
+            switch (rowType)
+            {
+                case RowTypeConstant.NormalRow:
+                    mapper.Map(A, betTypeWinLoss => betTypeWinLoss.BetTypeGroupName);
+                    break;
+                case RowTypeConstant.SubTotal:
+                    mapper.Map(A, betTypeWinLoss => ReportResources.SubTotal);
+                    break;
+                default:
+                    mapper.Map(A, betTypeWinLoss => ReportResources.GrandTotal);
+                    break;
+            }
 
             mapper
-                .Map(A, betTypeWinLoss => betTypeWinLoss.BetTypeGroupName)
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
                 .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
                 .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
@@ -85,40 +82,7 @@
             return mapper;
         }
 
-        internal static Mapper<MatchWinLossViewModel> GetSubRowMapper(decimal totalStock)
-        {
-            var mapper = new Mapper<MatchWinLossViewModel>();
-
-            mapper
-                .Map(A, betTypeWinLoss => ReportResources.SubTotal)
-                .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
-
-            return mapper;
-        }
-
-        internal static Mapper<MatchWinLossViewModel> GetGrandRowMapper(decimal totalStock)
-        {
-            var mapper = new Mapper<MatchWinLossViewModel>();
-
-            mapper
-                .Map(A, betTypeWinLoss => ReportResources.GrandTotal)
-                .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
-
-            return mapper;
-        }
-        private TemplateInfo GetTemplateInfo(MatchWinLossExcelQuery message)
+        private TemplateInfo GetTemplateInfo()
           => new TemplateInfo(
               GetExcelTemplatePath("MatchWinLossReport"),
               noInfomationText: AppResources.NoInformationIsAvailable,
@@ -136,16 +100,5 @@
 
         private string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
-
-        public MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matches)
-        {
-            var total = new MatchWinLossViewModel();
-            foreach (var match in matches)
-            {
-                total = total.Add(match);
-            }
-
-            return total;
-        }
-    }
+    }    
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
     using System.Collections.Generic;
     using System.Linq;

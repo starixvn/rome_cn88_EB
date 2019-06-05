@@ -47,6 +47,8 @@
     }
 
     tr.group {
+        cursor: pointer;
+
         .group-name {
             position: relative;
             top: -3px;
@@ -134,6 +136,7 @@ span.selectedMonth {
     font-size: 20px;
     color: #000;
 }
+
 .monPickrWrapParent .monPickrWrap .monPickr .next {
     top: 4px;
     right: 6px;
@@ -147,7 +150,6 @@ span.selectedMonth {
 }
 
 .selectedDayWrapParent .selectedDayWrap .dayPickr {
-    
     border-radius: 0 !important;
     height: 28px;
     background: #fff;
@@ -157,7 +159,6 @@ span.selectedMonth {
 
 
 .selectedDayWrapParent .selectedDayWrap .dayPickr .darr:before {
-   
     font-size: 19px;
     position: relative;
     top: 3px;

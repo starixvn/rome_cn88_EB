@@ -116,6 +116,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\RowTypeConstant.cs" />
     <Compile Include="Criteria\UnsettledHouseWinLossCriteria.cs" />
     <Compile Include="Criteria\SettledHouseWinLossCriteria.cs" />
     <Compile Include="Criteria\MatchWinLossCriteria.cs" />
@@ -123,7 +124,6 @@
     <Compile Include="Model\HouseWinLossModel.cs" />
     <Compile Include="Model\MatchWinLossModel.cs" />
     <Compile Include="Model\ReportModel.cs" />
-    <Compile Include="Params\HouseWinLossOldParam.cs" />
     <Compile Include="Params\HouseWinLossParam.cs" />
     <Compile Include="Params\MatchWinLossParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -131,6 +131,7 @@
     <Compile Include="Services\MatchWinLossService.cs" />
     <Compile Include="Services\HouseWinLossWorkbook.cs" />
     <Compile Include="Services\MatchWinLossWorkbook.cs" />
+    <Compile Include="ViewModel\HouseWinLossViewModel.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

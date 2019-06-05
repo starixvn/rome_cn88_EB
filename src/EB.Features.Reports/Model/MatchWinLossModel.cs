@@ -53,5 +53,23 @@
         public decimal HouseIncome { get; protected set; }
 
         public decimal HeadlineStock { get; protected set; }
+
+        public string BetTypeGroupName { get; set; }
+
+        public string LeagueName { get; set; }
+
+        public string EventInfo { get; set; }
+
+        public MatchWinLossModel Add(MatchWinLossModel match)
+        {
+            Wagers += match.Wagers;
+            Stake += match.Stake;
+            ValidStake += match.ValidStake;
+            MemberIncome += match.MemberIncome;
+            HouseIncome += match.HouseIncome;
+            HeadlineStock += match.HeadlineStock;
+
+            return this;
+        }
     }
 }

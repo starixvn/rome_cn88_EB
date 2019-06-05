@@ -13,7 +13,7 @@
 
     public interface IMatchWinLossService
     {
-        IEnumerable<MatchWinLossViewModel> Get(MatchWinLossParam param);
+        MatchWinLossViewModel Get(MatchWinLossParam param);
     }
 
     public class MatchWinLossService : IMatchWinLossService
@@ -32,40 +32,34 @@
             this.cacheRefService = cacheRefService;
         }
 
-        public IEnumerable<MatchWinLossViewModel> Get(MatchWinLossParam param)
+        public MatchWinLossViewModel Get(MatchWinLossParam param)
         {
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
 
             var reportData = dynamicRepository.Fetch<MatchWinLossModel>(new MatchWinLossCriteria(param));
-            var matchWinLoss = BuildViewModel(reportData);
+            BuildViewModel(reportData);
 
-            return matchWinLoss.OrderBy(i => $"{i.LeagueId}_{i.MatchId}_{i.BetTypeGroup}");
+            return new MatchWinLossViewModel(reportData.OrderBy(i => $"{i.LeagueId}_{i.MatchId}_{i.BetTypeGroup}"));
         }
 
-        private IEnumerable<MatchWinLossViewModel> BuildViewModel(IEnumerable<MatchWinLossModel> reportData)
+        private void BuildViewModel(IEnumerable<MatchWinLossModel> reportData)
         {
-            var matches = new List<MatchWinLossViewModel>();
             foreach (var row in reportData)
             {
-                var match = new MatchWinLossViewModel(row);
-                match.BetTypeGroupName = cacheRefService.GetBetTypeName(row.BetTypeGroup);
+                row.BetTypeGroupName = cacheRefService.GetBetTypeName(row.BetTypeGroup);
 
-                if (match.BetTypeGroup == BetTypeIdConstants.SystemParlay)
+                if (row.BetTypeGroup == BetTypeIdConstants.SystemParlay)
                 {
-                    match.LeagueName = AppResources.Parlay;
+                    row.LeagueName = AppResources.Parlay;
                 }
                 else
                 {
-                    match.EventInfo = match.BetTypeGroup == BetTypeIdConstants.Outright
+                    row.EventInfo = row.BetTypeGroup == BetTypeIdConstants.Outright
                         ? string.Empty
-                        : $"{cacheRefService.GetTeamName(match.HomeId)} v {cacheRefService.GetTeamName(match.AwayId)}";
-                    match.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
+                        : $"{cacheRefService.GetTeamName(row.HomeId)} v {cacheRefService.GetTeamName(row.AwayId)}";
+                    row.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
                 }
-
-                matches.Add(match);
             }
-
-            return matches;
         }
 
     }

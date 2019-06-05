@@ -1,46 +1,35 @@
 ﻿namespace EB.Features.Reports.ViewModel
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
+    using EB.Features.Shared.Constants;
 
-    public class MatchWinLossViewModel : MatchWinLossModel
+    public class MatchWinLossViewModel
     {
-        public MatchWinLossViewModel()
+        public MatchWinLossViewModel(IEnumerable<MatchWinLossModel> matches)
         {
-
+            Total = matches.Sum();
+            MatchesHasNoParlay = matches.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
+            NoParlayMatchesHasMajorBetType = MatchesHasNoParlay
+                .Where(i => BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup))
+                .OrderBy(i => i.BetTypeGroup);
+            NoParlayMatchesHasMinorBetType = MatchesHasNoParlay
+                .Where(i => !BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
+            Parlay = matches.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
         }
 
-        public MatchWinLossViewModel(MatchWinLossModel model)
-            : base(model.LeagueId,
-            model.MatchId,
-            model.HomeId,
-            model.AwayId,
-            model.BetTypeGroup,
-            model.Wagers,
-            model.Stake,
-            model.ValidStake,
-            model.MemberIncome,
-            model.HouseIncome,
-            model.HeadlineStock)
-        {
+        public IEnumerable<MatchWinLossModel> MatchesHasNoParlay { get; }
 
-        }
+        public IEnumerable<MatchWinLossModel> NoParlayMatchesHasMajorBetType { get; }
 
-        public string BetTypeGroupName { get; set; }
+        public IEnumerable<MatchWinLossModel> NoParlayMatchesHasMinorBetType { get; }
 
-        public string LeagueName { get; set; }
+        public MatchWinLossModel Parlay { get; }
 
-        public string EventInfo { get; set; }
+        public MatchWinLossModel Total { get; }
 
-        public MatchWinLossViewModel Add(MatchWinLossViewModel match)
-        {
-            Wagers += match.Wagers;
-            Stake += match.Stake;
-            ValidStake += match.ValidStake;
-            MemberIncome += match.MemberIncome;
-            HouseIncome += match.HouseIncome;
-            HeadlineStock += match.HeadlineStock;
-
-            return this;
-        }
+        public bool IsShowTotalRow => MatchesHasNoParlay.Any() || Parlay != null;
     }
 }

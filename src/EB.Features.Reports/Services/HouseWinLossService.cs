@@ -1,18 +1,17 @@
 ﻿namespace EB.Features.Reports.Services
 {
-    using System.Collections.Generic;
     using System.Linq;
     using EB.Features.Reports.Criteria;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared.Constants;
     using EB.Features.Shared.Services;
     using Fanex.Data.Repository;
 
     public interface IHouseWinLossService
     {
-        IEnumerable<HouseWinLossModel> Get(HouseWinLossParam param);
-
-        IEnumerable<HouseWinLossModel> Get(HouseWinLossOldParam param);
+        HouseWinLossViewModel Get(HouseWinLossParam param);
     }
 
     public class HouseWinLossService : IHouseWinLossService
@@ -28,25 +27,19 @@
             this.reportDateService = reportDateService;
         }
 
-        public IEnumerable<HouseWinLossModel> Get(HouseWinLossParam param)
-        {            
-            param.ArchiveDate = reportDateService.GetArchiveDate();
-            param.MoveBetsDay = reportDateService.GetMoveBetsDay();
-
-            var reportData= param.IsSettled?
-                dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossCriteria(param)):
-                dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossCriteria(param));
-
-            return reportData.OrderBy(i => i.UserName);
-	}
-        public IEnumerable<HouseWinLossModel> Get(HouseWinLossOldParam param)
+        public HouseWinLossViewModel Get(HouseWinLossParam param)
         {
             param.ArchiveDate = reportDateService.GetArchiveDate();
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
 
-            var reportData = dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossCriteria(param));
+            var reportData = IsSettled(param) ?
+                dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossCriteria(param)) :
+                dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossCriteria(param));
 
-            return reportData.OrderBy(i => i.UserName);
+            return new HouseWinLossViewModel(reportData.OrderBy(i => i.UserName));
         }
+
+        private bool IsSettled(HouseWinLossParam param)
+            => param.IsHistoricReport || param.TicketStatusId == TicketStatusConstants.Settled;
     }
 }

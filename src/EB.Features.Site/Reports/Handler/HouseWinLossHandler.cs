@@ -35,7 +35,8 @@
             var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
-                IsSettled = message.UserSelectedTicketStatusId == TicketStatusConstants.Settled,
+                IsHistoricReport = message.IsHistoricReport == 1,
+                TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
@@ -45,11 +46,11 @@
             });
 
             return new HouseWinLossReportViewModel(
+                reportData,
                 message,
                 reportDateService.GetBalanceUpDay(),
                 BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
-                reportData,
                 BuildBetTypeSelectListItems(allBetTypes, 0));
         }
     }

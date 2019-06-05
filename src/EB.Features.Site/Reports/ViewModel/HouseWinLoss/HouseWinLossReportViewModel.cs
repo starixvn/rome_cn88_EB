@@ -6,6 +6,7 @@
     using System.Web;
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
+    using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -18,12 +19,12 @@
     public class HouseWinLossReportViewModel
     {
         public HouseWinLossReportViewModel(
+            HouseWinLossViewModel reportData,
             HouseWinLossQuery query,
             DateTime balanceUpDate,
             IEnumerable<SelectListItemExt> sportGroups,
             IEnumerable<SelectListItemExt> betTypes,
-            IEnumerable<HouseWinLossModel> reportData,
-            IEnumerable<SelectListItemExt> allBetTypes = null)
+            IEnumerable<SelectListItemExt> allBetTypes)
         {
             var sportGroupSelectionViewModel = new SingleSelectionViewModel(sportGroups, query.UserSelectedSportGroupId);
             var betTypeSelectionViewModel = new SingleSelectionViewModel(betTypes, query.UserSelectedBetTypeId);
@@ -59,8 +60,6 @@
                 ticketStatusSelectionViewModel,
                 allBetTypesSelectionViewModel);
             ReportData = reportData;
-
-            TotalRow = reportData.Sum();
             Query = query;
             BalanceUpDate = balanceUpDate;
         }
@@ -69,13 +68,9 @@
 
         public HouseWinLossQuery Query { get; }
 
-        public IEnumerable<HouseWinLossModel> ReportData { get; }
+        public HouseWinLossViewModel ReportData { get; }
 
         public HouseWinLossFilterViewModel ReportFilterViewModel { get; }
-
-        public HouseWinLossModel TotalRow { get; }
-
-        public bool IsShowTotalRow => ReportData.Any();
 
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
 

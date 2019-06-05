@@ -6,9 +6,9 @@
 
     public static class EnumerableExtensions
     {
-        public static MatchWinLossViewModel Sum(this IEnumerable<MatchWinLossViewModel> matches)
+        public static MatchWinLossModel Sum(this IEnumerable<MatchWinLossModel> matches)
         {
-            var total = new MatchWinLossViewModel();
+            var total = new MatchWinLossModel();
             foreach (var match in matches)
             {
                 total = total.Add(match);

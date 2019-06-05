@@ -4,7 +4,9 @@
 
     public class HouseWinLossParam
     {
-        public bool IsSettled { get; set; }
+        public bool IsHistoricReport { get; set; }
+
+        public int TicketStatusId { get; set; }
 
         public DateTime FromDate { get; set; }
 

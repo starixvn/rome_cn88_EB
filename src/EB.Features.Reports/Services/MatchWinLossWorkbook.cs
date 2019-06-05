@@ -4,56 +4,58 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
+    using EB.Features.Reports.Model;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Resources;
     using ONEbook.SpreadSheets;
     using ONEbook.SpreadSheets.NPOI;
+    using EB.Features.Reports.Extension;
 
     public interface MatchWinLossWorkbook
     {
-        Workbook<MatchWinLossViewModel> UseTemplate(TemplateInfo templateInfo);
+        Workbook<MatchWinLossModel> UseTemplate(TemplateInfo templateInfo);
 
-        Workbook<MatchWinLossViewModel> Sheet(string sheetName);
+        Workbook<MatchWinLossModel> Sheet(string sheetName);
 
-        Workbook<MatchWinLossViewModel> Title(string titleText);
+        Workbook<MatchWinLossModel> Title(string titleText);
 
-        Workbook<MatchWinLossViewModel> Header(Func<string, string> headerMapping);
+        Workbook<MatchWinLossModel> Header(Func<string, string> headerMapping);
 
         byte[] ExportToBytes();
 
         MatchWinLossWorkbook SetData(
-            IEnumerable<MatchWinLossViewModel> reportData,
-            MatchWinLossViewModel systemParlay,
-            MatchWinLossViewModel grandTotal);
+            IEnumerable<MatchWinLossModel> reportData,
+            MatchWinLossModel systemParlay,
+            MatchWinLossModel grandTotal);
 
         MatchWinLossWorkbook SetRowMappers(
-            Mapper<MatchWinLossViewModel> betTypeRowMapper,
-            Mapper<MatchWinLossViewModel> subTotalRowMapper,
-            Mapper<MatchWinLossViewModel> grandTotalRowMapper);
+            Mapper<MatchWinLossModel> betTypeRowMapper,
+            Mapper<MatchWinLossModel> subTotalRowMapper,
+            Mapper<MatchWinLossModel> grandTotalRowMapper);
 
     }
 
-    public class MatchWinLossWorkbookImpl : NpoiWorkbook<MatchWinLossViewModel>, MatchWinLossWorkbook
+    public class MatchWinLossWorkbookImpl : NpoiWorkbook<MatchWinLossModel>, MatchWinLossWorkbook
     {
         private const int ReportSheetIndex = 1;
 
         private int currentRowIndex;
 
-        internal IEnumerable<MatchWinLossViewModel> NoParlayMatchWinLossDetail { get; set; }
+        internal IEnumerable<MatchWinLossModel> NoParlayMatchWinLossDetail { get; set; }
 
-        internal MatchWinLossViewModel NoParlayWinLossTotal { get; set; }
+        internal MatchWinLossModel NoParlayWinLossTotal { get; set; }
 
-        internal MatchWinLossViewModel SystemParlay { get; set; }
+        internal MatchWinLossModel SystemParlay { get; set; }
 
-        internal MatchWinLossViewModel GrandTotal { get; set; }
+        internal MatchWinLossModel GrandTotal { get; set; }
 
-        internal Mapper<MatchWinLossViewModel> BetTypeRowMapper { get; set; }
+        internal Mapper<MatchWinLossModel> BetTypeRowMapper { get; set; }
 
-        internal Mapper<MatchWinLossViewModel> SubTotalRowMapper { get; set; }
+        internal Mapper<MatchWinLossModel> SubTotalRowMapper { get; set; }
 
-        internal Mapper<MatchWinLossViewModel> TotalRowMapper { get; set; }
+        internal Mapper<MatchWinLossModel> TotalRowMapper { get; set; }
 
-        internal Mapper<MatchWinLossViewModel> GrandTotalRowMapper { get; set; }
+        internal Mapper<MatchWinLossModel> GrandTotalRowMapper { get; set; }
 
         internal Row MatchTitleRowTemplate { get; set; }
 
@@ -69,9 +71,9 @@
         internal Row GrandTotalRowTemplate { get; set; }
 
         public MatchWinLossWorkbook SetData(
-            IEnumerable<MatchWinLossViewModel> reportData,
-            MatchWinLossViewModel systemParlay,
-            MatchWinLossViewModel grandTotal)
+            IEnumerable<MatchWinLossModel> reportData,
+            MatchWinLossModel systemParlay,
+            MatchWinLossModel grandTotal)
         {
             NoParlayMatchWinLossDetail = reportData;
             SystemParlay = systemParlay;
@@ -81,9 +83,9 @@
         }
 
         public MatchWinLossWorkbook SetRowMappers(
-            Mapper<MatchWinLossViewModel> betTypeRowMapper,
-            Mapper<MatchWinLossViewModel> subTotalRowMapper,
-            Mapper<MatchWinLossViewModel> grandTotalRowMapper)
+            Mapper<MatchWinLossModel> betTypeRowMapper,
+            Mapper<MatchWinLossModel> subTotalRowMapper,
+            Mapper<MatchWinLossModel> grandTotalRowMapper)
         {
             BetTypeRowMapper = betTypeRowMapper;
             SubTotalRowMapper = subTotalRowMapper;
@@ -91,7 +93,7 @@
             return this;
         }
 
-        internal void FillMatchTitle(Sheet sheet, int rowIndex, MatchWinLossViewModel data)
+        internal void FillMatchTitle(Sheet sheet, int rowIndex, MatchWinLossModel data)
         {
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(MatchTitleRowTemplate);
@@ -105,7 +107,7 @@
             Sheet sheet,
             int rowIndex,
             bool isEvenRow,
-            MatchWinLossViewModel betTypeWinLoss)
+            MatchWinLossModel betTypeWinLoss)
         {
             var row = sheet.GetRow(rowIndex);
             var templateRow = isEvenRow ? EvenRowTemplate : OddRowTemplate;
@@ -114,7 +116,7 @@
             FillCells(row, betTypeWinLoss, BetTypeRowMapper.Mappings);
         }
 
-        internal void FillMatchTotal(Sheet sheet, int rowIndex, MatchWinLossViewModel data)
+        internal void FillMatchTotal(Sheet sheet, int rowIndex, MatchWinLossModel data)
         {
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(SubTotalRowTemplate);
@@ -223,7 +225,7 @@
             {
                 var isEvenRow = false;
                 var firstRowOfGroup = data.ToList();
-                var subTotal = Sum(firstRowOfGroup);
+                var subTotal = firstRowOfGroup.Sum();
 
                 FillMatchTitle(sheet, currentRowIndex++, firstRowOfGroup.First());
 
@@ -258,17 +260,6 @@
             var row = sheet.GetRow(currentRowIndex);
             row.CopyCellsFrom(GrandTotalRowTemplate);
             FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
-        }
-
-        private MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matches)
-        {
-            var total = new MatchWinLossViewModel();
-            foreach (var match in matches)
-            {
-                total = total.Add(match);
-            }
-
-            return total;
         }
     }
 }

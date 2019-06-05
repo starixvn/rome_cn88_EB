@@ -6,7 +6,6 @@
     using EB.Features.Site.Shared.Helpers;
     using Fanex.NAP.Core.Web.Session;
 
-
     public class IndexViewModel
     {
         private readonly ICurrentSession currentSession;

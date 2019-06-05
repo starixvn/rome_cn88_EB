@@ -42,11 +42,11 @@ namespace EB.Features.Site.Reports
             });
 
             return new MatchWinLossReportViewModel(
+                reportData,
                 message,
                 reportDateService.GetBalanceUpDay(),
                 BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
-                BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
-                reportData,
+                BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),                
                 BuildBetTypeSelectListItems(allBetTypes, 0));
         }
     }

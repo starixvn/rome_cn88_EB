@@ -127,7 +127,7 @@ class HouseWinLossReport {
             this.$("#fromDate").val(this.$("#monPickr1").monPickr("getFromDate", "MM/dd/yyyy"));
             this.$("#toDate").val(this.$("#monPickr1").monPickr("getToDate", "MM/dd/yyyy"));
         } else {
-            this.$("#fromDate").val(this.$("#date").val());
+            this.$("#fromDate").val(this.$("#date").val()); 
             this.$("#toDate").val(this.$("#date").val());
         }
     }

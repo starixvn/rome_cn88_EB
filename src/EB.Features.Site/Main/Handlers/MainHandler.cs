@@ -34,10 +34,10 @@
             this.encodeDataFunction = encodeDataFunction ?? Encryption.PearsonEncode;
         }
 
-        public async Task<IEnumerable<MenuItem>> Handle(MenuBarQuery query)
-            => siteMenuService.GetMenu(query.MenuList);
+        public async Task<IEnumerable<MenuItem>> Handle(MenuBarQuery message)
+            => siteMenuService.GetMenu(message.MenuList);
 
-        public async Task<IndexViewModel> Handle(IndexQuery query)
-            => new IndexViewModel(query.CurrentSession, browserHelper, encodeDataFunction, query);
+        public async Task<IndexViewModel> Handle(IndexQuery message)
+            => new IndexViewModel(message.CurrentSession, browserHelper, encodeDataFunction, message);
     }
 }

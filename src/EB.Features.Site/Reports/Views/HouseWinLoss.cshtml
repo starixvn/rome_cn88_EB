@@ -92,7 +92,7 @@
                     <th class="text-right header"> Headline Stock %</th>
                 </tr>
             </thead>
-            @foreach (var row in Model.ReportData)
+            @foreach (var row in Model.ReportData.Matches)
             {
                 <tr>
                     <td class="text-left">
@@ -101,33 +101,33 @@
                            data-cust-name="@row.UserName"
                            data-role-id="0">@row.UserName</a>
                     </td>
-                    @HtmlHelpers.RenderNumberCell(row.Wagers)
-                    @HtmlHelpers.RenderNumberCell(100, row.Stake)
-                    @HtmlHelpers.RenderNumberCell(100, row.ValidStake)
-                    @HtmlHelpers.RenderNumberCell(100, row.MemberIncome)
-                    @HtmlHelpers.RenderNumberCell(100, row.SuperComm)
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseWinLoss)
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseComm)
-                    @HtmlHelpers.RenderNumberCell(100, row.HouseIncome)
-                    @HtmlHelpers.RenderNumberCell(100, row.HeadlineStock)
-                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.TotalRow.HeadlineStock)
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome )
+                    @HtmlHelpers.RenderNumberCell(row.SuperComm )
+                    @HtmlHelpers.RenderNumberCell(row.HouseWinLoss )
+                    @HtmlHelpers.RenderNumberCell(row.HouseComm )
+                    @HtmlHelpers.RenderNumberCell(row.HouseIncome )
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock )
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock )
                 </tr>
             }
-            @if (Model.IsShowTotalRow)
+            @if (Model.ReportData.IsShowTotalRow)
             {
                 <tfoot>
                     <tr class="total">
                         <th class="text-right header"></th>
-                        @HtmlHelpers.RenderNumberCell(Model.TotalRow.Wagers)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.Stake)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.ValidStake)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.MemberIncome)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.SuperComm)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseWinLoss)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseComm)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HouseIncome)
-                        @HtmlHelpers.RenderNumberCell(100, Model.TotalRow.HeadlineStock)
-                        @HtmlHelpers.RenderStockPercentCell(Model.TotalRow.HeadlineStock, Model.TotalRow.HeadlineStock)
+                        @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperComm )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseWinLoss )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseComm )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseIncome )
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock )
+                        @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock )
                     </tr>
                 </tfoot>
             }

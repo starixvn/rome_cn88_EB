@@ -18,7 +18,7 @@ namespace EB.Features.Shared.Constants
         public const int Outright = 10;
         public const int SystemParlay = 29;
 
-        public static List<int> MajorBetType = new List<int> {
+        public readonly static List<int> MajorBetType = new List<int> {
             Handicap,
             OverUnder,
             CorrectScore,

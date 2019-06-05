@@ -50,8 +50,9 @@
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
             var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
-            var toDate = query.ToDate >= SystemTime.Today ? balanceUpDate : query.ToDate;
-            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, balanceUpDate, balanceUpDate.FirstDateOfMonth(), toDate);
+            var fromDate = query.FromDate < balanceUpDate ? query.FromDate : balanceUpDate.FirstDateOfMonth();
+            var toDate = query.ToDate < balanceUpDate ? query.ToDate : balanceUpDate;
+            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, balanceUpDate, fromDate, toDate);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,

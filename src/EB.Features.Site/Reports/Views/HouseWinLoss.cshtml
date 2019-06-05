@@ -19,7 +19,7 @@
         </div>
     </div>
     <form class="form-inline filter report-form" role="form" id="report-form">
-        <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">
+        <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
             @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
         </div>
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
@@ -65,13 +65,13 @@
         </div>
         <input type="hidden" name="FromDate" id="fromDate" />
         <input type="hidden" name="ToDate" id="toDate" />
-        <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport" />
+        <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />
     </form>
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">        
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("FromDate", Model.Query.FromDate)
         @Html.Hidden("ToDate", Model.Query.ToDate)
-        @Html.Hidden("IsHistoricReport", Model.Query.IsHistoricReport)
+        @Html.Hidden("IsHistoricReport", Model.Query.IsHistoricReport.ToString())
         @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
@@ -162,7 +162,7 @@
 }
 @helper RenderDatePicker()
 {
-    <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport==1?"none":"inline-block")">
+    <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
         <label>Date</label>
         <div class="control date">
             <div id="date-container"

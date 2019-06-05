@@ -63,11 +63,11 @@ class HouseWinLossReport {
         this.$("#icon-excel").on("click", this.onExportExcel);
 
         this.$("#ViewHistoryReport").click(() => {
-            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "1" ? "0" : "1");
+            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
             this.switchCalendarType();
         });
         this.$("#BackToCurrentReport").click(() => {
-            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "1" ? "0" : "1");
+            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
             this.switchCalendarType();
         });
         this.initMonthlyCalendar();
@@ -85,7 +85,7 @@ class HouseWinLossReport {
     }
 
     switchCalendarType = () => {
-        if (this.$("#IsHistoricReport").val() == "1") {
+        if (this.$("#IsHistoricReport").val() == "True") {
             this.$("#GroupViewHistory").css("display", "none");
             this.$("#GroupBackToCurrent").css("display", "block");
             this.$('.from-date-box').css('display', 'none');
@@ -123,7 +123,7 @@ class HouseWinLossReport {
     }
 
     UpdateFromDateToDate = () => {
-        if (this.$("#IsHistoricReport").val() == "1") {
+        if (this.$("#IsHistoricReport").val() == "True") {
             this.$("#fromDate").val(this.$("#monPickr1").monPickr("getFromDate", "MM/dd/yyyy"));
             this.$("#toDate").val(this.$("#monPickr1").monPickr("getToDate", "MM/dd/yyyy"));
         } else {

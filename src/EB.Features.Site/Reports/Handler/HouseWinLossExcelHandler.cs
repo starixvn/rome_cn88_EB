@@ -1,15 +1,11 @@
 ﻿namespace EB.Features.Site.Reports
 {
-    using System.Linq;
     using EB.Features.Reports.Constants;
-    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
-    using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
-    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
@@ -32,18 +28,19 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            var param = new HouseWinLossParam
+
+            var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
-                IsHistoricReport = message.IsHistoricReport == 1,
+                IsHistoricReport = message.IsHistoricReport,
                 TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.IsHistoricReport == 1 ? message.FromDate : message.Date,
-                ToDate = message.IsHistoricReport == 1 ? message.ToDate : message.Date
-            };
-            var reportData = houseWinLossService.Get(param);
+                FromDate = message.FromDate,
+                ToDate = message.ToDate,
+                Date = message.Date
+            });
 
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total)
@@ -52,12 +49,12 @@
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
                 .UseTemplate(GetTemplateInfo())
                 .Sheet("ReportData")
-                .Title(GetReportTitle(param))
+                .Title(GetReportTitle(message))
                 .Header(ReportResources.ResourceManager.GetString)
                 .Footer(reportData.Total, GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
                 .ExportToBytes();
 
-            return new ExcelFileViewModel(GetExcelFileName(param), fileContent);
+            return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
         internal static Mapper<HouseWinLossModel> GetRowMapper(decimal totalStock, int rowType)
@@ -88,7 +85,7 @@
 
             return mapper;
         }
-        
+
         private TemplateInfo GetTemplateInfo()
           => new TemplateInfo(
               GetExcelTemplatePath("HouseWinLossReport"),
@@ -102,9 +99,9 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        private string GetReportTitle(HouseWinLossParam param)
+        private string GetReportTitle(HouseWinLossExcelQuery param)
         {
-            if(param.IsHistoricReport)
+            if (param.IsHistoricReport)
             {
                 return $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
             }
@@ -112,7 +109,9 @@
             return $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
         }
 
-        private string GetExcelFileName(HouseWinLossParam param)
-            => $"Wager Report - {param.FromDate.ToShortDate()}";        
+        private string GetExcelFileName(HouseWinLossExcelQuery param)
+            => param.IsHistoricReport ? 
+            $"Wager Report - {param.FromDate.ToShortDate()}" : 
+            $"Wager Report - {param.Date.ToShortDate()}";
     }
 }

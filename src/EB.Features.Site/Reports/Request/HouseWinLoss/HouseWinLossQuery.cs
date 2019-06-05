@@ -34,7 +34,7 @@
 
         public bool IsTest { get; set; }
 
-        public int IsHistoricReport { get; set; }
+        public bool IsHistoricReport { get; set; }
 
         public DateTime FromDate { get; set; }
 

@@ -35,14 +35,15 @@
             var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
-                IsHistoricReport = message.IsHistoricReport == 1,
+                IsHistoricReport = message.IsHistoricReport,
                 TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.IsHistoricReport == 1 ? message.FromDate : message.Date,
-                ToDate = message.IsHistoricReport == 1 ? message.ToDate : message.Date
+                FromDate = message.FromDate,
+                ToDate = message.ToDate,
+                Date = message.Date
             });
 
             return new HouseWinLossReportViewModel(

@@ -1,5 +1,5 @@
 ﻿@using EB.Features.Shared.Extensions;
-@using EB.Features.Shared.Constants;
+@using EB.Features.Shared.Configuration;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @model HouseWinLossReportViewModel
 @{
@@ -153,6 +153,9 @@
     <input type="hidden" id="custId" name="custId" value="" />
     <input type="hidden" id="custName" name="custName" value="" />
     <input type="hidden" id="roleId" name="roleId" value="" />
+    <input type="hidden" id="roleId" name="roleId" value="" />
+    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
+    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="@Model.GetDownlineLink()" />
 </form>
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")

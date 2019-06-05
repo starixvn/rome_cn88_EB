@@ -1,6 +1,7 @@
 ﻿namespace EB.Features.Main.Services
 {
     using System;
+    using System.Collections.Generic;
     using EB.Features.Main.Criteria.InternalLogin;
     using EB.Features.Main.DataAccesses;
     using EB.Features.Main.Params;
@@ -22,7 +23,16 @@
         public string GetInternalLogInLink(InternalLoginParam param)
         {
             var time = dataAccess.GetDBTime(new GetDBTimeCriteria()).Ticks;
-            var queryParam = $"{param.CustName}&{param.AccId}&{time}";
+            var queryParam = string.Join("&", new List<object>
+            {
+                param.CustName,
+                param.AccId,
+                time,
+                string.Empty,
+                param.AfterLogInSite,
+                param.AfterLogInQuery.Replace("&", "|")
+            });
+
             var encryptedParams = param.EncryptParamFunc(queryParam, 1024, param.KeyPath);
 
             var result = string.Format(

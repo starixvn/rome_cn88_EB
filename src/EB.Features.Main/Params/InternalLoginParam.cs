@@ -11,6 +11,8 @@
             string logInLink,
             string internalLogInUMToken,
             string ip,
+            string afterLogInSite,
+            string afterLogInQuery,
             string keyPath,
             Func<string, int, string, string> encryptParamFunc)
         {
@@ -20,6 +22,9 @@
             LogInLink = logInLink.StartsWith("http") ? logInLink : "http://" + logInLink;
             InternalLogInUMToken = string.IsNullOrWhiteSpace(internalLogInUMToken) ? string.Empty : $"UMToken={internalLogInUMToken}&";
             IP = string.IsNullOrWhiteSpace(ip) ? string.Empty : ip;
+
+            AfterLogInSite = afterLogInSite;
+            AfterLogInQuery = afterLogInQuery;
 
             KeyPath = keyPath;
             EncryptParamFunc = encryptParamFunc;
@@ -36,6 +41,10 @@
         public string InternalLogInUMToken { get; }
 
         public string IP { get; }
+
+        public string AfterLogInSite { get; }
+
+        public string AfterLogInQuery { get; }
 
         public string KeyPath { get; }
 

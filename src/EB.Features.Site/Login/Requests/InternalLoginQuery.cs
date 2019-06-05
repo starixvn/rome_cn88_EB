@@ -27,6 +27,10 @@
 
         public byte RoleId { get; set; }
 
+        public string AfterLogInSite { get; set; }
+
+        public string AfterLogInQuery { get; set; }
+
         public int AccId { get; }
 
         public string KeyPath { get; }

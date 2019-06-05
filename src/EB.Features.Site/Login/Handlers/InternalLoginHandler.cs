@@ -23,6 +23,8 @@
                 message.InternalLogInURL,
                 message.InternalLogInUMToken,
                 message.IP,
+                message.AfterLogInSite,
+                message.AfterLogInQuery,
                 message.KeyPath,
                 message.EncryptParamFunc);
 

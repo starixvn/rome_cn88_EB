@@ -4,8 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
-    using EB.Features.Reports.Extension;
-    using EB.Features.Reports.Model;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
@@ -66,6 +64,9 @@
             ReportData = reportData;
             Query = query;
             BalanceUpDate = balanceUpDate;
+
+            FromDate = Query.IsHistoricReport ? Query.FromDate : Query.Date;
+            ToDate = Query.IsHistoricReport ? Query.ToDate : Query.Date;
         }
 
         private DateTime BalanceUpDate { get; }
@@ -76,8 +77,30 @@
 
         public HouseWinLossFilterViewModel ReportFilterViewModel { get; }
 
+        public DateTime FromDate { get; }
+
+        public DateTime ToDate { get; }
+
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
 
         public string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("/InternalLogin/Index");
+
+        public string GetDownlineLink()
+        {
+            var param = new Dictionary<string, object>
+            {
+                ["ReportType"] = Query.ReportType == 0 ? 1 : 2,
+                ["DisplayMode"] = 1,
+                ["IsOwner"] = true,
+                ["CustLevelId"] = 4,
+                ["FromDate"] = FromDate,
+                ["ToDate"] = ToDate,
+                ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupId,
+                ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
+                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId
+            };
+
+            return "~/Reports/Wager?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+        }
     }
 }

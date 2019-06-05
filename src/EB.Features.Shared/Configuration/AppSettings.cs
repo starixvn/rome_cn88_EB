@@ -28,6 +28,8 @@ namespace EB.Features.Shared.Configuration
 
         public static string InternalLogInUMToken => GetConfigValue("InternalLogInUMToken");
 
+        public static string FeaturesAppPath => GetConfigValue("FeaturesAppPath");
+
         public static string GetConfigValue(string configName) => AppSettingValues[configName];
 
         public static void Verify() => Require(StoredProcedurePath, nameof(StoredProcedurePath));

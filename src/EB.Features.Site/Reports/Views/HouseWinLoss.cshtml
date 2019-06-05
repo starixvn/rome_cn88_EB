@@ -67,8 +67,11 @@
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport" />
     </form>
-    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">        
         @Html.Hidden("Date", Model.Query.Date)
+        @Html.Hidden("FromDate", Model.Query.FromDate)
+        @Html.Hidden("ToDate", Model.Query.ToDate)
+        @Html.Hidden("IsHistoricReport", Model.Query.IsHistoricReport)
         @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)

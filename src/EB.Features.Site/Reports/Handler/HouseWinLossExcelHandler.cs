@@ -32,16 +32,18 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            var reportData = houseWinLossService.Get(new HouseWinLossParam
+            var param = new HouseWinLossParam
             {
+                IsHistoricReport = message.IsHistoricReport == 1,
                 TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
-                FromDate = message.Date,
-                ToDate = message.Date
-            });
+                FromDate = message.IsHistoricReport == 1 ? message.FromDate : message.Date,
+                ToDate = message.IsHistoricReport == 1 ? message.ToDate : message.Date
+            };
+            var reportData = houseWinLossService.Get(param);
 
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total)
@@ -50,12 +52,12 @@
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
                 .UseTemplate(GetTemplateInfo())
                 .Sheet("ReportData")
-                .Title(GetReportTitle(message))
+                .Title(GetReportTitle(param))
                 .Header(ReportResources.ResourceManager.GetString)
                 .Footer(reportData.Total, GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.GrandTotal))
                 .ExportToBytes();
 
-            return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
+            return new ExcelFileViewModel(GetExcelFileName(param), fileContent);
         }
 
         internal static Mapper<HouseWinLossModel> GetRowMapper(decimal totalStock, int rowType)
@@ -100,10 +102,17 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        private string GetReportTitle(HouseWinLossExcelQuery query)
-            => $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {query.FromDate.ToShortDate()}";
+        private string GetReportTitle(HouseWinLossParam param)
+        {
+            if(param.IsHistoricReport)
+            {
+                return $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
+            }
 
-        private string GetExcelFileName(HouseWinLossExcelQuery query)
-            => $"Wager Report - {query.FromDate.ToShortDate()}";        
+            return $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
+        }
+
+        private string GetExcelFileName(HouseWinLossParam param)
+            => $"Wager Report - {param.FromDate.ToShortDate()}";        
     }
 }

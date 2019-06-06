@@ -74,6 +74,7 @@
         private static void RegisterMainModule(Container container)
         {
             container.Register<IMenuService, MenuService>();
+            container.Register<IUnderMainternanceService, UnderMainternanceService>();
         }
 
         private static void RegisterMediator(Container container)

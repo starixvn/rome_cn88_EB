@@ -382,6 +382,7 @@
             url: indexManager.urls.reCheckin,
             data: { onid: indexManager.elements.onlineUserId },
             success: (isKickout: any) => {
+                debugger;
                 try {
                     if (isKickout) {
                         alert("Kick out!");
@@ -397,10 +398,11 @@
                 }
             },
             error: (xhr) => {
+                debugger;
                 if (xhr.status === 500) {
                     siteInfrastructure.logout();
                     alert((<HTMLInputElement>document.getElementById("errorMessage")).value);
-                } else if (xhr.status === 401 || xhr.status === 403) {
+                } else if (xhr.status === 401 || xhr.status === 403 || xhr.status === 503) {
                     siteInfrastructure.logout();
                 }
             },

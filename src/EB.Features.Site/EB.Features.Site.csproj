@@ -803,6 +803,7 @@
     <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
     <Compile Include="Login\InternalLoginController.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
+    <Compile Include="Login\ViewModel\UnderMaintenanceModel.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
     <Compile Include="Reports\ExcelBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossExcelHandler.cs" />
@@ -1152,6 +1153,7 @@
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\connectionStrings.config" />
     <Content Include="Login\Views\InternalLogin.cshtml" />
+    <Content Include="Login\Views\UnderMaintenance.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

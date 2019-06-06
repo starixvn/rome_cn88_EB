@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using EB.Features.Main.Services;
 using EB.Features.Shared.Resources;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
@@ -15,7 +16,6 @@ using Fanex.NAP.Core.Service.Interface;
 using Fanex.NAP.Core.Web.Auth;
 using Fanex.NAP.Core.Web.Context;
 using Fanex.NAP.Core.Web.Session;
-using ONEbook.UM.Services;
 
 namespace EB.Features.Site
 {
@@ -26,7 +26,7 @@ namespace EB.Features.Site
         private readonly ICurrentSession currentSession;
         private readonly IGroupService groupService;
         private readonly ICurrentContext currentContext;
-        private readonly IMaintenanceService maintenanceService;
+        private readonly IUnderMainternanceService maintenanceService;
         private readonly ISecurityService securityService;
 
         private readonly HashAlgorithm hashAlgorithm;
@@ -36,7 +36,7 @@ namespace EB.Features.Site
             IGroupService groupService,
             ICurrentContext currentContext,
             ISecurityService securityService,
-            IMaintenanceService maintenanceService,
+            IUnderMainternanceService maintenanceService,
             ICurrentSession currentSession)
         {
             this.groupService = groupService;
@@ -128,17 +128,19 @@ namespace EB.Features.Site
 
         public ActionResult Offline()
         {
-            var downTime = maintenanceService.GetUnderMaintenanceTime();
+            var downTime = maintenanceService.UnderMainternanceInfo();
 
-            if (!downTime.IsUnderMaintenanceTime)
+            if (!downTime.IsUM)
             {
+                if (Request.QueryString["UMToken"] != null)
+                {
+                    Session["UMToken"] = Request.QueryString["UMToken"];
+                }
+
                 FormsAuthentication.RedirectToLoginPage();
             }
 
-            ViewBag.UmtFrom = downTime.From;
-            ViewBag.UmtTo = downTime.To;
-
-            return View();
+            return View("~/Login/Views/UnderMaintenance.cshtml", downTime);
         }
 
         private void DoSignOut()

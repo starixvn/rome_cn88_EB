@@ -83,7 +83,7 @@
 
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
 
-        public string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("/InternalLogin/Index");
+        public string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 
         public string GetDownlineLink()
         {

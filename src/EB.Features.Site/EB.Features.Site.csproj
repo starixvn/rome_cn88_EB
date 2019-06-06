@@ -755,6 +755,7 @@
     <Content Include="assets\shared\scripts\components\date-picker.js.map">
       <DependentUpon>date-picker.ts</DependentUpon>
     </Content>
+    <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

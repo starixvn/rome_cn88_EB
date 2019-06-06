@@ -382,7 +382,6 @@
             url: indexManager.urls.reCheckin,
             data: { onid: indexManager.elements.onlineUserId },
             success: (isKickout: any) => {
-                debugger;
                 try {
                     if (isKickout) {
                         alert("Kick out!");
@@ -398,7 +397,6 @@
                 }
             },
             error: (xhr) => {
-                debugger;
                 if (xhr.status === 500) {
                     siteInfrastructure.logout();
                     alert((<HTMLInputElement>document.getElementById("errorMessage")).value);

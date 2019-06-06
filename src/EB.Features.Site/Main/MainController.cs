@@ -6,7 +6,6 @@
     using EB.Features.Site.Shared;
     using MediatR;
 
-
     public class MainController : BaseController
     {
         private const string ViewsPath = "~/Main/Views";

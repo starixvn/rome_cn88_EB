@@ -47,7 +47,7 @@ function ShowPassword() {
     } else {
         document.getElementById("txtPassword").setAttribute("type", "password");
     }
-    
+
 }
 window.onload = function () {
     /* jshint ignore: start */
@@ -68,7 +68,41 @@ window.onload = function () {
     else {
         msg.style.display = 'none';
     }
+
+    $("#language-ddl li").on("click touchend", function () {
+        changeLanguage($(this).find(".flag").data("language-code"));
+    });
 };
+
+function changeLanguage(lang) {
+    $.ajax({
+        type: "POST",
+        url: $("#changeLanguagePath").val(),
+        data: { languageCode: lang },
+        success: function (result) {
+            debugger;
+            if (result !== undefined) {
+                // Remove www so that subdomain can override LANGUAGE value
+                var domain = window.location.hostname.replace(/([a-zA-Z0-9]+.)/, '').replace("www.", '');
+                $.cookie("LANGUAGE", lang, { expires: 30, path: domain });
+                top.location.href = removeBookmarksInUrl(top.location.href);
+            }
+        }
+    });
+}
+
+function removeBookmarksInUrl(url) {
+    if (typeof url !== 'string') {
+        return null;
+    }
+
+    var i = url.indexOf("#");
+    if (i === -1) {
+        return url;
+    }
+
+    return url.substr(0, i);
+}
 
 document.forms[0].onsubmit = function () {
     msg.style.display = 'none';

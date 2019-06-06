@@ -10,6 +10,7 @@
     using EB.Features.Shared.Services;
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Helpers;
+    using EB.Features.Site.Shared.Models;
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Context;
     using Fanex.NAP.Core.Service.Impl;
@@ -61,6 +62,7 @@
 
             container.RegisterSingleton<InternalLoginService, InternalLoginServiceImpl>();
             container.RegisterSingleton<InternalLoginDataAccess, InternalLoginDataAccessImpl>();
+            container.Register<UserSession, UserSessionImpl>();
         }
 
         private static void RegisterReportModule(Container container)

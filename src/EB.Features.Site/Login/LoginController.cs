@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using EB.Features.Main.Services;
 using EB.Features.Shared.Resources;
+using EB.Features.Site.Shared;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Models;
@@ -20,7 +21,7 @@ using Fanex.NAP.Core.Web.Session;
 namespace EB.Features.Site
 {
     [AllowAnonymous]
-    public class LoginController : Controller
+    public class LoginController : MultipleLanguageController
     {
         private readonly IUserService userService;
         private readonly ICurrentSession currentSession;
@@ -162,7 +163,6 @@ namespace EB.Features.Site
                 UserId = user.Id,
                 OnUserId = currentSession.OnUserId
             };
-
 
             var authTicket = new FormsAuthenticationTicket(
                 1,

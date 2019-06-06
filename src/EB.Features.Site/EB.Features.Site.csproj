@@ -584,6 +584,7 @@
     <Content Include="assets\login\scripts\libs\flipclock\flipclock.js" />
     <Content Include="assets\login\scripts\libs\flipclock\flipclock.min.js" />
     <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.js" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery.cookie.js" />
     <Content Include="assets\login\scripts\libs\storage\store-with-json2.min.js" />
     <Content Include="assets\login\scripts\login\captcha.js" />
     <Content Include="assets\login\scripts\login\core.js" />
@@ -824,6 +825,7 @@
     <Compile Include="Reports\ReportsController.cs" />
     <Compile Include="Shared\Models\UserSession.cs" />
     <Compile Include="Shared\Models\UserSessionImpl.cs" />
+    <Compile Include="Shared\MultipleLanguageController.cs" />
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
     <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />

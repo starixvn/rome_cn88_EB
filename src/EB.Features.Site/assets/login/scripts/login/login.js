@@ -72,6 +72,13 @@ window.onload = function () {
     $("#language-ddl li").on("click touchend", function () {
         changeLanguage($(this).find(".flag").data("language-code"));
     });
+
+    var currentLanguage = $("#currentLanguage").val();
+    var $flag = $("#flag");
+    $flag.removeClass("flag-cn");
+    $flag.removeClass("flag-tw");
+    $flag.removeClass("flag-en");
+    $flag.addClass($(".flag[data-language-code='" + currentLanguage + "']").data("flag"));
 };
 
 function changeLanguage(lang) {
@@ -80,7 +87,6 @@ function changeLanguage(lang) {
         url: $("#changeLanguagePath").val(),
         data: { languageCode: lang },
         success: function (result) {
-            debugger;
             if (result !== undefined) {
                 // Remove www so that subdomain can override LANGUAGE value
                 var domain = window.location.hostname.replace(/([a-zA-Z0-9]+.)/, '').replace("www.", '');

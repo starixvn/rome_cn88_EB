@@ -6,11 +6,8 @@
 
     public class ChangeLanguageCommand : IRequest<string>
     {
-        private readonly UserSession userSession;
-
-        public ChangeLanguageCommand(UserSession userSession, string languageCode)
+        public ChangeLanguageCommand(string languageCode)
         {
-            this.userSession = userSession;
             LanguageCode = languageCode;
         }
 
@@ -24,7 +21,7 @@
                 return;
             }
 
-            userSession.Language = languageCode;
+            UserSessionImpl.Current.Language = languageCode;
         }
     }
 }

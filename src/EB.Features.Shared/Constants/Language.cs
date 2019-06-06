@@ -16,5 +16,12 @@
             [ChineseTraditional] = "CT",
             [English] = "E"
         };
+
+        public static readonly Dictionary<string, string> CodeNames = new Dictionary<string, string>
+        {
+            [NewChineseSimplified] = "简体",
+            [ChineseTraditional] = "繁體",
+            [English] = "English"
+        };
     }
 }

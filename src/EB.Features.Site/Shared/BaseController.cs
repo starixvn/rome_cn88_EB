@@ -62,6 +62,6 @@ namespace EB.Features.Site.Shared
         }
 
         private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)
-            => File(viewModel.Content, viewModel.ContentType, viewModel.Name);
+        => File(viewModel.Content, viewModel.ContentType, viewModel.Name);
     }
 }

@@ -6,7 +6,7 @@
       "scripts/libs/bootstrap/dropdown.js",
       "scripts/libs/storage/store-with-json2.min.js",
       "scripts/libs/cryptojs/CryptoJS.js",
-      "js/libs/jquery/jquery.cookie.js",
+      "scripts/libs/jquery/jquery.cookie.js",
       "scripts/login/login.js"
     ]
   },

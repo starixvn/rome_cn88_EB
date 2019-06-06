@@ -1140,6 +1140,7 @@
     <Content Include="Configurations\connectionStrings.config" />
     <Content Include="Login\Views\InternalLogin.cshtml" />
     <Content Include="Login\Views\UnderMaintenance.cshtml" />
+    <Content Include="deployment.ignore" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

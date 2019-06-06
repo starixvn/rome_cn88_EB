@@ -1,10 +1,11 @@
 ﻿@using EB.Features.Shared.Extensions;
 @using EB.Features.Shared.Configuration;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
+@using EB.Features.Reports;
 @model HouseWinLossReportViewModel
 @{
     Layout = "~/Shared/Views/_Layout.cshtml";
-    ViewBag.Title = "Wager Report";
+    ViewBag.Title = ReportResources.WagerReportTitle;
 }
 @section Styles {
     @StaticResources.RenderStyles("~/assets/report/bundles/reports")
@@ -29,17 +30,17 @@
              data-maxdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MaxDate.ToShortDate()"
              data-fromdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.FromDate.ToShortDate()"
              data-todate="@Model.ReportFilterViewModel.DateRangePickerViewModel.ToDate.ToShortDate()">
-            <label>Month</label>
+            <label>@ReportResources.Month</label>
             <div id="monPickr1">
             </div>
         </div>
         <div class="form-group js-month-group">
-            <label>From</label>
+            <label>@ReportResources.From</label>
             <div id="fromDay1">
             </div>
         </div>
         <div class="form-group js-month-group">
-            <label>To</label>
+            <label>@ReportResources.To</label>
             <div id="toDay1">
             </div>
         </div>
@@ -49,7 +50,7 @@
         <div class="form-group">
             <label class="isTest">
                 @Html.CheckBox("IsTest", Model.ReportFilterViewModel.IsTest)
-                Exclude Test Data
+                @ReportResources.ExcludeTestData
             </label>
         </div>
         <div class="form-group">
@@ -82,17 +83,17 @@
         <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
                 <tr>
-                    <th class="text-left header bettype"> Headline</th>
-                    <th class="text-right header"> Wagers</th>
-                    <th class="text-right header"> Stake</th>
-                    <th class="text-right header"> Valid Stake</th>
-                    <th class="text-right header"> Member Income</th>
-                    <th class="text-right header"> SMA Comm</th>
-                    <th class="text-right header"> House WL</th>
-                    <th class="text-right header"> House Comm</th>
-                    <th class="text-right header"> House Income</th>
-                    <th class="text-right header"> Headline Stock</th>
-                    <th class="text-right header"> Headline Stock %</th>
+                    <th class="text-left header bettype">@ReportResources.Headline</th>
+                    <th class="text-right header">@ReportResources.Wagers</th>
+                    <th class="text-right header">@ReportResources.Stake</th>
+                    <th class="text-right header">@ReportResources.ValidStake</th>
+                    <th class="text-right header">@ReportResources.MemberIncome</th>
+                    <th class="text-right header">@ReportResources.SuperComm</th>
+                    <th class="text-right header">@ReportResources.HouseWL</th>
+                    <th class="text-right header">@ReportResources.HouseComm</th>
+                    <th class="text-right header">@ReportResources.HouseIncome</th>
+                    <th class="text-right header">@ReportResources.HeadlineStock</th>
+                    <th class="text-right header">@ReportResources.HeadlineStockPercent</th>
                 </tr>
             </thead>
             @foreach (var row in Model.ReportData.Matches)
@@ -141,7 +142,7 @@
                         <td id="no-data-row" colspan="11"
                             data-isNoInfo="true"
                             align="center">
-                            No Information Is Available
+                            @AppResources.NoInformationIsAvailable
                         </td>
                     </tr>
                 </tbody>
@@ -166,7 +167,7 @@
 @helper RenderDatePicker()
 {
     <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
-        <label>Date</label>
+        <label>@ReportResources.Date</label>
         <div class="control date">
             <div id="date-container"
                  class="input-group date fromdate"

@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using EB.Features.Reports;
     using EB.Features.Reports.Constants;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
@@ -10,7 +11,6 @@
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
     using ONEbook.SpreadSheets;
-    using Resources;
     using static ONEbook.SpreadSheets.Column;
 
     public class HouseWinLossExcelHandler : ExcelBaseHandler, IRequestHandler<HouseWinLossExcelQuery, ExcelFileViewModel>
@@ -28,7 +28,6 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
                 IsHistoricReport = message.IsHistoricReport,

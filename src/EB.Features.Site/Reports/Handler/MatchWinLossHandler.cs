@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using EB.Features.Reports.Params;
-using EB.Features.Reports.Services;
-using EB.Features.Shared.Services;
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
+    using System.Linq;
+    using EB.Features.Reports.Params;
+    using EB.Features.Reports.Services;
+    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;

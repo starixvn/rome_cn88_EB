@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace EB.Features.Shared.Model
+﻿namespace EB.Features.Shared.Model
 {
+    using System;
+
     public class BetTypeGroup
     {
         public BetTypeGroup()

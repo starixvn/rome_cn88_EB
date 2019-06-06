@@ -1,13 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using EB.Features.Shared.Criteria;
-using EB.Features.Shared.DataAccesses;
-using EB.Features.Shared.Model;
-using Fanex.Caching;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using EB.Features.Shared.Criteria;
+    using EB.Features.Shared.DataAccesses;
+    using EB.Features.Shared.Model;
+    using Fanex.Caching;
+
     public interface SportGroupService
     {
         IEnumerable<SportGroup> GetSportGroups();

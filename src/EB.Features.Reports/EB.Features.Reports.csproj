@@ -127,6 +127,11 @@
     <Compile Include="Params\HouseWinLossParam.cs" />
     <Compile Include="Params\MatchWinLossParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Services\HouseWinLossService.cs" />
     <Compile Include="Services\MatchWinLossService.cs" />
     <Compile Include="Services\HouseWinLossWorkbook.cs" />
@@ -146,6 +151,12 @@
       <Project>{e31ebbb6-c646-4491-ac72-ff249afecf16}</Project>
       <Name>EB.Features.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ReportResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

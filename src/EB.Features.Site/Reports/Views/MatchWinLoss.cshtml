@@ -1,9 +1,10 @@
 ﻿@using EB.Features.Reports.Extension;
-
+@using EB.Features.Reports;
+     
 @model MatchWinLossReportViewModel
 @{
     Layout = "~/Shared/Views/_Layout.cshtml";
-    ViewBag.Title = "Match Win Loss Report";
+    ViewBag.Title = ReportResources.MatchWinLossReportTitle;
 }
 @section Styles {
     @StaticResources.RenderStyles("~/assets/report/bundles/reports")

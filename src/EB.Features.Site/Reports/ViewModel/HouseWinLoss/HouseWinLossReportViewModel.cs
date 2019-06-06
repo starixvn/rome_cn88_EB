@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using EB.Features.Reports;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
@@ -12,7 +13,6 @@
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Shared.ViewModels;
     using EB.Features.Site.Shared.ViewModels.Components;
-    using Resources;
 
     public class HouseWinLossReportViewModel
     {

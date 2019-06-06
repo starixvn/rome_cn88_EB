@@ -1,11 +1,11 @@
-﻿using System;
-using EB.Features.Shared.Criteria;
-using EB.Features.Shared.Model;
-using Fanex.Caching;
-using Fanex.Data.Repository;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
+    using System;
+    using EB.Features.Shared.Criteria;
+    using EB.Features.Shared.Model;
+    using Fanex.Caching;
+    using Fanex.Data.Repository;
+
     public interface ReportDateService
     {
         BalanceUpDayAndMoveBetsDay GetBalanceUpDayAndMoveBetsDay();

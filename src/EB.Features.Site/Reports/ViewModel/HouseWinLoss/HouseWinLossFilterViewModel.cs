@@ -1,11 +1,6 @@
 ﻿namespace EB.Features.Site.Reports.ViewModel
 {
-    using EB.Features.Site.Shared.ViewModels;
     using EB.Features.Site.Shared.ViewModels.Components;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Web;
 
     public class HouseWinLossFilterViewModel
     {

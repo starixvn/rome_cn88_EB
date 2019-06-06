@@ -1,10 +1,10 @@
-﻿using System;
-using System.Threading;
-using Fanex.Caching;
-using Fanex.RemotingRef;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
+    using System;
+    using System.Threading;
+    using Fanex.Caching;
+    using Fanex.RemotingRef;
+
     public interface CacheRefService
     {
         string GetSportName(int sportTypeId);

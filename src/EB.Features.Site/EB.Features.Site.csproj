@@ -777,11 +777,6 @@
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\ReportResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ReportResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -1093,7 +1088,7 @@
     <Content Include="assets\login\styles\vendors\bootstrap\_utilities.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_wells.scss" />
-    <Content Include="Home\Views\index2.cshtml" />
+    <Content Include="Home\Views\index.cshtml" />
     <Content Include="assets\common\bundleconfig.json" />
     <Content Include="assets\common\compilerconfig.json" />
     <Content Include="assets\main\scripts\auth\kickout.js.map" />
@@ -1182,12 +1177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\ReportResources.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

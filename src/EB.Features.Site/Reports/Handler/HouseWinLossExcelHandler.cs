@@ -111,7 +111,7 @@
 
         private string GetExcelFileName(HouseWinLossExcelQuery param)
             => param.IsHistoricReport ? 
-            $"Wager Report - {param.FromDate.ToShortDate()}" : 
+            $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()}" : 
             $"Wager Report - {param.Date.ToShortDate()}";
     }
 }

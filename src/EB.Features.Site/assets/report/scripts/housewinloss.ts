@@ -64,10 +64,12 @@ class HouseWinLossReport {
 
         this.$("#ViewHistoryReport").click(() => {
             this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
+            this.$("#tab-main-content").remove();
             this.switchCalendarType();
         });
         this.$("#BackToCurrentReport").click(() => {
             this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
+            this.$("#tab-main-content").remove();
             this.switchCalendarType();
         });
         this.initMonthlyCalendar();
@@ -98,7 +100,7 @@ class HouseWinLossReport {
             this.$("#GroupBackToCurrent").css("display", "none");
             this.$('.from-date-box').css('display', 'inline-block');
             this.$('.js-month-group').css('display', 'none');
-        }
+        }       
     }
 
     initMonthlyCalendar = () => {

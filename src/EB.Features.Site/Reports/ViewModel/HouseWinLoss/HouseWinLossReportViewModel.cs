@@ -21,7 +21,7 @@
         public HouseWinLossReportViewModel(
             HouseWinLossViewModel reportData,
             HouseWinLossQuery query,
-            DateTime balanceUpDate,
+            DateTime moveBetDate,
             IEnumerable<SelectListItemExt> sportGroups,
             IEnumerable<SelectListItemExt> betTypes,
             IEnumerable<SelectListItemExt> allBetTypes)
@@ -48,9 +48,9 @@
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
             var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
-            var fromDate = query.FromDate < balanceUpDate ? query.FromDate : balanceUpDate.FirstDateOfMonth();
-            var toDate = query.ToDate < balanceUpDate ? query.ToDate : balanceUpDate;
-            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, balanceUpDate, fromDate, toDate);
+            var fromDate = query.FromDate < moveBetDate ? query.FromDate : moveBetDate.FirstDateOfMonth();
+            var toDate = query.ToDate < moveBetDate ? query.ToDate : moveBetDate;
+            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, moveBetDate, fromDate, toDate);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,
@@ -63,13 +63,13 @@
                 allBetTypesSelectionViewModel);
             ReportData = reportData;
             Query = query;
-            BalanceUpDate = balanceUpDate;
+            MoveBetDate = moveBetDate;
 
             FromDate = Query.IsHistoricReport ? Query.FromDate : Query.Date;
             ToDate = Query.IsHistoricReport ? Query.ToDate : Query.Date;
         }
 
-        private DateTime BalanceUpDate { get; }
+        private DateTime MoveBetDate { get; }
 
         public HouseWinLossQuery Query { get; }
 
@@ -81,7 +81,7 @@
 
         public DateTime ToDate { get; }
 
-        public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, BalanceUpDate.ToShortDate());
+        public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, MoveBetDate.ToShortDate());
 
         public string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 

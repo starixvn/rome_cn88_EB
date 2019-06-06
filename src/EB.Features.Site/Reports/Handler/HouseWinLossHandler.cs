@@ -49,7 +49,7 @@
             return new HouseWinLossReportViewModel(
                 reportData,
                 message,
-                reportDateService.GetBalanceUpDay(),
+                reportDateService.GetMoveBetsDay(),
                 BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0));

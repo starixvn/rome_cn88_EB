@@ -1,10 +1,13 @@
 ﻿namespace EB.Features.Site.Main.Handlers
 {
     using EB.Features.Shared.Constants;
+    using EB.Features.Site.Main.ViewModel;
     using MediatR;
     using Requests;
 
-    public class LanguageHandler : IRequestHandler<ChangeLanguageCommand, string>
+    public class LanguageHandler :
+        IRequestHandler<ChangeLanguageCommand, string>,
+        IRequestHandler<AllLanguagesQuery, LanguageViewModel>
     {
         public string Handle(ChangeLanguageCommand message)
         {
@@ -14,6 +17,9 @@
 
             return languageCode;
         }
+
+        public LanguageViewModel Handle(AllLanguagesQuery message)
+            => new LanguageViewModel(Language.CodeNames, Standardize(message.LanguageCode));
 
         private string Standardize(string languageCode)
         {

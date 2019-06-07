@@ -1,9 +1,14 @@
-﻿using System.Net;
+﻿using System.Globalization;
+using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using System.Web.Routing;
+using EB.Features.Shared.Constants;
 using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
 using EB.Features.Site.Reports.ViewModel;
+using EB.Features.Site.Shared.Models;
 using Fanex.NAP.Core.Web.Attribute;
 using MediatR;
 
@@ -14,6 +19,7 @@ namespace EB.Features.Site.Shared
     {
         protected const string NoInformationPageViewPath = "~/Shared/Views/NoInformation.cshtml";
         private const string InvalidExcelFileName = "Invalid";
+        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(Language.Default);
 
         protected readonly IMediator mediator;
 
@@ -59,6 +65,26 @@ namespace EB.Features.Site.Shared
             }
 
             return GetExcelContent(new ExcelFileViewModel(InvalidExcelFileName, new byte[] { }));
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            var cultureName = UserSessionImpl.Current.Language;
+
+            if (string.IsNullOrEmpty(cultureName))
+            {
+                cultureName = Language.Default;
+                UserSessionImpl.Current.Language = cultureName;
+            }
+
+            // Modify current thread's cultures
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+
+            Thread.CurrentThread.CurrentCulture.DateTimeFormat = defaultCulture.DateTimeFormat;
+            Thread.CurrentThread.CurrentCulture.NumberFormat = defaultCulture.NumberFormat;
+
+            base.Initialize(requestContext);
         }
 
         private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)

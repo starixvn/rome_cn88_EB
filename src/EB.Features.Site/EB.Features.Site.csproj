@@ -788,8 +788,10 @@
     <Compile Include="Login\ViewModel\UnderMaintenanceModel.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
     <Compile Include="Main\LanguageController.cs" />
+    <Compile Include="Main\Requests\AllLanguagesQuery.cs" />
     <Compile Include="Main\Requests\ChangeLanguageCommand.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
+    <Compile Include="Main\ViewModel\LanguageViewModel.cs" />
     <Compile Include="Reports\ExcelBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossExcelHandler.cs" />
     <Compile Include="Reports\Handler\MatchWinLossExcelHandler.cs" />
@@ -1143,6 +1145,7 @@
     <Content Include="Login\Views\InternalLogin.cshtml" />
     <Content Include="Login\Views\UnderMaintenance.cshtml" />
     <Content Include="deployment.ignore" />
+    <Content Include="Main\Views\LanguageList.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

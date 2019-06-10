@@ -58,6 +58,8 @@
 
         public string LeagueName { get; set; }
 
+        public string LeagueNameByEnglish { get; set; }
+
         public string EventInfo { get; set; }
 
         public MatchWinLossModel Add(MatchWinLossModel match)

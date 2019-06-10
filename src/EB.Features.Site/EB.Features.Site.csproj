@@ -983,7 +983,6 @@
     <Content Include="assets\common\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\common\styles\vendors\bootstrap\_wells.scss" />
     <Content Include="assets\common\styles\vendors\toastr\toastr.scss" />
-    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
     <Content Include="assets\login\styles\abstracts\_mixins.scss" />
     <Content Include="assets\login\styles\abstracts\_variables-event.scss" />
     <Content Include="assets\login\styles\abstracts\_variables-event2.scss" />
@@ -1146,6 +1145,7 @@
     <Content Include="Login\Views\UnderMaintenance.cshtml" />
     <Content Include="deployment.ignore" />
     <Content Include="Main\Views\LanguageList.cshtml" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -39,7 +39,7 @@
             var reportData = dynamicRepository.Fetch<MatchWinLossModel>(new MatchWinLossCriteria(param));
             BuildViewModel(reportData);
 
-            return new MatchWinLossViewModel(reportData);
+            return new MatchWinLossViewModel(reportData.OrderBy(i => $"{i.LeagueNameByEnglish}_{i.MatchId}"));
         }
 
         private void BuildViewModel(IEnumerable<MatchWinLossModel> reportData)
@@ -58,6 +58,7 @@
                         ? string.Empty
                         : $"{cacheRefService.GetTeamName(row.HomeId)} v {cacheRefService.GetTeamName(row.AwayId)}";
                     row.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
+                    row.LeagueNameByEnglish = cacheRefService.GetLeagueName(row.LeagueId, Language.English);
                 }
             }
         }

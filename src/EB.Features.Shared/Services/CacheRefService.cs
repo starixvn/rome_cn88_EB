@@ -11,6 +11,8 @@
 
         string GetBetTypeName(int betTypeId);
 
+        string GetLeagueName(int leagueId, string languageCode);
+
         string GetLeagueName(int leagueId);
 
         string GetTeamName(int teamId);
@@ -38,11 +40,14 @@
         public string GetSportName(int sportTypeId)
             => remotingRefService.GetSportName(sportTypeId.ToString(), LanguageCode);
 
-        public string GetLeagueName(int leagueId)
+        public string GetLeagueName(int leagueId, string languageCode)
             => ConfiguredCacheService.GetOrSet(
-                $"{LeagueNameCacheKey}.{LanguageCode}.{leagueId}",
-                () => remotingRefService.GetLeagueName(leagueId.ToString(), LanguageCode),
+                $"{LeagueNameCacheKey}.{LanguageCode}.{leagueId}{languageCode}",
+                () => remotingRefService.GetLeagueName(leagueId.ToString(), languageCode),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+
+        public string GetLeagueName(int leagueId)
+            => GetLeagueName(leagueId, LanguageCode);
 
         public string GetTeamName(int teamId)
             => ConfiguredCacheService.GetOrSet(

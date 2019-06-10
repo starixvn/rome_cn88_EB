@@ -91,7 +91,7 @@
             {
                 ["ReportType"] = Query.ReportType == 0 ? 1 : 2,
                 ["DisplayMode"] = 1,
-                ["IsOwner"] = true,
+                ["IsOwner"] = false,
                 ["CustLevelId"] = 4,
                 ["FromDate"] = FromDate,
                 ["ToDate"] = ToDate,

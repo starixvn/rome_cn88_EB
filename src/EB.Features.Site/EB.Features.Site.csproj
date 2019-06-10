@@ -745,6 +745,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <TypeScriptCompile Include="assets\login\scripts\login\href-handler.ts" />
     <TypeScriptCompile Include="assets\main\scripts\auth\kickout.ts" />
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />

@@ -23,10 +23,7 @@
 
         byte[] ExportToBytes();
 
-        MatchWinLossWorkbook SetData(
-            IEnumerable<MatchWinLossModel> reportData,
-            MatchWinLossModel systemParlay,
-            MatchWinLossModel grandTotal);
+        MatchWinLossWorkbook SetData(MatchWinLossViewModel viewModel);
 
         MatchWinLossWorkbook SetRowMappers(
             Mapper<MatchWinLossModel> betTypeRowMapper,
@@ -41,13 +38,7 @@
 
         private int currentRowIndex;
 
-        internal IEnumerable<MatchWinLossModel> NoParlayMatchWinLossDetail { get; set; }
-
-        internal MatchWinLossModel NoParlayWinLossTotal { get; set; }
-
-        internal MatchWinLossModel SystemParlay { get; set; }
-
-        internal MatchWinLossModel GrandTotal { get; set; }
+        internal MatchWinLossViewModel ViewModel { get; set; }
 
         internal Mapper<MatchWinLossModel> BetTypeRowMapper { get; set; }
 
@@ -70,14 +61,9 @@
 
         internal Row GrandTotalRowTemplate { get; set; }
 
-        public MatchWinLossWorkbook SetData(
-            IEnumerable<MatchWinLossModel> reportData,
-            MatchWinLossModel systemParlay,
-            MatchWinLossModel grandTotal)
+        public MatchWinLossWorkbook SetData(MatchWinLossViewModel viewModel)
         {
-            NoParlayMatchWinLossDetail = reportData;
-            SystemParlay = systemParlay;
-            GrandTotal = grandTotal;
+            this.ViewModel = viewModel;
 
             return this;
         }
@@ -136,7 +122,7 @@
         {
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(SystemParlayRowTemplate);
-            FillCells(row, SystemParlay, BetTypeRowMapper.Mappings);
+            FillCells(row, ViewModel.Parlay, BetTypeRowMapper.Mappings);
         }
 
         protected override Sheet LoadTemplateSheet()
@@ -194,8 +180,8 @@
 
             RemoveTemplateRows(sheet);
 
-            var hasData = (NoParlayMatchWinLossDetail != null && NoParlayMatchWinLossDetail.Any())
-                || SystemParlay != null;
+            var hasData = (ViewModel != null && ViewModel.NormalMatches.Any())
+                || ViewModel.Parlay != null;
 
             if (hasData)
             {
@@ -219,17 +205,31 @@
 
             var row = sheet.GetRow(currentRowIndex++);
             row.CopyCellsFrom(GrandTotalRowTemplate);
-            FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
+            FillCells(row, ViewModel.Total, GrandTotalRowMapper.Mappings);
 
-            foreach (var data in NoParlayMatchWinLossDetail.GroupBy(i => i.MatchId))
+            foreach (var data in ViewModel.NormalMatches.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
             {
                 var isEvenRow = false;
                 var firstRowOfGroup = data.ToList();
+                var matchId = firstRowOfGroup.First().MatchId;
+                var leagueId = firstRowOfGroup.First().LeagueId;
                 var subTotal = firstRowOfGroup.Sum();
 
                 FillMatchTitle(sheet, currentRowIndex++, firstRowOfGroup.First());
 
-                foreach (var betType in data)
+                foreach (var betType in ViewModel.NormalMatchesHasMajorBetType.Where(i => i.MatchId == matchId))
+                {
+                    FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
+                    isEvenRow = !isEvenRow;
+                }
+
+                foreach (var betType in ViewModel.NormalMatchesHasMinorBetType.Where(i => i.MatchId == matchId))
+                {
+                    FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
+                    isEvenRow = !isEvenRow;
+                }
+
+                foreach (var betType in ViewModel.NormalMatchesHasOutright.Where(i => i.LeagueId == leagueId))
                 {
                     FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
                     isEvenRow = !isEvenRow;
@@ -238,7 +238,7 @@
                 FillMatchTotal(sheet, currentRowIndex++, subTotal);
             }
 
-            if (SystemParlay != null)
+            if (ViewModel.Parlay != null)
             {
                 FillSystemParlayWinLossTitle(sheet, currentRowIndex++);
                 FillSystemParlayWinLoss(sheet, currentRowIndex++);
@@ -259,7 +259,7 @@
 
             var row = sheet.GetRow(currentRowIndex);
             row.CopyCellsFrom(GrandTotalRowTemplate);
-            FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
+            FillCells(row, ViewModel.Total, GrandTotalRowMapper.Mappings);
         }
     }
 }

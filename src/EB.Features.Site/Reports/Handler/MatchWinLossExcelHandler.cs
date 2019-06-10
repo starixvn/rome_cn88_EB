@@ -5,6 +5,7 @@
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
+    using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
     using EB.Features.Site.Reports.Request;
@@ -35,10 +36,9 @@
                 IsLive = message.UserSelectedLiveStatusId,
                 SportTypeGroup = message.UserSelectedSportGroupId,
                 WinLossDate = message.Date
-            });            
-
+            });
             var fileContent = workbook
-                .SetData(reportData.NormalMatches, reportData.Parlay, reportData.Total)
+                .SetData(reportData)
                 .SetRowMappers(
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.NormalRow),
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.SubTotal),

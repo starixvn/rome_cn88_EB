@@ -39,7 +39,7 @@
             var reportData = dynamicRepository.Fetch<MatchWinLossModel>(new MatchWinLossCriteria(param));
             BuildViewModel(reportData);
 
-            return new MatchWinLossViewModel(reportData.OrderBy(i => $"{i.LeagueId}_{i.MatchId}_{i.BetTypeGroup}"));
+            return new MatchWinLossViewModel(reportData);
         }
 
         private void BuildViewModel(IEnumerable<MatchWinLossModel> reportData)

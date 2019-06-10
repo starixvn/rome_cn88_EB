@@ -11,25 +11,29 @@
         public MatchWinLossViewModel(IEnumerable<MatchWinLossModel> matches)
         {
             Total = matches.Sum();
-            MatchesHasNoParlay = matches.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
-            NoParlayMatchesHasMajorBetType = MatchesHasNoParlay
+            NormalMatches = matches.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
+            NormalMatchesHasMajorBetType = NormalMatches
                 .Where(i => BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup))
                 .OrderBy(i => i.BetTypeGroup);
-            NoParlayMatchesHasMinorBetType = MatchesHasNoParlay
-                .Where(i => !BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup));
-            Parlay = matches.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
+            NormalMatchesHasMinorBetType = NormalMatches
+                .Where(i => !BetTypeIdConstants.MajorBetType.Contains(i.BetTypeGroup) && i.BetTypeGroup != BetTypeIdConstants.Outright);
+            NormalMatchesHasOutright = matches.Where(i => i.BetTypeGroup == BetTypeIdConstants.Outright);
+
+            Parlay = matches.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);            
         }
 
-        public IEnumerable<MatchWinLossModel> MatchesHasNoParlay { get; }
+        public IEnumerable<MatchWinLossModel> NormalMatches { get; }
 
-        public IEnumerable<MatchWinLossModel> NoParlayMatchesHasMajorBetType { get; }
+        public IEnumerable<MatchWinLossModel> NormalMatchesHasMajorBetType { get; }
 
-        public IEnumerable<MatchWinLossModel> NoParlayMatchesHasMinorBetType { get; }
+        public IEnumerable<MatchWinLossModel> NormalMatchesHasMinorBetType { get; }
+
+        public IEnumerable<MatchWinLossModel> NormalMatchesHasOutright { get; }
 
         public MatchWinLossModel Parlay { get; }
 
         public MatchWinLossModel Total { get; }
 
-        public bool IsShowTotalRow => MatchesHasNoParlay.Any() || Parlay != null;
+        public bool IsShowTotalRow => NormalMatches.Any() || Parlay != null;
     }
 }

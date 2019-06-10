@@ -38,7 +38,7 @@
             });            
 
             var fileContent = workbook
-                .SetData(reportData.MatchesHasNoParlay, reportData.Parlay, reportData.Total)
+                .SetData(reportData.NormalMatches, reportData.Parlay, reportData.Total)
                 .SetRowMappers(
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.NormalRow),
                     GetRowMapper(reportData.Total.HeadlineStock, RowTypeConstant.SubTotal),

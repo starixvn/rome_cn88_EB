@@ -48,7 +48,7 @@
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
             var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
-            var fromDate = query.FromDate < moveBetDate ? query.FromDate : moveBetDate.FirstDateOfMonth();
+            var fromDate = query.FromDate <= moveBetDate ? query.FromDate : moveBetDate.FirstDateOfMonth();
             var toDate = query.ToDate < moveBetDate ? query.ToDate : moveBetDate;
             var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, moveBetDate, fromDate, toDate);
 

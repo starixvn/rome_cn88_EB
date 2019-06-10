@@ -1146,6 +1146,10 @@
     <Content Include="deployment.ignore" />
     <Content Include="Main\Views\LanguageList.cshtml" />
     <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
+    <Content Include="IbcKeys\ibckey.snk" />
+    <Content Include="IbcKeys\ibckeydec.snk" />
+    <Content Include="IbcKeys\ibcpkey.snk" />
+    <Content Include="IbcKeys\Web.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

@@ -279,11 +279,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml" />
     <Content Include="App_Data\SPNames\Main\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml" />
     <Content Include="App_Data\SPNames\Local\DB042.bodb02.xml" />
-    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.bodbAdminNet.xml" />
     <Content Include="App_Data\SPNames\Local\DBAGE.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Main\DBCust.CustDB.xml" />
     <Content Include="assets\common\bundles\common\common.css" />
     <Content Include="assets\common\bundles\common\common.js" />
     <Content Include="assets\common\bundles\common\common.min.css">

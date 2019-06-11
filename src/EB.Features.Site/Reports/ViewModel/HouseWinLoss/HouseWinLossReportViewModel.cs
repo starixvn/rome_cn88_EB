@@ -89,7 +89,7 @@
         {
             var param = new Dictionary<string, object>
             {
-                ["ReportType"] = Query.ReportType == 0 ? 1 : 2,
+                ["ReportType"] = Query.UserSelectedTicketStatusId == TicketStatusConstants.Settled ? 1 : 2,
                 ["DisplayMode"] = 1,
                 ["IsOwner"] = false,
                 ["CustLevelId"] = 4,

@@ -20,8 +20,6 @@
             IsTest = true;
         }
 
-        public int ReportType { get; set; }
-
         public int UserSelectedSportGroupId { get; set; }
 
         public int UserSelectedBetTypeId { get; set; }

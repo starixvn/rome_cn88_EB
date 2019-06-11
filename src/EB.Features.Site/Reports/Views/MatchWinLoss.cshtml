@@ -99,12 +99,19 @@
                     </tr>
                 }
 
-                if (Model.ReportData.NormalMatchesHasMinorBetType.Any(m => m.MatchId == matchId)
-                    || Model.ReportData.NormalMatchesHasOutright.Any(m => m.LeagueId == leagueId))
+                foreach (var betType in Model.ReportData.NormalMatchesHasOutright.Where(m => m.LeagueId == leagueId))
                 {
-                    var minorMatches = Model.ReportData.NormalMatchesHasMinorBetType.Where(m => m.MatchId == matchId);
-                    var outrightMatches = Model.ReportData.NormalMatchesHasOutright.Where(m => m.LeagueId == leagueId);
-                    var otherGroup = minorMatches.Concat(outrightMatches).Sum();
+                    <tr>
+                        <td class="text-left">@betType.BetTypeGroupName</td>
+                        @RenderRow(betType)
+
+                        @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                    </tr>
+                }
+
+                if (Model.ReportData.NormalMatchesHasMinorBetType.Any(m => m.MatchId == matchId))
+                {
+                    var otherGroup = Model.ReportData.NormalMatchesHasMinorBetType.Where(m => m.MatchId == matchId).Sum();
                     <tr class="group" data-leagueid="@($"{leagueId}_{matchId}")">
                         <td class="col-event-span-desktop text-left">
                             <span class="group-name-wrapper">
@@ -118,16 +125,6 @@
                     </tr>
 
                     foreach (var betType in Model.ReportData.NormalMatchesHasMinorBetType.Where(m => m.MatchId == matchId))
-                    {
-                        <tr class="childrow-@($"{leagueId}_{matchId}") hide">
-                            <td class="text-left child">@betType.BetTypeGroupName</td>
-                            @RenderRow(betType)
-
-                            @HtmlHelpers.RenderStockPercentCell(betType.HeadlineStock, Model.ReportData.Total.HeadlineStock)
-                        </tr>
-                    }
-
-                    foreach (var betType in Model.ReportData.NormalMatchesHasOutright.Where(m => m.LeagueId == leagueId))
                     {
                         <tr class="childrow-@($"{leagueId}_{matchId}") hide">
                             <td class="text-left child">@betType.BetTypeGroupName</td>

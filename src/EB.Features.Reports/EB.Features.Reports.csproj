@@ -157,6 +157,8 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportResources.zh-Hans.resx" />
+    <EmbeddedResource Include="ReportResources.zh-TW.resx" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

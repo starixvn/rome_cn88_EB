@@ -117,12 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangePassword" xml:space="preserve">
-    <value>Change Password</value>
-  </data>
-  <data name="ChangeSecurityCode" xml:space="preserve">
-    <value>Change Security Code</value>
-  </data>
   <data name="Invalidinput" xml:space="preserve">
     <value>Invalid input</value>
   </data>

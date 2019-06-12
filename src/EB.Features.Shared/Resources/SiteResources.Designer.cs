@@ -61,24 +61,6 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Password.
-        /// </summary>
-        public static string ChangePassword {
-            get {
-                return ResourceManager.GetString("ChangePassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Change Security Code.
-        /// </summary>
-        public static string ChangeSecurityCode {
-            get {
-                return ResourceManager.GetString("ChangeSecurityCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Close.
         /// </summary>
         public static string Close {

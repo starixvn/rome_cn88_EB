@@ -132,4 +132,76 @@
   <data name="Headline" xml:space="preserve">
     <value>股东</value>
   </data>
+  <data name="AllBetTypes" xml:space="preserve">
+    <value>所有玩法</value>
+  </data>
+  <data name="AllMarkets" xml:space="preserve">
+    <value>所有盘口类型</value>
+  </data>
+  <data name="AllSports" xml:space="preserve">
+    <value>所有球类</value>
+  </data>
+  <data name="ExportToExcel" xml:space="preserve">
+    <value>导出Excel</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>从</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="NoInformationIsAvailable" xml:space="preserve">
+    <value>无资料</value>
+  </data>
+  <data name="of" xml:space="preserve">
+    <value>之</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>页</value>
+  </data>
+  <data name="Pager_DisplayItems" xml:space="preserve">
+    <value>显示{from}到{to}，共{total}笔</value>
+  </data>
+  <data name="Parlay" xml:space="preserve">
+    <value>体育博彩混合过关</value>
+  </data>
+  <data name="SystemErrorMessage" xml:space="preserve">
+    <value>不好意思…目前系统出错，请联系管理员！</value>
+  </data>
+  <data name="Settled" xml:space="preserve">
+    <value>有结果</value>
+  </data>
+  <data name="UnSettled" xml:space="preserve">
+    <value>未有结果</value>
+  </data>
+  <data name="BetType" xml:space="preserve">
+    <value>玩法</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>类别</value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>其他</value>
+  </data>
+  <data name="VirtualSports" xml:space="preserve">
+    <value>虚拟运动</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>至</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="Sport" xml:space="preserve">
+    <value>球类</value>
+  </data>
+  <data name="Market" xml:space="preserve">
+    <value>盘口类型</value>
+  </data>
+  <data name="PreMatch" xml:space="preserve">
+    <value>赛前</value>
+  </data>
+  <data name="InPlay" xml:space="preserve">
+    <value>滚球</value>
+  </data>
 </root>

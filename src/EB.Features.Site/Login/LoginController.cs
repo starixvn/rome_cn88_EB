@@ -7,8 +7,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using EB.Features.Main.Services;
+using EB.Features.Shared.Constants;
 using EB.Features.Shared.Resources;
 using EB.Features.Site.Shared;
+using EB.Features.Site.Shared.Models;
 using Fanex.Common.Extensions;
 using Fanex.NAP.Core.Configuration;
 using Fanex.NAP.Core.Models;
@@ -66,7 +68,7 @@ namespace EB.Features.Site
 
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult Index(string username, string password, string returnUrl)
+        public ActionResult Index(string username, string password, string hidLanguage, string returnUrl)
         {
             if (!username.IsNullOrTrimEmpty() && !password.IsNullOrTrimEmpty())
             {
@@ -83,6 +85,7 @@ namespace EB.Features.Site
                             CheckIn(user);
                             CreateUserMenu(user);
                             CreateAuthInfo(user);
+                            AssignSettingLanguage(hidLanguage);
 
                             var redirectUrl = string.IsNullOrEmpty(returnUrl) ||
                                               returnUrl.IndexOf("Logout", StringComparison.CurrentCultureIgnoreCase) >=
@@ -191,6 +194,13 @@ namespace EB.Features.Site
                 NapSettings.Settings.SiteId,
                 NapSettings.Settings.Environment,
                 true);
+        }
+
+        private static void AssignSettingLanguage(string language)
+        {
+            var languageCode = Language.Standardize(language);
+
+            UserSessionImpl.Current.Language = languageCode;
         }
 
         private void CheckIn(User user)

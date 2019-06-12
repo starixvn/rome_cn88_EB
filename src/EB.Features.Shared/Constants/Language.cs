@@ -23,5 +23,11 @@
             [ChineseTraditional] = "繁體",
             [English] = "English"
         };
+
+        public static string Standardize(string languageCode)
+            => IsValidLanguage(languageCode) ? languageCode : Default;
+
+        public static bool IsValidLanguage(string languageCode)
+            => !string.IsNullOrWhiteSpace(languageCode) && CodeKeys.ContainsKey(languageCode);
     }
 }

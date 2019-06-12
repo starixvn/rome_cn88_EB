@@ -11,7 +11,7 @@
     {
         public string Handle(ChangeLanguageCommand message)
         {
-            var languageCode = Standardize(message.LanguageCode);
+            var languageCode = Language.Standardize(message.LanguageCode);
 
             message.ChangeLanguage(languageCode);
 
@@ -19,17 +19,6 @@
         }
 
         public LanguageViewModel Handle(AllLanguagesQuery message)
-            => new LanguageViewModel(Language.CodeNames, Standardize(message.LanguageCode));
-
-        private string Standardize(string languageCode)
-        {
-            if (string.IsNullOrWhiteSpace(languageCode)
-              || !Language.CodeKeys.ContainsKey(languageCode))
-            {
-                languageCode = Language.Default;
-            }
-
-            return languageCode;
-        }
+            => new LanguageViewModel(Language.CodeNames, Language.Standardize(message.LanguageCode));
     }
 }

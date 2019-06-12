@@ -121,7 +121,7 @@
         private static string GetIP()
         {
             var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            return ip.Equals("::1") ? "127.0.0.1" : (string.IsNullOrEmpty(ip) ? "127.0.0.1" : ip.Split(',')[0]);
+            return ip.Equals("::1") ? "127.0.0.1" : ip.Split(',')[0];
         }
 
         public bool IsAndroidNativeBrowser(string userAgent) => _androidNativeBrowserCheck.IsMatch(userAgent);

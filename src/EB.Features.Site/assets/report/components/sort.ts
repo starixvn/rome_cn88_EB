@@ -121,7 +121,7 @@ class SortComponent {
                     selectorHeaders: 'thead th.header'
                 });
         } catch (e) {
-            console.log(e);
+            
         }
 
         this.$sortContainer.off("sortEnd").on("sortEnd", () => {

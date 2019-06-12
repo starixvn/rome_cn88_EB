@@ -30,8 +30,11 @@
         public MatchWinLossReportViewModel Handle(MatchWinLossQuery message)
         {
             var sportGroups = sportGroupService.GetSportGroupsForSportbook();
-            var allBetTypes = betTypeService.GetBetTypeGroupsBySport(0);
-            var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
+            var allBetTypes = betTypeService.GetBetTypeGroupsBySportbook(sportGroups.Select(i => i.Id));
+            var betTypes = message.UserSelectedSportGroupId == 0 ?
+                allBetTypes :
+                allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
+
             var reportData = matchWinLossService.Get(new MatchWinLossParam
             {
                 BetTypeGroup = message.UserSelectedBetTypeId,
@@ -46,7 +49,7 @@
                 message,
                 reportDateService.GetBalanceUpDay(),
                 BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
-                BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),                
+                BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0));
         }
     }

@@ -50,6 +50,8 @@ function ShowPassword() {
 
 }
 window.onload = function () {
+
+    siteInfrastructure.localStorage.clear();
     /* jshint ignore: start */
     setTimeout('window.history.forward()', 0);
     /* jshint ignore: end */

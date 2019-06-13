@@ -1,6 +1,31 @@
 ﻿
 .match-title-row {
     background-color: #f3f5e0;
+
+    .home-title {
+        color: #f38130;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    .home-title:before {
+        content: '>>';
+        color: #f38130;
+        padding: 0 10px 0 50px;
+    }
+
+    .venus-title {
+        font-weight: bold;
+        margin: 0 5px;
+    }
+
+    .away-title {
+        color: #f38130;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+    }
 }
 
 .league-title {

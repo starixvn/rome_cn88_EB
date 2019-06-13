@@ -394,6 +394,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to V.
+        /// </summary>
+        public static string Venus {
+            get {
+                return ResourceManager.GetString("Venus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View History Report.
         /// </summary>
         public static string ViewHistoryReport {

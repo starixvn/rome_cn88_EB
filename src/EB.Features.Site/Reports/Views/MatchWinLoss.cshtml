@@ -82,9 +82,11 @@
                 <tr class="match-title-row">
                     <td class="text-left col-username" colspan="8">
                         <span class="league-title" title="@firstRowOfGroup.First().LeagueName">@firstRowOfGroup.First().LeagueName</span>
-                        @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().EventInfo))
+                        @if (!string.IsNullOrWhiteSpace(firstRowOfGroup.First().HomeName + firstRowOfGroup.First().AwayName))
                         {
-                            <span class="match-title">@firstRowOfGroup.First().EventInfo</span>
+                            <span class="home-title">@firstRowOfGroup.First().HomeName</span>
+                            <span class="venus-title">@ReportResources.Venus</span>
+                            <span class="away-title">@firstRowOfGroup.First().AwayName</span>
                         }
                     </td>
                 </tr>

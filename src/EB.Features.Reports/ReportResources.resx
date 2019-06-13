@@ -240,4 +240,7 @@
   <data name="December" xml:space="preserve">
     <value>Dec</value>
   </data>
+  <data name="Venus" xml:space="preserve">
+    <value>V</value>
+  </data>
 </root>

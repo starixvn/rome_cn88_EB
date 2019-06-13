@@ -54,9 +54,8 @@
                 }
                 else
                 {
-                    row.EventInfo = row.BetTypeGroup == BetTypeIdConstants.Outright
-                        ? string.Empty
-                        : $"{cacheRefService.GetTeamName(row.HomeId)} v {cacheRefService.GetTeamName(row.AwayId)}";
+                    row.HomeName = cacheRefService.GetTeamName(row.HomeId);
+                    row.AwayName = cacheRefService.GetTeamName(row.AwayId);
                     row.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
                     row.LeagueNameByEnglish = cacheRefService.GetLeagueName(row.LeagueId, Language.English);
                 }

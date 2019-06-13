@@ -7,8 +7,10 @@
     using EB.Features.Reports.Services;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared;
+    using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
@@ -19,13 +21,16 @@
     {
         private readonly IMatchWinLossService matchWinLossService;
         private readonly IMatchWinLossWorkbook workbook;
+        private readonly ICacheRefService cacheRefService;
 
         public MatchWinLossExcelHandler(
             IMatchWinLossService matchWinLossService,
-            IMatchWinLossWorkbook workbook)
+            IMatchWinLossWorkbook workbook,
+            ICacheRefService cacheRefService)
         {
             this.matchWinLossService = matchWinLossService;
             this.workbook = workbook;
+            this.cacheRefService = cacheRefService;
         }
 
         public ExcelFileViewModel Handle(MatchWinLossExcelQuery message)
@@ -96,8 +101,15 @@
               sheetIndex: 1,
               footerEndIndex: 9);
 
-        internal static string GetReportTitle(MatchWinLossExcelQuery query)
-            => $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
+        internal string GetReportTitle(MatchWinLossExcelQuery query)
+        {
+            var date = $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
+            var liveStatus = LiveStatusConstants.LiveStatuses[query.UserSelectedLiveStatusId];
+            var betType = query.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(query.UserSelectedBetTypeId);
+            var sportType = query.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(query.UserSelectedSportGroupId);
+
+            return $"{date} - {AppResources.ResourceManager.GetString(liveStatus)} - {betType} - {sportType}";
+        }
 
         internal static string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";

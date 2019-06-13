@@ -85,7 +85,7 @@
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(MatchTitleRowTemplate);
 
-            var title = (data.LeagueName + (string.IsNullOrEmpty(data.EventInfo) ? string.Empty : $" >> {data.EventInfo}"))
+            var title = (data.LeagueName + (string.IsNullOrEmpty(data.HomeName + data.AwayName) ? string.Empty : $" >> {data.HomeName} V {data.AwayName}"))
                 .ToUpper(CultureInfo.InvariantCulture);
             sheet.SetCellRangeValue(rowIndex, row.FirstCellIndex, lastRowIndex, row.LastCellIndex - 1, title);
         }

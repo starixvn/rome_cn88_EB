@@ -13,7 +13,11 @@
 
         public int HomeId { get; }
 
+        public string HomeName { get; set; }
+
         public int AwayId { get; }
+
+        public string AwayName { get; set; }
 
         public int BetTypeGroup { get; }
 
@@ -34,8 +38,6 @@
         public string LeagueName { get; set; }
 
         public string LeagueNameByEnglish { get; set; }
-
-        public string EventInfo { get; set; }
 
         public MatchWinLossModel Add(MatchWinLossModel match)
         {

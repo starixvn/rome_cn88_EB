@@ -6,8 +6,10 @@
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
     using EB.Features.Shared;
+    using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
@@ -18,13 +20,16 @@
     {
         private readonly IHouseWinLossService houseWinLossService;
         private readonly IHouseWinLossWorkbook workbook;
+        private readonly ICacheRefService cacheRefService;
 
         public HouseWinLossExcelHandler(
             IHouseWinLossService matchWinLossService,
-            IHouseWinLossWorkbook workbook)
+            IHouseWinLossWorkbook workbook,
+            ICacheRefService cacheRefService)
         {
             this.houseWinLossService = matchWinLossService;
             this.workbook = workbook;
+            this.cacheRefService = cacheRefService;
         }
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
@@ -98,15 +103,24 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        internal static string GetReportTitle(HouseWinLossExcelQuery param)
+        internal string GetReportTitle(HouseWinLossExcelQuery param)
         {
+            var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
             if (param.IsHistoricReport)
             {
-                return $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
+                title = $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
             }
 
-            return $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
+            var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
+            var ticketStatus = TicketStatusConstants.TicketStatuses[param.UserSelectedTicketStatusId];
+            var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
+            var sportType = param.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(param.UserSelectedSportGroupId);
+
+            return $"{title} - {GetResourcesText(ticketStatus)} - {sportType} - {betType} - {GetResourcesText(liveStatus)}";
         }
+
+        internal static string GetResourcesText(string key)
+            => AppResources.ResourceManager.GetString(key);
 
         internal static string GetExcelFileName(HouseWinLossExcelQuery param)
             => param.IsHistoricReport ?

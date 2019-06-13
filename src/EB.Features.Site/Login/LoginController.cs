@@ -63,6 +63,8 @@ namespace EB.Features.Site
 
             ClearAllCookie();
 
+            SetUMToken();
+
             return View("~/Login/Views/Index.cshtml");
         }
 
@@ -136,15 +138,21 @@ namespace EB.Features.Site
 
             if (!downTime.IsUM)
             {
-                if (Request.QueryString["UMToken"] != null)
-                {
-                    Session["UMToken"] = Request.QueryString["UMToken"];
-                }
+                SetUMToken();
 
                 FormsAuthentication.RedirectToLoginPage();
             }
 
             return View("~/Login/Views/UnderMaintenance.cshtml", downTime);
+        }
+
+
+        private void SetUMToken()
+        {
+            if (Request.QueryString["UMToken"] != null)
+            {
+                Session["UMToken"] = Request.QueryString["UMToken"];
+            }
         }
 
         private void DoSignOut()
@@ -247,7 +255,7 @@ namespace EB.Features.Site
             for (var i = 0; i < limit; i++)
             {
                 var cookieName = Request.Cookies[i].Name;
-                Response.Cookies[cookieName].Expires= DateTime.Now.AddDays(-1);
+                Response.Cookies[cookieName].Expires = DateTime.Now.AddDays(-1);
             }
         }
 

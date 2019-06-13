@@ -247,8 +247,7 @@ namespace EB.Features.Site
             for (var i = 0; i < limit; i++)
             {
                 var cookieName = Request.Cookies[i].Name;
-                var cookie = new HttpCookie(cookieName) { Expires = DateTime.Now.AddDays(-1) };
-                Response.Cookies.Add(cookie);
+                Response.Cookies[cookieName].Expires= DateTime.Now.AddDays(-1);
             }
         }
 

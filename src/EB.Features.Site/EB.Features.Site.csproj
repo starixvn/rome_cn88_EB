@@ -648,8 +648,6 @@
     <Content Include="assets\main\scripts\default\index-manager.js" />
     <Content Include="assets\main\scripts\home\index-manager.js" />
     <Content Include="assets\main\scripts\password\change-password.js" />
-    <Content Include="assets\main\scripts\securitycode\change-securitycode.js" />
-    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js" />
     <Content Include="assets\main\styles\error-page.css" />
     <Content Include="assets\main\styles\error-page.min.css" />
     <Content Include="assets\main\styles\home.css" />
@@ -754,8 +752,6 @@
     <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
     <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\securitycode\change-securitycode.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\securitycode\verify-securitycode.ts" />
     <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
     <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
     <TypeScriptCompile Include="assets\report\components\daterangepicker.ts" />
@@ -1107,8 +1103,6 @@
     <Content Include="assets\main\scripts\default\index-manager.js.map" />
     <Content Include="assets\main\scripts\home\index-manager.js.map" />
     <Content Include="assets\main\scripts\password\change-password.js.map" />
-    <Content Include="assets\main\scripts\securitycode\change-securitycode.js.map" />
-    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js.map" />
     <Content Include="assets\main\styles\error-page.scss" />
     <Content Include="assets\main\styles\home.scss" />
     <Content Include="assets\main\styles\popup.scss" />

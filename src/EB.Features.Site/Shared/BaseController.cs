@@ -58,8 +58,7 @@ namespace EB.Features.Site.Shared
 
         protected async Task<FileContentResult> ExcelView(IRequest<ExcelFileViewModel> message)
         {
-            var baseQuery = message as BaseQuery;
-            if (baseQuery == null || baseQuery.IsValid())
+            if (!(message is BaseQuery baseQuery) || baseQuery.IsValid())
             {
                 return GetExcelContent(await mediator.Send(message));
             }
@@ -88,6 +87,6 @@ namespace EB.Features.Site.Shared
         }
 
         private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)
-        => File(viewModel.Content, viewModel.ContentType, viewModel.Name);
+        => File(viewModel.Content, ExcelFileViewModel.ContentType, viewModel.Name);
     }
 }

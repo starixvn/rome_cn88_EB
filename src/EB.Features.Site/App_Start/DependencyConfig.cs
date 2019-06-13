@@ -54,11 +54,11 @@
         {
             container.Register<IDynamicRepository, DynamicRepository>();
             container.Register<SportGroupDataAccess, SportGroupDataAccessImpl>();
-            container.Register<BettypeGroupService, BettypeGroupServiceImpl>();
-            container.Register<CacheRefService, CacheRefServiceImpl>();
-            container.Register<ReportDateService, ReportDateServiceImpl>();
-            container.Register<SportGroupService, SportGroupServiceImpl>();
-            container.RegisterSingleton<BrowserHelper, BrowserHelperImpl>();
+            container.Register<IBettypeGroupService, BettypeGroupServiceImpl>();
+            container.Register<ICacheRefService, CacheRefServiceImpl>();
+            container.Register<IReportDateService, ReportDateServiceImpl>();
+            container.Register<ISportGroupService, SportGroupServiceImpl>();
+            container.RegisterSingleton<IBrowserHelper, BrowserHelperImpl>();
 
             container.RegisterSingleton<InternalLoginService, InternalLoginServiceImpl>();
             container.RegisterSingleton<InternalLoginDataAccess, InternalLoginDataAccessImpl>();
@@ -69,8 +69,8 @@
         {
             container.Register<IHouseWinLossService, HouseWinLossService>();
             container.Register<IMatchWinLossService, MatchWinLossService>();
-            container.Register<MatchWinLossWorkbook, MatchWinLossWorkbookImpl>();
-            container.Register<HouseWinLossWorkbook, HouseWinLossWorkbookImpl>();
+            container.Register<IMatchWinLossWorkbook, MatchWinLossWorkbookImpl>();
+            container.Register<IHouseWinLossWorkbook, HouseWinLossWorkbookImpl>();
         }
 
         private static void RegisterMainModule(Container container)

@@ -8,10 +8,6 @@
 
     public class ReportsBaseHandler
     {
-        public ReportsBaseHandler()
-        {
-        }
-
         protected internal IEnumerable<SelectListItemExt> BuildSportGroupSelectListItems(
             IEnumerable<SportGroup> sportGroups,
             int userSelectedSportGroupId)

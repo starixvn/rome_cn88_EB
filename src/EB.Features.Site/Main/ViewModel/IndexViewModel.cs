@@ -9,13 +9,13 @@
     public class IndexViewModel
     {
         private readonly ICurrentSession currentSession;
-        private readonly BrowserHelper browserHelper;
+        private readonly IBrowserHelper browserHelper;
         private readonly Func<string, string> encodeDataFunction;
         private readonly IndexQuery query;
 
         public IndexViewModel(
             ICurrentSession currentSession,
-            BrowserHelper browserHelper,
+            IBrowserHelper browserHelper,
             Func<string, string> encodeDataFunction,
             IndexQuery query)
         {
@@ -25,7 +25,7 @@
             this.query = query;
         }
 
-        public string MainRootPath => HttpContext.Current.Response.ApplyAppPathModifier("~/");
+        public static string MainRootPath => HttpContext.Current.Response.ApplyAppPathModifier("~/");
 
         public string CurrentURLCookieName => CookieHelper.GetCookieNameOfCurrentPage(CustId, 0, encodeDataFunction);
 
@@ -46,7 +46,7 @@
             }
         }
 
-        public string DefaultPath => HttpContext.Current.Response.ApplyAppPathModifier("/Home/Index");
+        public static string DefaultPath => HttpContext.Current.Response.ApplyAppPathModifier("/Home/Index");
 
         public string CustName => currentSession.Username;
 

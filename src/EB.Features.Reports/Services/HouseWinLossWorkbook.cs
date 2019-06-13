@@ -7,7 +7,7 @@
     using ONEbook.SpreadSheets;
     using ONEbook.SpreadSheets.NPOI;
 
-    public interface HouseWinLossWorkbook
+    public interface IHouseWinLossWorkbook
     {
         Workbook<HouseWinLossModel> UseTemplate(TemplateInfo templateInfo);
 
@@ -19,17 +19,17 @@
 
         byte[] ExportToBytes();
 
-        HouseWinLossWorkbook SetData(
+        IHouseWinLossWorkbook SetData(
             IEnumerable<HouseWinLossModel> reportData,
             HouseWinLossModel grandTotal);
 
-        HouseWinLossWorkbook SetRowMappers(
+        IHouseWinLossWorkbook SetRowMappers(
             Mapper<HouseWinLossModel> betTypeRowMapper,
             Mapper<HouseWinLossModel> grandTotalRowMapper);
 
     }
 
-    public class HouseWinLossWorkbookImpl : NpoiWorkbook<HouseWinLossModel>, HouseWinLossWorkbook
+    public class HouseWinLossWorkbookImpl : NpoiWorkbook<HouseWinLossModel>, IHouseWinLossWorkbook
     {
         private const int ReportSheetIndex = 1;
 
@@ -53,7 +53,7 @@
 
         internal Row GrandTotalRowTemplate { get; set; }
 
-        public HouseWinLossWorkbook SetData(
+        public IHouseWinLossWorkbook SetData(
             IEnumerable<HouseWinLossModel> reportData,
             HouseWinLossModel grandTotal)
         {
@@ -63,7 +63,7 @@
             return this;
         }
 
-        public HouseWinLossWorkbook SetRowMappers(
+        public IHouseWinLossWorkbook SetRowMappers(
             Mapper<HouseWinLossModel> betTypeRowMapper,
             Mapper<HouseWinLossModel> grandTotalRowMapper)
         {
@@ -110,18 +110,14 @@
 
         protected override void FillNoInfoRow(Sheet sheet)
         {
-            if (sheet == null)
-            {
-                throw new ArgumentNullException(nameof(sheet), "Sheet cannot be null");
-            }
-
             var rowIndex = TemplateInfo.BodyStartIndex;
+            var lastRowIndex = rowIndex;
             var colIndex = Column.GetColIndex(TemplateInfo.ColumnStartName);
 
             sheet.SetCellRangeValue(
                 rowIndex,
                 colIndex,
-                rowIndex,
+                lastRowIndex,
                 MatchTitleRowTemplate.LastCellIndex - 1,
                 TemplateInfo.NoInfomationText);
 
@@ -130,11 +126,6 @@
 
         protected override void FillBody(Sheet sheet)
         {
-            if (sheet == null)
-            {
-                throw new ArgumentNullException(nameof(sheet), "Sheet cannot be null");
-            }
-
             RemoveTemplateRows(sheet);
 
             var hasData = (NoParlayMatchWinLossDetail != null && NoParlayMatchWinLossDetail.Any());
@@ -152,11 +143,6 @@
 
         protected override void FillBodyRows(Sheet sheet)
         {
-            if (sheet == null)
-            {
-                throw new ArgumentNullException(nameof(sheet), "Sheet cannot be null");
-            }
-
             currentRowIndex = TemplateInfo.BodyStartIndex;
             var isEvenRow = false;
             foreach (var data in NoParlayMatchWinLossDetail)
@@ -168,19 +154,12 @@
 
         protected override void FillFooterRows(Sheet sheet)
         {
-            if (sheet == null)
+            if (SpreadSheet.FooterRows.Any())
             {
-                throw new ArgumentNullException(nameof(sheet), "Sheet cannot be null");
+                var row = sheet.GetRow(currentRowIndex);
+                row.CopyCellsFrom(GrandTotalRowTemplate);
+                FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
             }
-
-            if (!SpreadSheet.FooterRows.Any())
-            {
-                return;
-            }
-
-            var row = sheet.GetRow(currentRowIndex);
-            row.CopyCellsFrom(GrandTotalRowTemplate);
-            FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
         }
     }
 }

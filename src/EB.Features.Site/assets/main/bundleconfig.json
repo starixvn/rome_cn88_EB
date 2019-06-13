@@ -28,24 +28,7 @@
       "scripts/password/change-password.js"
     ]
   },
-  {
-    "outputFileName": "bundles/securitycode/change-securitycode.js",
-    "inputFiles": [
-      "scripts/site-infrastructure.js",
-      "scripts/aes.js",
-      "scripts/security-helper.js",
-      "scripts/securitycode/change-securitycode.js"
-    ]
-  },
-  {
-    "outputFileName": "bundles/securitycode/verify-securitycode.js",
-    "inputFiles": [
-      "scripts/site-infrastructure.js",
-      "scripts/aes.js",
-      "scripts/security-helper.js",
-      "scripts/securitycode/verify-securitycode.js"
-    ]
-  },
+  
   {
     "outputFileName": "bundles/home-index.js",
     "inputFiles": [

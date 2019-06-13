@@ -11,15 +11,15 @@
 
     public class HouseWinLossHandler : ReportsBaseHandler, IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>
     {
-        private readonly SportGroupService sportGroupService;
-        private readonly BettypeGroupService betTypeService;
+        private readonly ISportGroupService sportGroupService;
+        private readonly IBettypeGroupService betTypeService;
         private readonly IHouseWinLossService houseWinLossService;
-        private readonly ReportDateService reportDateService;
+        private readonly IReportDateService reportDateService;
 
         public HouseWinLossHandler(
-            SportGroupService sportGroupService,
-            BettypeGroupService betTypeService,
-            ReportDateService reportDateService,
+            ISportGroupService sportGroupService,
+            IBettypeGroupService betTypeService,
+            IReportDateService reportDateService,
             IHouseWinLossService houseWinLossService)
         {
             this.houseWinLossService = houseWinLossService;
@@ -31,7 +31,7 @@
         public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
         {
             var sportGroups = sportGroupService.GetSportGroups();
-            var allBetTypes = betTypeService.GetBetTypeGroupsBySport(0);
+            var allBetTypes = betTypeService.GetBetTypeGroupsBySport();
             var betTypes = allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {

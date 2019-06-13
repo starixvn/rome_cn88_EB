@@ -8,23 +8,24 @@
     using EB.Features.Shared.Model;
     using Fanex.Caching;
 
-    public interface SportGroupService
+    public interface ISportGroupService
     {
         IEnumerable<SportGroup> GetSportGroups();
 
         IEnumerable<SportGroup> GetSportGroupsForSportbook();
     }
 
-    public class SportGroupServiceImpl : SportGroupService
+    public class SportGroupServiceImpl : ISportGroupService
     {
         private const string SportGroupsCacheKey = "EB.Features.Shared.Services.SportServiceImpl.SportGroups";
+        private const int CachedSecond = 30;
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
-        private readonly CacheRefService cacheRefService;
+        private readonly ICacheRefService cacheRefService;
 
         public SportGroupServiceImpl(
             SportGroupDataAccess sportGroupDataAccess,
-            CacheRefService cacheRefService)
+            ICacheRefService cacheRefService)
         {
             this.sportGroupDataAccess = sportGroupDataAccess;
             this.cacheRefService = cacheRefService;
@@ -34,7 +35,7 @@
             => ConfiguredCacheService.GetOrSet(
                 SportGroupsCacheKey,
                 () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(30)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
 
         public IEnumerable<SportGroup> GetSportGroupsForSportbook()
             => GetSportGroups().Where(s => s.ProductId != 0);

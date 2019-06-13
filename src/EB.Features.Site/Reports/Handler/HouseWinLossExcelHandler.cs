@@ -5,6 +5,7 @@
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
+    using EB.Features.Shared;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
@@ -16,11 +17,11 @@
     public class HouseWinLossExcelHandler : ExcelBaseHandler, IRequestHandler<HouseWinLossExcelQuery, ExcelFileViewModel>
     {
         private readonly IHouseWinLossService houseWinLossService;
-        private readonly HouseWinLossWorkbook workbook;
+        private readonly IHouseWinLossWorkbook workbook;
 
         public HouseWinLossExcelHandler(
             IHouseWinLossService matchWinLossService,
-            HouseWinLossWorkbook workbook)
+            IHouseWinLossWorkbook workbook)
         {
             this.houseWinLossService = matchWinLossService;
             this.workbook = workbook;
@@ -60,27 +61,26 @@
         {
             var mapper = new Mapper<HouseWinLossModel>();
 
-            switch (rowType)
+            if (rowType == RowTypeConstant.NormalRow)
             {
-                case RowTypeConstant.NormalRow:
-                    mapper.Map(A, betTypeWinLoss => betTypeWinLoss.UserName);
-                    break;
-                default:
-                    mapper.Map(A, betTypeWinLoss => string.Empty);
-                    break;
+                mapper.Map(A, betTypeWinLoss => betTypeWinLoss.UserName);
+            }
+            else
+            {
+                mapper.Map(A, betTypeWinLoss => string.Empty);
             }
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / 100)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / 100)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / 100)
-                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
-                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
-                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / CommonConstants.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / CommonConstants.ReduceNumber)
+                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / CommonConstants.ReduceNumber)
+                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
+                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
+                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
 
             return mapper;
         }
@@ -98,7 +98,7 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        private string GetReportTitle(HouseWinLossExcelQuery param)
+        internal static string GetReportTitle(HouseWinLossExcelQuery param)
         {
             if (param.IsHistoricReport)
             {
@@ -108,9 +108,9 @@
             return $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
         }
 
-        private string GetExcelFileName(HouseWinLossExcelQuery param)
-            => param.IsHistoricReport ? 
-            $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()}" : 
+        internal static string GetExcelFileName(HouseWinLossExcelQuery param)
+            => param.IsHistoricReport ?
+            $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()}" :
             $"Wager Report - {param.Date.ToShortDate()}";
     }
 }

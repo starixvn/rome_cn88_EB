@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Constants\BetTypeIdConstants.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Constants\Language.cs" />
     <Compile Include="Constants\TicketStatusConstants.cs" />
     <Compile Include="Constants\LiveStatusConstants.cs" />

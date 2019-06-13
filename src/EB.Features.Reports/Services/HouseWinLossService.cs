@@ -17,11 +17,11 @@
     public class HouseWinLossService : IHouseWinLossService
     {
         private readonly IDynamicRepository dynamicRepository;
-        private readonly ReportDateService reportDateService;
+        private readonly IReportDateService reportDateService;
 
         public HouseWinLossService(
             IDynamicRepository dynamicRepository,
-            ReportDateService reportDateService)
+            IReportDateService reportDateService)
         {
             this.dynamicRepository = dynamicRepository;
             this.reportDateService = reportDateService;
@@ -41,7 +41,7 @@
             return new HouseWinLossViewModel(reportData.OrderBy(i => i.UserName));
         }
 
-        private bool IsSettled(HouseWinLossParam param)
+        private static bool IsSettled(HouseWinLossParam param)
             => param.IsHistoricReport || param.TicketStatusId == TicketStatusConstants.Settled;
     }
 }

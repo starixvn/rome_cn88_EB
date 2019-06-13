@@ -19,13 +19,13 @@
     public class MatchWinLossService : IMatchWinLossService
     {
         private readonly IDynamicRepository dynamicRepository;
-        private readonly ReportDateService reportDateService;
-        private readonly CacheRefService cacheRefService;
+        private readonly IReportDateService reportDateService;
+        private readonly ICacheRefService cacheRefService;
 
         public MatchWinLossService(
             IDynamicRepository dynamicRepository,
-            ReportDateService reportDateService,
-            CacheRefService cacheRefService)
+            IReportDateService reportDateService,
+            ICacheRefService cacheRefService)
         {
             this.dynamicRepository = dynamicRepository;
             this.reportDateService = reportDateService;

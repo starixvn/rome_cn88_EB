@@ -12,6 +12,6 @@
             => start <= number && number <= end;
 
         public static decimal Round(this decimal value)
-            => decimal.Round(value, 2);
+            => decimal.Round(value, CommonConstants.NumberRound);
     }
 }

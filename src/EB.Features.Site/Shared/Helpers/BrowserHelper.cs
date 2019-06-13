@@ -3,7 +3,7 @@ using EB.Features.Site.Shared.ViewModels;
 
 namespace EB.Features.Site.Shared.Helpers
 {
-    public interface BrowserHelper
+    public interface IBrowserHelper
     {
         bool IsMobile(bool isOnlyTablet);
 

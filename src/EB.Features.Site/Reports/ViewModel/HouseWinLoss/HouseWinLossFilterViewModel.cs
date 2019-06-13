@@ -13,7 +13,7 @@
             SingleSelectionViewModel betTypeSelectionViewModel,
             SingleSelectionViewModel liveStatusSelectionViewModel,
             SingleSelectionViewModel ticketStatusSelectionViewModel,
-            SingleSelectionViewModel allBetTypesSelectionViewModel = null)
+            SingleSelectionViewModel allBetTypesSelectionViewModel)
         {
             BetTypeSelectionViewModel = betTypeSelectionViewModel;
             LiveStatusSelectionViewModel = liveStatusSelectionViewModel;
@@ -41,7 +41,7 @@
 
         public bool IsTest { get; }
 
-        public string[] MonthNames => new[]
+        public static string[] MonthNames => new[]
         {
             ReportResources.January,
             ReportResources.February,

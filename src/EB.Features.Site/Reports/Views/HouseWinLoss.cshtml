@@ -28,7 +28,7 @@
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
         <div class="form-group js-month-group"
              id="dateRangeContainer"
-             data-longmonths-inyear="@Model.ReportFilterViewModel.MonthNames.JoinWithComma()"
+             data-longmonths-inyear="@HouseWinLossFilterViewModel.MonthNames.JoinWithComma()"
              data-mindate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MinDate.ToShortDate()"
              data-maxdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MaxDate.ToShortDate()"
              data-fromdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.FromDate.ToShortDate()"
@@ -153,7 +153,7 @@
         </table>
     </div>
 </div>
-<form id="internal-login-form" method="get" action="@Model.InternalLoginAction" target="_blank">
+<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
     <input type="hidden" id="custId" name="custId" value="" />
     <input type="hidden" id="custName" name="custName" value="" />
     <input type="hidden" id="roleId" name="roleId" value="" />

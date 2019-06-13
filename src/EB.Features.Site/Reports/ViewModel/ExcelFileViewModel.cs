@@ -15,7 +15,7 @@
 
         public byte[] Content { get; }
 
-        public string ContentType => "application/vnd.ms-excel";
+        public static string ContentType => "application/vnd.ms-excel";
 
         private static string GetValidFileName(string fileName)
             => string.IsNullOrWhiteSpace(fileName)

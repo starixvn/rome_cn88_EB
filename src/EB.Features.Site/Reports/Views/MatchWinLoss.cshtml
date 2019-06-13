@@ -68,7 +68,7 @@
                         @HtmlHelpers.RenderHeaderNumberCell(Model.ReportData.Total.MemberIncome)
                         @HtmlHelpers.RenderHeaderNumberCell(Model.ReportData.Total.HouseIncome)
                         @HtmlHelpers.RenderHeaderNumberCell(Model.ReportData.Total.HeadlineStock)
-                        @HtmlHelpers.RenderHeaderPercentCell(Model.TotalHeadlineStockPercent, "", true)
+                        @HtmlHelpers.RenderHeaderPercentCell(MatchWinLossReportViewModel.TotalHeadlineStockPercent, "", true)
                     </tr>
                 }
             </thead>
@@ -164,7 +164,7 @@
                     <tr class="total">
                         <td class="text-left">@ReportResources.GrandTotal</td>
                         @RenderRow(Model.ReportData.Total)
-                        @HtmlHelpers.RenderStockPercentCell(Model.TotalHeadlineStockPercent, Model.TotalHeadlineStockPercent)
+                        @HtmlHelpers.RenderStockPercentCell(MatchWinLossReportViewModel.TotalHeadlineStockPercent, MatchWinLossReportViewModel.TotalHeadlineStockPercent)
                     </tr>
                 </tfoot>
             }

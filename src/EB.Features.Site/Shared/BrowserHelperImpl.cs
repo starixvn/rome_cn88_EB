@@ -5,7 +5,7 @@
     using Features.Shared.Model;
     using ViewModels;
 
-    public class BrowserHelperImpl : BrowserHelper
+    public class BrowserHelperImpl : IBrowserHelper
     {
         private const string DeviceIdSessionKey = "ProcessAfterLogin_Handler.DeviceIdSessionKey";
 
@@ -126,7 +126,7 @@
 
         public bool IsAndroidNativeBrowser(string userAgent) => _androidNativeBrowserCheck.IsMatch(userAgent);
 
-        private bool IsTablet()
+        private static bool IsTablet()
         {
             if (HttpContext.Current.Request?.ServerVariables["HTTP_USER_AGENT"] != null)
             {
@@ -152,7 +152,7 @@
 
     public static class BrowserManager
     {
-        private static readonly BrowserHelper browserHelper = new BrowserHelperImpl();
+        private static readonly IBrowserHelper browserHelper = new BrowserHelperImpl();
 
         public static BrowserInfo GetBrowserInfo()
             => browserHelper.GetBrowserInfo();

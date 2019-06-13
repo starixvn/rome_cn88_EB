@@ -1,6 +1,4 @@
 ﻿/* File Created: November 14, 2012 */
-/// <reference path="../jquery-1.8.2.js" />
-/// <reference path="../jquery-ui-1.9.1.js" />
 
 //// Helper for Calculation Date
 var NexDatePickerHelper = NexDatePickerHelper ||

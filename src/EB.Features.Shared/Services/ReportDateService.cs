@@ -6,7 +6,7 @@
     using Fanex.Caching;
     using Fanex.Data.Repository;
 
-    public interface ReportDateService
+    public interface IReportDateService
     {
         BalanceUpDayAndMoveBetsDay GetBalanceUpDayAndMoveBetsDay();
 
@@ -17,10 +17,11 @@
         DateTime GetArchiveDate();
     }
 
-    public class ReportDateServiceImpl : ReportDateService
+    public class ReportDateServiceImpl : IReportDateService
     {
         private const string BalanceUpDayAndMoveBetsDayCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.BalanceUpDayAndMoveBetsDay";
         private const string ArchiveDateCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.ArchiveDate";
+        private const int CachedMinute = 5;
 
         private readonly IDynamicRepository dynamicRepository;
 
@@ -29,7 +30,7 @@
             this.dynamicRepository = dynamicRepository;
         }
 
-        public static ReportDateService Instance { get; set; }
+        public static IReportDateService Instance { get; set; }
 
         public DateTime GetBalanceUpDay() => GetBalanceUpDayAndMoveBetsDay().BalanceUpDay;
 
@@ -39,12 +40,12 @@
             => ConfiguredCacheService.GetOrSet(
                 BalanceUpDayAndMoveBetsDayCacheKey,
                 () => dynamicRepository.Get<BalanceUpDayAndMoveBetsDay>(new GetBalanceUpDayAndMoveBetsDayCriteria()),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CachedMinute)));
 
         public DateTime GetArchiveDate()
             => ConfiguredCacheService.GetOrSet(
                 ArchiveDateCacheKey,
                 () => dynamicRepository.Get<DateTime>(new GetArchiveDateCriteria()),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CachedMinute)));
     }
 }

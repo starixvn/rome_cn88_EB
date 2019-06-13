@@ -8,23 +8,24 @@
     using Fanex.Caching;
     using Fanex.Data.Repository;
 
-    public interface BettypeGroupService
+    public interface IBettypeGroupService
     {
         IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(int sportGroupId = 0);
 
         IEnumerable<BetTypeGroup> GetBetTypeGroupsBySportbook(IEnumerable<int> sportGroupIds);
     }
 
-    public class BettypeGroupServiceImpl : BettypeGroupService
+    public class BettypeGroupServiceImpl : IBettypeGroupService
     {
         private const string BetTypesCacheKey = "EB.Features.Shared.Services.Bettypes";
+        private const int CachedDay = 1;
 
         private readonly IDynamicRepository dynamicRepository;
-        private readonly CacheRefService cacheRefService;
+        private readonly ICacheRefService cacheRefService;
 
         public BettypeGroupServiceImpl(
             IDynamicRepository dynamicRepository,
-            CacheRefService cacheRefService)
+            ICacheRefService cacheRefService)
         {
             this.dynamicRepository = dynamicRepository;
             this.cacheRefService = cacheRefService;
@@ -47,6 +48,6 @@
 
                     return betTypes.Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName));
                 },
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
     }
 }

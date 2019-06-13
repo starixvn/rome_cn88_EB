@@ -6,6 +6,7 @@
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
     using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
     using EB.Features.Site.Reports.Request;
@@ -17,11 +18,11 @@
     public class MatchWinLossExcelHandler : ExcelBaseHandler, IRequestHandler<MatchWinLossExcelQuery, ExcelFileViewModel>
     {
         private readonly IMatchWinLossService matchWinLossService;
-        private readonly MatchWinLossWorkbook workbook;
+        private readonly IMatchWinLossWorkbook workbook;
 
         public MatchWinLossExcelHandler(
             IMatchWinLossService matchWinLossService,
-            MatchWinLossWorkbook workbook)
+            IMatchWinLossWorkbook workbook)
         {
             this.matchWinLossService = matchWinLossService;
             this.workbook = workbook;
@@ -72,12 +73,12 @@
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / 100)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / 100)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / 100)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / 100)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / 100)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
 
             return mapper;
         }
@@ -95,10 +96,10 @@
               sheetIndex: 1,
               footerEndIndex: 9);
 
-        private string GetReportTitle(MatchWinLossExcelQuery query)
+        internal static string GetReportTitle(MatchWinLossExcelQuery query)
             => $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
 
-        private string GetExcelFileName(MatchWinLossExcelQuery query)
+        internal static string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
     }    
 }

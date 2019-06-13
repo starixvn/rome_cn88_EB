@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace EB.Features.Shared.Configuration
 {
-    public class AppSettings
+    public static class AppSettings
     {
         [ThreadStatic]
         private static NameValueCollection appSettingValues;

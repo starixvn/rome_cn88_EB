@@ -5,7 +5,7 @@
     using Fanex.Caching;
     using Fanex.RemotingRef;
 
-    public interface CacheRefService
+    public interface ICacheRefService
     {
         string GetSportName(int sportTypeId);
 
@@ -18,11 +18,12 @@
         string GetTeamName(int teamId);
     }
 
-    public class CacheRefServiceImpl : CacheRefService
+    public class CacheRefServiceImpl : ICacheRefService
     {
         private const string BetTypeNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.BetTypeName";
         private const string LeagueNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.LeagueName";
         private const string TeamNameCacheKey = "EB.Features.Shared.Services.CacheRefServiceImpl.TeamName";
+        private const int CachedDay = 1;
 
         private readonly IRemotingRefService remotingRefService;
 
@@ -35,7 +36,7 @@
             => ConfiguredCacheService.GetOrSet(
                 $"{BetTypeNameCacheKey}.{LanguageCode}.{betTypeId}",
                 () => remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageCode),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
 
         public string GetSportName(int sportTypeId)
             => remotingRefService.GetSportName(sportTypeId.ToString(), LanguageCode);
@@ -44,7 +45,7 @@
             => ConfiguredCacheService.GetOrSet(
                 $"{LeagueNameCacheKey}.{LanguageCode}.{leagueId}{languageCode}",
                 () => remotingRefService.GetLeagueName(leagueId.ToString(), languageCode),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
 
         public string GetLeagueName(int leagueId)
             => GetLeagueName(leagueId, LanguageCode);
@@ -53,7 +54,7 @@
             => ConfiguredCacheService.GetOrSet(
                 $"{TeamNameCacheKey}.{LanguageCode}.{teamId}",
                 () => remotingRefService.GetTeamName(teamId.ToString(), LanguageCode),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
 
         private static string LanguageCode
             => Thread.CurrentThread.CurrentCulture.Name;

@@ -10,16 +10,16 @@
 
     public class MatchWinLossHandler : ReportsBaseHandler, IRequestHandler<MatchWinLossQuery, MatchWinLossReportViewModel>
     {
-        private readonly SportGroupService sportGroupService;
-        private readonly BettypeGroupService betTypeService;
+        private readonly ISportGroupService sportGroupService;
+        private readonly IBettypeGroupService betTypeService;
         private readonly IMatchWinLossService matchWinLossService;
-        private readonly ReportDateService reportDateService;
+        private readonly IReportDateService reportDateService;
 
         public MatchWinLossHandler(
-            SportGroupService sportGroupService,
-            BettypeGroupService betTypeService,
+            ISportGroupService sportGroupService,
+            IBettypeGroupService betTypeService,
             IMatchWinLossService matchWinLossService,
-            ReportDateService reportDateService)
+            IReportDateService reportDateService)
         {
             this.sportGroupService = sportGroupService;
             this.betTypeService = betTypeService;

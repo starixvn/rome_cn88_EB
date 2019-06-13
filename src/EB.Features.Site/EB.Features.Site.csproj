@@ -785,7 +785,6 @@
     <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
     <Compile Include="Login\InternalLoginController.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
-    <Compile Include="Login\ViewModel\UnderMaintenanceModel.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
     <Compile Include="Main\LanguageController.cs" />
     <Compile Include="Main\Requests\AllLanguagesQuery.cs" />

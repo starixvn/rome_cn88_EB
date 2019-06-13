@@ -48,45 +48,6 @@
             return false;
         }
 
-        public BrowserViewModel CheckSupportedBrowsers()
-        {
-            var browserViewModel = new BrowserViewModel();
-            var currentRequest = HttpContext.Current.Request;
-
-            if (IsMobile())
-            {
-                return browserViewModel;
-            }
-
-            if (currentRequest.Browser.Browser.ToLower() == "ie"
-                && currentRequest.Browser.MajorVersion <= 9)
-            {
-                browserViewModel.IsUnsupportedBrowser = true;
-                browserViewModel.DownloadNewBrowserLink = "http://windows.microsoft.com/en-us/internet-explorer/download-ie";
-                return browserViewModel;
-            }
-
-            if (currentRequest.Browser.Type.ToLower().Contains("firefox")
-                && currentRequest.Browser.MajorVersion <= 27)
-            {
-                browserViewModel.IsUnsupportedBrowser = true;
-                browserViewModel.DownloadNewBrowserLink = "https://www.mozilla.org/firefox";
-                return browserViewModel;
-            }
-
-            if (currentRequest.Browser.Type.ToLower().Contains("safari")
-                && (currentRequest.Browser.MajorVersion < 7
-                    || (currentRequest.Browser.MajorVersion == 7
-                        && currentRequest.Browser.MinorVersion <= 1)))
-            {
-                browserViewModel.IsUnsupportedBrowser = true;
-                browserViewModel.DownloadNewBrowserLink = "https://support.apple.com/downloads/safari";
-                return browserViewModel;
-            }
-
-            return browserViewModel;
-        }
-
         public Device GetDevice()
         {
             var browser = HttpContext.Current.Request.Browser;

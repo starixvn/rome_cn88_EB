@@ -33,8 +33,8 @@
         {
             get
             {
-                var browserName = browserHelper.GetDevice().Info.BrowserName.ToLower();
-                var userAgent = browserHelper.GetUserAgent().ToLower();
+                var browserName = browserHelper.GetDevice().Info.BrowserName.ToLowerInvariant();
+                var userAgent = browserHelper.GetUserAgent().ToLowerInvariant();
                 var isTablet = browserHelper.IsMobile(isOnlyTablet: true);
 
                 var isSmallScale = browserName.Contains("chrome") &&

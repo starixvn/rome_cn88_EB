@@ -267,7 +267,7 @@ namespace EB.Features.Site
             {
                 var hashData = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
-                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLower();
+                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLowerInvariant();
             }
 
             return encrypted;

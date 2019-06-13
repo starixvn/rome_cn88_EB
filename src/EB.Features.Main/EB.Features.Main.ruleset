@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="SonarQube - CN88 / EB Nexcel CSharp" ToolsVersion="15.0">
-  <Include Path="..\..\SonarQube\cn88-ebcsharp.ruleset" Action="Default" />
+  <Include Path="..\..\sonarqube\cn88-ebcsharp.ruleset" Action="Default" />
 </RuleSet>

@@ -7,8 +7,6 @@ namespace EB.Features.Site.Shared.Helpers
     {
         bool IsMobile(bool isOnlyTablet);
 
-        BrowserViewModel CheckSupportedBrowsers();
-
         Device GetDevice();
 
         string GetDeviceId();

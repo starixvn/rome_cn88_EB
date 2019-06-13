@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EB.Features.Main.Model
+﻿namespace EB.Features.Main.Model
 {
+    using System;
+
     public class UnderMaintenanceModel
     {
         private const string TaipeiStandardTime = "Taipei Standard Time";

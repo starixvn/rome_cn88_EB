@@ -2,6 +2,8 @@
 @using EB.Features.Shared.Configuration;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
+@using EB.Features.Reports.Extension;
+
 @model HouseWinLossReportViewModel
 @{
     Layout = "~/Shared/Views/_Layout.cshtml";
@@ -26,6 +28,7 @@
         @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
         <div class="form-group js-month-group"
              id="dateRangeContainer"
+             data-longmonths-inyear="@Model.ReportFilterViewModel.MonthNames.JoinWithComma()"
              data-mindate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MinDate.ToShortDate()"
              data-maxdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MaxDate.ToShortDate()"
              data-fromdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.FromDate.ToShortDate()"
@@ -68,7 +71,7 @@
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />
     </form>
-    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">        
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("FromDate", Model.Query.FromDate)
         @Html.Hidden("ToDate", Model.Query.ToDate)
@@ -108,13 +111,13 @@
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
                     @HtmlHelpers.RenderNumberCell(row.ValidStake)
-                    @HtmlHelpers.RenderNumberCell(row.MemberIncome )
-                    @HtmlHelpers.RenderNumberCell(row.SuperComm )
-                    @HtmlHelpers.RenderNumberCell(row.HouseWinLoss )
-                    @HtmlHelpers.RenderNumberCell(row.HouseComm )
-                    @HtmlHelpers.RenderNumberCell(row.HouseIncome )
-                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock )
-                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock )
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.SuperComm)
+                    @HtmlHelpers.RenderNumberCell(row.HouseWinLoss)
+                    @HtmlHelpers.RenderNumberCell(row.HouseComm)
+                    @HtmlHelpers.RenderNumberCell(row.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                 </tr>
             }
             @if (Model.ReportData.IsShowTotalRow)
@@ -122,16 +125,16 @@
                 <tfoot>
                     <tr class="total">
                         <th class="text-right header"></th>
-                        @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperComm )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseWinLoss )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseComm )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseIncome )
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock )
-                        @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock )
+                        @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperComm)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseWinLoss)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseComm)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseIncome)
+                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock)
+                        @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                     </tr>
                 </tfoot>
             }

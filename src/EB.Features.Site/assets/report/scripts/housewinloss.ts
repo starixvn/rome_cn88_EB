@@ -107,13 +107,13 @@ class HouseWinLossReport {
         var maxDate = new Date(this.$dateRangeContainer.data("maxdate"));
         var fromDate = new Date(this.$dateRangeContainer.data("fromdate"));
         var toDate = new Date(this.$dateRangeContainer.data("todate"));
-
         this.$("#monPickr1").monPickr({
             today: fromDate,
             maxDate: maxDate,
             showDateRange: true,
             fromDayId: "fromDay1",
-            toDayId: "toDay1"
+            toDayId: "toDay1",
+            shortMonthsInYear: this.$dateRangeContainer.data("longmonths-inyear").split(",")
         });
 
 

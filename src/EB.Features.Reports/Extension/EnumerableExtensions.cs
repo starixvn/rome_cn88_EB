@@ -27,5 +27,7 @@
 
             return total;
         }
+
+        public static string JoinWithComma<T>(this IEnumerable<T> source) => string.Join(",", source);
     }
 }

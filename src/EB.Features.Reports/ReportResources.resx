@@ -204,4 +204,40 @@
   <data name="To" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="January" xml:space="preserve">
+    <value>Jan</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Feb</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Mar</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Apr</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>May</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Jun</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Jul</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Aug</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Sep</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Oct</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Nov</value>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Dec</value>
+  </data>
 </root>

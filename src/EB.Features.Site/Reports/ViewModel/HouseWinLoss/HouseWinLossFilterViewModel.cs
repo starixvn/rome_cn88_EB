@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Site.Reports.ViewModel
 {
+    using EB.Features.Reports;
     using EB.Features.Site.Shared.ViewModels.Components;
 
     public class HouseWinLossFilterViewModel
@@ -40,5 +41,20 @@
 
         public bool IsTest { get; }
 
+        public string[] MonthNames => new[]
+        {
+            ReportResources.January,
+            ReportResources.February,
+            ReportResources.March,
+            ReportResources.April,
+            ReportResources.May,
+            ReportResources.June,
+            ReportResources.July,
+            ReportResources.August,
+            ReportResources.September,
+            ReportResources.October,
+            ReportResources.November,
+            ReportResources.December
+        };
     }
 }

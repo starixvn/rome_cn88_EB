@@ -1,12 +1,11 @@
 (function ($) {
 
     var logger = { error: $.noop };
-
+    var shortMonthsInYear = [],
+        longMonthsInYear = []
     Date.prototype.toStringFormat = function (format) {
 
-        var shortMonthsInYear = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-            longMonthsInYear = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            year = this.getFullYear(),
+        var year = this.getFullYear(),
             month = this.getMonth(),
             day = this.getDate(),
             result = format;
@@ -236,6 +235,8 @@
 
             // Create some defaults, extending them with any options that were provided
             var settings = $.extend({
+                shortMonthsInYear: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                longMonthsInYear: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
                 minDate: firstDayThisYear,
                 maxDate: today,
                 month: today,
@@ -263,6 +264,9 @@
                 beforeChangeDay: function () { },
                 afterChangeDay: function () { }
             }, options);
+
+            shortMonthsInYear = settings.shortMonthsInYear;
+            longMonthsInYear = settings.longMonthsInYear;
 
             //#region VALIDATES INPUT VALUES
 

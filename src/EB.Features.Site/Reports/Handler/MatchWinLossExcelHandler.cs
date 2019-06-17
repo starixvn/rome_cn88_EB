@@ -108,7 +108,7 @@
             var betType = query.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(query.UserSelectedBetTypeId);
             var sportType = query.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(query.UserSelectedSportGroupId);
 
-            return $"{date} - {AppResources.ResourceManager.GetString(liveStatus)} - {betType} - {sportType}";
+            return $"{date} - {sportType} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
         }
 
         internal static string GetExcelFileName(MatchWinLossExcelQuery query)

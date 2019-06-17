@@ -97,7 +97,8 @@
                 ["ToDate"] = ToDate,
                 ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupId,
                 ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
-                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId
+                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
+                ["IsSetMenu"] = true
             };
 
             return "~/Reports/Wager?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));

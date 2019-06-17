@@ -29,7 +29,7 @@
         public DateTime MoveBetsDay { get; }
 
         public override bool IsValid()
-            => SportTypeGroup > 0 && BetTypeGroup > 0 && IsLive > 0;
+            => SportTypeGroup >= 0 && BetTypeGroup >= 0 && IsLive >= 0;
 
         public override string GetSettingKey()
             => "CS_Rpt_MatchWinLoss_Headline";

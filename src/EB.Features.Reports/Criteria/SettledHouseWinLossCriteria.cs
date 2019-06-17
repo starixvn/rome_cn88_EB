@@ -35,7 +35,7 @@
         public bool IsExcludedTest { get; }
 
         public override bool IsValid()
-            => SportTypeGroup > 0 && BetTypeGroup > 0 && IsLive > 0 && FromDate <= ToDate;
+            => SportTypeGroup >= 0 && BetTypeGroup >= 0 && IsLive >= 0 && FromDate <= ToDate;
 
         public override string GetSettingKey()
             => "CS_Rpt_Winloss_Headline";

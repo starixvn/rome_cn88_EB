@@ -1,10 +1,9 @@
-﻿using System;
-using EB.Features.Reports.Params;
-using Fanex.Data;
-using Fanex.Data.Repository;
-
-namespace EB.Features.Reports.Criteria
+﻿namespace EB.Features.Reports.Criteria
 {
+    using System;
+    using EB.Features.Reports.Params;
+    using Fanex.Data.Repository;
+
     public class UnsettledHouseWinLossCriteria : CriteriaBase
     {
         public UnsettledHouseWinLossCriteria(HouseWinLossParam param)
@@ -30,7 +29,7 @@ namespace EB.Features.Reports.Criteria
         public bool IsExcludedTest { get; }
 
         public override bool IsValid()
-            => true;
+            => SportTypeGroup > 0 && BetTypeGroup > 0 && IsLive > 0 && FromDate <= ToDate;
 
         public override string GetSettingKey()
             => "CS_Rpt_Outstanding_Headline";

@@ -19,6 +19,8 @@
 
         Workbook<MatchWinLossModel> Title(string titleText);
 
+        Workbook<MatchWinLossModel> Footer(MatchWinLossModel row, Mapper<MatchWinLossModel> footerMapper);
+
         Workbook<MatchWinLossModel> Header(Func<string, string> headerMapping);
 
         byte[] ExportToBytes();
@@ -26,7 +28,7 @@
         IMatchWinLossWorkbook SetData(MatchWinLossViewModel viewModel);
 
         IMatchWinLossWorkbook SetRowMappers(
-            Mapper<MatchWinLossModel> betTypeRowMapper,
+            Mapper<MatchWinLossModel> normalRowMapper,
             Mapper<MatchWinLossModel> subTotalRowMapper,
             Mapper<MatchWinLossModel> grandTotalRowMapper);
 
@@ -40,11 +42,9 @@
 
         internal MatchWinLossViewModel ViewModel { get; set; }
 
-        internal Mapper<MatchWinLossModel> BetTypeRowMapper { get; set; }
+        internal Mapper<MatchWinLossModel> NormalRowMapper { get; set; }
 
         internal Mapper<MatchWinLossModel> SubTotalRowMapper { get; set; }
-
-        internal Mapper<MatchWinLossModel> TotalRowMapper { get; set; }
 
         internal Mapper<MatchWinLossModel> GrandTotalRowMapper { get; set; }
 
@@ -55,7 +55,6 @@
         internal Row EvenRowTemplate { get; set; }
 
         internal Row SubTotalRowTemplate { get; set; }
-
 
         internal Row SystemParlayRowTemplate { get; set; }
 
@@ -69,13 +68,14 @@
         }
 
         public IMatchWinLossWorkbook SetRowMappers(
-            Mapper<MatchWinLossModel> betTypeRowMapper,
+            Mapper<MatchWinLossModel> normalRowMapper,
             Mapper<MatchWinLossModel> subTotalRowMapper,
             Mapper<MatchWinLossModel> grandTotalRowMapper)
         {
-            BetTypeRowMapper = betTypeRowMapper;
+            NormalRowMapper = normalRowMapper;
             SubTotalRowMapper = subTotalRowMapper;
             GrandTotalRowMapper = grandTotalRowMapper;
+
             return this;
         }
 
@@ -100,7 +100,7 @@
             var templateRow = isEvenRow ? EvenRowTemplate : OddRowTemplate;
 
             row.CopyCellsFrom(templateRow);
-            FillCells(row, betTypeWinLoss, BetTypeRowMapper.Mappings);
+            FillCells(row, betTypeWinLoss, NormalRowMapper.Mappings);
         }
 
         internal void FillMatchTotal(Sheet sheet, int rowIndex, MatchWinLossModel data)
@@ -124,7 +124,7 @@
         {
             var row = sheet.GetRow(rowIndex);
             row.CopyCellsFrom(SystemParlayRowTemplate);
-            FillCells(row, ViewModel.Parlay, BetTypeRowMapper.Mappings);
+            FillCells(row, ViewModel.Parlay, NormalRowMapper.Mappings);
         }
 
         protected override Sheet LoadTemplateSheet()

@@ -84,6 +84,8 @@ window.onload = function () {
 };
 
 function changeLanguage(lang) {
+
+    //document.forms[0].submit();
     $.ajax({
         type: "POST",
         url: $("#changeLanguagePath").val(),

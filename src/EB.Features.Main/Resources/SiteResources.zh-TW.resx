@@ -117,31 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Invalidinput" xml:space="preserve">
-    <value>Invalid input</value>
-  </data>
   <data name="Invalid_Username_or_Password" xml:space="preserve">
-    <value>Invalid Username or Password</value>
+    <value>帳戶或密碼無效</value>
   </data>
   <data name="Logout" xml:space="preserve">
-    <value>Logout</value>
+    <value>登出</value>
   </data>
   <data name="You_have_no_authorization" xml:space="preserve">
-    <value>You have no authorization</value>
+    <value>無存取權限</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>登入</value>
   </data>
   <data name="ShowPassword" xml:space="preserve">
-    <value>Show password</value>
+    <value>顯示密碼</value>
   </data>
   <data name="ExcludeTestData" xml:space="preserve">
-    <value>Exclude Test Data</value>
+    <value>排除測試資料</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>日期</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>關閉</value>
   </data>
 </root>

@@ -29,19 +29,18 @@
 
         public decimal HeadlineStock { get; private set; }
 
-        public HouseWinLossModel Add(HouseWinLossModel model)
-        {
-            Wagers += model.Wagers;
-            Stake += model.Stake;
-            ValidStake += model.ValidStake;
-            MemberIncome += model.MemberIncome;
-            SuperComm += model.SuperComm;
-            HouseWinLoss += model.HouseWinLoss;
-            HouseComm += model.HouseComm;
-            HouseIncome += model.HouseIncome;
-            HeadlineStock += model.HeadlineStock;
-
-            return this;
-        }
+        public static HouseWinLossModel operator +(HouseWinLossModel model1, HouseWinLossModel model2)
+            => new HouseWinLossModel
+            {
+                Wagers = model1.Wagers + model2.Wagers,
+                Stake = model1.Stake + model2.Stake,
+                ValidStake = model1.ValidStake + model2.ValidStake,
+                MemberIncome = model1.MemberIncome + model2.MemberIncome,
+                SuperComm = model1.SuperComm + model2.SuperComm,
+                HouseWinLoss = model1.HouseWinLoss + model2.HouseWinLoss,
+                HouseComm = model1.HouseComm + model2.HouseComm,
+                HouseIncome = model1.HouseIncome + model2.HouseIncome,
+                HeadlineStock = model1.HeadlineStock + model2.HeadlineStock
+            };
     }
 }

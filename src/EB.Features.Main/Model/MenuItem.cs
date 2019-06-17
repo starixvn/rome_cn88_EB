@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using EB.Features.Main.Resources;
 using NapMenuItem = Fanex.NAP.Core.Models.MenuItem;
 
 namespace EB.Features.Main.Model

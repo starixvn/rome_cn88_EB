@@ -77,6 +77,7 @@
         {
             container.Register<IMenuService, MenuService>();
             container.Register<IUnderMainternanceService, UnderMainternanceService>();
+            container.Register<IAuthService, AuthService>();
         }
 
         private static void RegisterMediator(Container container)

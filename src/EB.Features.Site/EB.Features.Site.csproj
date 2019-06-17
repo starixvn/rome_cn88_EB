@@ -637,7 +637,7 @@
     <Content Include="assets\main\bundles\home-index.min.css" />
     <Content Include="assets\main\bundles\home-index.min.js" />
     <Content Include="assets\main\bundles\password\change-password.js" />
-    <Content Include="assets\main\bundles\password\change-password.min.js" />        
+    <Content Include="assets\main\bundles\password\change-password.min.js" />
     <Content Include="assets\main\bundles\security\change-password.css" />
     <Content Include="assets\main\bundles\security\change-password.min.css" />
     <Content Include="assets\main\scripts\auth\kickout.js" />
@@ -778,8 +778,11 @@
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Login\Handlers\LoginHandler.cs" />
     <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
     <Compile Include="Login\InternalLoginController.cs" />
+    <Compile Include="Login\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Login\Requests\LoginQuery.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
     <Compile Include="Main\LanguageController.cs" />

@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using EB.Features.Reports.Model;
-    using EB.Features.Reports.ViewModel;
 
     public static class EnumerableExtensions
     {
@@ -11,7 +10,7 @@
             var total = new MatchWinLossModel();
             foreach (var match in matches)
             {
-                total = total.Add(match);
+                total += match;
             }
 
             return total;
@@ -22,7 +21,7 @@
             var total = new HouseWinLossModel();
             foreach (var match in matches)
             {
-                total = total.Add(match);
+                total += match;
             }
 
             return total;

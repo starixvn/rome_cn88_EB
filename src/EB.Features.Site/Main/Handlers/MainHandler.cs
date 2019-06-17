@@ -35,7 +35,7 @@
         }
 
         public IEnumerable<MenuItem> Handle(MenuBarQuery message)
-            => siteMenuService.GetMenu(message.MenuList);
+            => siteMenuService.GetMenu(message.CurrentSession.UserId);
 
         public IndexViewModel Handle(IndexQuery message)
             => new IndexViewModel(message.CurrentSession, browserHelper, encodeDataFunction, message);

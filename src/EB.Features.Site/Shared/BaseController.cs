@@ -4,9 +4,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
+using EB.Features.Main.Resources;
 using EB.Features.Shared.Constants;
 using EB.Features.Shared.Model;
-using EB.Features.Shared.Resources;
 using EB.Features.Site.Reports.ViewModel;
 using EB.Features.Site.Shared.Models;
 using Fanex.NAP.Core.Web.Attribute;
@@ -19,7 +19,7 @@ namespace EB.Features.Site.Shared
     {
         protected const string NoInformationPageViewPath = "~/Shared/Views/NoInformation.cshtml";
         private const string InvalidExcelFileName = "Invalid";
-        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(Language.Default);
+        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(LanguageConstants.Default);
 
         protected readonly IMediator mediator;
 
@@ -72,7 +72,7 @@ namespace EB.Features.Site.Shared
 
             if (string.IsNullOrEmpty(cultureName))
             {
-                cultureName = Language.Default;
+                cultureName = LanguageConstants.Default;
                 UserSessionImpl.Current.Language = cultureName;
             }
 

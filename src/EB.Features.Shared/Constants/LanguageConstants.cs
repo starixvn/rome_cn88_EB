@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public static class Language
+    public static class LanguageConstants
     {
         public const string NewChineseSimplified = "zh-Hans";
         public const string ChineseTraditional = "zh-TW";

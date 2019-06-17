@@ -15,6 +15,8 @@
 
         Workbook<HouseWinLossModel> Title(string titleText);
 
+        Workbook<HouseWinLossModel> Footer(HouseWinLossModel row, Mapper<HouseWinLossModel> footerMapper);
+
         Workbook<HouseWinLossModel> Header(Func<string, string> headerMapping);
 
         byte[] ExportToBytes();
@@ -24,7 +26,7 @@
             HouseWinLossModel grandTotal);
 
         IHouseWinLossWorkbook SetRowMappers(
-            Mapper<HouseWinLossModel> betTypeRowMapper,
+            Mapper<HouseWinLossModel> rowMapper,
             Mapper<HouseWinLossModel> grandTotalRowMapper);
 
     }
@@ -35,13 +37,11 @@
 
         private int currentRowIndex;
 
-        internal IEnumerable<HouseWinLossModel> NoParlayMatchWinLossDetail { get; set; }
-
-        internal HouseWinLossModel NoParlayWinLossTotal { get; set; }
+        internal IEnumerable<HouseWinLossModel> ModelDetails { get; set; }
 
         internal HouseWinLossModel GrandTotal { get; set; }
 
-        internal Mapper<HouseWinLossModel> BetTypeRowMapper { get; set; }
+        internal Mapper<HouseWinLossModel> RowMapper { get; set; }
 
         internal Mapper<HouseWinLossModel> GrandTotalRowMapper { get; set; }
 
@@ -57,17 +57,17 @@
             IEnumerable<HouseWinLossModel> reportData,
             HouseWinLossModel grandTotal)
         {
-            NoParlayMatchWinLossDetail = reportData;
+            ModelDetails = reportData;
             GrandTotal = grandTotal;
 
             return this;
         }
 
         public IHouseWinLossWorkbook SetRowMappers(
-            Mapper<HouseWinLossModel> betTypeRowMapper,
+            Mapper<HouseWinLossModel> rowMapper,
             Mapper<HouseWinLossModel> grandTotalRowMapper)
         {
-            BetTypeRowMapper = betTypeRowMapper;
+            RowMapper = rowMapper;
             GrandTotalRowMapper = grandTotalRowMapper;
             return this;
         }
@@ -82,7 +82,7 @@
             var templateRow = isEvenRow ? EvenRowTemplate : OddRowTemplate;
 
             row.CopyCellsFrom(templateRow);
-            FillCells(row, betTypeWinLoss, BetTypeRowMapper.Mappings);
+            FillCells(row, betTypeWinLoss, RowMapper.Mappings);
         }
 
         protected override Sheet LoadTemplateSheet()
@@ -128,7 +128,7 @@
         {
             RemoveTemplateRows(sheet);
 
-            var hasData = (NoParlayMatchWinLossDetail != null && NoParlayMatchWinLossDetail.Any());
+            var hasData = (ModelDetails != null && ModelDetails.Any());
 
             if (hasData)
             {
@@ -145,7 +145,7 @@
         {
             currentRowIndex = TemplateInfo.BodyStartIndex;
             var isEvenRow = false;
-            foreach (var data in NoParlayMatchWinLossDetail)
+            foreach (var data in ModelDetails)
             {
                 FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, data);
                 isEvenRow = !isEvenRow;

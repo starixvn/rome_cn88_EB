@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace EB.Features.Shared.Constants
+﻿namespace EB.Features.Shared.Constants
 {
+    using System.Collections.Generic;
+
     public static class BetTypeIdConstants
     {
         public const int Handicap = 1;

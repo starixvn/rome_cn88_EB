@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Resources;
-
-namespace EB.Features.Shared.Model
+﻿namespace EB.Features.Shared.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Resources;
+
     public class SportGroup
     {
         private readonly Func<int, string> getSportGroupDisplayName;

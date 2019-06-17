@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace EB.Features.Shared.Extensions
+﻿namespace EB.Features.Shared.Extensions
 {
+    using System;
+
     public static class DateTimeExtensions
     {
         private const string ShortDate = "yyyy-MM-dd";

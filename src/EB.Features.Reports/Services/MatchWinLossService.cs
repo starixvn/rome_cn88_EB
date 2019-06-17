@@ -57,10 +57,9 @@
                     row.HomeName = cacheRefService.GetTeamName(row.HomeId);
                     row.AwayName = cacheRefService.GetTeamName(row.AwayId);
                     row.LeagueName = cacheRefService.GetLeagueName(row.LeagueId);
-                    row.LeagueNameByEnglish = cacheRefService.GetLeagueName(row.LeagueId, Language.English);
+                    row.LeagueNameByEnglish = cacheRefService.GetLeagueName(row.LeagueId, LanguageConstants.English);
                 }
             }
         }
-
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Specialized;
-using System.Configuration;
-
-namespace EB.Features.Shared.Configuration
+﻿namespace EB.Features.Shared.Configuration
 {
+    using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
+
     public static class AppSettings
     {
         [ThreadStatic]

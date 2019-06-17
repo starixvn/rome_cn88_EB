@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Shared.Model;
-using Fanex.Common;
-using Fanex.Data;
-using Fanex.Data.Repository;
-
-namespace EB.Features.Shared.DataAccesses
+﻿namespace EB.Features.Shared.DataAccesses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Shared.Model;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
+
     public interface SportGroupDataAccess
     {
         IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName);

@@ -6,7 +6,7 @@
         {
 
         }
-                
+
         public int LeagueId { get; }
 
         public int MatchId { get; }
@@ -39,16 +39,15 @@
 
         public string LeagueNameByEnglish { get; set; }
 
-        public MatchWinLossModel Add(MatchWinLossModel match)
-        {
-            Wagers += match.Wagers;
-            Stake += match.Stake;
-            ValidStake += match.ValidStake;
-            MemberIncome += match.MemberIncome;
-            HouseIncome += match.HouseIncome;
-            HeadlineStock += match.HeadlineStock;
-
-            return this;
-        }
+        public static MatchWinLossModel operator +(MatchWinLossModel match1, MatchWinLossModel match2)
+            => new MatchWinLossModel
+            {
+                Wagers = match1.Wagers + match2.Wagers,
+                Stake = match1.Stake + match2.Stake,
+                ValidStake = match1.ValidStake + match2.ValidStake,
+                MemberIncome = match1.MemberIncome + match2.MemberIncome,
+                HouseIncome = match1.HouseIncome = match2.HouseIncome,
+                HeadlineStock = match1.HeadlineStock + match2.HeadlineStock
+            };
     }
 }

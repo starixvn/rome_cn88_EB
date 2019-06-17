@@ -9,20 +9,19 @@
 
     public class MultipleLanguageController : Controller
     {
-        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(Language.Default);
+        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(LanguageConstants.Default);
 
         protected override void Initialize(RequestContext requestContext)
         {
-            var cultureName = UserSessionImpl.Current.Language;
-
-            if (string.IsNullOrEmpty(cultureName))
+            var languageCode = requestContext.HttpContext.Request["HideLanguage"];
+            languageCode = string.IsNullOrEmpty(languageCode) ? UserSessionImpl.Current.Language : languageCode;
+            if (string.IsNullOrEmpty(languageCode))
             {
-                cultureName = Language.Default;
-                UserSessionImpl.Current.Language = cultureName;
+                languageCode = LanguageConstants.Default;
             }
 
             // Modify current thread's cultures
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(languageCode);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
             Thread.CurrentThread.CurrentCulture.DateTimeFormat = defaultCulture.DateTimeFormat;

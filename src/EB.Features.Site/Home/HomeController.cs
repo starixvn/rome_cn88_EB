@@ -1,8 +1,8 @@
-﻿using System.Web.Mvc;
-using Fanex.NAP.Core.Web.Attribute;
-
-namespace EB.Features.Site.Reports
+﻿namespace EB.Features.Site.Reports
 {
+    using System.Web.Mvc;
+    using Fanex.NAP.Core.Web.Attribute;
+
     [NapSuperAuth]
     public class HomeController : Controller
     {

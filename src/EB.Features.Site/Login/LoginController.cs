@@ -191,15 +191,5 @@
             currentSession.OnUserId = onUserId;
             currentSession.SessionId = Session.SessionID;
         }
-
-        private void ClearAllCookie()
-        {
-            var limit = Request.Cookies.Count;
-            for (var i = 0; i < limit; i++)
-            {
-                var cookieName = Request.Cookies[i].Name;
-                Response.Cookies[cookieName].Expires = DateTime.Now.AddDays(-10);
-            }
-        }
     }
 }

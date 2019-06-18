@@ -191,7 +191,7 @@ Sphinx.Login = {
 
     resetPassword: function ($input) {
         var valPlaceholder = $input.attr('placeholder');
-        var inputPassword = $('<input type="text" id="txtPassWord" name="txtPassWord" tabindex="2" placeholder="' +
+        var inputPassword = $('<input type="text" id="password" name="password" tabindex="2" placeholder="' +
             valPlaceholder +
             '" class="txt" value="' +
             $('<div>').text($input.val()).html() +

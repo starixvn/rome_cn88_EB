@@ -85,23 +85,15 @@
 
         public static string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 
-        public string GetDownlineLink()
+        public static string GetDownlineLink()
         {
             var param = new Dictionary<string, object>
-            {
-                ["ReportType"] = Query.UserSelectedTicketStatusId == TicketStatusConstants.Settled ? 1 : 2,
+            {                
                 ["DisplayMode"] = 1,
-                ["IsOwner"] = false,
-                ["CustLevelId"] = 4,
-                ["FromDate"] = FromDate,
-                ["ToDate"] = ToDate,
-                ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupId,
-                ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
-                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
                 ["IsSetMenu"] = true
             };
 
-            return "~/Reports/Wager?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+            return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
         }
     }
 }

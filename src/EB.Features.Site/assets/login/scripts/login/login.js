@@ -67,8 +67,8 @@ Sphinx.Login = {
         formLogin: null
     },
     cachedDomElements: function () {
-        Sphinx.Login.domElements.txtUsername = $('#txtUserName');
-        Sphinx.Login.domElements.txtPassword = $('#txtPassWord');
+        Sphinx.Login.domElements.txtUsername = $('#username');
+        Sphinx.Login.domElements.txtPassword = $('#password');
         Sphinx.Login.domElements.chbShowPassword = $('#chbShowPass');
         Sphinx.Login.domElements.txtCaptcha = $('#txtCaptcha');
         Sphinx.Login.domElements.imgCode = $('#imgCode');

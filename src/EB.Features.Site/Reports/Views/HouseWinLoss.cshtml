@@ -159,7 +159,7 @@
     <input type="hidden" id="roleId" name="roleId" value="" />
     <input type="hidden" id="roleId" name="roleId" value="" />
     <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
-    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="@Model.GetDownlineLink()" />
+    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="@HouseWinLossReportViewModel.GetDownlineLink()" />
 </form>
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")

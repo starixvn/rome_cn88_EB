@@ -172,7 +172,7 @@ Sphinx.Login = {
 
     setPassword: function ($input) {
         var valPlaceholder = $input.attr('placeholder');
-        var inputPassword = $('<input type="password" id="txtPassWord" name="txtPassWord" tabindex="2" placeholder="' +
+        var inputPassword = $('<input type="password" id="password" name="password" tabindex="2" placeholder="' +
             valPlaceholder +
             '"  class="txt"  value="' +
             $('<div>').text($input.val()).html() + '" autocomplete="off"  />');

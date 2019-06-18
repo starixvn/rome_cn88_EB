@@ -64,9 +64,6 @@
             ReportData = reportData;
             Query = query;
             MoveBetDate = moveBetDate;
-
-            FromDate = Query.IsHistoricReport ? Query.FromDate : Query.Date;
-            ToDate = Query.IsHistoricReport ? Query.ToDate : Query.Date;
         }
 
         private DateTime MoveBetDate { get; }
@@ -76,10 +73,6 @@
         public HouseWinLossViewModel ReportData { get; }
 
         public HouseWinLossFilterViewModel ReportFilterViewModel { get; }
-
-        public DateTime FromDate { get; }
-
-        public DateTime ToDate { get; }
 
         public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, MoveBetDate.ToShortDate());
 

@@ -20,13 +20,11 @@
     {
         private readonly IUserService userService;
         private readonly IGroupService groupService;
-        private readonly HashAlgorithm hashAlgorithm;
 
         public AuthService(IUserService userService, IGroupService groupService)
         {
             this.groupService = groupService;
             this.userService = userService;
-            hashAlgorithm = new SHA256Managed();
         }
 
         public User GetUserInfo(string userName)
@@ -80,12 +78,13 @@
                    menuList.Any());
         }
 
-        private string GetHash(string input)
+        private static string GetHash(string input)
         {
             var encrypted = string.Empty;
 
             if (!string.IsNullOrWhiteSpace(input))
             {
+                var hashAlgorithm = new SHA256Managed();
                 var hashData = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
 
                 encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLowerInvariant();

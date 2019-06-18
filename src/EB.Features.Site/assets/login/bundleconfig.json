@@ -7,9 +7,10 @@
       "scripts/libs/storage/store-with-json2.min.js",
       "scripts/libs/cryptojs/CryptoJS.js",
       "scripts/libs/jquery/jquery.cookie.js",
+      "scripts/login/core.js",
       "scripts/login/login.js",
-      "scripts/login/href-handler.js",
-      "../main/scripts/site-infrastructure.js"
+      "scripts/login/resources.js",
+      "scripts/login/href-handler.js"
     ]
   },
   {

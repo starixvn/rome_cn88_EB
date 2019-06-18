@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using EB.Features.Shared.Constants;
-    using EB.Features.Site.Shared.Models;
 
     public class MultipleLanguageController : Controller
     {
@@ -14,7 +13,6 @@
         protected override void Initialize(RequestContext requestContext)
         {
             var languageCode = requestContext.HttpContext.Request["HideLanguage"];
-            languageCode = string.IsNullOrEmpty(languageCode) ? UserSessionImpl.Current.Language : languageCode;
             if (string.IsNullOrEmpty(languageCode))
             {
                 languageCode = LanguageConstants.Default;

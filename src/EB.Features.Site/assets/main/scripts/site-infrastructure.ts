@@ -59,8 +59,12 @@ class SiteInfrastructure {
             return cookieExpire;
         },
         clear: () => {
-            if (store.enabled) {
-                store.clear();
+            if (store.enabled) {                
+                var allKeys = store.getAll();
+                for (var key in allKeys) {
+                    if (key != "LANGUAGE")
+                        store.remove(key);
+                }
             }
         },
         remove: (key: string) => {

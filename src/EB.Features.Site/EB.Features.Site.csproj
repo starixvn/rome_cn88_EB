@@ -1143,15 +1143,13 @@
     <Content Include="Main\Views\LanguageList.cshtml" />
     <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
     <Content Include="IbcKeys\ibckey.snk" />
-    <Content Include="Configurations\appSettings.uat.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configurations\connectionStrings.uat.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Configurations\appSettings.uat.config" />
+    <Content Include="Configurations\connectionStrings.uat.config" />
     <Content Include="IbcKeys\ibckeydec.snk" />
     <Content Include="IbcKeys\ibcpkey.snk" />
     <Content Include="IbcKeys\Web.config" />
+    <Content Include="Configurations\connectionStrings.pro.config" />
+    <Content Include="Configurations\appSettings.pro.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
@@ -1170,16 +1168,15 @@
     <Content Include="Reports\Views\MatchWinLoss.cshtml" />
     <Content Include="Shared\Views\_Layout.cshtml" />
     <Content Include="Shared\Views\web.config" />
-    <Content Include="Web.uat.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Web.uat.config" />
     <Content Include="Web.uat.Debug.config">
       <DependentUpon>Web.uat.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.pro.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
     <Content Include="Web.uat.Release.config">
       <DependentUpon>Web.uat.config</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

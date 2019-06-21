@@ -785,10 +785,14 @@
     <Compile Include="Login\Requests\LoginQuery.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
+    <Compile Include="Main\Handlers\UserInfoHandler.cs" />
     <Compile Include="Main\LanguageController.cs" />
+    <Compile Include="Main\Requests\ChangePasswordQuery.cs" />
+    <Compile Include="Main\UserInfoController.cs" />
     <Compile Include="Main\Requests\AllLanguagesQuery.cs" />
     <Compile Include="Main\Requests\ChangeLanguageCommand.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
+    <Compile Include="Main\ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="Main\ViewModel\LanguageViewModel.cs" />
     <Compile Include="Reports\ExcelBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossExcelHandler.cs" />
@@ -1150,6 +1154,7 @@
     <Content Include="IbcKeys\Web.config" />
     <Content Include="Configurations\connectionStrings.pro.config" />
     <Content Include="Configurations\appSettings.pro.config" />
+    <Content Include="Main\Views\ChangePassword.cshtml" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

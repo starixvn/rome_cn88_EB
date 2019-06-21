@@ -129,4 +129,7 @@
   <data name="Home" xml:space="preserve">
     <value>首頁</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>更改密碼</value>
+  </data>
 </root>

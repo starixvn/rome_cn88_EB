@@ -93,6 +93,7 @@
     <Compile Include="Criteria\InternalLogin\GetDBTimeCriteria.cs" />
     <Compile Include="DataAccesses\InternalLoginDataAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Params\ChangePasswordParam.cs" />
     <Compile Include="Resources\MainResource.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,6 +113,7 @@
     <Compile Include="Services\InternalLoginService.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\UnderMainternanceService.cs" />
+    <Compile Include="Services\UserInfoService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -120,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MainResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MainResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\MainResource.zh-Hans.resx" />
@@ -132,6 +134,11 @@
     <EmbeddedResource Include="Resources\SiteResources.zh-Hans.resx" />
     <EmbeddedResource Include="Resources\SiteResources.zh-TW.resx" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\EB.Features.Shared\EB.Features.Shared.csproj">
+      <Project>{E31EBBB6-C646-4491-AC72-FF249AFECF16}</Project>
+      <Name>EB.Features.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

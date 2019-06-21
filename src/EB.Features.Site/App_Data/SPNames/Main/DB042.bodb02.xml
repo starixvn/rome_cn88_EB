@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions> 
+  <Function Name="Reports">
+    <Setting Key="CS_Rpt_Outstanding_Headline" SpName="CS_Rpt_Outstanding_Headline" DbName="DB042.bodb02.bodbAdminNet" Plain="0">
+    </Setting>
+  </Function>
+
+</Functions>

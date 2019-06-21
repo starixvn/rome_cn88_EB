@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Configuration
+﻿namespace EB.Features.Shared.Configuration
 {
-    public class AppSettings
+    using System;
+    using System.Collections.Specialized;
+    using System.Configuration;
+
+    public static class AppSettings
     {
         [ThreadStatic]
         private static NameValueCollection appSettingValues;
@@ -25,6 +21,14 @@ namespace EB.Features.Shared.Configuration
         public static string RemoteRefURL => GetConfigValue("RemoteRefURL");
 
         public static bool IsTest => GetConfigValue("LocalTest") == "1";
+
+        public static string InternalLogInURLHeadline => GetConfigValue("InternalLogInURLHeadline");
+
+        public static string InternalLogInURL => GetConfigValue("InternalLogInURL");
+
+        public static string InternalLogInUMToken => GetConfigValue("InternalLogInUMToken");
+
+        public static string FeaturesAppPath => GetConfigValue("FeaturesAppPath");
 
         public static string GetConfigValue(string configName) => AppSettingValues[configName];
 

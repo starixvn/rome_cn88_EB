@@ -9,58 +9,58 @@
     @value.ToString("#,##0")
 }
 
+@helper RenderHeaderWagerCell(int wager, string cellClass = "", bool isHiddenOnMobile = false)
+{
+    <th class="text-right @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
+        @FormatNumber(wager)
+    </th>
+}
+
 @helper RenderHeaderNumberCell(decimal cellValue, string cellClass = "", bool isHiddenOnMobile = false)
 {
 
-    var value = cellValue.Round();
-    <th class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
-        @FormatNumber(value)
-    </th>
-}
-
-@helper RenderHeaderNumberCell(int divisor, decimal cellValue, string cellClass = "", bool isHiddenOnMobile = false)
-{
-
-    var value = (cellValue / divisor).Round();
+    var value = (cellValue / 100).Round();
 
     <th class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
         @FormatNumber(value)
     </th>
 }
 
-@helper RenderHeaderNumberCell(int cellValue, string cellClass = "")
+@helper RenderWagerCell(int cellValue, string cellClass = "")
 {
-    <th class="text-right @(cellValue < 0 ? "negative-value" : string.Empty) @cellClass">
+    <td class="text-right @cellClass">
         @FormatNumber(cellValue)
-    </th>
+    </td>
 }
+
 
 @helper RenderNumberCell(decimal cellValue, string cellClass = "")
 {
-    var value = cellValue.Round();
+    var value = (cellValue / 100).Round();
     <td class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass">
         @FormatNumber(value)
     </td>
 }
 
-@helper RenderNumberCell(int cellValue, string cellClass = "")
+@helper FormatPercent(decimal percent)
 {
-    <td class="text-right @(cellValue < 0 ? "negative-value" : string.Empty) @cellClass">
-        @FormatNumber(cellValue)
-    </td>
+    @percent.ToString("#,##0.0000")
 }
 
-@helper RenderNumberCell(int divisor, decimal cellValue, string cellClass = "")
+@helper RenderHeaderPercentCell(decimal percent, string cellClass = "", bool isHiddenOnMobile = false)
 {
-    var value = (cellValue / divisor).Round();
-    <td class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass">
-        @FormatNumber(value)
-    </td>
-}
-
-@helper RenderHeaderNumberCell(int cellValue, string cellClass = "", bool isHiddenOnMobile = false)
-{
-    <th class="text-right @(cellValue < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
-        @FormatNumber(cellValue)
+    <th class="text-right @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
+        @FormatPercent(percent)
     </th>
+}
+@helper RenderPercentCell(decimal percent, string cellClass = "")
+{
+    <td class="text-right @cellClass">
+        @FormatPercent(percent)
+    </td>
+}
+@helper RenderStockPercentCell(decimal stock, decimal totalStock, string cellClass = "")
+{
+    var stockPercent = totalStock == 0 ? 0 : stock / totalStock * 100;
+    @RenderPercentCell(stockPercent, cellClass)
 }

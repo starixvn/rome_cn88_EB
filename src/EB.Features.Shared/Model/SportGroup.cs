@@ -1,27 +1,36 @@
-﻿using EB.Features.Shared.Constants;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Model
+﻿namespace EB.Features.Shared.Model
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Resources;
+
     public class SportGroup
     {
         private readonly Func<int, string> getSportGroupDisplayName;
 
+        public SportGroup()
+        {
+
+        }
+
         internal SportGroup(
             int id,
+            int productId,
             IEnumerable<int> displaySportIds,
             Func<int, string> getSportGroupDisplayName)
         {
             Id = id;
+            ProductId = productId;
             DisplaySportIds = displaySportIds;
             this.getSportGroupDisplayName = getSportGroupDisplayName;
         }
 
         public int Id { get; }
+
+        public int ProductId { get; }
 
         public IEnumerable<int> DisplaySportIds { get; }
 
@@ -31,12 +40,12 @@ namespace EB.Features.Shared.Model
         {
             if (Id == SportGroupConstants.ParlaySportGroupId)
             {
-                return "SharedResources.Parlay";
+                return AppResources.Parlay;
             }
 
             if (Id == SportGroupConstants.VirtualSportsGroupId)
             {
-                return "SharedResources.VirtualSports";
+                return AppResources.VirtualSports;
             }
 
             var stringBuilder = new StringBuilder();

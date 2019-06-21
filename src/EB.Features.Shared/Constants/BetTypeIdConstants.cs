@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Constants
+﻿namespace EB.Features.Shared.Constants
 {
+    using System.Collections.Generic;
+
     public static class BetTypeIdConstants
     {
         public const int Handicap = 1;
@@ -22,7 +18,7 @@ namespace EB.Features.Shared.Constants
         public const int Outright = 10;
         public const int SystemParlay = 29;
 
-        public static List<int> MajorBetType = new List<int> {
+        public readonly static List<int> MajorBetType = new List<int> {
             Handicap,
             OverUnder,
             CorrectScore,

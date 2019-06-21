@@ -1,12 +1,7 @@
-﻿using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Criteria
+﻿namespace EB.Features.Shared.Criteria
 {
+    using Fanex.Data.Repository;
+
     public class GetBalanceUpDayAndMoveBetsDayCriteria : CriteriaBase
     {
         public override string GetSettingKey() => "Age_SelBalanceUpDay";

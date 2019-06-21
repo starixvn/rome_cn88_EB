@@ -1,4 +1,9 @@
-﻿using EB.Features.Shared.Configuration;
+﻿using System;
+using System.Diagnostics;
+using System.Reflection;
+using System.Web.Mvc;
+using System.Web.Routing;
+using EB.Features.Shared.Configuration;
 using EB.Features.Site.App_Start;
 using EB.Features.Site.Shared;
 using Fanex.Data;
@@ -6,14 +11,6 @@ using Fanex.Data.CrossCutting.WrappingException;
 using Fanex.Data.OldConnectionStringProvider;
 using Fanex.RemotingRef;
 using ONEbook.UM.Filters;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
 
 namespace EB.Features.Site
 {
@@ -47,6 +44,7 @@ namespace EB.Features.Site
                 .ConnectTo(new Uri(AppSettings.RemoteRefURL))
                 .FromApplication("EB.Features.Site");
         }
+
         private static string GetBuildVersion()
         {
             Assembly assembly = Assembly.GetCallingAssembly();

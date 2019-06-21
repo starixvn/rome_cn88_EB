@@ -1,0 +1,18 @@
+﻿@using EB.Features.Shared.Resources
+@using EB.Features.Site.Shared.ViewModels.Components
+@helper Render(SingleSelectionViewModel model, bool showLabel)
+{
+    <div class="form-group">
+        @if (showLabel)
+        {
+            <label>@AppResources.Type</label>
+        }
+        <select id="dropdown-ticketstatus">
+            @foreach (var group in model.Items)
+            {
+                <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
+            }
+        </select>
+        <input type="hidden" name="UserSelectedTicketStatusId" id="UserSelectedTicketStatusId" value="@model.UserSelectedId" />
+    </div>
+}

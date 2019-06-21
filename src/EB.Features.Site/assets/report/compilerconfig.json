@@ -4,6 +4,10 @@
     "inputFile": "styles/reports.scss"
   },
   {
+    "outputFile": "styles/reports.override.css",
+    "inputFile": "styles/reports.override.scss"
+  },
+  {
     "outputFile": "styles/security.css",
     "inputFile": "styles/security.scss"
   }

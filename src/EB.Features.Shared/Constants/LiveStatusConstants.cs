@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Constants
+﻿namespace EB.Features.Shared.Constants
 {
+    using System.Collections.Generic;
+
     public static class LiveStatusConstants
     {
         public const int PreMatch = 0;

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Extensions
+﻿namespace EB.Features.Shared.Extensions
 {
     public static class NumberExtensions
     {
@@ -18,6 +12,6 @@ namespace EB.Features.Shared.Extensions
             => start <= number && number <= end;
 
         public static decimal Round(this decimal value)
-            => decimal.Round(value, 2);
+            => decimal.Round(value, CommonConstants.NumberRound);
     }
 }

@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
@@ -35,6 +36,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,8 +46,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Couchbase, Version=1.2.6.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CouchbaseNetClient.1.2.6.3\lib\net40\Couchbase.dll</HintPath>
+    </Reference>
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Dapper.1.60.1\lib\net451\Dapper.dll</HintPath>
     </Reference>
@@ -57,6 +63,9 @@
     </Reference>
     <Reference Include="EasyNetQ, Version=2.3.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EasyNetQ.2.3.3\lib\net451\EasyNetQ.dll</HintPath>
+    </Reference>
+    <Reference Include="Enyim.Caching, Version=2.12.0.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\CouchbaseNetClient.1.2.6.3\lib\net40\Enyim.Caching.dll</HintPath>
     </Reference>
     <Reference Include="Fanex.Caching, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.Caching.2.2.1\lib\net461\Fanex.Caching.dll</HintPath>
@@ -100,6 +109,9 @@
     <Reference Include="Fanex.RemotingRef, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Fanex.RemotingRef.1.3.0\lib\net461\Fanex.RemotingRef.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MediatR.3.0.1\lib\net45\MediatR.dll</HintPath>
     </Reference>
@@ -122,6 +134,24 @@
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="ONEbook.SpreadSheets, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.SpreadSheets.1.0.0.1\lib\net461\ONEbook.SpreadSheets.dll</HintPath>
+    </Reference>
+    <Reference Include="ONEbook.SpreadSheets.NPOI, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ONEbook.SpreadSheets.NPOI.1.0.0.3\lib\net461\ONEbook.SpreadSheets.NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="ONEbook.UM, Version=2.0.2.9, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ONEbook.UM.2.0.2.9\lib\net40\ONEbook.UM.dll</HintPath>
     </Reference>
@@ -130,6 +160,9 @@
     </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\RestSharp.105.2.3\lib\net46\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="RSACryptoPad, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\RSACryptoPad.1.0.0.0\lib\net40\RSACryptoPad.dll</HintPath>
     </Reference>
     <Reference Include="SharpRaven, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SharpRaven.2.4.0\lib\net45\SharpRaven.dll</HintPath>
@@ -142,6 +175,9 @@
     </Reference>
     <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.6.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SimpleInjector.Integration.Web.Mvc.4.6.0\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Sunplus.Agent.Utilities, Version=3.0.0.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Sunplus.Agent.Utilities.3.0.0.7\lib\net40\Sunplus.Agent.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
@@ -243,8 +279,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml" />
+    <Content Include="App_Data\SPNames\Main\DB042.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml" />
     <Content Include="App_Data\SPNames\Local\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Local\DBAGE.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Main\DBCust.CustDB.xml" />
     <Content Include="assets\common\bundles\common\common.css" />
     <Content Include="assets\common\bundles\common\common.js" />
     <Content Include="assets\common\bundles\common\common.min.css">
@@ -437,8 +477,6 @@
     <Content Include="assets\common\styles\images\oldbrowser-super2.jpg" />
     <Content Include="assets\common\styles\layout\before-home-page\before-home-page.css" />
     <Content Include="assets\common\styles\layout\before-home-page\before-home-page.min.css" />
-    <Content Include="assets\common\styles\layout\dcs\customizeDCS.css" />
-    <Content Include="assets\common\styles\layout\dcs\customizeDCS.min.css" />
     <Content Include="assets\common\styles\layout\default-layout\header.css" />
     <Content Include="assets\common\styles\layout\default-layout\header.min.css" />
     <Content Include="assets\common\styles\layout\default-layout\navigation.css" />
@@ -549,6 +587,7 @@
     <Content Include="assets\login\scripts\libs\flipclock\flipclock.js" />
     <Content Include="assets\login\scripts\libs\flipclock\flipclock.min.js" />
     <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.js" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery.cookie.js" />
     <Content Include="assets\login\scripts\libs\storage\store-with-json2.min.js" />
     <Content Include="assets\login\scripts\login\captcha.js" />
     <Content Include="assets\login\scripts\login\core.js" />
@@ -567,10 +606,6 @@
     <Content Include="assets\login\styles\pages\error3.min.css" />
     <Content Include="assets\login\styles\pages\um.css" />
     <Content Include="assets\login\styles\pages\um.min.css" />
-    <Content Include="assets\login\styles\pages\um2.css" />
-    <Content Include="assets\login\styles\pages\um2.min.css" />
-    <Content Include="assets\login\styles\pages\um3.css" />
-    <Content Include="assets\login\styles\pages\um3.min.css" />
     <Content Include="assets\login\styles\themes\default.css" />
     <Content Include="assets\login\styles\themes\default.min.css" />
     <Content Include="assets\login\styles\themes\event.css" />
@@ -587,12 +622,28 @@
     </Content>
     <Content Include="assets\login\styles\vendors\bootstrap.css" />
     <Content Include="assets\login\styles\vendors\bootstrap.min.css" />
+    <Content Include="assets\main\bundles\auth\kickout.js" />
+    <Content Include="assets\main\bundles\auth\kickout.min.js" />
+    <Content Include="assets\main\bundles\default-index.css" />
+    <Content Include="assets\main\bundles\default-index.js" />
+    <Content Include="assets\main\bundles\default-index.min.css" />
+    <Content Include="assets\main\bundles\default-index.min.js" />
+    <Content Include="assets\main\bundles\default.css" />
+    <Content Include="assets\main\bundles\default.min.css" />
+    <Content Include="assets\main\bundles\error-page.css" />
+    <Content Include="assets\main\bundles\error-page.min.css" />
+    <Content Include="assets\main\bundles\home-index.css" />
+    <Content Include="assets\main\bundles\home-index.js" />
+    <Content Include="assets\main\bundles\home-index.min.css" />
+    <Content Include="assets\main\bundles\home-index.min.js" />
+    <Content Include="assets\main\bundles\password\change-password.js" />
+    <Content Include="assets\main\bundles\password\change-password.min.js" />
+    <Content Include="assets\main\bundles\security\change-password.css" />
+    <Content Include="assets\main\bundles\security\change-password.min.css" />
     <Content Include="assets\main\scripts\auth\kickout.js" />
     <Content Include="assets\main\scripts\default\index-manager.js" />
     <Content Include="assets\main\scripts\home\index-manager.js" />
     <Content Include="assets\main\scripts\password\change-password.js" />
-    <Content Include="assets\main\scripts\securitycode\change-securitycode.js" />
-    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js" />
     <Content Include="assets\main\styles\error-page.css" />
     <Content Include="assets\main\styles\error-page.min.css" />
     <Content Include="assets\main\styles\home.css" />
@@ -640,6 +691,10 @@
     <Content Include="assets\main\styles\security\security.min.css" />
     <Content Include="assets\main\styles\site.css" />
     <Content Include="assets\main\styles\site.min.css" />
+    <Content Include="assets\report\bundles\housewinloss.js" />
+    <Content Include="assets\report\bundles\housewinloss.min.js">
+      <DependentUpon>housewinloss.js</DependentUpon>
+    </Content>
     <Content Include="assets\report\bundles\matchwinloss.js" />
     <Content Include="assets\report\bundles\matchwinloss.min.js">
       <DependentUpon>matchwinloss.js</DependentUpon>
@@ -648,11 +703,28 @@
     <Content Include="assets\report\bundles\reports.min.css">
       <DependentUpon>reports.css</DependentUpon>
     </Content>
+    <Content Include="assets\report\libs\monthPicker\images\bg-demo-docs-param.gif" />
+    <Content Include="assets\report\libs\monthPicker\images\demo-spindown-closed.gif" />
+    <Content Include="assets\report\libs\monthPicker\images\demo-spindown-open.gif" />
+    <Content Include="assets\report\libs\monthPicker\images\icon-down.png" />
+    <Content Include="assets\report\libs\monthPicker\images\icon-left.png" />
+    <Content Include="assets\report\libs\monthPicker\images\icon-right.png" />
+    <Content Include="assets\report\libs\monthPicker\images\icon-up.png" />
+    <Content Include="assets\report\libs\monthPicker\images\spindown-closed.png" />
+    <Content Include="assets\report\libs\monthPicker\images\spindown-open.png" />
+    <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.css" />
+    <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.js" />
     <Content Include="assets\report\styles\reports.css">
       <DependentUpon>reports.scss</DependentUpon>
     </Content>
     <Content Include="assets\report\styles\reports.min.css">
       <DependentUpon>reports.css</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.override.css">
+      <DependentUpon>reports.override.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\reports.override.min.css">
+      <DependentUpon>reports.override.css</DependentUpon>
     </Content>
     <Content Include="assets\report\styles\security.css">
       <DependentUpon>security.scss</DependentUpon>
@@ -660,16 +732,22 @@
     <Content Include="assets\report\styles\security.min.css">
       <DependentUpon>security.css</DependentUpon>
     </Content>
+    <Content Include="assets\shared\scripts\components\date-picker.js">
+      <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="assets\shared\scripts\components\date-picker.js.map">
+      <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="Error.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <TypeScriptCompile Include="assets\login\scripts\login\href-handler.ts" />
     <TypeScriptCompile Include="assets\main\scripts\auth\kickout.ts" />
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
     <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\securitycode\change-securitycode.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\securitycode\verify-securitycode.ts" />
     <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
     <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
     <TypeScriptCompile Include="assets\report\components\daterangepicker.ts" />
@@ -680,8 +758,10 @@
     <TypeScriptCompile Include="assets\report\components\pager.ts" />
     <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\sort.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\housewinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\core.ts" />
+    <TypeScriptCompile Include="assets\shared\scripts\components\date-picker.ts" />
     <TypeScriptCompile Include="typings\globals\bootstrap\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine-jquery\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
@@ -694,25 +774,45 @@
     <TypeScriptCompile Include="typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\Resource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\LoggingManager.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Login\Handlers\LoginHandler.cs" />
+    <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
+    <Compile Include="Login\InternalLoginController.cs" />
+    <Compile Include="Login\ViewModel\LoginViewModel.cs" />
+    <Compile Include="Login\Requests\LoginQuery.cs" />
+    <Compile Include="Login\Requests\InternalLoginQuery.cs" />
+    <Compile Include="Main\Handlers\LanguageHandler.cs" />
+    <Compile Include="Main\LanguageController.cs" />
+    <Compile Include="Main\Requests\AllLanguagesQuery.cs" />
+    <Compile Include="Main\Requests\ChangeLanguageCommand.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
-    <Compile Include="Reports\ReportsHandler.cs" />
-    <Compile Include="Reports\Request\MatchWinLossQuery.cs" />
+    <Compile Include="Main\ViewModel\LanguageViewModel.cs" />
+    <Compile Include="Reports\ExcelBaseHandler.cs" />
+    <Compile Include="Reports\Handler\HouseWinLossExcelHandler.cs" />
+    <Compile Include="Reports\Handler\MatchWinLossExcelHandler.cs" />
+    <Compile Include="Reports\Handler\MatchWinLossHandler.cs" />
+    <Compile Include="Reports\ReportsBaseHandler.cs" />
+    <Compile Include="Reports\Handler\HouseWinLossHandler.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
+    <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossQuery.cs" />
+    <Compile Include="Reports\ViewModel\ExcelFileViewModel.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossReportViewModel.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
     <Compile Include="Shared\BaseController.cs" />
+    <Compile Include="Shared\BrowserHelperImpl.cs" />
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
+    <Compile Include="Shared\Helpers\CookieHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" />
     <Compile Include="Shared\Helpers\StaticResources.cs" />
     <Compile Include="Home\HomeController.cs" />
-    <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Login\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -723,6 +823,11 @@
     <Compile Include="Main\MainController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ReportsController.cs" />
+    <Compile Include="Shared\Models\UserSession.cs" />
+    <Compile Include="Shared\Models\UserSessionImpl.cs" />
+    <Compile Include="Shared\MultipleLanguageController.cs" />
+    <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
+    <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DateRangePickerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\PagerViewModel.cs" />
@@ -730,7 +835,7 @@
     <Compile Include="Shared\ViewModels\SelectListItemExt.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\web.config" />
+    <Content Include="Login\Views\web.config" />
     <Content Include="assets\login\bundleconfig.json" />
     <Content Include="assets\login\compilerconfig.json" />
     <Content Include="Home\Views\web.config" />
@@ -797,22 +902,12 @@
     <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff" />
     <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="assets\common\styles\layout\before-home-page\before-home-page.scss" />
-    <Content Include="assets\common\styles\layout\before-home-page\before-home-page3.scss" />
-    <Content Include="assets\common\styles\layout\before-home-page\before-home-page4.scss" />
-    <Content Include="assets\common\styles\layout\dcs\customizeDCS.scss" />
     <Content Include="assets\common\styles\layout\default-layout\header.scss" />
     <Content Include="assets\common\styles\layout\default-layout\navigation.scss" />
     <Content Include="assets\common\styles\layout\default-layout\sidebar.scss" />
     <Content Include="assets\common\styles\themes\customer-status.scss" />
     <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex2.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex3.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\bootstrap-ex4.scss" />
     <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins2.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins3.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\common\_bootstrap-mixins4.scss" />
-    <Content Include="assets\common\styles\vendors-extensions\site-viewlogs\bootstrap-ex.scss" />
     <Content Include="assets\common\styles\vendors\bootstrap-readme.md" />
     <Content Include="assets\common\styles\vendors\bootstrap.scss" />
     <Content Include="assets\common\styles\vendors\bootstrap\mixins\_alerts.scss" />
@@ -886,7 +981,6 @@
     <Content Include="assets\common\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\common\styles\vendors\bootstrap\_wells.scss" />
     <Content Include="assets\common\styles\vendors\toastr\toastr.scss" />
-    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
     <Content Include="assets\login\styles\abstracts\_mixins.scss" />
     <Content Include="assets\login\styles\abstracts\_variables-event.scss" />
     <Content Include="assets\login\styles\abstracts\_variables-event2.scss" />
@@ -925,13 +1019,8 @@
     <Content Include="assets\login\styles\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="assets\login\styles\pages\error3.scss" />
     <Content Include="assets\login\styles\pages\um.scss" />
-    <Content Include="assets\login\styles\pages\um2.scss" />
-    <Content Include="assets\login\styles\pages\um3.scss" />
     <Content Include="assets\login\styles\themes\default.scss" />
-    <Content Include="assets\login\styles\themes\default2.scss" />
-    <Content Include="assets\login\styles\themes\default3.scss" />
     <Content Include="assets\login\styles\themes\event.scss" />
-    <Content Include="assets\login\styles\themes\event2.scss" />
     <Content Include="assets\login\styles\vendors-extensions\login\bootstrap-ex.scss" />
     <Content Include="assets\login\styles\vendors-extensions\login\_bootstrap-mixins.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap.scss" />
@@ -1005,15 +1094,13 @@
     <Content Include="assets\login\styles\vendors\bootstrap\_utilities.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_wells.scss" />
-    <Content Include="Home\Views\index2.cshtml" />
+    <Content Include="Home\Views\index.cshtml" />
     <Content Include="assets\common\bundleconfig.json" />
     <Content Include="assets\common\compilerconfig.json" />
     <Content Include="assets\main\scripts\auth\kickout.js.map" />
     <Content Include="assets\main\scripts\default\index-manager.js.map" />
     <Content Include="assets\main\scripts\home\index-manager.js.map" />
     <Content Include="assets\main\scripts\password\change-password.js.map" />
-    <Content Include="assets\main\scripts\securitycode\change-securitycode.js.map" />
-    <Content Include="assets\main\scripts\securitycode\verify-securitycode.js.map" />
     <Content Include="assets\main\styles\error-page.scss" />
     <Content Include="assets\main\styles\home.scss" />
     <Content Include="assets\main\styles\popup.scss" />
@@ -1041,13 +1128,33 @@
     <Content Include="assets\report\styles\_variables.scss" />
     <Content Include="assets\report\compilerconfig.json" />
     <Content Include="assets\report\bundleconfig.json" />
-    <Content Include="App_Code\Reports\ReportHtmlHelpers.cshtml" />
     <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
+    <Content Include="assets\report\styles\reports.override.scss" />
+    <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
+    <Content Include="App_Code\Components\DatePicker.cshtml" />
+    <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
+    <Content Include="EB.Features.Site.ruleset" />
+    <Content Include="Configurations\appSettings.config" />
+    <Content Include="Configurations\connectionStrings.config" />
+    <Content Include="Login\Views\InternalLogin.cshtml" />
+    <Content Include="Login\Views\UnderMaintenance.cshtml" />
+    <Content Include="deployment.ignore" />
+    <Content Include="Main\Views\LanguageList.cshtml" />
+    <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
+    <Content Include="IbcKeys\ibckey.snk" />
+    <Content Include="Configurations\appSettings.uat.config" />
+    <Content Include="Configurations\connectionStrings.uat.config" />
+    <Content Include="IbcKeys\ibckeydec.snk" />
+    <Content Include="IbcKeys\ibcpkey.snk" />
+    <Content Include="IbcKeys\Web.config" />
+    <Content Include="Configurations\connectionStrings.pro.config" />
+    <Content Include="Configurations\appSettings.pro.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
     <Content Include="Reports\Views\HouseWinLoss.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Login\Views\Index.cshtml" />
     <Content Include="typings\globals\bootstrap\typings.json" />
     <Content Include="typings\globals\jasmine-jquery\typings.json" />
     <Content Include="typings\globals\jasmine\typings.json" />
@@ -1061,6 +1168,16 @@
     <Content Include="Reports\Views\MatchWinLoss.cshtml" />
     <Content Include="Shared\Views\_Layout.cshtml" />
     <Content Include="Shared\Views\web.config" />
+    <Content Include="Web.uat.config" />
+    <Content Include="Web.uat.Debug.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.pro.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
+    <Content Include="Web.uat.Release.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1068,9 +1185,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Shared\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EB.Features.Shared\EB.Features.Shared.csproj">
       <Project>{e31ebbb6-c646-4491-ac72-ff249afecf16}</Project>
@@ -1087,12 +1202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="App_GlobalResources\Resource.resx">
-      <Generator>GlobalResourceProxyGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1129,7 +1238,14 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-    </PostBuildEvent>
+      cd $(ProjectDir)
+      cd ..
+      cd ..
+      cd build
+      assets.build.cmd
+      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"
+</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

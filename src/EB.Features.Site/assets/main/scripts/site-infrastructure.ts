@@ -59,8 +59,12 @@ class SiteInfrastructure {
             return cookieExpire;
         },
         clear: () => {
-            if (store.enabled) {
-                store.clear();
+            if (store.enabled) {                
+                var allKeys = store.getAll();
+                for (var key in allKeys) {
+                    if (key != "LANGUAGE")
+                        store.remove(key);
+                }
             }
         },
         remove: (key: string) => {
@@ -131,8 +135,7 @@ class SiteInfrastructure {
 
         const isInternalElement = (<HTMLInputElement>top.document.getElementById("IsInternal"));
         const isInternal = isInternalElement ? isInternalElement.value : "0";
-
-        index.location.href = "/Login/Logout";
+        index.location.href = $("#mainRootPath").val() + "Login/Logout";
         siteInfrastructure.localStorage.clear();
 
         if (isInternal === "1") {

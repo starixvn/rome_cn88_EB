@@ -1,22 +1,17 @@
-﻿using Fanex.NAP.Core.Models;
-using Fanex.NAP.Core.Web.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EB.Features.Site.Shared
+﻿namespace EB.Features.Site.Shared
 {
+    using System.Collections.Generic;
+    using Fanex.NAP.Core.Models;
+    using Fanex.NAP.Core.Web.Session;
+
     public class BaseQuery
     {
         public BaseQuery(ICurrentSession currentSession)
         {
-            this.currentSession = currentSession;
+            CurrentSession = currentSession;
         }
 
-        public ICurrentSession currentSession { get; }
-
-        public IList<MenuItem> MenuList => currentSession.MenuItemList;
+        public ICurrentSession CurrentSession { get; }
 
         public virtual bool IsValid() => true;
     }

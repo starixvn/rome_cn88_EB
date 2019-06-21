@@ -1,14 +1,16 @@
-﻿using EB.Features.Shared.Model;
+﻿using System.Globalization;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Web.Mvc;
+using System.Web.Routing;
+using EB.Features.Main.Resources;
+using EB.Features.Shared.Constants;
+using EB.Features.Shared.Model;
+using EB.Features.Site.Reports.ViewModel;
+using EB.Features.Site.Shared.Models;
 using Fanex.NAP.Core.Web.Attribute;
 using MediatR;
-using Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Mvc;
 
 namespace EB.Features.Site.Shared
 {
@@ -17,6 +19,7 @@ namespace EB.Features.Site.Shared
     {
         protected const string NoInformationPageViewPath = "~/Shared/Views/NoInformation.cshtml";
         private const string InvalidExcelFileName = "Invalid";
+        private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(LanguageConstants.Default);
 
         protected readonly IMediator mediator;
 
@@ -33,24 +36,57 @@ namespace EB.Features.Site.Shared
            IRequest<TResponse> message,
            JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.AllowGet)
         {
-            if (!(message as BaseQuery).IsValid())
+            if ((message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, Resource.You_have_no_authorization));
+                return Json(mediator.Send(message), jsonRequestBehavior);
             }
 
-            return Json(mediator.Send(message), jsonRequestBehavior);
+            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
         }
 
         protected async Task<ActionResult> JsonDataAsync<TResponse>(
             IRequest<TResponse> message,
             JsonRequestBehavior jsonRequestBehavior = JsonRequestBehavior.AllowGet)
         {
-            if (!(message as BaseQuery).IsValid())
+            if ((message as BaseQuery).IsValid())
             {
-                return Json(new Result((int)HttpStatusCode.Forbidden, Resource.You_have_no_authorization));
+                return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
             }
 
-            return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
+            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
         }
+
+        protected async Task<FileContentResult> ExcelView(IRequest<ExcelFileViewModel> message)
+        {
+            if (!(message is BaseQuery baseQuery) || baseQuery.IsValid())
+            {
+                return GetExcelContent(await mediator.Send(message));
+            }
+
+            return GetExcelContent(new ExcelFileViewModel(InvalidExcelFileName, new byte[] { }));
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            var cultureName = UserSessionImpl.Current.Language;
+
+            if (string.IsNullOrEmpty(cultureName))
+            {
+                cultureName = LanguageConstants.Default;
+                UserSessionImpl.Current.Language = cultureName;
+            }
+
+            // Modify current thread's cultures
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+
+            Thread.CurrentThread.CurrentCulture.DateTimeFormat = defaultCulture.DateTimeFormat;
+            Thread.CurrentThread.CurrentCulture.NumberFormat = defaultCulture.NumberFormat;
+
+            base.Initialize(requestContext);
+        }
+
+        private FileContentResult GetExcelContent(ExcelFileViewModel viewModel)
+        => File(viewModel.Content, ExcelFileViewModel.ContentType, viewModel.Name);
     }
 }

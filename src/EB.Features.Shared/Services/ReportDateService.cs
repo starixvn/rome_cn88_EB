@@ -1,16 +1,12 @@
-﻿using EB.Features.Shared.Criteria;
-using EB.Features.Shared.Model;
-using Fanex.Caching;
-using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
-    public interface ReportDateService
+    using System;
+    using EB.Features.Shared.Criteria;
+    using EB.Features.Shared.Model;
+    using Fanex.Caching;
+    using Fanex.Data.Repository;
+
+    public interface IReportDateService
     {
         BalanceUpDayAndMoveBetsDay GetBalanceUpDayAndMoveBetsDay();
 
@@ -21,10 +17,11 @@ namespace EB.Features.Shared.Services
         DateTime GetArchiveDate();
     }
 
-    public class ReportDateServiceImpl : ReportDateService
+    public class ReportDateServiceImpl : IReportDateService
     {
-        private const string BalanceUpDayAndMoveBetsDayCacheKey = "CN88.Features.Shared.Services.ReportDateServiceImpl.BalanceUpDayAndMoveBetsDay";
-        private const string ArchiveDateCacheKey = "CN88.Features.Shared.Services.ReportDateServiceImpl.ArchiveDate";
+        private const string BalanceUpDayAndMoveBetsDayCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.BalanceUpDayAndMoveBetsDay";
+        private const string ArchiveDateCacheKey = "EB.Features.Shared.Services.ReportDateServiceImpl.ArchiveDate";
+        private const int CachedMinute = 5;
 
         private readonly IDynamicRepository dynamicRepository;
 
@@ -33,7 +30,7 @@ namespace EB.Features.Shared.Services
             this.dynamicRepository = dynamicRepository;
         }
 
-        public static ReportDateService Instance { get; set; }
+        public static IReportDateService Instance { get; set; }
 
         public DateTime GetBalanceUpDay() => GetBalanceUpDayAndMoveBetsDay().BalanceUpDay;
 
@@ -43,12 +40,12 @@ namespace EB.Features.Shared.Services
             => ConfiguredCacheService.GetOrSet(
                 BalanceUpDayAndMoveBetsDayCacheKey,
                 () => dynamicRepository.Get<BalanceUpDayAndMoveBetsDay>(new GetBalanceUpDayAndMoveBetsDayCriteria()),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CachedMinute)));
 
         public DateTime GetArchiveDate()
             => ConfiguredCacheService.GetOrSet(
                 ArchiveDateCacheKey,
                 () => dynamicRepository.Get<DateTime>(new GetArchiveDateCriteria()),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(CachedMinute)));
     }
 }

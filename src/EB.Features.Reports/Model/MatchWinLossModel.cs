@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Reports.Model
+﻿namespace EB.Features.Reports.Model
 {
     public class MatchWinLossModel
     {
@@ -13,37 +7,17 @@ namespace EB.Features.Reports.Model
 
         }
 
-        public MatchWinLossModel(int leagueId, 
-            int matchId, 
-            int homeId, 
-            int awayId, 
-            int bettype, 
-            int wager, 
-            decimal stake, 
-            decimal validStake,
-            decimal memberIncome, 
-            decimal headlineResult, 
-            decimal headlineStock)
-        {
-            LeagueId = leagueId;
-            MatchId = matchId;
-            HomeId = homeId;
-            AwayId = awayId;
-            BetTypeGroup = bettype;
-            Wagers = wager;
-            Stake = stake;
-            ValidStake = validStake;
-            MemberIncome = memberIncome;
-            HeadlineResult = headlineResult;
-            HeadlineStock = headlineResult;
-        }
         public int LeagueId { get; }
 
         public int MatchId { get; }
 
         public int HomeId { get; }
 
+        public string HomeName { get; set; }
+
         public int AwayId { get; }
+
+        public string AwayName { get; set; }
 
         public int BetTypeGroup { get; }
 
@@ -55,8 +29,25 @@ namespace EB.Features.Reports.Model
 
         public decimal MemberIncome { get; protected set; }
 
-        public decimal HeadlineResult { get; protected set; }
+        public decimal HouseIncome { get; protected set; }
 
         public decimal HeadlineStock { get; protected set; }
+
+        public string BetTypeGroupName { get; set; }
+
+        public string LeagueName { get; set; }
+
+        public string LeagueNameByEnglish { get; set; }
+
+        public static MatchWinLossModel operator +(MatchWinLossModel match1, MatchWinLossModel match2)
+            => new MatchWinLossModel
+            {
+                Wagers = match1.Wagers + match2.Wagers,
+                Stake = match1.Stake + match2.Stake,
+                ValidStake = match1.ValidStake + match2.ValidStake,
+                MemberIncome = match1.MemberIncome + match2.MemberIncome,
+                HouseIncome = match1.HouseIncome = match2.HouseIncome,
+                HeadlineStock = match1.HeadlineStock + match2.HeadlineStock
+            };
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Model
+﻿namespace EB.Features.Shared.Model
 {
     public class Result
     {
@@ -24,6 +18,6 @@ namespace EB.Features.Shared.Model
         public static Result CreateErrorResult(int code = 1, string message = "")
             => new Result(code, message);
 
-        public bool IsSuccess => Code.Equals(0);
+        public bool IsSuccess => Code == 0;
     }
 }

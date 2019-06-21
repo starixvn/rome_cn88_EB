@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Shared.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>EB.Features.Shared.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -86,7 +88,11 @@
   <ItemGroup>
     <Compile Include="Configuration\AppSettings.cs" />
     <Compile Include="Constants\BetTypeIdConstants.cs" />
+    <Compile Include="Constants\CommonConstants.cs" />
+    <Compile Include="Constants\LanguageConstants.cs" />
+    <Compile Include="Constants\TicketStatusConstants.cs" />
     <Compile Include="Constants\LiveStatusConstants.cs" />
+    <Compile Include="Constants\SiteFunctionKeys.cs" />
     <Compile Include="Constants\SportGroupConstants.cs" />
     <Compile Include="Criteria\GetArchiveDateCriteria.cs" />
     <Compile Include="Criteria\GetBalanceUpDayAndMoveBetsDayCriteria.cs" />
@@ -97,6 +103,8 @@
     <Compile Include="Extensions\NumberExtensions.cs" />
     <Compile Include="Model\BalanceUpDayAndMoveBetsDay.cs" />
     <Compile Include="Model\BetTypeGroup.cs" />
+    <Compile Include="Model\Device.cs" />
+    <Compile Include="Model\DeviceInfo.cs" />
     <Compile Include="Model\Result.cs" />
     <Compile Include="Model\SportGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,9 +124,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\AppResources.zh-Hans.resx" />
+    <EmbeddedResource Include="Resources\AppResources.zh-TW.resx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="EB.Features.Shared.ruleset" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

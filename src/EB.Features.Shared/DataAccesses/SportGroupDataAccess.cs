@@ -1,15 +1,13 @@
-﻿using EB.Features.Shared.Model;
-using Fanex.Data;
-using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Fanex.Common;
-
-namespace EB.Features.Shared.DataAccesses
+﻿namespace EB.Features.Shared.DataAccesses
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Shared.Model;
+    using Fanex.Common;
+    using Fanex.Data;
+    using Fanex.Data.Repository;
+
     public interface SportGroupDataAccess
     {
         IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName);
@@ -31,7 +29,8 @@ namespace EB.Features.Shared.DataAccesses
                         {
                             var group = new SportGroup(
                                 id: Converter.ToInt(reader["SportTypeGroup"]),
-                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),
+                                productId: Converter.ToInt(reader["ProductID"]),
+                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),                                
                                 getSportGroupDisplayName: getSportGroupDisplayName);
 
                             groups.Add(group);

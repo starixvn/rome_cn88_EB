@@ -1,30 +1,31 @@
-﻿using EB.Features.Shared.Criteria;
-using EB.Features.Shared.DataAccesses;
-using EB.Features.Shared.Model;
-using Fanex.Caching;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
-    public interface SportGroupService
+    using System;
+    using System.Linq;
+    using System.Collections.Generic;
+    using EB.Features.Shared.Criteria;
+    using EB.Features.Shared.DataAccesses;
+    using EB.Features.Shared.Model;
+    using Fanex.Caching;
+
+    public interface ISportGroupService
     {
         IEnumerable<SportGroup> GetSportGroups();
+
+        IEnumerable<SportGroup> GetSportGroupsForSportbook();
     }
 
-    public class SportGroupServiceImpl : SportGroupService
+    public class SportGroupServiceImpl : ISportGroupService
     {
-        private const string SportGroupsCacheKey = "CN88.Features.Shared.Services.SportServiceImpl.SportGroups";
+        private const string SportGroupsCacheKey = "EB.Features.Shared.Services.SportServiceImpl.SportGroups";
+        private const int CachedSecond = 30;
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
-        private readonly CacheRefService cacheRefService;
+        private readonly ICacheRefService cacheRefService;
 
         public SportGroupServiceImpl(
             SportGroupDataAccess sportGroupDataAccess,
-            CacheRefService cacheRefService)
+            ICacheRefService cacheRefService)
         {
             this.sportGroupDataAccess = sportGroupDataAccess;
             this.cacheRefService = cacheRefService;
@@ -34,6 +35,9 @@ namespace EB.Features.Shared.Services
             => ConfiguredCacheService.GetOrSet(
                 SportGroupsCacheKey,
                 () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
+
+        public IEnumerable<SportGroup> GetSportGroupsForSportbook()
+            => GetSportGroups().Where(s => s.ProductId != 0);
     }
 }

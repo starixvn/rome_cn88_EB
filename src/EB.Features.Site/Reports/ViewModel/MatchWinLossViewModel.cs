@@ -1,27 +1,26 @@
-﻿using EB.Features.Reports.Model;
-using EB.Features.Reports.ViewModel;
-using EB.Features.Shared.Constants;
-using EB.Features.Shared.Resources;
-using EB.Features.Shared.Utilies;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Shared.ViewModels;
-using EB.Features.Site.Shared.ViewModels.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EB.Features.Site.Reports.ViewModel
+﻿namespace EB.Features.Site.Reports.ViewModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Reports.ViewModel;
+    using EB.Features.Shared;
+    using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Utilies;
+    using EB.Features.Site.Reports.Request;
+    using EB.Features.Site.Shared.ViewModels;
+    using EB.Features.Site.Shared.ViewModels.Components;
+
     public class MatchWinLossReportViewModel
     {
         public MatchWinLossReportViewModel(
+            MatchWinLossViewModel reportData,
             MatchWinLossQuery query,
             DateTime balanceUpDate,
             IEnumerable<SelectListItemExt> sportGroups,
-            IEnumerable<SelectListItemExt> betTypes,
-            IEnumerable<MatchWinLossViewModel> reportData,
-            IEnumerable<SelectListItemExt> allBetTypes = null)
+            IEnumerable<SelectListItemExt> betTypes,            
+            IEnumerable<SelectListItemExt> allBetTypes)
         {
             var sportGroupSelectionViewModel = new SingleSelectionViewModel(sportGroups, query.UserSelectedSportGroupId);
             var betTypeSelectionViewModel = new SingleSelectionViewModel(betTypes, query.UserSelectedBetTypeId);
@@ -44,32 +43,16 @@ namespace EB.Features.Site.Reports.ViewModel
                 betTypeSelectionViewModel,
                 liveStatusSelectionViewModel,
                 allBetTypesSelectionViewModel);
-            ReportData = reportData.Where(i => i.BetTypeGroup != BetTypeIdConstants.SystemParlay);
-            Parlay = reportData.FirstOrDefault(i => i.BetTypeGroup == BetTypeIdConstants.SystemParlay);
-            TotalRow = Sum(reportData);
+            ReportData = reportData;
+            Query = query;
         }
+
+        public MatchWinLossQuery Query { get; }
+
+        public MatchWinLossViewModel ReportData { get; }
 
         public MatchWinLossFilterViewModel ReportFilterViewModel { get; }
 
-        public IEnumerable<MatchWinLossViewModel> ReportData { get; }
-
-        public MatchWinLossViewModel Parlay { get; }
-
-        public MatchWinLossModel TotalRow { get; }
-
-        public bool IsShowTotalRow => ReportData.Any();
-
-        public decimal TotalHeadlineStockPercent => 100;
-
-        private MatchWinLossViewModel Sum(IEnumerable<MatchWinLossViewModel> matchs)
-        {
-            var total = new MatchWinLossViewModel();
-            foreach(var match in matchs)
-            {
-                total = total.Add(match);
-            }
-
-            return total;
-        }
+        public static decimal TotalHeadlineStockPercent => CommonConstants.ReduceNumber;
     }
 }

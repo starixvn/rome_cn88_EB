@@ -1,12 +1,7 @@
-﻿using EB.Features.Site.Shared.ViewModels;
-using EB.Features.Site.Shared.ViewModels.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace EB.Features.Site.Reports.ViewModel
+﻿namespace EB.Features.Site.Reports.ViewModel
 {
+    using EB.Features.Site.Shared.ViewModels.Components;
+
     public class MatchWinLossFilterViewModel
     {
         public MatchWinLossFilterViewModel(

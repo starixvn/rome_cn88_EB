@@ -1,34 +1,38 @@
-﻿using EB.Features.Shared.Criteria;
-using EB.Features.Shared.Model;
-using Fanex.Caching;
-using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Services
+﻿namespace EB.Features.Shared.Services
 {
-    public interface BettypeGroupService
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using EB.Features.Shared.Criteria;
+    using EB.Features.Shared.Model;
+    using Fanex.Caching;
+    using Fanex.Data.Repository;
+
+    public interface IBettypeGroupService
     {
         IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(int sportGroupId = 0);
+
+        IEnumerable<BetTypeGroup> GetBetTypeGroupsBySportbook(IEnumerable<int> sportGroupIds);
     }
 
-    public class BettypeGroupServiceImpl : BettypeGroupService
+    public class BettypeGroupServiceImpl : IBettypeGroupService
     {
-        private const string BetTypesCacheKey = "CN88.Features.Shared.Services.Bettypes";
+        private const string BetTypesCacheKey = "EB.Features.Shared.Services.Bettypes";
+        private const int CachedDay = 1;
 
         private readonly IDynamicRepository dynamicRepository;
-        private readonly CacheRefService cacheRefService;
+        private readonly ICacheRefService cacheRefService;
 
         public BettypeGroupServiceImpl(
             IDynamicRepository dynamicRepository,
-            CacheRefService cacheRefService)
+            ICacheRefService cacheRefService)
         {
             this.dynamicRepository = dynamicRepository;
             this.cacheRefService = cacheRefService;
         }
+
+        public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySportbook(IEnumerable<int> sportGroupIds)
+            => GetBetTypeGroups().Where(b => sportGroupIds.Contains(b.SportTypeGroup));
 
         public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(int sportGroupId = 0)
             => sportGroupId == 0
@@ -44,6 +48,6 @@ namespace EB.Features.Shared.Services
 
                     return betTypes.Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName));
                 },
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
     }
 }

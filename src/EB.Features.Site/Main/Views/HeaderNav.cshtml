@@ -3,15 +3,16 @@
 <section class="header-nav" id="header-nav">
     <ul class="header-left"></ul>
     <ul class="header-right">
+        <li class="header-item dropdown language">
+            @Html.Action("List", "Language")
+        </li>
         <li class="header-item dropdown header-custname">
             <a href="javascript:;" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
                 @Model.CustName
                 <span class="icon-chevron-down"></span>
             </a>
             <ul class="dropdown-menu">
-                <li><a id="lnk-change-password">@Resource.ChangePassword</a></li>
-                <li><a id="lnk-security-code">@Resource.ChangeSecurityCode</a></li>
-                <li><a id="lnk-logout">@Resource.Logout</a></li>
+                <li><a id="lnk-logout">@SiteResources.Logout</a></li>
             </ul>
         </li>
     </ul>

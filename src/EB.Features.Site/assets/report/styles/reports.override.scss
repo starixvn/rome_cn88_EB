@@ -1,0 +1,194 @@
+﻿
+.match-title-row {
+    background-color: #f3f5e0;
+
+    .home-title {
+        color: #f38130;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    .home-title:before {
+        content: '>>';
+        color: #f38130;
+        padding: 0 10px 0 50px;
+    }
+
+    .venus-title {
+        font-weight: bold;
+        margin: 0 5px;
+    }
+
+    .away-title {
+        color: #f38130;
+        font-weight: bold;
+        text-align: left;
+        text-transform: uppercase;
+    }
+}
+
+.league-title {
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    width: 450px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.match-title:before {
+    content: '>>';
+    color: #f38130;
+    padding: 0 10px 0 50px;
+}
+
+.match-title {
+    color: #f38130;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.report-detail {
+    padding-bottom: 50px;
+}
+
+.tbl-report {
+
+    .bettype {
+        width: 400px;
+    }
+
+    .child {
+        padding-left: 30px;
+    }
+
+    .icon-chevron-down, .icon-chevron-right {
+        font-size: 20px;
+    }
+
+    tr.group {
+        cursor: pointer;
+
+        .group-name {
+            position: relative;
+            top: -3px;
+        }
+    }
+
+    > tfoot > tr.total {
+        color: #fff;
+        background-color: #2C3E50;
+        padding: 7px 8px;
+        text-transform: uppercase;
+
+        .negative-value {
+            color: #ffbeb4;
+        }
+    }
+}
+
+.sub-total-row {
+    background-color: #eae9ee;
+    color: #394e6e;
+    font-weight: bold;
+}
+
+.title-report-detail {
+    .report-name {
+        font-weight: bold;
+        font-size: 20px;
+    }
+}
+
+.report-form {
+    .form-group {
+        > label {
+            &.isTest {
+                text-transform: capitalize;
+            }
+        }
+    }
+
+    .history {
+        margin-left: 1px;
+        color: #2489ce;
+        cursor: pointer;
+        font-style: italic;
+    }
+
+    .dateRangeContainer {
+        vertical-align: bottom;
+    }
+
+    .note {
+        display: block;
+    }
+}
+
+
+span.selectedMonth {
+    margin-right: 15px;
+    font-size: 13px;
+}
+
+.monPickrWrapParent .monPickrWrap {
+    font-family: Arial, sans-serif;
+    position: relative !important;
+    border-radius: 0 !important;
+    border: none;
+    background: initial;
+    width: 170px;
+}
+
+.monPickrWrapParent .monPickrWrap:hover {
+    box-shadow: none;
+}
+
+.monPickrWrapParent .monPickrWrap .monPickr {
+    height: unset;
+    padding: 5px 2px;
+    border-radius: 0 !important;
+    background: #fff;
+    border: 1px solid #a6a6a6;
+    width: 170px;
+}
+
+.monPickrWrapParent .monPickrWrap .monPickr .prev:before, .monPickrWrapParent .monPickrWrap .monPickr .next:before {
+    font-family: 'CN88Icon';
+    font-size: 20px;
+    color: #000;
+}
+
+.monPickrWrapParent .monPickrWrap .monPickr .next {
+    top: 4px;
+    right: 6px;
+    left: unset;
+}
+
+
+.selectedDayWrapParent .selectedDayWrap {
+    width: 60px;
+    border-radius: 0 !important;
+}
+
+.selectedDayWrapParent .selectedDayWrap .dayPickr {
+    border-radius: 0 !important;
+    height: 28px;
+    background: #fff;
+    font-size: 13px;
+    line-height: 25px;
+}
+
+
+.selectedDayWrapParent .selectedDayWrap .dayPickr .darr:before {
+    font-size: 19px;
+    position: relative;
+    top: 3px;
+    right: 2px;
+    color: #000;
+}

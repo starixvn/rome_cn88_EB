@@ -1,4 +1,5 @@
 ﻿@model IndexViewModel
 
+@Html.Hidden("currentURLCookieName", Model.CurrentURLCookieName)
 @Html.Hidden("ClearClientData", 0)
-@Html.Hidden("mainRootPath", Model.MainRootPath)
+@Html.Hidden("mainRootPath", IndexViewModel.MainRootPath)

@@ -4,24 +4,27 @@ var betTypes: any = betTypes;
 class MatchWinLossReport {
     $: JQueryStatic;
     $reportForm: JQuery;
-    $dateContainer: JQuery;
+    $exportExcelForm: JQuery;
     sportGroupSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     pagerComponent: ClientPagerComponent;
+    datePickerComponent: DatePickerComponent;
 
     constructor($: JQueryStatic,
         sportGroupSelectionComponent: SingleSelectionDropdownComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         pagerComponent: ClientPagerComponent,
-        toggleHandler: ToggleHandler) {
+        toggleHandler: ToggleHandler,
+        datePickerComponent: DatePickerComponent) {
         this.$ = $;
         this.sportGroupSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.pagerComponent = pagerComponent;
         this.pagerComponent.pageList = this.pagerComponent.smallPageList;
+        this.datePickerComponent = datePickerComponent;
     }
 
     init = () => {
@@ -34,17 +37,33 @@ class MatchWinLossReport {
 
     public cacheDOMElements() {
         this.$reportForm = this.$("#report-form");
-        this.$dateContainer = this.$("#date-container");
+        this.$exportExcelForm = this.$("#export-excel-form");
     }
 
     public registerEvents() {
         this.$reportForm.submit(this.onReportSubmit);
-        this.$dateContainer.datepicker({
-            minDate: this.$dateContainer.data("mindate"),
-            maxDate: this.$dateContainer.data("maxdate"),
-            defaultDate: this.$dateContainer.data("curentdate")
+        this.datePickerComponent.render(new DatePickerOption($, "date-container"));
+
+        $(".group").click(function (): void {
+            let $this: JQuery = $(this);
+            let icon: JQuery = $this.find(".group-name-wrapper").children().first();
+            let children: any = $this.siblings(`.childrow-${$this.data("leagueid")}`);
+
+            if (icon.hasClass("icon-chevron-down")) {
+                icon.removeClass().addClass("icon-chevron-right");
+                children.addClass("hide");
+            } else {
+                icon.removeClass().addClass("icon-chevron-down");
+                children.removeClass("hide");
+            }
         });
+
+        this.$("#icon-excel").on("click", this.onExportExcel);
     }
+
+    onExportExcel = () => {
+        this.$exportExcelForm.submit();
+    };
 
     onReportSubmit = () => {
         this.sportGroupSelectionComponent.updateSelectedValue();
@@ -58,26 +77,14 @@ class MatchWinLossReport {
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
     }
 
-    
-
     onchangeSportType(): void {
         let sportType = this.sportGroupSelectionComponent.$dropdown.val();
         this.betTypeSelectionComponent.$dropdown.empty();
         for (var i = 0; i < betTypes.length; i++) {
             var betTypeGroup = betTypes[i];
-            if (betTypeGroup[0].SportTypeGroup == 0) {
-                this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup[0].Value + '>' + betTypeGroup[0].Text + '</option>');
-
-                if (sportType == 0)
-                    break;
-            }
-
-            if (betTypeGroup[0].SportTypeGroup == sportType) {
-                for (var j = 0; j < betTypeGroup.length; j++) {
-                    this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup[j].Value + '>' + betTypeGroup[j].Text + '</option>');
-                }
-
-                break;
+            if (betTypeGroup.SportTypeGroup == 0 ||
+                betTypeGroup.SportTypeGroup == sportType) {
+                this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup.Value + '>' + betTypeGroup.Text + '</option>');
             }
         }
 
@@ -98,7 +105,8 @@ $(function () {
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new ClientPagerComponent($),
-        new ToggleHandler($));
+        new ToggleHandler($),
+        new DatePickerComponent());
 
     matchWinLossReport.init();
 })

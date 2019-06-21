@@ -343,10 +343,18 @@ body {
         &.profit-margin span {
             color: #000;
             padding-left: 10px;
-            &.negative-value{
+
+            &.negative-value {
                 color: #B50000;
             }
         }
+    }
+
+    > tfoot > tr.total > th {
+        color: #fff;
+        background-color: #2C3E50;
+        padding: 7px 8px;
+        text-transform: uppercase;
     }
 
     > thead > tr.total > th {
@@ -721,3 +729,33 @@ body.phone {
     }
 }
 
+
+
+.match-title-row {
+    background-color: #f3f5e0;
+}
+
+.league-title {
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+    width: 300px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+.match-title:before {
+    content: '>>';
+    color: #f38130;
+    padding: 0 10px 0 50px;
+}
+
+.match-title {
+    color: #f38130;
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}

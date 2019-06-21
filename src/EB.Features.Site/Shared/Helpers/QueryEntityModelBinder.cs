@@ -1,10 +1,6 @@
-﻿using EB.Features.Site.Main.Requests;
-using Fanex.NAP.Core.Web.Session;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using Fanex.NAP.Core.Web.Session;
 
 namespace EB.Features.Site.Shared
 {

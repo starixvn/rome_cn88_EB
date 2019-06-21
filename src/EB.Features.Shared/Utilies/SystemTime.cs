@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Utilies
+﻿namespace EB.Features.Shared.Utilies
 {
+    using System;
+
     public static class SystemTime
     {
         [ThreadStatic]

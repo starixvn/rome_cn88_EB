@@ -106,51 +106,6 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
-        /// </summary>
-        public static string Cancel {
-            get {
-                return ResourceManager.GetString("Cancel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Clear.
-        /// </summary>
-        public static string Clear {
-            get {
-                return ResourceManager.GetString("Clear", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Delete.
-        /// </summary>
-        public static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Early.
-        /// </summary>
-        public static string Early {
-            get {
-                return ResourceManager.GetString("Early", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Edit.
-        /// </summary>
-        public static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Export to Excel.
         /// </summary>
         public static string ExportToExcel {
@@ -169,29 +124,20 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Headline.
+        /// </summary>
+        public static string Headline {
+            get {
+                return ResourceManager.GetString("Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In-Play.
         /// </summary>
         public static string InPlay {
             get {
                 return ResourceManager.GetString("InPlay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last Period.
-        /// </summary>
-        public static string LastPeriod {
-            get {
-                return ResourceManager.GetString("LastPeriod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last Week.
-        /// </summary>
-        public static string LastWeek {
-            get {
-                return ResourceManager.GetString("LastWeek", resourceCulture);
             }
         }
         
@@ -205,20 +151,20 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Main.
-        /// </summary>
-        public static string Main {
-            get {
-                return ResourceManager.GetString("Main", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Market.
         /// </summary>
         public static string Market {
             get {
                 return ResourceManager.GetString("Market", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Agent.
+        /// </summary>
+        public static string MasterAgent {
+            get {
+                return ResourceManager.GetString("MasterAgent", resourceCulture);
             }
         }
         
@@ -232,38 +178,11 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Member Stake.
-        /// </summary>
-        public static string MemberStake {
-            get {
-                return ResourceManager.GetString("MemberStake", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Nickname.
-        /// </summary>
-        public static string NickName {
-            get {
-                return ResourceManager.GetString("NickName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No information is available.
         /// </summary>
         public static string NoInformationIsAvailable {
             get {
                 return ResourceManager.GetString("NoInformationIsAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You are not authorized on this function..
-        /// </summary>
-        public static string NotAuthorized {
-            get {
-                return ResourceManager.GetString("NotAuthorized", resourceCulture);
             }
         }
         
@@ -277,29 +196,11 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Off.
+        ///   Looks up a localized string similar to Others.
         /// </summary>
-        public static string Off {
+        public static string Others {
             get {
-                return ResourceManager.GetString("Off", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to OK.
-        /// </summary>
-        public static string OK {
-            get {
-                return ResourceManager.GetString("OK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to On.
-        /// </summary>
-        public static string On {
-            get {
-                return ResourceManager.GetString("On", resourceCulture);
+                return ResourceManager.GetString("Others", resourceCulture);
             }
         }
         
@@ -322,119 +223,11 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sportsbook Parlay.
+        ///   Looks up a localized string similar to Sportsbook  Parlay.
         /// </summary>
         public static string Parlay {
             get {
                 return ResourceManager.GetString("Parlay", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parlay.
-        /// </summary>
-        public static string ParlayText {
-            get {
-                return ResourceManager.GetString("ParlayText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Password.
-        /// </summary>
-        public static string Password {
-            get {
-                return ResourceManager.GetString("Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pause.
-        /// </summary>
-        public static string Pause {
-            get {
-                return ResourceManager.GetString("Pause", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Full Percentage.
-        /// </summary>
-        public static string PercentageViewMode_0 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Company %.
-        /// </summary>
-        public static string PercentageViewMode_1 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SMA %.
-        /// </summary>
-        public static string PercentageViewMode_2 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MA %.
-        /// </summary>
-        public static string PercentageViewMode_3 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Agent %.
-        /// </summary>
-        public static string PercentageViewMode_4 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SMA + MA + Agent %.
-        /// </summary>
-        public static string PercentageViewMode_5 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SMA + MA %.
-        /// </summary>
-        public static string PercentageViewMode_6 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to MA + Agent %.
-        /// </summary>
-        public static string PercentageViewMode_7 {
-            get {
-                return ResourceManager.GetString("PercentageViewMode_7", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Per Sports.
-        /// </summary>
-        public static string PerSports {
-            get {
-                return ResourceManager.GetString("PerSports", resourceCulture);
             }
         }
         
@@ -448,38 +241,11 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reset to Default.
+        ///   Looks up a localized string similar to Settled.
         /// </summary>
-        public static string ResetToDefault {
+        public static string Settled {
             get {
-                return ResourceManager.GetString("ResetToDefault", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save.
-        /// </summary>
-        public static string Save {
-            get {
-                return ResourceManager.GetString("Save", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Search.
-        /// </summary>
-        public static string Search {
-            get {
-                return ResourceManager.GetString("Search", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to SMA.
-        /// </summary>
-        public static string SMA {
-            get {
-                return ResourceManager.GetString("SMA", resourceCulture);
+                return ResourceManager.GetString("Settled", resourceCulture);
             }
         }
         
@@ -493,65 +259,20 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stake.
-        /// </summary>
-        public static string Stake {
-            get {
-                return ResourceManager.GetString("Stake", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to =.
-        /// </summary>
-        public static string StakeMode_0 {
-            get {
-                return ResourceManager.GetString("StakeMode_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &gt;.
-        /// </summary>
-        public static string StakeMode_1 {
-            get {
-                return ResourceManager.GetString("StakeMode_1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;.
-        /// </summary>
-        public static string StakeMode_2 {
-            get {
-                return ResourceManager.GetString("StakeMode_2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &lt;=.
-        /// </summary>
-        public static string StakeMode_3 {
-            get {
-                return ResourceManager.GetString("StakeMode_3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to &gt;=.
-        /// </summary>
-        public static string StakeMode_4 {
-            get {
-                return ResourceManager.GetString("StakeMode_4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Super.
+        /// </summary>
+        public static string Super {
+            get {
+                return ResourceManager.GetString("Super", resourceCulture);
             }
         }
         
@@ -565,24 +286,6 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This Period.
-        /// </summary>
-        public static string ThisPeriod {
-            get {
-                return ResourceManager.GetString("ThisPeriod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This Week.
-        /// </summary>
-        public static string ThisWeek {
-            get {
-                return ResourceManager.GetString("ThisWeek", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
         public static string To {
@@ -592,38 +295,20 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Today.
+        ///   Looks up a localized string similar to Type.
         /// </summary>
-        public static string Today {
+        public static string Type {
             get {
-                return ResourceManager.GetString("Today", resourceCulture);
+                return ResourceManager.GetString("Type", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tomorrow.
+        ///   Looks up a localized string similar to Unsettled.
         /// </summary>
-        public static string Tomorrow {
+        public static string UnSettled {
             get {
-                return ResourceManager.GetString("Tomorrow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to User Code.
-        /// </summary>
-        public static string UserCode {
-            get {
-                return ResourceManager.GetString("UserCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View.
-        /// </summary>
-        public static string View {
-            get {
-                return ResourceManager.GetString("View", resourceCulture);
+                return ResourceManager.GetString("UnSettled", resourceCulture);
             }
         }
         
@@ -633,24 +318,6 @@ namespace EB.Features.Shared.Resources {
         public static string VirtualSports {
             get {
                 return ResourceManager.GetString("VirtualSports", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Warning.
-        /// </summary>
-        public static string Warning {
-            get {
-                return ResourceManager.GetString("Warning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yesterday.
-        /// </summary>
-        public static string Yesterday {
-            get {
-                return ResourceManager.GetString("Yesterday", resourceCulture);
             }
         }
     }

@@ -1,0 +1,28 @@
+﻿@using EB.Features.Main.Resources
+@using EB.Features.Site.Shared.ViewModels.Components
+@using EB.Features.Shared.Extensions;
+
+@helper Render(DatePickerViewModel model)
+{
+    <div class="form-group from-date-box">
+        <label>@SiteResources.Date</label>
+        <div class="control date">
+            <div id="date-container"
+                 class="input-group date fromdate"
+                 data-mindate="@model.MinDate.ToShortDate()"
+                 data-maxdate="@model.MaxDate.ToShortDate()"
+                 data-currentdate="@model.CurrentDate.ToShortDate()">
+                <input type="text"
+                       id="date"
+                       name="Date"
+                       readonly="readonly"
+                       autocomplete="off"
+                       class="ui_nexdatepicker_datetextbox ui_nexdatepicker_fromdate form-control"
+                       value="@model.CurrentDate.ToShortDate()" />
+                <span class="input-group-addon">
+                    <span class="icon-calendar" id="fdate_trigger"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+}

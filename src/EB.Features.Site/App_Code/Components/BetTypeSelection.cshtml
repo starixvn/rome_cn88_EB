@@ -9,17 +9,17 @@
             <label>@AppResources.BetType</label>
         }
         <select id="dropdown-bettype">
-            @if (!showAllOnly)
+            @if (showAllOnly)
+            {
+                var group = model.Items.ElementAt(0);
+                <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
+            }
+            else
             {
                 foreach (var group in model.Items)
                 {
                     <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
                 }
-            }
-            else
-            {
-                var group = model.Items.ElementAt(0);
-                <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
             }
         </select>
         <input type="hidden" name="UserSelectedBetTypeId" id="UserSelectedBetTypeId" value="@model.UserSelectedId" />

@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Shared.Model
+﻿namespace EB.Features.Shared.Model
 {
+    using System;
+
     public class BetTypeGroup
     {
         public BetTypeGroup()

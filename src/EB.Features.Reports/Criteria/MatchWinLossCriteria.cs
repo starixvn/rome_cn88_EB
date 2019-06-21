@@ -1,14 +1,10 @@
-﻿using EB.Features.Reports.Params;
-using Fanex.Data.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EB.Features.Reports.Criteria
+﻿namespace EB.Features.Reports.Criteria
 {
-    public class MatchWinLossCriteria: CriteriaBase
+    using System;
+    using EB.Features.Reports.Params;
+    using Fanex.Data.Repository;
+
+    public class MatchWinLossCriteria : CriteriaBase
     {
         public MatchWinLossCriteria(MatchWinLossParam param)
         {
@@ -17,8 +13,7 @@ namespace EB.Features.Reports.Criteria
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
-            //MoveBetsDay = param.MoveBetsDay;
-            MoveBetsDay = new DateTime(2019, 4, 27);
+            MoveBetsDay = param.MoveBetsDay;
         }
 
         public DateTime WinLostDate { get; }
@@ -34,7 +29,7 @@ namespace EB.Features.Reports.Criteria
         public DateTime MoveBetsDay { get; }
 
         public override bool IsValid()
-            => true;
+            => SportTypeGroup >= 0 && BetTypeGroup >= 0 && IsLive >= 0;
 
         public override string GetSettingKey()
             => "CS_Rpt_MatchWinLoss_Headline";

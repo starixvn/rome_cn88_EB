@@ -132,41 +132,14 @@
   <data name="BetType" xml:space="preserve">
     <value>Bet type</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Early" xml:space="preserve">
-    <value>Early</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
   <data name="ExportToExcel" xml:space="preserve">
     <value>Export to Excel</value>
   </data>
   <data name="From" xml:space="preserve">
     <value>From</value>
   </data>
-  <data name="InPlay" xml:space="preserve">
-    <value>In-Play</value>
-  </data>
-  <data name="LastPeriod" xml:space="preserve">
-    <value>Last Period</value>
-  </data>
-  <data name="LastWeek" xml:space="preserve">
-    <value>Last Week</value>
-  </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
-  </data>
-  <data name="Main" xml:space="preserve">
-    <value>Main</value>
   </data>
   <data name="Market" xml:space="preserve">
     <value>Market</value>
@@ -174,29 +147,11 @@
   <data name="Member" xml:space="preserve">
     <value>Member</value>
   </data>
-  <data name="MemberStake" xml:space="preserve">
-    <value>Member Stake</value>
-  </data>
-  <data name="NickName" xml:space="preserve">
-    <value>Nickname</value>
-  </data>
   <data name="NoInformationIsAvailable" xml:space="preserve">
     <value>No information is available</value>
   </data>
-  <data name="NotAuthorized" xml:space="preserve">
-    <value>You are not authorized on this function.</value>
-  </data>
   <data name="of" xml:space="preserve">
     <value>of</value>
-  </data>
-  <data name="Off" xml:space="preserve">
-    <value>Off</value>
-  </data>
-  <data name="OK" xml:space="preserve">
-    <value>OK</value>
-  </data>
-  <data name="On" xml:space="preserve">
-    <value>On</value>
   </data>
   <data name="Page" xml:space="preserve">
     <value>Page</value>
@@ -205,79 +160,10 @@
     <value>Displaying {from} to {to} of {total} items</value>
   </data>
   <data name="Parlay" xml:space="preserve">
-    <value>Sportsbook Parlay</value>
-  </data>
-  <data name="ParlayText" xml:space="preserve">
-    <value>Parlay</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="Pause" xml:space="preserve">
-    <value>Pause</value>
-  </data>
-  <data name="PercentageViewMode_0" xml:space="preserve">
-    <value>Full Percentage</value>
-  </data>
-  <data name="PercentageViewMode_1" xml:space="preserve">
-    <value>Company %</value>
-  </data>
-  <data name="PercentageViewMode_2" xml:space="preserve">
-    <value>SMA %</value>
-  </data>
-  <data name="PercentageViewMode_3" xml:space="preserve">
-    <value>MA %</value>
-  </data>
-  <data name="PercentageViewMode_4" xml:space="preserve">
-    <value>Agent %</value>
-  </data>
-  <data name="PercentageViewMode_5" xml:space="preserve">
-    <value>SMA + MA + Agent %</value>
-  </data>
-  <data name="PercentageViewMode_6" xml:space="preserve">
-    <value>SMA + MA %</value>
-  </data>
-  <data name="PercentageViewMode_7" xml:space="preserve">
-    <value>MA + Agent %</value>
-  </data>
-  <data name="PerSports" xml:space="preserve">
-    <value>Per Sports</value>
-  </data>
-  <data name="PreMatch" xml:space="preserve">
-    <value>Pre-Match</value>
-  </data>
-  <data name="ResetToDefault" xml:space="preserve">
-    <value>Reset to Default</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SMA" xml:space="preserve">
-    <value>SMA</value>
+    <value>Sportsbook  Parlay</value>
   </data>
   <data name="Sport" xml:space="preserve">
     <value>Sport</value>
-  </data>
-  <data name="Stake" xml:space="preserve">
-    <value>Stake</value>
-  </data>
-  <data name="StakeMode_0" xml:space="preserve">
-    <value>=</value>
-  </data>
-  <data name="StakeMode_1" xml:space="preserve">
-    <value>&gt;</value>
-  </data>
-  <data name="StakeMode_2" xml:space="preserve">
-    <value>&lt;</value>
-  </data>
-  <data name="StakeMode_3" xml:space="preserve">
-    <value>&lt;=</value>
-  </data>
-  <data name="StakeMode_4" xml:space="preserve">
-    <value>&gt;=</value>
   </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
@@ -285,34 +171,37 @@
   <data name="SystemErrorMessage" xml:space="preserve">
     <value>Oops... you are here because of a system error, please notify system administrator.</value>
   </data>
-  <data name="ThisPeriod" xml:space="preserve">
-    <value>This Period</value>
-  </data>
-  <data name="ThisWeek" xml:space="preserve">
-    <value>This Week</value>
-  </data>
   <data name="To" xml:space="preserve">
     <value>To</value>
-  </data>
-  <data name="Today" xml:space="preserve">
-    <value>Today</value>
-  </data>
-  <data name="Tomorrow" xml:space="preserve">
-    <value>Tomorrow</value>
-  </data>
-  <data name="UserCode" xml:space="preserve">
-    <value>User Code</value>
-  </data>
-  <data name="View" xml:space="preserve">
-    <value>View</value>
   </data>
   <data name="VirtualSports" xml:space="preserve">
     <value>Virtual Sports</value>
   </data>
-  <data name="Warning" xml:space="preserve">
-    <value>Warning</value>
+  <data name="Super" xml:space="preserve">
+    <value>Super</value>
   </data>
-  <data name="Yesterday" xml:space="preserve">
-    <value>Yesterday</value>
+  <data name="MasterAgent" xml:space="preserve">
+    <value>Master Agent</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline</value>
+  </data>
+  <data name="Others" xml:space="preserve">
+    <value>Others</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Settled" xml:space="preserve">
+    <value>Settled</value>
+  </data>
+  <data name="UnSettled" xml:space="preserve">
+    <value>Unsettled</value>
+  </data>
+  <data name="PreMatch" xml:space="preserve">
+    <value>Pre-Match</value>
+  </data>
+  <data name="InPlay" xml:space="preserve">
+    <value>In-Play</value>
   </data>
 </root>

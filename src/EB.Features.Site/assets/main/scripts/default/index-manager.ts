@@ -61,7 +61,7 @@
         indexManager.urls.onlineList = $("#OnlineMembersPath").val();
         indexManager.urls.liveChat = indexManager.urls.mainRootPath + "CustomerList/LiveChat";
         indexManager.urls.contactUs = indexManager.urls.mainRootPath + "Help/ContactUs";
-        indexManager.urls.reCheckin = "/Login/ReCheckin";
+        indexManager.urls.reCheckin = indexManager.urls.mainRootPath + "Login/ReCheckin";
         indexManager.urls.changePassword = indexManager.urls.mainRootPath + "Password/ChangePassword";
         indexManager.urls.changeSecurityCode = indexManager.urls.mainRootPath + "SecurityCode/ChangeSecurityCode";
         indexManager.urls.oldReportsPath = $("#OldReportsPath").val();
@@ -400,7 +400,7 @@
                 if (xhr.status === 500) {
                     siteInfrastructure.logout();
                     alert((<HTMLInputElement>document.getElementById("errorMessage")).value);
-                } else if (xhr.status === 401 || xhr.status === 403) {
+                } else if (xhr.status === 401 || xhr.status === 403 || xhr.status === 503) {
                     siteInfrastructure.logout();
                 }
             },

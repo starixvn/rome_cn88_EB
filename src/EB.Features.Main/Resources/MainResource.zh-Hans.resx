@@ -126,4 +126,7 @@
   <data name="HouseWinLoss" xml:space="preserve">
     <value>注单报表</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>首页</value>
+  </data>
 </root>

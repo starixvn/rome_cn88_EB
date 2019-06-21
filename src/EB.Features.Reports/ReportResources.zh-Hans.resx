@@ -228,4 +228,16 @@
   <data name="December" xml:space="preserve">
     <value>十二月</value>
   </data>
+  <data name="GrandTotal" xml:space="preserve">
+    <value>累计</value>
+  </data>
+  <data name="SuperComm" xml:space="preserve">
+    <value>股东退水</value>
+  </data>
+  <data name="ViewHistoryReport" xml:space="preserve">
+    <value>检视历史报表</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>月</value>
+  </data>
 </root>

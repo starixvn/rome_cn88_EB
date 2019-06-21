@@ -141,4 +141,7 @@
   <data name="Close" xml:space="preserve">
     <value>關閉</value>
   </data>
+  <data name="Invalidinput" xml:space="preserve">
+    <value>無效輸入</value>
+  </data>
 </root>

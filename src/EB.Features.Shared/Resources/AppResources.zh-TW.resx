@@ -201,4 +201,7 @@
   <data name="InPlay" xml:space="preserve">
     <value>進行中</value>
   </data>
+  <data name="BetType" xml:space="preserve">
+    <value>投注類別</value>
+  </data>
 </root>

@@ -1,0 +1,274 @@
+﻿[
+  {
+    "outputFileName": "assets/common/bundles/common/common.css",
+    "inputFiles": [
+      "assets/common/styles/base/reset.css",
+      "assets/common/styles/vendors-extensions/common/bootstrap-ex.css",
+      "assets/common/styles/fonts/iconcn88/style.css",
+      "assets/common/styles/base/scaffolding.css",
+      "assets/common/styles/components/blockui.css",
+      "assets/common/styles/components/dropdown.css",
+      "assets/common/styles/base/icon-fonts.css",
+      "assets/common/styles/components/icon.css",
+      "assets/common/styles/components/tables.css",
+      "assets/common/styles/components/modals.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-cn88/default.css",
+    "inputFiles": [
+      "assets/common/styles/layout/default-layout/header.css",
+      "assets/common/styles/layout/default-layout/sidebar.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/common/common.js",
+    "inputFiles": [
+      "assets/common/js/libs/jquery/jquery-1.11.3.js",
+      "assets/common/js/libs/bootstrap/button.js",
+      "assets/common/js/libs/bootstrap/dropdown.js",
+      "assets/common/js/libs/bootstrap/modal.js",
+      "assets/common/js/libs/bootstrap/tooltip.js",
+      "assets/common/js/libs/mobile/isMobile.js",
+      "assets/common/js/components/blockui/jquery.blockUI.js",
+      "assets/common/js/components/bootbox/bootbox.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-cn88/default.js",
+    "inputFiles": [
+      "assets/common/js/libs/bootstrap/transition.js",
+      "assets/common/js/libs/bootstrap/collapse.js",
+      "assets/common/js/components/pagination/jquery.draggable.js",
+      "assets/common/js/components/pagination/jquery.resizable.js",
+      "assets/common/js/components/pagination/jquery.parser.js",
+      "assets/common/js/components/pagination/jquery.linkbutton.js",
+      "assets/common/js/components/pagination/jquery.pagination.js",
+      "assets/common/js/components/bootbox/bootbox.js",
+      "assets/common/js/libs/jquery/jquery.cookie.js",
+      "assets/common/js/components/sticky-table-headers/jquery.stickytableheaders.js",
+      "assets/common/js/components/tablesorter/tablesorter.js",
+      "assets/common/js/components/multiselect/bootstrap-multiselect.js",
+      "assets/common/js/components/storejs/store.js",
+      "assets/common/js/libs/bootstrap/tab.js",
+      "assets/common/js/libs/numeral/numeral.js",
+      "assets/common/js/components/autocomplete/autocomplete.js",
+      "assets/common/js/libs/cleave/cleave.js",
+      "assets/common/js/components/draggable/tiny-draggable.js",
+      "assets/common/js/components/resizable/resizable.js",
+      "assets/common/js/components/popup-manager/popup-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-features/default.css",
+    "inputFiles": [
+      "assets/common/styles/vendors/jqueryui/jquery-ui-1.9.1.custom.css",
+      "assets/common/styles/vendors/jquery-easyui-1.5/easyui.css",
+      "assets/common/styles/layout/default-layout/sidebar.css",
+      "assets/common/styles/components/tablesorter.css",
+      "assets/common/styles/vendors/bootstrap-multiselect.css",
+      "assets/common/styles/components/bootstrap-multiselect.css",
+      "assets/common/styles/vendors/bootstrap-datetimepicker.css",
+      "assets/common/styles/components/calendars.css",
+      "assets/common/styles/components/bootstrap.nexDatePicker.css",
+      "assets/common/styles/components/pagination.css",
+      "assets/common/styles/components/tabs.css",
+      "assets/common/styles/components/buttons.css",
+      "assets/common/styles/components/textboxes.css",
+      "assets/common/styles/components/form.css",
+      "assets/common/styles/components/alerts.css",
+      "assets/common/styles/components/tooltip.css",
+      "assets/common/styles/components/breadcrumbs.css",
+      "assets/common/styles/layout/default-layout/sidebar.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-features/security.css",
+    "inputFiles": [
+      "assets/common/styles/components/buttons.css",
+      "assets/common/styles/components/alerts.css",
+      "assets/common/styles/fonts/iconcn88/style.css",
+      "assets/common/styles/components/textboxes.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-cn88/security.css",
+    "inputFiles": [
+      "assets/common/styles/components/buttons.css",
+      "assets/common/styles/components/alerts.css",
+      "assets/common/styles/components/textboxes.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-cn88/error-page.css",
+    "inputFiles": [
+      "assets/common/styles/fonts/iconcn88/style.css",
+      "assets/common/styles/base/scaffolding.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-features/default.js",
+    "inputFiles": [
+      "assets/common/js/libs/bootstrap/transition.js",
+      "assets/common/js/libs/bootstrap/collapse.js",
+      "assets/common/js/libs/bootstrap/tooltip.js",
+      "assets/common/js/components/pagination/jquery.draggable.js",
+      "assets/common/js/components/pagination/jquery.resizable.js",
+      "assets/common/js/components/pagination/jquery.parser.js",
+      "assets/common/js/components/pagination/jquery.linkbutton.js",
+      "assets/common/js/components/pagination/jquery.pagination.js",
+      "assets/common/js/components/bootbox/bootbox.js",
+      "assets/common/js/libs/jquery/jquery.cookie.js",
+      "assets/common/js/components/sticky-table-headers/jquery.stickytableheaders.js",
+      "assets/common/js/components/tablesorter/tablesorter.js",
+      "assets/common/js/components/multiselect/bootstrap-multiselect.js",
+      "assets/common/js/libs/moment/moment.js",
+      "assets/common/js/components/datetimepicker/datepicker.js",
+      "assets/common/js/components/datetimepicker/bootstrap-datetimepicker.js",
+      "assets/common/js/components/bootstrap.nexDatePicker/bootstrap.nexDatePicker.js",
+      "assets/common/js/components/storejs/store.js",
+      "assets/common/js/libs/bootstrap/tab.js",
+      "assets/common/js/libs/numeral/numeral.js",
+      "assets/common/js/components/autocomplete/autocomplete.js",
+      "assets/common/js/libs/cleave/cleave.js",
+      "assets/common/js/libs/raven/raven.js",
+      "assets/common/js/components/draggable/tiny-draggable.js",
+      "assets/common/js/components/resizable/resizable.js",
+      "assets/common/js/components/popup-manager/popup-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/common/bundles/site-cn88/security.js",
+    "inputFiles": [
+      "assets/common/js/components/secure-hashing/sha1.js",
+      "assets/common/js/components/secure-hashing/sha256.js"
+    ]
+  },
+
+
+
+  { ////////////////////////LOGIN
+    "outputFileName": "assets/login/bundles/login.js",
+    "inputFiles": [
+      "assets/login/scripts/libs/jquery/jquery-1.11.3.js",
+      "assets/login/scripts/libs/bootstrap/dropdown.js",
+      "assets/login/scripts/libs/storage/store-with-json2.min.js",
+      "assets/login/scripts/libs/cryptojs/CryptoJS.js",
+      "assets/login/scripts/libs/jquery/jquery.cookie.js",
+      "assets/login/scripts/login/core.js",
+      "assets/login/scripts/login/login.js",
+      "assets/login/scripts/login/resources.js",
+      "assets/login/scripts/login/href-handler.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/login/bundles/login.css",
+    "inputFiles": [
+      "assets/login/styles/vendors-extensions/login/bootstrap-ex.css",
+      "assets/login/styles/themes/default.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/login/bundles/um.css",
+    "inputFiles": [
+      "assets/login/styles/pages/um.css"
+    ]
+  }, ////////////////////////MAIN
+  {
+    "outputFileName": "assets/main/bundles/default.css",
+    "inputFiles": [
+      "assets/main/styles/site.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/main/bundles/default-index.css",
+    "inputFiles": [
+      "assets/main/styles/site.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/main/bundles/default-index.js",
+    "inputFiles": [
+      "assets/main/scripts/site-infrastructure.js",
+      "assets/main/scripts/default/index-manager.js"
+    ]
+  },
+
+  {
+    "outputFileName": "assets/main/bundles/password/change-password.js",
+    "inputFiles": [
+      "assets/main/scripts/site-infrastructure.js",
+      "assets/main/scripts/aes.js",
+      "assets/main/scripts/security-helper.js",
+      "assets/main/scripts/password/change-password.js"
+    ]
+  },
+
+  {
+    "outputFileName": "assets/main/bundles/home-index.js",
+    "inputFiles": [
+      "assets/main/scripts/site-infrastructure.js",
+      "assets/main/scripts/home/index-manager.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/main/bundles/home-index.css",
+    "inputFiles": [
+      "assets/main/styles/home.css"
+    ]
+  },
+
+  {
+    "outputFileName": "assets/main/bundles/security/change-password.css",
+    "inputFiles": [
+      "assets/main/styles/security/change-password.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/main/bundles/error-page.css",
+    "inputFiles": [
+      "assets/main/styles/error-page.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/main/bundles/auth/kickout.js",
+    "inputFiles": [
+      "assets/main/scripts/site-infrastructure.js",
+      "assets/main/scripts/auth/kickout.js"
+    ]
+  }, ////////////////REPORT
+  {
+    "outputFileName": "assets/report/bundles/reports.css",
+    "inputFiles": [
+      "assets/report/styles/reports.css",
+      "assets/report/styles/reports.override.css",
+      "assets/report/libs/monthPicker/monPickr-0.0.1.css"
+    ]
+  },
+  {
+    "outputFileName": "assets/report/bundles/matchwinloss.js",
+    "inputFiles": [
+      "assets/report/components/link-builder.js",
+      "assets/report/components/single-selection-dropdown.js",
+      "assets/report/components/daterangepicker.js",
+      "assets/report/components/client-pager.js",
+      "assets/report/components/sort.js",
+      "assets/report/components/filter-toggle.js",
+      "assets/shared/scripts/components/date-picker.js",
+      "assets/report/scripts/matchwinloss.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/report/bundles/housewinloss.js",
+    "inputFiles": [
+      "assets/report/components/link-builder.js",
+      "assets/report/components/single-selection-dropdown.js",
+      "assets/report/components/daterangepicker.js",
+      "assets/report/components/client-pager.js",
+      "assets/report/components/sort.js",
+      "assets/report/components/filter-toggle.js",
+      "assets/report/libs/monthPicker/monPickr-0.0.1.js",
+      "assets/report/scripts/housewinloss.js"
+    ]
+  }
+]

@@ -623,23 +623,41 @@
     <Content Include="assets\login\styles\vendors\bootstrap.css" />
     <Content Include="assets\login\styles\vendors\bootstrap.min.css" />
     <Content Include="assets\main\bundles\auth\kickout.js" />
-    <Content Include="assets\main\bundles\auth\kickout.min.js" />
+    <Content Include="assets\main\bundles\auth\kickout.min.js">
+      <DependentUpon>kickout.js</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\default-index.css" />
     <Content Include="assets\main\bundles\default-index.js" />
-    <Content Include="assets\main\bundles\default-index.min.css" />
-    <Content Include="assets\main\bundles\default-index.min.js" />
+    <Content Include="assets\main\bundles\default-index.min.css">
+      <DependentUpon>default-index.css</DependentUpon>
+    </Content>
+    <Content Include="assets\main\bundles\default-index.min.js">
+      <DependentUpon>default-index.js</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\default.css" />
-    <Content Include="assets\main\bundles\default.min.css" />
+    <Content Include="assets\main\bundles\default.min.css">
+      <DependentUpon>default.css</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\error-page.css" />
-    <Content Include="assets\main\bundles\error-page.min.css" />
+    <Content Include="assets\main\bundles\error-page.min.css">
+      <DependentUpon>error-page.css</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\home-index.css" />
     <Content Include="assets\main\bundles\home-index.js" />
-    <Content Include="assets\main\bundles\home-index.min.css" />
-    <Content Include="assets\main\bundles\home-index.min.js" />
+    <Content Include="assets\main\bundles\home-index.min.css">
+      <DependentUpon>home-index.css</DependentUpon>
+    </Content>
+    <Content Include="assets\main\bundles\home-index.min.js">
+      <DependentUpon>home-index.js</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\password\change-password.js" />
-    <Content Include="assets\main\bundles\password\change-password.min.js" />
+    <Content Include="assets\main\bundles\password\change-password.min.js">
+      <DependentUpon>change-password.js</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\security\change-password.css" />
-    <Content Include="assets\main\bundles\security\change-password.min.css" />
+    <Content Include="assets\main\bundles\security\change-password.min.css">
+      <DependentUpon>change-password.css</DependentUpon>
+    </Content>
     <Content Include="assets\main\scripts\auth\kickout.js" />
     <Content Include="assets\main\scripts\default\index-manager.js" />
     <Content Include="assets\main\scripts\home\index-manager.js" />
@@ -840,8 +858,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Login\Views\web.config" />
-    <Content Include="assets\login\bundleconfig.json" />
-    <Content Include="assets\login\compilerconfig.json" />
     <Content Include="Home\Views\web.config" />
     <Content Include="assets\common\js\libs\bootstrap\readme.md" />
     <Content Include="assets\common\js\libs\jquery\jquery-1.11.3.min.map" />
@@ -1099,8 +1115,6 @@
     <Content Include="assets\login\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_wells.scss" />
     <Content Include="Home\Views\index.cshtml" />
-    <Content Include="assets\common\bundleconfig.json" />
-    <Content Include="assets\common\compilerconfig.json" />
     <Content Include="assets\main\scripts\auth\kickout.js.map" />
     <Content Include="assets\main\scripts\default\index-manager.js.map" />
     <Content Include="assets\main\scripts\home\index-manager.js.map" />
@@ -1114,8 +1128,6 @@
     <Content Include="assets\main\styles\site.scss" />
     <Content Include="assets\main\styles\_mixins.scss" />
     <Content Include="assets\main\styles\_variables.scss" />
-    <Content Include="assets\main\bundleconfig.json" />
-    <Content Include="assets\main\compilerconfig.json" />
     <Content Include="Main\Views\web.config" />
     <Content Include="Main\Views\HeaderNav.cshtml" />
     <Content Include="Main\Views\HiddenFields.cshtml" />
@@ -1130,8 +1142,6 @@
     <Content Include="assets\report\styles\security.scss" />
     <Content Include="assets\report\styles\_mixins.scss" />
     <Content Include="assets\report\styles\_variables.scss" />
-    <Content Include="assets\report\compilerconfig.json" />
-    <Content Include="assets\report\bundleconfig.json" />
     <Content Include="App_Code\Reports\HtmlHelpers.cshtml" />
     <Content Include="assets\report\styles\reports.override.scss" />
     <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
@@ -1155,6 +1165,8 @@
     <Content Include="Configurations\connectionStrings.pro.config" />
     <Content Include="Configurations\appSettings.pro.config" />
     <Content Include="Main\Views\ChangePassword.cshtml" />
+    <Content Include="bundleconfig.json" />
+    <Content Include="compilerconfig.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

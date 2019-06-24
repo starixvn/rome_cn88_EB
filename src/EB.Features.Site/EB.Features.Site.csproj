@@ -598,6 +598,7 @@
     <Content Include="assets\login\scripts\um\um.js" />
     <Content Include="assets\login\styles\images\crossword.png" />
     <Content Include="assets\login\styles\images\error3-bg.png" />
+    <Content Include="assets\login\styles\images\Login_panel.svg" />
     <Content Include="assets\login\styles\images\sprites.png" />
     <Content Include="assets\login\styles\images\sprites2.png" />
     <Content Include="assets\login\styles\images\sprites3.png" />

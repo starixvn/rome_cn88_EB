@@ -1168,6 +1168,8 @@
     <Content Include="Main\Views\ChangePassword.cshtml" />
     <Content Include="bundleconfig.json" />
     <Content Include="compilerconfig.json" />
+    <Content Include="assets\common\bundleconfig.json" />
+    <Content Include="assets\common\compilerconfig.json" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

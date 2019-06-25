@@ -4,7 +4,6 @@
 html, body {
   height: 100%;
   width: 100%;
-  padding-top: 4%;
 }
 
 body {
@@ -228,6 +227,11 @@ input[type="checkbox"], input[type="radio"] {
         }
     }
 
+    .btn {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
     .btn:active, .btn.active {
         @include box-shadow-multiple(none);
     }
@@ -362,9 +366,15 @@ input[type="checkbox"], input[type="radio"] {
         top: 1px; 
    }
 }
+
 @media only screen and (min-device-width: 768px) {
+    body {
+        padding-top: 8%;
+    }
+
     .login-panel {
-        width: 30%;
+        width: 25%;
     }
 }
+
 

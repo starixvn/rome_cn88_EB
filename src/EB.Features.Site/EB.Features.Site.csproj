@@ -600,6 +600,7 @@
     <Content Include="assets\login\styles\images\error3-bg.png" />
     <Content Include="assets\login\styles\images\Login_panel.svg" />
     <Content Include="assets\login\styles\images\sprites.png" />
+    <Content Include="assets\login\styles\images\sprites.svg" />
     <Content Include="assets\login\styles\images\sprites2.png" />
     <Content Include="assets\login\styles\images\sprites3.png" />
     <Content Include="assets\login\styles\images\um3-bg.png" />

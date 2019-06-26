@@ -293,25 +293,9 @@
     <Content Include="assets\common\bundles\common\common.min.js">
       <DependentUpon>common.js</DependentUpon>
     </Content>
-    <Content Include="assets\common\bundles\site-cn88\default.css" />
-    <Content Include="assets\common\bundles\site-cn88\default.js" />
-    <Content Include="assets\common\bundles\site-cn88\default.min.css">
-      <DependentUpon>default.css</DependentUpon>
-    </Content>
-    <Content Include="assets\common\bundles\site-cn88\default.min.js">
-      <DependentUpon>default.js</DependentUpon>
-    </Content>
     <Content Include="assets\common\bundles\site-cn88\error-page.css" />
     <Content Include="assets\common\bundles\site-cn88\error-page.min.css">
       <DependentUpon>error-page.css</DependentUpon>
-    </Content>
-    <Content Include="assets\common\bundles\site-cn88\security.css" />
-    <Content Include="assets\common\bundles\site-cn88\security.js" />
-    <Content Include="assets\common\bundles\site-cn88\security.min.css">
-      <DependentUpon>security.css</DependentUpon>
-    </Content>
-    <Content Include="assets\common\bundles\site-cn88\security.min.js">
-      <DependentUpon>security.js</DependentUpon>
     </Content>
     <Content Include="assets\common\bundles\site-features\default.css" />
     <Content Include="assets\common\bundles\site-features\default.js" />
@@ -320,10 +304,6 @@
     </Content>
     <Content Include="assets\common\bundles\site-features\default.min.js">
       <DependentUpon>default.js</DependentUpon>
-    </Content>
-    <Content Include="assets\common\bundles\site-features\security.css" />
-    <Content Include="assets\common\bundles\site-features\security.min.css">
-      <DependentUpon>security.css</DependentUpon>
     </Content>
     <Content Include="assets\common\js\components\autocomplete\autocomplete.js" />
     <Content Include="assets\common\js\components\blockui\jquery.blockUI.js" />
@@ -624,10 +604,6 @@
     </Content>
     <Content Include="assets\login\styles\vendors\bootstrap.css" />
     <Content Include="assets\login\styles\vendors\bootstrap.min.css" />
-    <Content Include="assets\main\bundles\auth\kickout.js" />
-    <Content Include="assets\main\bundles\auth\kickout.min.js">
-      <DependentUpon>kickout.js</DependentUpon>
-    </Content>
     <Content Include="assets\main\bundles\default-index.css" />
     <Content Include="assets\main\bundles\default-index.js" />
     <Content Include="assets\main\bundles\default-index.min.css">
@@ -636,21 +612,9 @@
     <Content Include="assets\main\bundles\default-index.min.js">
       <DependentUpon>default-index.js</DependentUpon>
     </Content>
-    <Content Include="assets\main\bundles\default.css" />
-    <Content Include="assets\main\bundles\default.min.css">
-      <DependentUpon>default.css</DependentUpon>
-    </Content>
     <Content Include="assets\main\bundles\error-page.css" />
     <Content Include="assets\main\bundles\error-page.min.css">
       <DependentUpon>error-page.css</DependentUpon>
-    </Content>
-    <Content Include="assets\main\bundles\home-index.css" />
-    <Content Include="assets\main\bundles\home-index.js" />
-    <Content Include="assets\main\bundles\home-index.min.css">
-      <DependentUpon>home-index.css</DependentUpon>
-    </Content>
-    <Content Include="assets\main\bundles\home-index.min.js">
-      <DependentUpon>home-index.js</DependentUpon>
     </Content>
     <Content Include="assets\main\bundles\password\change-password.css" />
     <Content Include="assets\main\bundles\password\change-password.js" />

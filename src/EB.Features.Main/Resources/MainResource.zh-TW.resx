@@ -147,4 +147,52 @@
   <data name="PasswordChangedSuccessfully" xml:space="preserve">
     <value>您已經成功更改密碼。</value>
   </data>
+  <data name="CorrectConfirmPasswordMessage" xml:space="preserve">
+    <value>密碼未正確確認。</value>
+  </data>
+  <data name="NewPasswordAndOldTheSameMessage" xml:space="preserve">
+    <value>您的新密碼必須與當前密碼不同。</value>
+  </data>
+  <data name="Invalidinput" xml:space="preserve">
+    <value>無效輸入</value>
+  </data>
+  <data name="Invalid_Username_or_Password" xml:space="preserve">
+    <value>帳戶或密碼無效</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="You_have_no_authorization" xml:space="preserve">
+    <value>無存取權限</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>顯示密碼</value>
+  </data>
+  <data name="ExcludeTestData" xml:space="preserve">
+    <value>排除測試資料</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>關閉</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>確認密碼</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新密碼</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>舊密碼</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
 </root>

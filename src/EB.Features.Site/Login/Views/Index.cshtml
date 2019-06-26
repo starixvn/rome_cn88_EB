@@ -34,7 +34,7 @@
                         </ul>
                     </div>
                 </div>
-                <h1 class="title login-text">@SiteResources.Login</h1>
+                <h1 class="title login-text">@MainResource.Login</h1>
                 <div class="rowlg msg-error" id="divMessage">@Model.ErrorMessage</div>
                 <div class="rowlg">
                     <input type="text" class="txt" placeholder="Username" id="username" name="username" tabindex="1" />
@@ -55,7 +55,7 @@
                 @Html.Hidden("ModelLanguage", Model.LanguageCode)
                 @Html.Hidden("ModelErrMsg", Html.Raw(Model.ErrorMessage))
                 <div class="list-button">
-                    <input type="submit" class="btnLogin" value="@SiteResources.Login" id="btnLogin" tabindex="5" />
+                    <input type="submit" class="btnLogin" value="@MainResource.Login" id="btnLogin" tabindex="5" />
                 </div>
                 <input name="code" id="code" type="hidden" value="" />
             </form>

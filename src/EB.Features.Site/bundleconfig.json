@@ -26,26 +26,42 @@
       "assets/login/styles/pages/um.css"
     ]
   }, ////////////////////////MAIN
-  {
-    "outputFileName": "assets/main/bundles/default.css",
-    "inputFiles": [
-      "assets/main/styles/site.css"
-    ]
-  },
+ 
   {
     "outputFileName": "assets/main/bundles/default-index.css",
     "inputFiles": [
+      "assets/common/styles/layout/default-layout/header.css",
+      "assets/common/styles/layout/default-layout/sidebar.css",
       "assets/main/styles/site.css"
     ]
   },
   {
     "outputFileName": "assets/main/bundles/default-index.js",
     "inputFiles": [
+      "assets/common/js/libs/bootstrap/transition.js",
+      "assets/common/js/libs/bootstrap/collapse.js",
+      "assets/common/js/components/pagination/jquery.draggable.js",
+      "assets/common/js/components/pagination/jquery.resizable.js",
+      "assets/common/js/components/pagination/jquery.parser.js",
+      "assets/common/js/components/pagination/jquery.linkbutton.js",
+      "assets/common/js/components/pagination/jquery.pagination.js",
+      "assets/common/js/components/bootbox/bootbox.js",
+      "assets/common/js/libs/jquery/jquery.cookie.js",
+      "assets/common/js/components/sticky-table-headers/jquery.stickytableheaders.js",
+      "assets/common/js/components/tablesorter/tablesorter.js",
+      "assets/common/js/components/multiselect/bootstrap-multiselect.js",
+      "assets/common/js/components/storejs/store.js",
+      "assets/common/js/libs/bootstrap/tab.js",
+      "assets/common/js/libs/numeral/numeral.js",
+      "assets/common/js/components/autocomplete/autocomplete.js",
+      "assets/common/js/libs/cleave/cleave.js",
+      "assets/common/js/components/draggable/tiny-draggable.js",
+      "assets/common/js/components/resizable/resizable.js",
+      "assets/common/js/components/popup-manager/popup-manager.js",
       "assets/main/scripts/site-infrastructure.js",
       "assets/main/scripts/default/index-manager.js"
     ]
   },
-
   {
     "outputFileName": "assets/main/bundles/password/change-password.js",
     "inputFiles": [
@@ -56,21 +72,6 @@
       "assets/login/scripts/libs/cryptojs/CryptoJS.js"
     ]
   },
-
-  {
-    "outputFileName": "assets/main/bundles/home-index.js",
-    "inputFiles": [
-      "assets/main/scripts/site-infrastructure.js",
-      "assets/main/scripts/home/index-manager.js"
-    ]
-  },
-  {
-    "outputFileName": "assets/main/bundles/home-index.css",
-    "inputFiles": [
-      "assets/main/styles/home.css"
-    ]
-  },
-
   {
     "outputFileName": "assets/main/bundles/password/change-password.css",
     "inputFiles": [
@@ -84,13 +85,6 @@
     "outputFileName": "assets/main/bundles/error-page.css",
     "inputFiles": [
       "assets/main/styles/error-page.css"
-    ]
-  },
-  {
-    "outputFileName": "assets/main/bundles/auth/kickout.js",
-    "inputFiles": [
-      "assets/main/scripts/site-infrastructure.js",
-      "assets/main/scripts/auth/kickout.js"
     ]
   }, ////////////////REPORT
   {

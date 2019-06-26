@@ -41,22 +41,22 @@
                     {
                         if (!CheckUserSitePermission(user))
                         {
-                            message = SiteResources.You_have_no_authorization;
+                            message = MainResource.You_have_no_authorization;
                         }                        
                     }
                     else
                     {
-                        message = SiteResources.Invalid_Username_or_Password;
+                        message = MainResource.Invalid_Username_or_Password;
                     }
                 }
                 else
                 {
-                    message = SiteResources.Invalid_Username_or_Password;
+                    message = MainResource.Invalid_Username_or_Password;
                 }
             }
             else
             {
-                message = SiteResources.Invalidinput;
+                message = MainResource.Invalidinput;
             }
 
             return message;

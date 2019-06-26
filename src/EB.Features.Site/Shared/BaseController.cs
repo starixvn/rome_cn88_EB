@@ -41,7 +41,7 @@ namespace EB.Features.Site.Shared
                 return Json(mediator.Send(message), jsonRequestBehavior);
             }
 
-            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
+            return Json(new Result((int)HttpStatusCode.Forbidden, MainResource.You_have_no_authorization));
         }
 
         protected async Task<ActionResult> JsonDataAsync<TResponse>(
@@ -53,7 +53,7 @@ namespace EB.Features.Site.Shared
                 return Json(await mediator.Send(message).ConfigureAwait(false), jsonRequestBehavior);
             }
 
-            return Json(new Result((int)HttpStatusCode.Forbidden, SiteResources.You_have_no_authorization));
+            return Json(new Result((int)HttpStatusCode.Forbidden, MainResource.You_have_no_authorization));
         }
 
         protected async Task<FileContentResult> ExcelView(IRequest<ExcelFileViewModel> message)

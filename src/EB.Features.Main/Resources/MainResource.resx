@@ -162,4 +162,46 @@
   <data name="PasswordChangedSuccessfully" xml:space="preserve">
     <value>Your password has been changed successfully.</value>
   </data>
+  <data name="Invalidinput" xml:space="preserve">
+    <value>Invalid input</value>
+  </data>
+  <data name="Invalid_Username_or_Password" xml:space="preserve">
+    <value>Invalid Username or Password</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="You_have_no_authorization" xml:space="preserve">
+    <value>You have no authorization</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="ExcludeTestData" xml:space="preserve">
+    <value>Exclude Test Data</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

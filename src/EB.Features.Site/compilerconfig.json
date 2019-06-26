@@ -33,17 +33,10 @@
     "outputFile": "assets/main/styles/home.css",
     "inputFile": "assets/main/styles/home.scss"
   },
+
   {
-    "outputFile": "assets/main/styles/security/security.css",
-    "inputFile": "assets/main/styles/security/security.scss"
-  },
-  {
-    "outputFile": "assets/main/styles/security/create-nickname.css",
-    "inputFile": "assets/main/styles/security/create-nickname.scss"
-  },
-  {
-    "outputFile": "assets/main/styles/security/change-password.css",
-    "inputFile": "assets/main/styles/security/change-password.scss"
+    "outputFile": "assets/main/styles/password/change-password.css",
+    "inputFile": "assets/main/styles/password/change-password.scss"
   },
   {
     "outputFile": "assets/main/styles/error-page.css",

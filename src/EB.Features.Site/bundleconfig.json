@@ -52,7 +52,8 @@
       "assets/main/scripts/site-infrastructure.js",
       "assets/main/scripts/aes.js",
       "assets/main/scripts/security-helper.js",
-      "assets/main/scripts/password/change-password.js"
+      "assets/main/scripts/password/change-password.js",
+      "assets/login/scripts/libs/cryptojs/CryptoJS.js"
     ]
   },
 
@@ -71,9 +72,10 @@
   },
 
   {
-    "outputFileName": "assets/main/bundles/security/change-password.css",
+    "outputFileName": "assets/main/bundles/password/change-password.css",
     "inputFiles": [
-      "assets/main/styles/security/change-password.css"
+      "assets/main/styles/password/change-password.css",
+      "assets/common/styles/components/alerts.css"
     ]
   },
   {

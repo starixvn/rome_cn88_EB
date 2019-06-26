@@ -132,4 +132,19 @@
   <data name="ChangePassword" xml:space="preserve">
     <value>更改密碼</value>
   </data>
+  <data name="NewPwdSameOldOneError" xml:space="preserve">
+    <value>您的新密碼必須與當前密碼不同。</value>
+  </data>
+  <data name="RequiredInputOldPwdError" xml:space="preserve">
+    <value>請輸入舊密碼！</value>
+  </data>
+  <data name="RequiredPasswordError" xml:space="preserve">
+    <value>對不起，密碼欄位不能為空！</value>
+  </data>
+  <data name="ComfirmPasswordError" xml:space="preserve">
+    <value>密碼未正確確認。</value>
+  </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>您已經成功更改密碼。</value>
+  </data>
 </root>

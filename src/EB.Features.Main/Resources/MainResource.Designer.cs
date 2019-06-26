@@ -72,6 +72,15 @@ namespace EB.Features.Main.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The password was not correctly confirmed..
         /// </summary>
+        public static string ComfirmPasswordError {
+            get {
+                return ResourceManager.GetString("ComfirmPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password was not correctly confirmed..
+        /// </summary>
         public static string CorrectConfirmPasswordMessage {
             get {
                 return ResourceManager.GetString("CorrectConfirmPasswordMessage", resourceCulture);
@@ -115,11 +124,56 @@ namespace EB.Features.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your new password must be totally different from your current one..
+        /// </summary>
+        public static string NewPwdSameOldOneError {
+            get {
+                return ResourceManager.GetString("NewPwdSameOldOneError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been changed successfully..
+        /// </summary>
+        public static string PasswordChangedSuccessfully {
+            get {
+                return ResourceManager.GetString("PasswordChangedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The New Password field must be at least 2 and maximum 50 characters long..
+        /// </summary>
+        public static string PasswordHint01 {
+            get {
+                return ResourceManager.GetString("PasswordHint01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report.
         /// </summary>
         public static string Report {
             get {
                 return ResourceManager.GetString("Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Old Password!!!.
+        /// </summary>
+        public static string RequiredInputOldPwdError {
+            get {
+                return ResourceManager.GetString("RequiredInputOldPwdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, password cannot be empty!!!.
+        /// </summary>
+        public static string RequiredPasswordError {
+            get {
+                return ResourceManager.GetString("RequiredPasswordError", resourceCulture);
             }
         }
         

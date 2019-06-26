@@ -9,15 +9,15 @@
   <UsingTask AssemblyFile="..\tools\BundlerMinifier\BundlerMinifier.exe" TaskName="BundlerMinifier.BundlerCleanTask"/>
 
   <Target Name="MyTargets">
-    <WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\compilerconfig.json" />
-    <WebCompiler.CompilerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\compilerconfig.json" />
-	<BundlerMinifier.BundlerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\bundleconfig.json" />
-	<BundlerMinifier.BundlerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\bundleconfig.json" />
-
-    <WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\assets\common\compilerconfig.json" />
+	<WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\assets\common\compilerconfig.json" />
     <WebCompiler.CompilerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\assets\common\compilerconfig.json" />
 	<BundlerMinifier.BundlerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\assets\common\bundleconfig.json" />
 	<BundlerMinifier.BundlerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\assets\common\bundleconfig.json" />	
+	
+    <WebCompiler.CompilerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\compilerconfig.json" />
+    <WebCompiler.CompilerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\compilerconfig.json" />
+	<BundlerMinifier.BundlerCleanTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\bundleconfig.json" />
+	<BundlerMinifier.BundlerBuildTask FileName="$(MSBuildProjectDirectory)\..\src\EB.Features.Site\bundleconfig.json" />    
   </Target>
   
 </Project>

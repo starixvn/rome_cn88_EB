@@ -14,11 +14,11 @@
 
         public string NewPassword { get; set; }
 
-        public string ConfirmedNewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
 
-        public string OldPassword { get; set; }
+        public string CurrentPassword { get; set; }
 
         public override bool IsValid()
-            => !string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(ConfirmedNewPassword) && !string.IsNullOrEmpty(OldPassword);
+            => !string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(ConfirmPassword) && !string.IsNullOrEmpty(CurrentPassword);
     }
 }

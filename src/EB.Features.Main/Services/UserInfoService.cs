@@ -36,29 +36,26 @@
 
         public Result ChangePassword(ChangePasswordParam param)
         {
-            var resultMessage = ValidatePassword(param);
-            if (!string.IsNullOrEmpty(resultMessage))
+            var resultMessage = string.Empty;
+            var user = userService.Get(param.UserId);
+            var hashPassword = GetHash(user.Password);
+            if (hashPassword == param.OldPassword)
             {
-                var user = userService.Get(param.UserId);
-                var hashPassword = GetHash(user.Password);
-                if (hashPassword == param.OldPassword)
-                {
-                    var password = Cryptography.CfsEnCode(param.NewPassword);
+                var password = Cryptography.CfsEnCode(param.NewPassword);
 
-                    var resultUpdate = securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, password);
-                    if (!resultUpdate)
-                    {
-                        resultMessage = AppResources.SystemErrorMessage;
-                    }
-                }
-                else
+                var resultUpdate = securityService.UpdatePassword(NapSettings.Settings.SiteId, user.Id, password);
+                if (!resultUpdate)
                 {
-                    resultMessage = MainResource.WrongOldPasswordMessage;
+                    resultMessage = AppResources.SystemErrorMessage;
                 }
+            }
+            else
+            {
+                resultMessage = MainResource.WrongOldPasswordMessage;
             }
 
             return string.IsNullOrEmpty(resultMessage) ?
-                Result.CreateSuccessResult() :
+                Result.CreateSuccessResult(MainResource.PasswordChangedSuccessfully) :
                 Result.CreateErrorResult(resultMessage);
         }
 
@@ -75,28 +72,6 @@
             }
 
             return encrypted;
-        }
-
-        private static string ValidatePassword(ChangePasswordParam param)
-        {
-            const int minLengthPass = 2;
-            const int maxLengthPass = 50;
-            if (param.NewPassword.Length < minLengthPass || param.NewPassword.Length > maxLengthPass)
-            {
-                return MainResource.ValidLengthPasswordMessage;
-            }
-
-            if (param.ConfirmedNewPassword != param.NewPassword)
-            {
-                return MainResource.CorrectConfirmPasswordMessage;
-            }
-
-            if (param.NewPassword == param.OldPassword)
-            {
-                return MainResource.NewPasswordAndOldTheSameMessage;
-            }
-
-            return string.Empty;
         }
     }
 }

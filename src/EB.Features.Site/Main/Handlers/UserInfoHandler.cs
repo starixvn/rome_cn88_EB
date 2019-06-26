@@ -24,8 +24,8 @@
                 {
                     UserId = message.CurrentSession.UserId,
                     NewPassword = message.NewPassword,
-                    OldPassword = message.OldPassword,
-                    ConfirmedNewPassword = message.ConfirmedNewPassword
+                    OldPassword = message.CurrentPassword,
+                    ConfirmedNewPassword = message.ConfirmPassword
                 });
 
             return new ChangePasswordViewModel(message, updatePasswordMesssage);

@@ -652,13 +652,13 @@
     <Content Include="assets\main\bundles\home-index.min.js">
       <DependentUpon>home-index.js</DependentUpon>
     </Content>
+    <Content Include="assets\main\bundles\password\change-password.css" />
     <Content Include="assets\main\bundles\password\change-password.js" />
+    <Content Include="assets\main\bundles\password\change-password.min.css">
+      <DependentUpon>change-password.css</DependentUpon>
+    </Content>
     <Content Include="assets\main\bundles\password\change-password.min.js">
       <DependentUpon>change-password.js</DependentUpon>
-    </Content>
-    <Content Include="assets\main\bundles\security\change-password.css" />
-    <Content Include="assets\main\bundles\security\change-password.min.css">
-      <DependentUpon>change-password.css</DependentUpon>
     </Content>
     <Content Include="assets\main\scripts\auth\kickout.js" />
     <Content Include="assets\main\scripts\default\index-manager.js" />
@@ -703,12 +703,8 @@
     <Content Include="assets\main\styles\images\help\screen03_en.jpg" />
     <Content Include="assets\main\styles\images\lastGoal.gif" />
     <Content Include="assets\main\styles\images\note_title.gif" />
-    <Content Include="assets\main\styles\security\change-password.css" />
-    <Content Include="assets\main\styles\security\change-password.min.css" />
-    <Content Include="assets\main\styles\security\create-nickname.css" />
-    <Content Include="assets\main\styles\security\create-nickname.min.css" />
-    <Content Include="assets\main\styles\security\security.css" />
-    <Content Include="assets\main\styles\security\security.min.css" />
+    <Content Include="assets\main\styles\password\change-password.css" />
+    <Content Include="assets\main\styles\password\change-password.min.css" />
     <Content Include="assets\main\styles\site.css" />
     <Content Include="assets\main\styles\site.min.css" />
     <Content Include="assets\report\bundles\housewinloss.js" />
@@ -1124,9 +1120,7 @@
     <Content Include="assets\main\styles\error-page.scss" />
     <Content Include="assets\main\styles\home.scss" />
     <Content Include="assets\main\styles\popup.scss" />
-    <Content Include="assets\main\styles\security\change-password.scss" />
-    <Content Include="assets\main\styles\security\create-nickname.scss" />
-    <Content Include="assets\main\styles\security\security.scss" />
+    <Content Include="assets\main\styles\password\change-password.scss" />
     <Content Include="assets\main\styles\site.scss" />
     <Content Include="assets\main\styles\_mixins.scss" />
     <Content Include="assets\main\styles\_variables.scss" />

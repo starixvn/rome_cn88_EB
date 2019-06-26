@@ -62,7 +62,7 @@
         indexManager.urls.liveChat = indexManager.urls.mainRootPath + "CustomerList/LiveChat";
         indexManager.urls.contactUs = indexManager.urls.mainRootPath + "Help/ContactUs";
         indexManager.urls.reCheckin = indexManager.urls.mainRootPath + "Login/ReCheckin";
-        indexManager.urls.changePassword = indexManager.urls.mainRootPath + "Password/ChangePassword";
+        indexManager.urls.changePassword = indexManager.urls.mainRootPath + "UserInfo/ChangePassword";
         indexManager.urls.changeSecurityCode = indexManager.urls.mainRootPath + "SecurityCode/ChangeSecurityCode";
         indexManager.urls.oldReportsPath = $("#OldReportsPath").val();
         indexManager.urls.wagerMonitoringConsolePath = $("#WagerMonitoringConsolePath").val();
@@ -141,13 +141,13 @@
             indexManager.clearAllActiveMenu();
         });
 
-        $("#lnk-change-password").on("click touchend", () => {
+        $("#lnk-changepassword").on("click touchend", () => {
             indexManager.topWindow.popupManager.init($, top);
             indexManager.topWindow.popupManager.open({
                 title: indexManager.resources.changePassword,
                 url: indexManager.urls.changePassword,
                 top: 128,
-                width: 490,
+                width: 560,
                 height: 500
             });
         });

@@ -19,7 +19,8 @@
         public ActionResult ChangePassword()
             => View($"{ViewsPath}/ChangePassword.cshtml", new ChangePasswordViewModel());
 
-        public async Task<ActionResult> ChangePassword(ChangePasswordQuery query)
+        [HttpPost]
+        public async Task<ActionResult> SavePassword(ChangePasswordQuery query)
             => await ViewAsync(query, $"{ViewsPath}/ChangePassword.cshtml");
     }
 }

@@ -147,8 +147,8 @@
                 title: indexManager.resources.changePassword,
                 url: indexManager.urls.changePassword,
                 top: 128,
-                width: 560,
-                height: 500
+                width: 518,
+                height: 380
             });
         });
 

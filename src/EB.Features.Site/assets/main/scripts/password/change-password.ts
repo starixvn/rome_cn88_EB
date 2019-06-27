@@ -52,7 +52,8 @@ class ChangePassword {
             pleaseEnterOldPassword: this.$("#please-enter-oldPassword").val(),
             passwordCannotEmpty: this.$("#password-cannot-empty").val(),
             confirmPasswordNotCorret: this.$("#not-correct-confirm-password").val(),
-            newPassMustbeDiffOldPass: this.$("#newPassword-must-be-diff-old").val()
+            newPassMustbeDiffOldPass: this.$("#newPassword-must-be-diff-old").val(),
+            validLengthPassword: this.$("#valid-length-password").val()
         };
 
         let $memberHiddenField: JQuery = this.$("#isResetMemberPassword");
@@ -85,7 +86,14 @@ class ChangePassword {
 
             return false;
         }
-              
+
+        if (newPasswordValue.length < 2 || newPasswordValue.length > 50 ) {
+            siteInfrastructure.showError(this.elements.messsageContainer, this.resources.validLengthPassword);
+            newPassword.focus();
+
+            return false;
+        }
+
         if (newPasswordValue !== confirmPasswordValue) {
             siteInfrastructure.showError(this.elements.messsageContainer, this.resources.confirmPasswordNotCorret);
             confirmPassword.focus();

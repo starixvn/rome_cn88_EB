@@ -22,7 +22,7 @@ namespace EB.Features.Main.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class MainResource {
+    public class MainResource {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace EB.Features.Main.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EB.Features.Main.Resources.MainResource", typeof(MainResource).Assembly);
@@ -51,7 +51,7 @@ namespace EB.Features.Main.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,9 +61,81 @@ namespace EB.Features.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePassword {
+            get {
+                return ResourceManager.GetString("ChangePassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password was not correctly confirmed..
+        /// </summary>
+        public static string ComfirmPasswordError {
+            get {
+                return ResourceManager.GetString("ComfirmPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPassword {
+            get {
+                return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password was not correctly confirmed..
+        /// </summary>
+        public static string CorrectConfirmPasswordMessage {
+            get {
+                return ResourceManager.GetString("CorrectConfirmPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude Test Data.
+        /// </summary>
+        public static string ExcludeTestData {
+            get {
+                return ResourceManager.GetString("ExcludeTestData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
-        internal static string Home {
+        public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
             }
@@ -72,27 +144,180 @@ namespace EB.Features.Main.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Wager Report.
         /// </summary>
-        internal static string HouseWinLoss {
+        public static string HouseWinLoss {
             get {
                 return ResourceManager.GetString("HouseWinLoss", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Username or Password.
+        /// </summary>
+        public static string Invalid_Username_or_Password {
+            get {
+                return ResourceManager.GetString("Invalid_Username_or_Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid input.
+        /// </summary>
+        public static string Invalidinput {
+            get {
+                return ResourceManager.GetString("Invalidinput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login.
+        /// </summary>
+        public static string Login {
+            get {
+                return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logout.
+        /// </summary>
+        public static string Logout {
+            get {
+                return ResourceManager.GetString("Logout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Win Loss.
         /// </summary>
-        internal static string MatchWinLoss {
+        public static string MatchWinLoss {
             get {
                 return ResourceManager.GetString("MatchWinLoss", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New password.
+        /// </summary>
+        public static string NewPassword {
+            get {
+                return ResourceManager.GetString("NewPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your new password must be totally different from your current one..
+        /// </summary>
+        public static string NewPasswordAndOldTheSameMessage {
+            get {
+                return ResourceManager.GetString("NewPasswordAndOldTheSameMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your new password must be totally different from your current one..
+        /// </summary>
+        public static string NewPwdSameOldOneError {
+            get {
+                return ResourceManager.GetString("NewPwdSameOldOneError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old password.
+        /// </summary>
+        public static string OldPassword {
+            get {
+                return ResourceManager.GetString("OldPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been changed successfully..
+        /// </summary>
+        public static string PasswordChangedSuccessfully {
+            get {
+                return ResourceManager.GetString("PasswordChangedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The New Password field must be at least 2 and maximum 50 characters long..
+        /// </summary>
+        public static string PasswordHint01 {
+            get {
+                return ResourceManager.GetString("PasswordHint01", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report.
         /// </summary>
-        internal static string Report {
+        public static string Report {
             get {
                 return ResourceManager.GetString("Report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Enter Old Password!!!.
+        /// </summary>
+        public static string RequiredInputOldPwdError {
+            get {
+                return ResourceManager.GetString("RequiredInputOldPwdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, password cannot be empty!!!.
+        /// </summary>
+        public static string RequiredPasswordError {
+            get {
+                return ResourceManager.GetString("RequiredPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show password.
+        /// </summary>
+        public static string ShowPassword {
+            get {
+                return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The New Password field must be at least 2 and maximum 50 characters long..
+        /// </summary>
+        public static string ValidLengthPasswordMessage {
+            get {
+                return ResourceManager.GetString("ValidLengthPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old password is incorrect.
+        /// </summary>
+        public static string WrongOldPasswordMessage {
+            get {
+                return ResourceManager.GetString("WrongOldPasswordMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have no authorization.
+        /// </summary>
+        public static string You_have_no_authorization {
+            get {
+                return ResourceManager.GetString("You_have_no_authorization", resourceCulture);
             }
         }
     }

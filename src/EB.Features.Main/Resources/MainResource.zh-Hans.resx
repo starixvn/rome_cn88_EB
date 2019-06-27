@@ -129,4 +129,70 @@
   <data name="Home" xml:space="preserve">
     <value>首页</value>
   </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>更改密码</value>
+  </data>
+  <data name="NewPwdSameOldOneError" xml:space="preserve">
+    <value>您的新密码必须与当前密码不同。</value>
+  </data>
+  <data name="RequiredInputOldPwdError" xml:space="preserve">
+    <value>请输入旧密码！</value>
+  </data>
+  <data name="RequiredPasswordError" xml:space="preserve">
+    <value>对不起，密码栏位不能为空！</value>
+  </data>
+  <data name="ComfirmPasswordError" xml:space="preserve">
+    <value>密码未正确确认。</value>
+  </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>您已经成功更改密码。</value>
+  </data>
+  <data name="CorrectConfirmPasswordMessage" xml:space="preserve">
+    <value>密码未正确确认。</value>
+  </data>
+  <data name="NewPasswordAndOldTheSameMessage" xml:space="preserve">
+    <value>您的新密码必须与当前密码不同。</value>
+  </data>
+  <data name="Invalidinput" xml:space="preserve">
+    <value>无效输入</value>
+  </data>
+  <data name="Invalid_Username_or_Password" xml:space="preserve">
+    <value>帐户或密码无效</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="You_have_no_authorization" xml:space="preserve">
+    <value>无权限访问</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登入</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>顯示密碼</value>
+  </data>
+  <data name="ExcludeTestData" xml:space="preserve">
+    <value>排除测试资料</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>关闭</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>新密码</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>旧密码</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
 </root>

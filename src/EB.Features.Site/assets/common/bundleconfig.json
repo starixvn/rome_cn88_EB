@@ -7,20 +7,13 @@
       "styles/fonts/iconcn88/style.css",
       "styles/base/scaffolding.css",
       "styles/components/blockui.css",
-      "styles/components/dropdown.css",      
+      "styles/components/dropdown.css",
       "styles/base/icon-fonts.css",
       "styles/components/icon.css",
       "styles/components/tables.css",
       "styles/components/modals.css"
     ]
-  },
-  {
-    "outputFileName": "bundles/site-cn88/default.css",
-    "inputFiles": [
-      "styles/layout/default-layout/header.css",
-      "styles/layout/default-layout/sidebar.css"
-    ]
-  },
+  },  
   {
     "outputFileName": "bundles/common/common.js",
     "inputFiles": [
@@ -32,31 +25,6 @@
       "js/libs/mobile/isMobile.js",
       "js/components/blockui/jquery.blockUI.js",
       "js/components/bootbox/bootbox.js"
-    ]
-  },
-  {
-    "outputFileName": "bundles/site-cn88/default.js",
-    "inputFiles": [
-      "js/libs/bootstrap/transition.js",
-      "js/libs/bootstrap/collapse.js",
-      "js/components/pagination/jquery.draggable.js",
-      "js/components/pagination/jquery.resizable.js",
-      "js/components/pagination/jquery.parser.js",
-      "js/components/pagination/jquery.linkbutton.js",
-      "js/components/pagination/jquery.pagination.js",
-      "js/components/bootbox/bootbox.js",
-      "js/libs/jquery/jquery.cookie.js",
-      "js/components/sticky-table-headers/jquery.stickytableheaders.js",
-      "js/components/tablesorter/tablesorter.js",
-      "js/components/multiselect/bootstrap-multiselect.js",
-      "js/components/storejs/store.js",
-      "js/libs/bootstrap/tab.js",
-      "js/libs/numeral/numeral.js",
-      "js/components/autocomplete/autocomplete.js",
-      "js/libs/cleave/cleave.js",
-      "js/components/draggable/tiny-draggable.js",
-      "js/components/resizable/resizable.js",
-      "js/components/popup-manager/popup-manager.js"
     ]
   },
   {
@@ -83,29 +51,12 @@
     ]
   },
   {
-    "outputFileName": "bundles/site-features/security.css",
-    "inputFiles": [
-      "styles/components/buttons.css",
-      "styles/components/alerts.css",
-      "styles/fonts/iconcn88/style.css",
-      "styles/components/textboxes.css"
-    ]
-  },
-  {
-    "outputFileName": "bundles/site-cn88/security.css",
-    "inputFiles": [
-      "styles/components/buttons.css",
-      "styles/components/alerts.css",
-      "styles/components/textboxes.css"
-    ]
-  },
-  {
     "outputFileName": "bundles/site-cn88/error-page.css",
     "inputFiles": [
       "styles/fonts/iconcn88/style.css",
       "styles/base/scaffolding.css"
     ]
-  },  
+  },
   {
     "outputFileName": "bundles/site-features/default.js",
     "inputFiles": [
@@ -135,13 +86,6 @@
       "js/components/draggable/tiny-draggable.js",
       "js/components/resizable/resizable.js",
       "js/components/popup-manager/popup-manager.js"
-    ]
-  },
-  {
-    "outputFileName": "bundles/site-cn88/security.js",
-    "inputFiles": [
-      "js/components/secure-hashing/sha1.js",
-      "js/components/secure-hashing/sha256.js"
     ]
   }
 ]

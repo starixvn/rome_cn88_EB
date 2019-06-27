@@ -117,16 +117,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
   <data name="HouseWinLoss" xml:space="preserve">
     <value>Wager Report</value>
   </data>
+  <data name="CorrectConfirmPasswordMessage" xml:space="preserve">
+    <value>The password was not correctly confirmed.</value>
+  </data>
+  <data name="NewPasswordAndOldTheSameMessage" xml:space="preserve">
+    <value>Your new password must be totally different from your current one.</value>
+  </data>
   <data name="MatchWinLoss" xml:space="preserve">
     <value>Match Win Loss</value>
   </data>
   <data name="Report" xml:space="preserve">
     <value>Report</value>
+  </data>
+  <data name="ValidLengthPasswordMessage" xml:space="preserve">
+    <value>The New Password field must be at least 2 and maximum 50 characters long.</value>
+  </data>
+  <data name="WrongOldPasswordMessage" xml:space="preserve">
+    <value>Old password is incorrect</value>
+  </data>
+  <data name="NewPwdSameOldOneError" xml:space="preserve">
+    <value>Your new password must be totally different from your current one.</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>The New Password field must be at least 2 and maximum 50 characters long.</value>
+  </data>
+  <data name="RequiredInputOldPwdError" xml:space="preserve">
+    <value>Please Enter Old Password!!!</value>
+  </data>
+  <data name="RequiredPasswordError" xml:space="preserve">
+    <value>Sorry, password cannot be empty!!!</value>
+  </data>
+  <data name="ComfirmPasswordError" xml:space="preserve">
+    <value>The password was not correctly confirmed.</value>
+  </data>
+  <data name="PasswordChangedSuccessfully" xml:space="preserve">
+    <value>Your password has been changed successfully.</value>
+  </data>
+  <data name="Invalidinput" xml:space="preserve">
+    <value>Invalid input</value>
+  </data>
+  <data name="Invalid_Username_or_Password" xml:space="preserve">
+    <value>Invalid Username or Password</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="You_have_no_authorization" xml:space="preserve">
+    <value>You have no authorization</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ShowPassword" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="ExcludeTestData" xml:space="preserve">
+    <value>Exclude Test Data</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Old password</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

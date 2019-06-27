@@ -12,8 +12,6 @@
     public interface IAuthService
     {
         string Login(string userName, string password);
-
-        User GetUserInfo(string userName);
     }
 
     public class AuthService : IAuthService
@@ -21,14 +19,12 @@
         private readonly IUserService userService;
         private readonly IGroupService groupService;
 
+
         public AuthService(IUserService userService, IGroupService groupService)
         {
             this.groupService = groupService;
             this.userService = userService;
         }
-
-        public User GetUserInfo(string userName)
-            => userService.Get(userName.Trim());
 
         public string Login(string userName, string password)
         {
@@ -39,28 +35,28 @@
 
                 if (user != null)
                 {
-                    var hashPassword = GetHash(user.Password);
+                    var hashPassword = UserInfoService.GetHash(user.Password);
 
                     if (password == hashPassword)
                     {
                         if (!CheckUserSitePermission(user))
                         {
-                            message = SiteResources.You_have_no_authorization;
+                            message = MainResource.You_have_no_authorization;
                         }                        
                     }
                     else
                     {
-                        message = SiteResources.Invalid_Username_or_Password;
+                        message = MainResource.Invalid_Username_or_Password;
                     }
                 }
                 else
                 {
-                    message = SiteResources.Invalid_Username_or_Password;
+                    message = MainResource.Invalid_Username_or_Password;
                 }
             }
             else
             {
-                message = SiteResources.Invalidinput;
+                message = MainResource.Invalidinput;
             }
 
             return message;
@@ -76,21 +72,6 @@
             return (group == null || group.IsActive) &&
                    siteLevelList.Any(x => x.Site.Id == NapSettings.Settings.SiteId && x.IsActive &&
                    menuList.Any());
-        }
-
-        private static string GetHash(string input)
-        {
-            var encrypted = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(input))
-            {
-                var hashAlgorithm = new SHA256Managed();
-                var hashData = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-                encrypted = BitConverter.ToString(hashData).Replace("-", string.Empty).ToLowerInvariant();
-            }
-
-            return encrypted;
-        }
+        }        
     }
 }

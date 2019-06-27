@@ -13,7 +13,6 @@ class ChangePassword {
     init(): void {
         let self: any = this;
         this.cacheElements();
-
         this.$("#formPassword").submit(function (): boolean {
             self.$.blockUI();
             let $currentPassword: JQuery = self.elements.currentPassword;
@@ -25,16 +24,11 @@ class ChangePassword {
                 return false;
             }
 
-            let hashKey: string = self.elements.hashKey;
-
             if ($currentPassword.length > 0) {
-                let currentPwd: string = $currentPassword.val().encrypt(hashKey);
-                $currentPassword.val(currentPwd);
+                var encryptedPwd = CryptoJS.CfsEnCode($currentPassword.val());
+                var hashPwd = CryptoJS.SHA256(encryptedPwd);
+                $currentPassword.val(hashPwd);
             }
-
-            let newPwd: string = $newPassword.val().encrypt(hashKey);
-            $newPassword.val(newPwd);
-            $confirmPassword.val(newPwd);
 
             return true;
         });
@@ -59,7 +53,7 @@ class ChangePassword {
             passwordCannotEmpty: this.$("#password-cannot-empty").val(),
             confirmPasswordNotCorret: this.$("#not-correct-confirm-password").val(),
             newPassMustbeDiffOldPass: this.$("#newPassword-must-be-diff-old").val(),
-            passwordDoesNotMeetMinimunRequirement: this.$("#password-does-not-min-requirement").val()
+            validLengthPassword: this.$("#valid-length-password").val()
         };
 
         let $memberHiddenField: JQuery = this.$("#isResetMemberPassword");
@@ -93,8 +87,8 @@ class ChangePassword {
             return false;
         }
 
-        if (!this.isValidPassword(newPasswordValue, isResetMemberPassword)) {
-            siteInfrastructure.showError(this.elements.messsageContainer, this.resources.passwordDoesNotMeetMinimunRequirement);
+        if (newPasswordValue.length < 2 || newPasswordValue.length > 50 ) {
+            siteInfrastructure.showError(this.elements.messsageContainer, this.resources.validLengthPassword);
             newPassword.focus();
 
             return false;
@@ -115,29 +109,6 @@ class ChangePassword {
         }
 
         return true;
-    }
-
-    isValidPassword(password: string, isResetMemberPassword: boolean) {
-        let whiteSpace: RegExp = /^\S*$/;
-        let whiteSpaceCase: boolean = password.search(whiteSpace) !== -1;
-
-        if (isResetMemberPassword) {
-            let memberRegex: RegExp = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
-
-            return (password.search(memberRegex) !== -1) && whiteSpaceCase;
-        }
-
-        let regex1: RegExp = /^(?=.{8,100}$).*\d/i;
-        let regex2: RegExp = /^(?=.{8,100}$).*[a-z]/;
-        let regex3: RegExp = /^(?=.{8,100}$).*[A-Z]/;
-        let regex4: RegExp = /^(?=.{8,100}$).*[\[\]\^\$\.\|\?\*\+\(\)\\~`\!@#%&\-_+={}'""<>:;,]/i;
-
-        let case1: number = password.search(regex1) !== -1 ? 1 : 0;
-        let case2: number = password.search(regex2) !== -1 ? 1 : 0;
-        let case3: number = password.search(regex3) !== -1 ? 1 : 0;
-        let case4: number = password.search(regex4) !== -1 ? 1 : 0;
-
-        return (case1 + case2 + case3 + case4 >= 3) && whiteSpaceCase;
     }
 }
 

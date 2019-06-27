@@ -719,7 +719,7 @@
       <DependentUpon>date-picker.ts</DependentUpon>
     </Content>
     <Content Include="Error.aspx" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <TypeScriptCompile Include="assets\login\scripts\login\href-handler.ts" />

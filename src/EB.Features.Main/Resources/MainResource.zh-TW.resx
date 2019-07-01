@@ -195,4 +195,13 @@
   <data name="Save" xml:space="preserve">
     <value>保存</value>
   </data>
+  <data name="WrongOldPasswordMessage" xml:space="preserve">
+    <value>舊密碼錯誤。</value>
+  </data>
+  <data name="ValidLengthPasswordMessage" xml:space="preserve">
+    <value>新密碼長度至少2個字元，至多到50個字元。</value>
+  </data>
+  <data name="PasswordHint01" xml:space="preserve">
+    <value>新密碼長度至少2個字元，至多到50個字元。</value>
+  </data>
 </root>

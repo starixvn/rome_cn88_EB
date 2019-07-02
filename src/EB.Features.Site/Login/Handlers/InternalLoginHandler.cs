@@ -3,6 +3,7 @@
     using EB.Features.Main.Params;
     using EB.Features.Main.Services;
     using EB.Features.Site.Login.Requests;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class InternalLoginHandler : IRequestHandler<InternalLoginQuery, string>
@@ -20,6 +21,7 @@
                 message.CustId,
                 message.CustName,
                 message.AccId,
+                message.Languagekey,
                 message.InternalLogInURL,
                 message.InternalLogInUMToken,
                 message.IP,

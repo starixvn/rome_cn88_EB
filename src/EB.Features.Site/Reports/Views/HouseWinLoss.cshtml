@@ -3,6 +3,7 @@
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
 @using EB.Features.Reports.Extension;
+@using EB.Features.Site.Shared.Models;
 
 @model HouseWinLossReportViewModel
 @{
@@ -106,7 +107,8 @@
                         <a href="javascript:void(0);" class="lnk-internal"
                            data-cust-id="@row.CustId"
                            data-cust-name="@row.UserName"
-                           data-role-id="0">@row.UserName</a>
+                           data-role-id="0"
+                           data-languageKey="@UserSessionImpl.Current.Language">@row.UserName</a>
                     </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
@@ -157,7 +159,7 @@
     <input type="hidden" id="custId" name="custId" value="" />
     <input type="hidden" id="custName" name="custName" value="" />
     <input type="hidden" id="roleId" name="roleId" value="" />
-    <input type="hidden" id="roleId" name="roleId" value="" />
+    <input type="hidden" id="languageKey" name="languageKey" value="" />
     <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
     <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="@HouseWinLossReportViewModel.GetDownlineLink()" />
 </form>

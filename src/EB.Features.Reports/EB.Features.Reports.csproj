@@ -117,6 +117,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ReportMode.cs" />
     <Compile Include="Constants\RowTypeConstant.cs" />
     <Compile Include="Criteria\UnsettledHouseWinLossCriteria.cs" />
     <Compile Include="Criteria\SettledHouseWinLossCriteria.cs" />

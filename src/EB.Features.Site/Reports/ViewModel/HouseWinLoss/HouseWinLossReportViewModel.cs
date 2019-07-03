@@ -21,7 +21,6 @@
         public HouseWinLossReportViewModel(
             HouseWinLossViewModel reportData,
             HouseWinLossQuery query,
-            DateTime moveBetDate,
             IEnumerable<SelectListItemExt> sportGroups,
             IEnumerable<SelectListItemExt> betTypes,
             IEnumerable<SelectListItemExt> allBetTypes)
@@ -48,9 +47,9 @@
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
             var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
-            var fromDate = query.FromDate <= moveBetDate ? query.FromDate : moveBetDate.FirstDateOfMonth();
-            var toDate = query.ToDate < moveBetDate ? query.ToDate : moveBetDate;
-            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, moveBetDate, fromDate, toDate);
+            var fromDate = query.FromDate <= SystemTime.Yesterday ? query.FromDate : SystemTime.Yesterday.FirstDateOfMonth();
+            var toDate = query.ToDate < SystemTime.Yesterday ? query.ToDate : SystemTime.Yesterday;
+            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, SystemTime.Yesterday, fromDate, toDate);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,
@@ -63,10 +62,7 @@
                 allBetTypesSelectionViewModel);
             ReportData = reportData;
             Query = query;
-            MoveBetDate = moveBetDate;
         }
-
-        private DateTime MoveBetDate { get; }
 
         public HouseWinLossQuery Query { get; }
 
@@ -74,7 +70,7 @@
 
         public HouseWinLossFilterViewModel ReportFilterViewModel { get; }
 
-        public string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, MoveBetDate.ToShortDate());
+        public static string NoteMaxDateDescription => string.Format(ReportResources.NoteViewCurrentReport, SystemTime.Yesterday.ToShortDate());
 
         public static string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 

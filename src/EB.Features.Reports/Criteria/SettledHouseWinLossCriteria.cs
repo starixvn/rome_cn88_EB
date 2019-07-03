@@ -6,6 +6,7 @@
 
     public class SettledHouseWinLossCriteria : CriteriaBase
     {
+
         public SettledHouseWinLossCriteria(HouseWinLossParam param)
         {
             FromDate = param.FromDate;
@@ -16,7 +17,10 @@
             IsExcludedTest = param.IsExcludedTest;
             ArchiveDate = param.ArchiveDate;
             MoveBetsDay = param.MoveBetsDay;
+            ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
         }
+
+        public int ReportMode { get; }
 
         public DateTime ArchiveDate { get; }
 

@@ -50,7 +50,7 @@
 
         public string CustName => currentSession.Username;
 
-        public int CustId => query.CurrentSession.UserId;
+        public int CustId => query.CurrentSession.OnUserId;
 
         public static string GetMenuLink(string path)
             => HttpContext.Current.Response.ApplyAppPathModifier("~" + path);

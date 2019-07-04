@@ -8,7 +8,6 @@
     {
         Response.Redirect("~/Login/Index", true);
     }
-    var a = EB.Features.Shared.Resources.AppResources.SystemErrorMessage;
 %>
 <html>
     <head>

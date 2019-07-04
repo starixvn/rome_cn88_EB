@@ -135,8 +135,6 @@
 
         private void CreateAuthInfo(User user)
         {
-            var currentDomain = new CurrentContext().CurrentDomain;
-
             var authInfo = new AuthInfo
             {
                 UserId = user.Id,
@@ -150,13 +148,13 @@
                 DateTime.Now + FormsAuthentication.Timeout,
                 false,
                 authInfo.ToXml(),
-                currentDomain.Path);
+                Request.ApplicationPath);
 
             var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = currentDomain.Path,
+                Path = Request.ApplicationPath,
                 Name = FormsAuthentication.FormsCookieName
             };
 

@@ -9,6 +9,7 @@ using EB.Features.Site.Shared;
 using Fanex.Data;
 using Fanex.Data.CrossCutting.WrappingException;
 using Fanex.Data.OldConnectionStringProvider;
+using Fanex.Logging.Extensions.Web;
 using Fanex.RemotingRef;
 using ONEbook.UM.Filters;
 
@@ -43,6 +44,16 @@ namespace EB.Features.Site
             RefDataTypeContainer
                 .ConnectTo(new Uri(AppSettings.RemoteRefURL))
                 .FromApplication("EB.Features.Site");
+        }
+
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            if (Request.IsLocal)
+            {
+                return;
+            }
+
+            ExceptionHandler.Handle(Server.GetLastError());
         }
 
         private static string GetBuildVersion()

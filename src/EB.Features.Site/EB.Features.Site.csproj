@@ -293,6 +293,10 @@
     <Content Include="assets\common\bundles\common\common.min.js">
       <DependentUpon>common.js</DependentUpon>
     </Content>
+    <Content Include="assets\common\bundles\raven.js" />
+    <Content Include="assets\common\bundles\raven.min.js">
+      <DependentUpon>raven.js</DependentUpon>
+    </Content>
     <Content Include="assets\common\bundles\site-cn88\error-page.css" />
     <Content Include="assets\common\bundles\site-cn88\error-page.min.css">
       <DependentUpon>error-page.css</DependentUpon>

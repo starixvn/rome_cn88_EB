@@ -722,6 +722,24 @@
     <Content Include="assets\shared\scripts\components\date-picker.js.map">
       <DependentUpon>date-picker.ts</DependentUpon>
     </Content>
+    <Content Include="Configurations\appSettings.pro.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+    </Content>
+    <Content Include="Configurations\appSettings.staging.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+    </Content>
+    <Content Include="Configurations\appSettings.uat.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+    </Content>
+    <Content Include="Configurations\connectionStrings.pro.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+    </Content>
+    <Content Include="Configurations\connectionStrings.staging.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+    </Content>
+    <Content Include="Configurations\connectionStrings.uat.config">
+      <DependentUpon>connectionStrings.config</DependentUpon>
+    </Content>
     <Content Include="Error.aspx" />
     <Content Include="favicon.png" />
     <Content Include="Global.asax" />
@@ -1121,13 +1139,9 @@
     <Content Include="Main\Views\LanguageList.cshtml" />
     <Content Include="assets\login\scripts\libs\jquery\jquery-1.11.3.min.map" />
     <Content Include="IbcKeys\ibckey.snk" />
-    <Content Include="Configurations\appSettings.uat.config" />
-    <Content Include="Configurations\connectionStrings.uat.config" />
     <Content Include="IbcKeys\ibckeydec.snk" />
     <Content Include="IbcKeys\ibcpkey.snk" />
     <Content Include="IbcKeys\Web.config" />
-    <Content Include="Configurations\connectionStrings.pro.config" />
-    <Content Include="Configurations\appSettings.pro.config" />
     <Content Include="Main\Views\ChangePassword.cshtml" />
     <Content Include="bundleconfig.json" />
     <Content Include="compilerconfig.json" />
@@ -1151,22 +1165,13 @@
     <Content Include="Reports\Views\MatchWinLoss.cshtml" />
     <Content Include="Shared\Views\_Layout.cshtml" />
     <Content Include="Shared\Views\web.config" />
-    <Content Include="Web.uat.config" />
-    <Content Include="Web.uat.Debug.config">
-      <DependentUpon>Web.uat.config</DependentUpon>
-    </Content>
     <Content Include="Web.pro.config">
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
-    <Content Include="Web.uat.Release.config">
+    <Content Include="Web.uat.config" />
+    <Content Include="Web.staging.config">
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

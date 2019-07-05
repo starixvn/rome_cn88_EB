@@ -26,8 +26,6 @@
 
         public static string InternalLogInURL => GetConfigValue("InternalLogInURL");
 
-        public static string InternalLogInUMToken => GetConfigValue("InternalLogInUMToken");
-
         public static string FeaturesAppPath => GetConfigValue("FeaturesAppPath");
 
         public static string GetConfigValue(string configName) => AppSettingValues[configName];

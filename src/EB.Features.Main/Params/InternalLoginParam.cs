@@ -8,6 +8,7 @@
             int custId,
             string custName,
             int accId,
+            string languageKey,
             string logInLink,
             string internalLogInUMToken,
             string ip,
@@ -18,6 +19,7 @@
         {
             CustId = custId;
             CustName = custName;
+            Language = languageKey;
             AccId = accId;
             LogInLink = logInLink.StartsWith("http") ? logInLink : "http://" + logInLink;
             InternalLogInUMToken = string.IsNullOrWhiteSpace(internalLogInUMToken) ? string.Empty : $"UMToken={internalLogInUMToken}&";
@@ -35,6 +37,8 @@
         public string CustName { get; }
 
         public int AccId { get; }
+
+        public string Language { get; }
 
         public string LogInLink { get; }
 

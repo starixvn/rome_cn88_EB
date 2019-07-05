@@ -14,18 +14,15 @@
         private readonly ISportGroupService sportGroupService;
         private readonly IBettypeGroupService betTypeService;
         private readonly IHouseWinLossService houseWinLossService;
-        private readonly IReportDateService reportDateService;
 
         public HouseWinLossHandler(
             ISportGroupService sportGroupService,
             IBettypeGroupService betTypeService,
-            IReportDateService reportDateService,
             IHouseWinLossService houseWinLossService)
         {
             this.houseWinLossService = houseWinLossService;
             this.sportGroupService = sportGroupService;
             this.betTypeService = betTypeService;
-            this.reportDateService = reportDateService;
         }
 
         public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
@@ -49,7 +46,6 @@
             return new HouseWinLossReportViewModel(
                 reportData,
                 message,
-                reportDateService.GetMoveBetsDay(),
                 BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0));

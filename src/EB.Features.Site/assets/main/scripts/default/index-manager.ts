@@ -384,7 +384,7 @@
             success: (isKickout: any) => {
                 try {
                     if (isKickout) {
-                        alert("Kick out!");
+                        alert((<HTMLInputElement>document.getElementById("KickoutMessage")).value);
                         siteInfrastructure.logout();
                     }
                 }

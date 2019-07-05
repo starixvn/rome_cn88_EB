@@ -204,4 +204,7 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="SessionKickedOut" xml:space="preserve">
+    <value>You have been logged out because your account has logged into another session. Don't recognize this activity? Please contact admin for assistance.</value>
+  </data>
 </root>

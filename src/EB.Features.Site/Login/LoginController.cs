@@ -11,6 +11,7 @@
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Configuration;
+    using Fanex.NAP.Core.Context;
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Models.ParameterObject;
     using Fanex.NAP.Core.Service.Interface;
@@ -147,13 +148,13 @@
                 DateTime.Now + FormsAuthentication.Timeout,
                 false,
                 authInfo.ToXml(),
-                "/");
+                Request.ApplicationPath);
 
             var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
             {
                 HttpOnly = true,
-                Path = "/",
+                Path = Request.ApplicationPath,
                 Name = FormsAuthentication.FormsCookieName
             };
 

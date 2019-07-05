@@ -1,5 +1,11 @@
 ﻿[
   {
+    "outputFileName": "bundles/raven.js",
+    "inputFiles": [
+     "js/libs/raven/raven.js"
+    ]
+  },
+  {
     "outputFileName": "bundles/common/common.css",
     "inputFiles": [
       "styles/base/reset.css",
@@ -13,7 +19,7 @@
       "styles/components/tables.css",
       "styles/components/modals.css"
     ]
-  },  
+  },
   {
     "outputFileName": "bundles/common/common.js",
     "inputFiles": [

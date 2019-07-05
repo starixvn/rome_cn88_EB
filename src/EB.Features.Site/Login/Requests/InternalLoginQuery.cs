@@ -14,7 +14,7 @@
             : base(currentSession)
         {
             AccId = currentSession.UserId;
-
+            
             KeyPath = HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
             EncryptParamFunc = (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
             InternalLogInUMToken = AppSettings.InternalLogInUMToken;
@@ -22,6 +22,8 @@
         }
 
         public int CustId { get; set; }
+
+        public string Languagekey { get; set; }
 
         public string CustName { get; set; }
 

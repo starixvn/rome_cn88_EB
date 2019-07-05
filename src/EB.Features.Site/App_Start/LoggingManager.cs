@@ -23,7 +23,7 @@
             {
                 logEngines.Add(new SentryLogging(
                     new SentryEngineOptions { Dsn = new SharpRaven.Dsn(sentryUrl) },
-                    $"/bundles/common/raven.min.js"));
+                    $"~/assets/common/bundles/raven.min.js"));
             }
 
             LogManager

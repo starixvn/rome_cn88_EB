@@ -10,6 +10,7 @@ class HouseWinLossReport {
 
     $internalLoginForm: JQuery;
     $internalCustId: JQuery;
+    $internalLanguageKey: JQuery;
     $internalCustName: JQuery;
     $internalRoleId: JQuery;
 
@@ -47,6 +48,7 @@ class HouseWinLossReport {
 
         this.$internalLoginForm = this.$("#internal-login-form");
         this.$internalCustId = this.$internalLoginForm.find("#custId");
+        this.$internalLanguageKey = this.$internalLoginForm.find("#languageKey");
         this.$internalCustName = this.$internalLoginForm.find("#custName");
         this.$internalRoleId = this.$internalLoginForm.find("#roleId");
     }
@@ -80,6 +82,7 @@ class HouseWinLossReport {
             var elm = this$(this);
             thisInternalLogin({
                 custId: elm.attr("data-cust-id"),
+                languageKey: elm.attr("data-languageKey"),
                 custName: elm.attr("data-cust-name"),
                 roleId: elm.attr("data-role-id")
             });
@@ -186,6 +189,7 @@ class HouseWinLossReport {
     };
     internalLogin = (options) => {
         this.$internalCustId.val(options.custId);
+        this.$internalLanguageKey.val(options.languageKey);
         this.$internalCustName.val(options.custName);
         this.$internalRoleId.val(options.roleId);
         this.$internalLoginForm.submit();

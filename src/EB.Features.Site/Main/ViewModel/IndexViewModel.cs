@@ -4,17 +4,17 @@
     using System.Web;
     using EB.Features.Site.Main.Requests;
     using EB.Features.Site.Shared.Helpers;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
 
     public class IndexViewModel
     {
-        private readonly ICurrentSession currentSession;
+        private readonly UserSession currentSession;
         private readonly IBrowserHelper browserHelper;
         private readonly Func<string, string> encodeDataFunction;
         private readonly IndexQuery query;
 
         public IndexViewModel(
-            ICurrentSession currentSession,
+            UserSession currentSession,
             IBrowserHelper browserHelper,
             Func<string, string> encodeDataFunction,
             IndexQuery query)
@@ -48,7 +48,7 @@
 
         public static string DefaultPath => HttpContext.Current.Response.ApplyAppPathModifier("/Home/Index");
 
-        public string CustName => currentSession.Username;
+        public string CustName => currentSession.UserName;
 
         public int CustId => query.CurrentSession.OnUserId;
 

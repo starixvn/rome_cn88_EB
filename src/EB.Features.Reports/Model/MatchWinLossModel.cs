@@ -7,31 +7,31 @@
 
         }
 
-        public int LeagueId { get; }
+        public int LeagueId { get; internal set; }
 
         public int MatchId { get; }
 
-        public int HomeId { get; }
+        public int HomeId { get; internal set; }
 
         public string HomeName { get; set; }
 
-        public int AwayId { get; }
+        public int AwayId { get; internal set; }
 
         public string AwayName { get; set; }
 
-        public int BetTypeGroup { get; }
+        public int BetTypeGroup { get; internal set; }
 
-        public int Wagers { get; protected set; }
+        public int Wagers { get; internal set; }
 
-        public decimal Stake { get; protected set; }
+        public decimal Stake { get; internal set; }
 
-        public decimal ValidStake { get; protected set; }
+        public decimal ValidStake { get; internal set; }
 
-        public decimal MemberIncome { get; protected set; }
+        public decimal MemberIncome { get; internal set; }
 
-        public decimal HouseIncome { get; protected set; }
+        public decimal HouseIncome { get; internal set; }
 
-        public decimal HeadlineStock { get; protected set; }
+        public decimal HeadlineStock { get; internal set; }
 
         public string BetTypeGroupName { get; set; }
 

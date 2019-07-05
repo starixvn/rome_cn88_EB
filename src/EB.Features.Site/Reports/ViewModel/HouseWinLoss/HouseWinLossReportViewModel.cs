@@ -23,7 +23,8 @@
             HouseWinLossQuery query,
             IEnumerable<SelectListItemExt> sportGroups,
             IEnumerable<SelectListItemExt> betTypes,
-            IEnumerable<SelectListItemExt> allBetTypes)
+            IEnumerable<SelectListItemExt> allBetTypes,
+            string languageCode)
         {
             var sportGroupSelectionViewModel = new SingleSelectionViewModel(sportGroups, query.UserSelectedSportGroupId);
             var betTypeSelectionViewModel = new SingleSelectionViewModel(betTypes, query.UserSelectedBetTypeId);
@@ -62,6 +63,7 @@
                 allBetTypesSelectionViewModel);
             ReportData = reportData;
             Query = query;
+            LanguageCode = languageCode;
         }
 
         public HouseWinLossQuery Query { get; }
@@ -84,5 +86,7 @@
 
             return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
         }
+
+        public string LanguageCode { get; }
     }
 }

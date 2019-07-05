@@ -5,13 +5,13 @@
     using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Utilities;
     using EB.Features.Site.Shared;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
     using RSACryptoPad;
 
     public class InternalLoginQuery : BaseQuery, IRequest<string>
     {
-        public InternalLoginQuery(ICurrentSession currentSession)
+        public InternalLoginQuery(UserSession currentSession)
             : base(currentSession)
         {
             AccId = currentSession.UserId;

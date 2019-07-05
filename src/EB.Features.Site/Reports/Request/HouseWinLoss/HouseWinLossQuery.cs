@@ -1,7 +1,7 @@
 ﻿namespace EB.Features.Site.Reports.Request.HouseWinLoss
 {
     using System;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using Features.Shared.Constants;
     using Features.Shared.Utilities;
     using MediatR;
@@ -10,7 +10,7 @@
 
     public class HouseWinLossQuery : BaseQuery, IRequest<HouseWinLossReportViewModel>
     {
-        public HouseWinLossQuery(ICurrentSession currentSession)
+        public HouseWinLossQuery(UserSession currentSession)
             : base(currentSession)
         {
             UserSelectedLiveStatusId = LiveStatusConstants.AllMarkets;

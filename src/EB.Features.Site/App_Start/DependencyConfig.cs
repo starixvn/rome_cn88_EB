@@ -12,6 +12,7 @@
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Helpers;
     using EB.Features.Site.Shared.Models;
+    using Fanex.Caching;
     using Fanex.Data.Repository;
     using Fanex.NAP.Core.Context;
     using Fanex.NAP.Core.Service.Impl;
@@ -54,6 +55,7 @@
 
         private static void RegisterShareModule(Container container)
         {
+            container.RegisterSingleton<ICacheService>(new CacheService());
             container.Register<IDynamicRepository, DynamicRepository>();
             container.Register<SportGroupDataAccess, SportGroupDataAccessImpl>();
             container.Register<IBettypeGroupService, BettypeGroupServiceImpl>();

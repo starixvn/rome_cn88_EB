@@ -6,6 +6,7 @@
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Business;
     using Fanex.NAP.Core.Web.Attribute;
     using MediatR;
@@ -14,8 +15,8 @@
     {
         private const string ViewsPath = "~/Reports/Views";
 
-        public ReportsController(IMediator mediator)
-            : base(mediator)
+        public ReportsController(IMediator mediator, UserSession userSession)
+            : base(mediator, userSession)
         {
         }
 

@@ -119,10 +119,10 @@
             return $"{title} - {GetResourcesText(ticketStatus)} - {sportType} - {betType} - {GetResourcesText(liveStatus)}";
         }
 
-        internal static string GetResourcesText(string key)
+        private static string GetResourcesText(string key)
             => AppResources.ResourceManager.GetString(key);
 
-        internal static string GetExcelFileName(HouseWinLossExcelQuery param)
+        internal string GetExcelFileName(HouseWinLossExcelQuery param)
             => param.IsHistoricReport ?
             $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()}" :
             $"Wager Report - {param.Date.ToShortDate()}";

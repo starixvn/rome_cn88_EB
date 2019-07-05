@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Web.Mvc;
-using Fanex.NAP.Core.Web.Session;
+using EB.Features.Site.Shared.Models;
 
 namespace EB.Features.Site.Shared
 {
     public class QueryEntityModelBinder : DefaultModelBinder
     {
-        private static readonly Type[] IUserType = { typeof(ICurrentSession) };
+        private static readonly Type[] IUserType = { typeof(UserSession) };
         private static readonly Type BaseQueryType = typeof(BaseQuery);
 
         protected override object CreateModel(
@@ -25,7 +25,7 @@ namespace EB.Features.Site.Shared
         }
 
         protected virtual object CreateInstanceOfAssignableBaseQuery(Type modelType)
-            => Activator.CreateInstance(modelType, DependencyResolver.Current.GetService<ICurrentSession>());
+            => Activator.CreateInstance(modelType, DependencyResolver.Current.GetService<UserSession>());
 
         protected virtual object CallBaseCreateModel(
            ControllerContext controllerContext,

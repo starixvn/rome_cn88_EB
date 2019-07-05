@@ -6,11 +6,5 @@
 
     public class AllLanguagesQuery : IRequest<LanguageViewModel>
     {
-        public AllLanguagesQuery()
-        {
-            LanguageCode = UserSessionImpl.Current.Language;
-        }
-
-        public string LanguageCode { get; set; }
     }
 }

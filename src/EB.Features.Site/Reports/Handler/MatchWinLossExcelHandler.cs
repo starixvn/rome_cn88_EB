@@ -59,7 +59,7 @@
             return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
-        internal static Mapper<MatchWinLossModel> GetRowMapper(decimal totalStock, int rowType)
+        private static Mapper<MatchWinLossModel> GetRowMapper(decimal totalStock, int rowType)
         {
             var mapper = new Mapper<MatchWinLossModel>();
 
@@ -111,7 +111,7 @@
             return $"{date} - {sportType} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
         }
 
-        internal static string GetExcelFileName(MatchWinLossExcelQuery query)
+        internal string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
     }    
 }

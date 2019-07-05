@@ -126,7 +126,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\HouseWinLossModel.cs" />
     <Compile Include="Model\MatchWinLossModel.cs" />
-    <Compile Include="Model\ReportModel.cs" />
     <Compile Include="Params\HouseWinLossParam.cs" />
     <Compile Include="Params\MatchWinLossParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

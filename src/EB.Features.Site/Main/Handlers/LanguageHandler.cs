@@ -2,6 +2,7 @@
 {
     using EB.Features.Shared.Constants;
     using EB.Features.Site.Main.ViewModel;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
     using Requests;
 
@@ -9,16 +10,21 @@
         IRequestHandler<ChangeLanguageCommand, string>,
         IRequestHandler<AllLanguagesQuery, LanguageViewModel>
     {
+        private readonly UserSession userSession;
+
+        public LanguageHandler(UserSession userSession)
+        {
+            this.userSession = userSession;
+        }
+
         public string Handle(ChangeLanguageCommand message)
         {
-            var languageCode = LanguageConstants.Standardize(message.LanguageCode);
+            userSession.Language = message.LanguageCode;
 
-            message.ChangeLanguage(languageCode);
-
-            return languageCode;
+            return userSession.Language;
         }
 
         public LanguageViewModel Handle(AllLanguagesQuery message)
-            => new LanguageViewModel(LanguageConstants.CodeNames, LanguageConstants.Standardize(message.LanguageCode));
+            => new LanguageViewModel(LanguageConstants.CodeNames, userSession.Language);
     }
 }

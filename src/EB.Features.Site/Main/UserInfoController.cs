@@ -5,14 +5,15 @@
     using EB.Features.Site.Main.Requests;
     using EB.Features.Site.Main.ViewModel;
     using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class UserInfoController : BaseController
     {
         private const string ViewsPath = "~/Main/Views";
 
-        public UserInfoController(IMediator mediator)
-            : base(mediator)
+        public UserInfoController(IMediator mediator, UserSession userSession)
+            : base(mediator, userSession)
         {
         }
 

@@ -2,12 +2,12 @@
 {
     using EB.Features.Site.Main.ViewModel;
     using EB.Features.Site.Shared;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class ChangePasswordQuery : BaseQuery, IRequest<ChangePasswordViewModel>
     {
-        public ChangePasswordQuery(ICurrentSession currentSession)
+        public ChangePasswordQuery(UserSession currentSession)
             : base(currentSession)
         {
         }

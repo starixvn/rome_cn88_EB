@@ -869,7 +869,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ReportsController.cs" />
     <Compile Include="Shared\Models\UserSession.cs" />
-    <Compile Include="Shared\Models\UserSessionImpl.cs" />
     <Compile Include="Shared\MultipleLanguageController.cs" />
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
     <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
@@ -1278,14 +1277,7 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>
-      cd $(ProjectDir)
-      cd ..
-      cd ..
-      cd build
-      assets.build.cmd
-      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
-      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"
-</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

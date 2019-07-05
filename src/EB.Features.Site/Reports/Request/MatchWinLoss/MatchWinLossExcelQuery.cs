@@ -1,12 +1,12 @@
 ﻿namespace EB.Features.Site.Reports.Request
 {
     using EB.Features.Site.Reports.ViewModel;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class MatchWinLossExcelQuery : MatchWinLossQuery, IRequest<ExcelFileViewModel>
     {
-        public MatchWinLossExcelQuery(ICurrentSession currentSession)
+        public MatchWinLossExcelQuery(UserSession currentSession)
             : base(currentSession)
         {
         }

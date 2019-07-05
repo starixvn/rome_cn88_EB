@@ -22,10 +22,12 @@ namespace EB.Features.Site.Shared
         private readonly CultureInfo defaultCulture = CultureInfo.CreateSpecificCulture(LanguageConstants.Default);
 
         protected readonly IMediator mediator;
+        private readonly UserSession userSession;
 
-        public BaseController(IMediator mediator)
+        public BaseController(IMediator mediator, UserSession userSession)
         {
             this.mediator = mediator;
+            this.userSession = userSession;
         }
 
         protected async Task<ActionResult> ViewAsync<TResponse>(IRequest<TResponse> message, string viewPath)
@@ -68,16 +70,8 @@ namespace EB.Features.Site.Shared
 
         protected override void Initialize(RequestContext requestContext)
         {
-            var cultureName = UserSessionImpl.Current.Language;
-
-            if (string.IsNullOrEmpty(cultureName))
-            {
-                cultureName = LanguageConstants.Default;
-                UserSessionImpl.Current.Language = cultureName;
-            }
-
             // Modify current thread's cultures
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(cultureName);
+            Thread.CurrentThread.CurrentCulture = new CultureInfo(userSession.Language);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
 
             Thread.CurrentThread.CurrentCulture.DateTimeFormat = defaultCulture.DateTimeFormat;

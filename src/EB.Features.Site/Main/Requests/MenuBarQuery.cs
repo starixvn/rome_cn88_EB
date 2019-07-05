@@ -3,12 +3,12 @@
     using System.Collections.Generic;
     using EB.Features.Main.Model;
     using EB.Features.Site.Shared;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class MenuBarQuery : BaseQuery, IRequest<IEnumerable<MenuItem>>
     {
-        public MenuBarQuery(ICurrentSession currentSession)
+        public MenuBarQuery(UserSession currentSession)
             : base(currentSession)
         {
         }

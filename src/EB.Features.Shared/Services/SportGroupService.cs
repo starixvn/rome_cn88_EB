@@ -22,17 +22,20 @@
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
         private readonly ICacheRefService cacheRefService;
+        private readonly ICacheService fanexCacheService;
 
         public SportGroupServiceImpl(
             SportGroupDataAccess sportGroupDataAccess,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ICacheService fanexCacheService)
         {
             this.sportGroupDataAccess = sportGroupDataAccess;
             this.cacheRefService = cacheRefService;
+            this.fanexCacheService = fanexCacheService;
         }
 
         public IEnumerable<SportGroup> GetSportGroups()
-            => ConfiguredCacheService.GetOrSet(
+            => fanexCacheService.GetOrSet(
                 SportGroupsCacheKey,
                 () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));

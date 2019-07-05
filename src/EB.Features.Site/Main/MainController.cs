@@ -4,14 +4,15 @@
     using System.Web.Mvc;
     using EB.Features.Site.Main.Requests;
     using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class MainController : BaseController
     {
         private const string ViewsPath = "~/Main/Views";
 
-        public MainController(IMediator mediator)
-            : base(mediator)
+        public MainController(IMediator mediator, UserSession userSession)
+            : base(mediator, userSession)
         {
         }
 

@@ -7,17 +7,15 @@
     public class LoginViewModel
     {
 
-        public LoginViewModel()
+        public LoginViewModel(string languageCode)
         {
-            LanguageName = LanguageConstants.CodeNames[UserSessionImpl.Current.Language];
-            LanguageCode = UserSessionImpl.Current.Language;
+            LanguageCode = languageCode;
+            LanguageName = LanguageConstants.GetLanguageName(languageCode);
         }
 
-        public LoginViewModel(string message, User userInfo)
+        public LoginViewModel(string message, User userInfo, string languageCode) : this(languageCode)
         {
             ErrorMessage = message;
-            LanguageName = LanguageConstants.CodeNames[UserSessionImpl.Current.Language];
-            LanguageCode = UserSessionImpl.Current.Language;
             UserInfo = userInfo;
         }
 

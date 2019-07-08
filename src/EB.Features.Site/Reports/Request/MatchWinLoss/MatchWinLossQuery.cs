@@ -2,7 +2,7 @@
 {
     using System;
     using EB.Features.Shared.Constants;
-    using EB.Features.Shared.Utilies;
+    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.ViewModel;
     using EB.Features.Site.Shared;
     using Fanex.NAP.Core.Web.Session;

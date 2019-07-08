@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Main.Params
 {
+    using EB.Features.Shared.Utilities;
     using System;
 
     public class InternalLoginParam
@@ -23,7 +24,7 @@
             AccId = accId;
             LogInLink = logInLink.StartsWith("http") ? logInLink : "http://" + logInLink;
             InternalLogInUMToken = string.IsNullOrWhiteSpace(internalLogInUMToken) ? string.Empty : $"UMToken={internalLogInUMToken}&";
-            IP = string.IsNullOrWhiteSpace(ip) ? string.Empty : ip;
+            IP = string.IsNullOrWhiteSpace(ip) ? IPHelper.ClientIP() : ip;
 
             AfterLogInSite = afterLogInSite;
             AfterLogInQuery = afterLogInQuery;

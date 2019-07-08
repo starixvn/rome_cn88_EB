@@ -3,6 +3,7 @@
     using System;
     using System.Web;
     using EB.Features.Shared.Configuration;
+    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Shared;
     using Fanex.NAP.Core.Web.Session;
     using MediatR;
@@ -18,7 +19,7 @@
             KeyPath = HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
             EncryptParamFunc = (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
             InternalLogInUMToken = HttpContext.Current.Request["AlphaUMToken"];
-            IP = HttpContext.Current.Request.Headers["Host"];
+            IP = IPHelper.ClientIP();
         }
 
         public int CustId { get; set; }

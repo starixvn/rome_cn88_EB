@@ -3,7 +3,7 @@
     using System;
     using Fanex.NAP.Core.Web.Session;
     using Features.Shared.Constants;
-    using Features.Shared.Utilies;
+    using Features.Shared.Utilities;
     using MediatR;
     using Shared;
     using ViewModel.HouseWinLoss;

@@ -9,7 +9,7 @@
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
-    using EB.Features.Shared.Utilies;
+    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Shared.ViewModels;
     using EB.Features.Site.Shared.ViewModels.Components;

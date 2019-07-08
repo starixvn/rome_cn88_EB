@@ -6,6 +6,7 @@
     using System.Web.Security;
     using EB.Features.Main.Services;
     using EB.Features.Shared.Constants;
+    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Login;
     using EB.Features.Site.Login.Requests;
     using EB.Features.Site.Shared;
@@ -176,7 +177,7 @@
                 UserId = user.Id,
                 SiteId = NapSettings.Settings.SiteId,
                 NetSessionId = Session.SessionID,
-                Ip = currentContext.IP,
+                Ip = IPHelper.ClientIP(),
                 LoginDate = DateTime.Now,
                 BrowserName = currentContext.BrowserName,
                 CountryCode = currentContext.CountryCode,

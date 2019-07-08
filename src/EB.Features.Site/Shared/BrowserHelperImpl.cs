@@ -2,6 +2,7 @@
 {
     using System.Text.RegularExpressions;
     using System.Web;
+    using EB.Features.Shared.Utilities;
     using Features.Shared.Model;
     using ViewModels;
 
@@ -57,7 +58,7 @@
                 Id = GetDeviceId(),
                 Info = new DeviceInfo
                 {
-                    IP = GetIP(),
+                    IP = IPHelper.ClientIP(),
                     BrowserName = browser.Browser,
                     BrowserVersion = browser.Version,
                     DeviceName = browser.Platform
@@ -77,12 +78,6 @@
             var userAgent = HttpContext.Current.Request.UserAgent ?? "N/A";
 
             return userAgent;
-        }
-
-        private static string GetIP()
-        {
-            var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
-            return ip.Equals("::1") ? "127.0.0.1" : ip.Split(',')[0];
         }
 
         public bool IsAndroidNativeBrowser(string userAgent) => _androidNativeBrowserCheck.IsMatch(userAgent);

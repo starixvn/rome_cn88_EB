@@ -1,4 +1,4 @@
-﻿namespace EB.Features.Shared.Utilies
+﻿namespace EB.Features.Shared.Utilities
 {
     using System;
 

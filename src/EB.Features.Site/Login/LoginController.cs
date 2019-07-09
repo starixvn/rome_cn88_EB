@@ -16,6 +16,7 @@
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Models.ParameterObject;
     using Fanex.NAP.Core.Service.Interface;
+    using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Core.Web.Auth;
     using Fanex.NAP.Core.Web.Context;
     using Fanex.NAP.Core.Web.Session;
@@ -90,6 +91,7 @@
             return Redirect(FormsAuthentication.LoginUrl);
         }
 
+        [NapSuperAuth]
         [HttpPost]
         public ActionResult ReCheckin()
         {

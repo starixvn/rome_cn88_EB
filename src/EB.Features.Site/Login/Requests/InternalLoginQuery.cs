@@ -18,7 +18,7 @@
             
             KeyPath = HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
             EncryptParamFunc = (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
-            InternalLogInUMToken = HttpContext.Current.Request["AlphaUMToken"];
+            InternalLogInUMToken = HttpContext.Current.Session["AlphaUMToken"] as string;
             IP = IPHelper.ClientIP();
         }
 

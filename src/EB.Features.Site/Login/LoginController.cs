@@ -122,6 +122,11 @@
             {
                 Session["UMToken"] = Request.QueryString["UMToken"];
             }
+
+            if (Request.QueryString["AlphaUMToken"] != null)
+            {
+                Session["AlphaUMToken"] = Request.QueryString["AlphaUMToken"];
+            }
         }
 
         private void DoSignOut()

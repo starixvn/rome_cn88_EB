@@ -46,7 +46,7 @@
                 Stake = match1.Stake + match2.Stake,
                 ValidStake = match1.ValidStake + match2.ValidStake,
                 MemberIncome = match1.MemberIncome + match2.MemberIncome,
-                HouseIncome = match1.HouseIncome = match2.HouseIncome,
+                HouseIncome = match1.HouseIncome + match2.HouseIncome,
                 HeadlineStock = match1.HeadlineStock + match2.HeadlineStock
             };
     }

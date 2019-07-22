@@ -178,6 +178,15 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You are not authorized on this function..
+        /// </summary>
+        public static string NoAuthorized {
+            get {
+                return ResourceManager.GetString("NoAuthorized", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No information is available.
         /// </summary>
         public static string NoInformationIsAvailable {
@@ -237,6 +246,15 @@ namespace EB.Features.Shared.Resources {
         public static string PreMatch {
             get {
                 return ResourceManager.GetString("PreMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
             }
         }
         

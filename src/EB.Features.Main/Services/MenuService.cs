@@ -37,14 +37,22 @@ namespace EB.Features.Main.Services
         public IEnumerable<MenuItem> GetMenu(IEnumerable<NapMenuItem> napMenuItems)
         {
             var menuItems = new List<MenuItem>();
-            foreach (var napMenuItem in napMenuItems.Where(i => i.Parent == null))
-            {
-                var menuItem = new MenuItem(napMenuItem);
-                var napSubMenuItems = napMenuItems.Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id);
-                menuItem.SubMenus = napSubMenuItems.Select(i => new MenuItem(i)).ToList();
 
-                menuItems.Add(menuItem);
-            }
+            napMenuItems
+                .Where(i => i.Parent == null)
+                .OrderBy(i => i.DisplayOrder)
+                .ToList()
+                .ForEach(napMenuItem =>
+                {
+                    var menuItem = new MenuItem(napMenuItem);
+                    menuItem.SubMenus = napMenuItems
+                        .Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id)
+                        .OrderBy(i => i.DisplayOrder)
+                        .Select(i => new MenuItem(i))
+                        .ToList();
+
+                    menuItems.Add(menuItem);
+                });
 
             return menuItems;
         }

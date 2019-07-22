@@ -26,7 +26,7 @@
       "assets/login/styles/pages/um.css"
     ]
   }, ////////////////////////MAIN
- 
+
   {
     "outputFileName": "assets/main/bundles/default-index.css",
     "inputFiles": [
@@ -119,6 +119,20 @@
       "assets/report/components/filter-toggle.js",
       "assets/report/libs/monthPicker/monPickr-0.0.1.js",
       "assets/report/scripts/housewinloss.js"
+    ]
+  }, ////////////////SUB ACCOUNT
+  {
+    "outputFileName": "AccountManagement/bundles/subaccount.js",
+    "inputFiles": [
+      "assets/main/scripts/site-infrastructure.js",
+      "assets/report/components/message.js",
+      "AccountManagement/Scripts/subaccount.js"
+    ]
+  },
+  {
+    "outputFileName": "AccountManagement/bundles/subaccount.css",
+    "inputFiles": [
+      "AccountManagement/Styles/subaccount.css"
     ]
   }
 ]

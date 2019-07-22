@@ -204,4 +204,10 @@
   <data name="InPlay" xml:space="preserve">
     <value>In-Play</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="NoAuthorized" xml:space="preserve">
+    <value>You are not authorized on this function.</value>
+  </data>
 </root>

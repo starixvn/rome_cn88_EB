@@ -204,4 +204,10 @@
   <data name="InPlay" xml:space="preserve">
     <value>滚球</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="NoAuthorized" xml:space="preserve">
+    <value>您没有使用此功能的权限.</value>
+  </data>
 </root>

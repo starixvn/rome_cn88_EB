@@ -3,4 +3,8 @@
   <Function Name="Shared">
     <Setting Key="Age_LoginAdminVerifyTicket" SpName="Age_LoginAdminVerifyTicket" DbName="DBCust.CustDB.bodbAdminNet" />
   </Function>
+  <Function Name="Sub Account">
+    <Setting Key="CS_CustSubSelInfoSuper" SpName="CS_CustSubSelInfoSuper_xtest" DbName="DBCust.CustDB.bodbAdminNet" />
+    <Setting Key="CS_CustSubUpd" SpName="CS_CustSubUpd" DbName="DBCust.CustDB.bodbAdminNet" />
+  </Function>
 </Functions>

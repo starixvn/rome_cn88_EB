@@ -4,5 +4,7 @@
     {
         public const string MatchWinLoss = "MatchWinLoss";
         public const string HouseWinLoss = "HouseWinLoss";
+
+        public const string SubAccount = "SubAccount";
     }
 }

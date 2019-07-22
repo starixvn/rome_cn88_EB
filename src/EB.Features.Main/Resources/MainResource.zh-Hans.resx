@@ -204,4 +204,10 @@
   <data name="PasswordHint01" xml:space="preserve">
     <value>新密码长度至少2个字符，至多到50个字符。</value>
   </data>
+  <data name="AccountManagement" xml:space="preserve">
+    <value>账户管理</value>
+  </data>
+  <data name="SubAccount" xml:space="preserve">
+    <value>子帐号</value>
+  </data>
 </root>

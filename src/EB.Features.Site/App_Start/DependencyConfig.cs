@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Reflection;
     using System.Web.Mvc;
+    using EB.Features.AccountManagement.Services;
     using EB.Features.Main.DataAccesses;
     using EB.Features.Main.Services;
     using EB.Features.Reports.Services;
@@ -38,6 +39,7 @@
             RegisterMainModule(container);
             RegisterShareModule(container);
             RegisterReportModule(container);
+            RegisterAccountManagementModule(container);
 
             // This is an extension method from the integration package.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
@@ -114,5 +116,8 @@
             container.Register<ICurrentSession, CurrentSession>();
             container.Register<IMaintenanceService, MaintenanceService>();
         }
+
+        private static void RegisterAccountManagementModule(Container container)
+            => container.Register<SubAccountService, SubAccountServiceImpl>();
     }
 }

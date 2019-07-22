@@ -1,0 +1,43 @@
+﻿html {
+    height: 100%;
+}
+
+.subaccount {
+    padding: 0 20px;
+    width: 680px;
+
+    .search-form {
+        .control {
+            width: 250px;
+        }
+    }
+
+    .update-form {
+        hr {
+            border-color: #c8c8c8;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            display: block;
+
+            .control-label {
+                text-align: left;
+                width: 222px;
+            }
+
+            .checkbox {
+                width: 480px;
+
+                input[type="checkbox"] {
+                    right: 0;
+                    bottom: 6px;
+                }
+
+                label {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+}

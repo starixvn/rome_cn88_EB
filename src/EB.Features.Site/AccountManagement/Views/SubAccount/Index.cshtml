@@ -1,0 +1,76 @@
+﻿@using EB.Features.AccountManagement.Models.SubAccount;
+@using EB.Features.Shared.Resources;
+@using Sunplus.Agent.Model.Entities;
+@{
+    Layout = "~/Shared/Views/_Layout.cshtml";
+    ViewBag.Title = EB.Features.Main.Resources.MainResource.SubAccount;
+}
+@section Styles {
+    @StaticResources.RenderStyles("~/AccountManagement/bundles/subaccount")
+}
+@section Scripts{
+    @StaticResources.RenderScripts("~/AccountManagement/bundles/subaccount")
+}
+@model SubAccountItem
+<div class="subaccount">
+    <div id="message"></div>
+
+    @using (Html.BeginForm("Search", "SubAccount", FormMethod.Get, new { id = "formSearch", @class = "form-inline filter search-form", novalidate = "novalidate" }))
+    {
+        <div class="form-group">
+            <label for="name">@SubAccountResource.SubAccountUsernameOrNickname</label>
+            <input type="text" class="control" id="name" autocomplete="off" maxlength="50" />
+        </div>
+        <div class="form-group">
+            <input type="submit" value="@AppResources.Submit" class="btn-submit" id="btnSearch" />
+        </div>
+    }
+
+    @using (Html.BeginForm("Update", "SubAccount", FormMethod.Post, new { id = "formUpdate", @class = "form-horizontal filter update-form hide", novalidate = "novalidate" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group">
+            <label class="control-label">@SubAccountResource.SMAUsername</label>
+            <span class="control" id="smaUsername"></span>
+        </div>
+        <div class="form-group">
+            <label class="control-label">@SubAccountResource.SubAccountUsername</label>
+            <span class="control" id="subAccountUsername"></span>
+        </div>
+        <hr />
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="totalbets" value="@PageAccessType.ViewTotalBets"> @SubAccountResource.TotalBets
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="acViewOnly" value="@PageAccessType.ViewMemberInfo"> @SubAccountResource.AccountManagementViewOnly
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="acEditView" value="@PageAccessType.UpdateAccount"> @SubAccountResource.AccountManagementEditView
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="reports" value="@PageAccessType.ViewReports"> @SubAccountResource.Reports
+                </label>
+            </div>
+        </div>
+        <div class="list-button text-center">
+            <input type="submit" class="btn-submit" value="@AppResources.Save" />
+        </div>
+    }
+
+    <input type="hidden" id="InvalidSMASubAccount" value="@SubAccountResource.InvalidSMASubAccount" />
+    <input type="hidden" id="NoAuthorized" value="@AppResources.NoAuthorized" />
+</div>

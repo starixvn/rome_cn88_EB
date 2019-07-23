@@ -48,7 +48,7 @@
             SubAccountItem subAccountItem)
         {
             param.Name = subAccountItem.FirstName;
-            param.PageAccess = string.Join(",", FilterWithValidPermissions(param.PageAccess));
+            param.PageAccess = string.Join(string.Empty, FilterWithValidPermissions(param.PageAccess));
             var result = await UpdateAsync(new UpdateSubAccountCommand(param));
 
             // Kickout when updating Permissions.

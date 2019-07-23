@@ -43,7 +43,7 @@ namespace EB.Features.Reports.Tests.ViewModel
             var viewModel = new MatchWinLossViewModel(matches);
 
             // Act
-            var act = viewModel.NormalMatchesHasMajorBetType;
+            var act = viewModel.SportbookMatchesHasMajorBetType;
 
             // Assert
             Assert.AreEqual(1, act.Count(i => i.BetTypeGroup == majorBettype));
@@ -61,7 +61,7 @@ namespace EB.Features.Reports.Tests.ViewModel
             var viewModel = new MatchWinLossViewModel(matches);
 
             // Act
-            var act = viewModel.NormalMatchesHasMajorBetType.ToList();
+            var act = viewModel.SportbookMatchesHasMajorBetType.ToList();
 
             // Assert
             Assert.AreEqual(BetTypeIdConstants.Handicap, act[0].BetTypeGroup);
@@ -81,7 +81,7 @@ namespace EB.Features.Reports.Tests.ViewModel
             var viewModel = new MatchWinLossViewModel(matches);
 
             // Act
-            var act = viewModel.NormalMatchesHasMinorBetType;
+            var act = viewModel.SportbookMatchesHasMinorBetType;
 
             // Assert
             Assert.IsEmpty(act);
@@ -100,7 +100,7 @@ namespace EB.Features.Reports.Tests.ViewModel
             var viewModel = new MatchWinLossViewModel(matches);
 
             // Act
-            var act = viewModel.NormalMatchesHasOutright;
+            var act = viewModel.SportbookMatchesHasOutright;
 
             // Assert
             Assert.IsTrue(act.Any(i => i.BetTypeGroup == BetTypeIdConstants.Outright));
@@ -129,6 +129,23 @@ namespace EB.Features.Reports.Tests.ViewModel
             var matches = new List<MatchWinLossModel>
             {
                 new MatchWinLossModel{ BetTypeGroup = BetTypeIdConstants.SystemParlay }
+            };
+            var viewModel = new MatchWinLossViewModel(matches);
+
+            // Act
+            var act = viewModel.IsShowTotalRow;
+
+            // Assert
+            Assert.IsTrue(act);
+        }
+
+        [Test]
+        public void IsShowTotalRow_HasNonSportProduct_ReturnTrue()
+        {
+            // Arrange
+            var matches = new List<MatchWinLossModel>
+            {
+                new MatchWinLossModel{ BetTypeGroup = 1, IsNonSports = true }
             };
             var viewModel = new MatchWinLossViewModel(matches);
 
@@ -176,6 +193,47 @@ namespace EB.Features.Reports.Tests.ViewModel
             Assert.AreEqual(expectedTotal.MemberIncome, act.MemberIncome);
             Assert.AreEqual(expectedTotal.HouseIncome, act.HouseIncome);
             Assert.AreEqual(expectedTotal.HeadlineStock, act.HeadlineStock);
+        }
+
+
+        [Test]
+        public void NoSportMatches_IsNonSports_AlwaysIsTrue()
+        {
+            // Arrange
+            var matches = new List<MatchWinLossModel>
+            {
+                new MatchWinLossModel{ BetTypeGroup = BetTypeIdConstants.Handicap, IsNonSports = true },
+                new MatchWinLossModel{ BetTypeGroup = BetTypeIdConstants.Outright },
+            };
+            var viewModel = new MatchWinLossViewModel(matches);
+
+            // Act
+            var act = viewModel.NonSportMatches;
+
+            // Assert
+            Assert.IsTrue(act.Any(i => i.BetTypeGroup == BetTypeIdConstants.Handicap));
+            Assert.AreEqual(1, act.Count());
+        }
+
+
+        public void NoSportMatches_Always_OrderByBetTypeGroupNameByEnglish()
+        {
+            // Arrange
+            var matches = new List<MatchWinLossModel>
+            {
+                new MatchWinLossModel{ BetTypeGroup = 12, IsNonSports = true },
+                new MatchWinLossModel{ BetTypeGroup = 11, IsNonSports = true },
+                new MatchWinLossModel{ BetTypeGroup = 13, IsNonSports = true },
+            };
+            var viewModel = new MatchWinLossViewModel(matches);
+
+            // Act
+            var act = viewModel.NonSportMatches.ToList();
+
+            // Assert
+            Assert.AreEqual(11, act[0].BetTypeGroup);
+            Assert.AreEqual(12, act[1].BetTypeGroup);
+            Assert.AreEqual(13, act[2].BetTypeGroup);
         }
     }
 }

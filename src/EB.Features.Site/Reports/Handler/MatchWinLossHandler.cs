@@ -29,7 +29,7 @@
 
         public MatchWinLossReportViewModel Handle(MatchWinLossQuery message)
         {
-            var sportGroups = sportGroupService.GetSportGroupsForSportbook();
+            var sportGroups = sportGroupService.GetSportGroups();
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport(sportGroups.Select(i => i.Id));
             var betTypes = message.UserSelectedSportGroupId == 0 ?
                 allBetTypes:

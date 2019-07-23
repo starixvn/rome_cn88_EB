@@ -38,7 +38,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
 
         [Test]
-        public void Handler_Always_CallSportGroupsForSportbook()
+        public void Handler_Always_CallSportGroups()
         {
             // Arrange
 
@@ -47,7 +47,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             hander.Handle(new MatchWinLossQuery(currentSession));
 
             // Assert
-            sportGroupService.Received().GetSportGroupsForSportbook();
+            sportGroupService.Received().GetSportGroups();
         }
 
 
@@ -58,10 +58,10 @@ namespace EB.Features.Site.Tests.Reports.Handler
             var expectedGroupId = 1;
             var sportGroup = new List<SportGroup>
             {
-                new SportGroup(expectedGroupId, 1, new List<int>(), cacheRefService.GetSportName)
+                new SportGroup(expectedGroupId, new List<int>(), cacheRefService.GetSportName, cacheRefService.GetSportNameByEnglish)
             };
 
-            sportGroupService.GetSportGroupsForSportbook()
+            sportGroupService.GetSportGroups()
                 .Returns(sportGroup);
 
             // Act

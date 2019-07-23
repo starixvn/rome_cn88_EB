@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using AutoFixture;
 using EB.Features.Reports;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Reports.ViewModel;
+using EB.Features.Shared.Configuration;
 using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
@@ -210,7 +212,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
 
         [Test]
-        public void Handle_Number_MustBeDivide100WhenExport()
+        public void Handle_Number_MustBeDivideReduceNumberInAppSettingWhenExport()
         {
             // Arrange            
             var match = new MatchWinLossModel { Wagers = 1, Stake = 2, ValidStake = 3, MemberIncome = 4, HouseIncome = 5, HeadlineStock = 6 };
@@ -221,16 +223,21 @@ namespace EB.Features.Site.Tests.Reports.Handler
             var viewModel = new MatchWinLossViewModel(matches);
             matchWinLossService.Get(Arg.Any<MatchWinLossParam>()).Returns(viewModel);
             workbook.SetData(Arg.Any<MatchWinLossViewModel>()).Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "100" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
 
             // Act
             handler.Handle(new MatchWinLossExcelQuery(currentSession));
 
             // Assert
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[C](match) == 0.02m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[D](match) == 0.03m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[E](match) == 0.04m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[F](match) == 0.05m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[G](match) == 0.06m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.HouseIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.HeadlineStock / AppSettings.ReduceNumber), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
             workbook.Received().SetRowMappers(Arg.Is<Mapper<MatchWinLossModel>>(i => (decimal)i.Mappings[H](match) == 100m), Arg.Any<Mapper<MatchWinLossModel>>(), Arg.Any<Mapper<MatchWinLossModel>>());
         }
 
@@ -290,8 +297,8 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Any<Mapper<MatchWinLossModel>>()
-                ,Arg.Is<Mapper<MatchWinLossModel>>(i => (string)i.Mappings[A](match) == ReportResources.SubTotal)
-                ,Arg.Any<Mapper<MatchWinLossModel>>());
+                , Arg.Is<Mapper<MatchWinLossModel>>(i => (string)i.Mappings[A](match) == ReportResources.SubTotal)
+                , Arg.Any<Mapper<MatchWinLossModel>>());
         }
 
         [Test]

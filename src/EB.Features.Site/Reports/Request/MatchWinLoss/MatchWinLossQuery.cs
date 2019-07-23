@@ -8,7 +8,7 @@
     using EB.Features.Site.Shared.Models;
     using MediatR;
 
-    public class MatchWinLossQuery : BaseQuery, IRequest<MatchWinLossReportViewModel>
+    public class MatchWinLossQuery : ReportBaseQuery, IRequest<MatchWinLossReportViewModel>
     {
         public MatchWinLossQuery(UserSession currentSession)
             : base(currentSession)

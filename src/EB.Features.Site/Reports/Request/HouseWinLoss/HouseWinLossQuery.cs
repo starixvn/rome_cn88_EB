@@ -5,10 +5,9 @@
     using Features.Shared.Constants;
     using Features.Shared.Utilities;
     using MediatR;
-    using Shared;
     using ViewModel.HouseWinLoss;
 
-    public class HouseWinLossQuery : BaseQuery, IRequest<HouseWinLossReportViewModel>
+    public class HouseWinLossQuery : ReportBaseQuery, IRequest<HouseWinLossReportViewModel>
     {
         public HouseWinLossQuery(UserSession currentSession)
             : base(currentSession)

@@ -7,6 +7,7 @@
     using EB.Features.Reports.Services;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared;
+    using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -78,12 +79,12 @@
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / AppSettings.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / AppSettings.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / AppSettings.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * AppSettings.ReduceNumber));
 
             return mapper;
         }

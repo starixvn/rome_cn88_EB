@@ -36,3 +36,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: InternalsVisibleTo("EB.Features.Shared.Tests")]
 [assembly: InternalsVisibleTo("EB.Features.Site.Tests")]
+[assembly: InternalsVisibleTo("EB.Features.Reports.Tests")]

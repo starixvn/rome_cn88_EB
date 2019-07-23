@@ -38,24 +38,6 @@
 
             // Assert
             fanexCacheService.Received().GetOrSet(key, Arg.Any<Func<IEnumerable<SportGroup>>>(), Arg.Any<CacheItemOptions>());
-        }
-
-        [Test]
-        public void GetSportGroupsForSportbook_Always_ReturnSportbookProduct()
-        {
-            // Arrange
-            var sportGroups = new List<SportGroup>
-            {
-                new SportGroup(1, 0, new List<int>(), cacheRefService.GetSportName),
-                new SportGroup(1, 1, new List<int>(), cacheRefService.GetSportName),
-            };
-            sportGroupDataAccess.GetSportGroups(Arg.Any<GetSportGroupsCriteria>(), Arg.Any<Func<int, string>>()).Returns(sportGroups);
-
-            // Action
-            var act = sportGroupService.GetSportGroupsForSportbook();
-
-            // Assert
-            Assert.IsFalse(act.Any(i => i.ProductId == 0));
-        }
+        }        
     }
 }

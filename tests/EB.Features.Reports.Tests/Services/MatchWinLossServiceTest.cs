@@ -6,6 +6,7 @@ using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Constants;
+using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using Fanex.Data.Repository;
@@ -20,6 +21,7 @@ namespace EB.Features.Reports.Tests.Services
         private IReportDateService reportDateService;
         private ICacheRefService cacheRefService;
         private IMatchWinLossService reportService;
+        private ISportGroupService sportGroupService;
 
         [SetUp]
         public void SetUp()
@@ -27,8 +29,9 @@ namespace EB.Features.Reports.Tests.Services
             dynamicRepository = Substitute.For<IDynamicRepository>();
             reportDateService = Substitute.For<IReportDateService>();
             cacheRefService = Substitute.For<ICacheRefService>();
+            sportGroupService = Substitute.For<ISportGroupService>();
 
-            reportService = new MatchWinLossService(dynamicRepository, reportDateService, cacheRefService);
+            reportService = new MatchWinLossService(dynamicRepository, reportDateService, cacheRefService, sportGroupService);
         }
 
         [Test]
@@ -82,7 +85,7 @@ namespace EB.Features.Reports.Tests.Services
             var act = reportService.Get(new MatchWinLossParam());
 
             // Assert
-            Assert.AreEqual(2, act.NormalMatches.Count(i => i.BetTypeGroupName == expectedBettypeName));
+            Assert.AreEqual(2, act.SportbookMatches.Count(i => i.BetTypeGroupName == expectedBettypeName));
         }
 
 
@@ -122,7 +125,7 @@ namespace EB.Features.Reports.Tests.Services
             var act = reportService.Get(new MatchWinLossParam());
 
             // Assert
-            Assert.IsTrue(act.NormalMatches.Any(i => i.HomeName == expectedHomeName));
+            Assert.IsTrue(act.SportbookMatches.Any(i => i.HomeName == expectedHomeName));
         }
 
         [Test]
@@ -142,7 +145,7 @@ namespace EB.Features.Reports.Tests.Services
             var act = reportService.Get(new MatchWinLossParam());
 
             // Assert
-            Assert.IsTrue(act.NormalMatches.Any(i => i.AwayName == expectedAwayName));
+            Assert.IsTrue(act.SportbookMatches.Any(i => i.AwayName == expectedAwayName));
         }
 
         [Test]
@@ -162,7 +165,7 @@ namespace EB.Features.Reports.Tests.Services
             var act = reportService.Get(new MatchWinLossParam());
 
             // Assert
-            Assert.IsTrue(act.NormalMatches.Any(i => i.LeagueName == expectedAwayName));
+            Assert.IsTrue(act.SportbookMatches.Any(i => i.LeagueName == expectedAwayName));
         }
 
 
@@ -182,11 +185,53 @@ namespace EB.Features.Reports.Tests.Services
             cacheRefService.GetLeagueName(1).Returns(leagueNameByEnglishIsTW);
 
             // Act
-            var act= reportService.Get(new MatchWinLossParam());
+            var act = reportService.Get(new MatchWinLossParam());
 
             // Assert
-            Assert.IsTrue(act.NormalMatches.Any(i => i.LeagueNameByEnglish == leagueNameByEnglishIsEnglish));
-            Assert.IsTrue(act.NormalMatches.Any(i => i.LeagueName == leagueNameByEnglishIsTW));
+            Assert.IsTrue(act.SportbookMatches.Any(i => i.LeagueNameByEnglish == leagueNameByEnglishIsEnglish));
+            Assert.IsTrue(act.SportbookMatches.Any(i => i.LeagueName == leagueNameByEnglishIsTW));
+        }
+
+
+        [Test]
+        public void MachIsNonSportProduct_BetTypeGroupName_IsSportGroupName()
+        {
+            // Arrange
+            var matchs = new List<MatchWinLossModel>
+            {
+                new MatchWinLossModel{ IsNonSports = true, BetTypeGroup =1 }
+            };
+            dynamicRepository.Fetch<MatchWinLossModel>(Arg.Any<MatchWinLossCriteria>())
+                .Returns(matchs);
+            
+            var sportGroup = new SportGroup(1, new List<int> { 11 }, Substitute.For<Func<int, string>>(), Substitute.For<Func<int, string>>());
+            sportGroupService.GetSportGroupById(1).Returns(sportGroup);
+
+            // Act
+            var act = reportService.Get(new MatchWinLossParam());
+
+            // Assert
+            Assert.IsTrue(act.NonSportMatches.Any(i => i.BetTypeGroupName == sportGroup.DisplayName));
+        }
+
+        [Test]
+        public void MachIsNonSportProduct_BetTypeGroupNameByEnglish_IsSportGroupNameByEnglish()
+        {
+            // Arrange
+            var matchs = new List<MatchWinLossModel>
+            {
+                new MatchWinLossModel{ IsNonSports = true, BetTypeGroup =1 }
+            };
+            dynamicRepository.Fetch<MatchWinLossModel>(Arg.Any<MatchWinLossCriteria>())
+                .Returns(matchs);
+            var sportGroup = new SportGroup(1, new List<int> { 11 }, Substitute.For<Func<int, string>>(), Substitute.For<Func<int, string>>());
+            sportGroupService.GetSportGroupById(1).Returns(sportGroup);
+
+            // Act
+            var act = reportService.Get(new MatchWinLossParam());
+
+            // Assert
+            Assert.IsTrue(act.NonSportMatches.Any(i => i.BetTypeGroupNameByEnglish == sportGroup.DisplayNameByEnglish));
         }
     }
 }

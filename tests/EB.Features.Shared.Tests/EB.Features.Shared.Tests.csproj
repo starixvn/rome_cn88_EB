@@ -74,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Criteria\GetSportGroupsCriteriaTest.cs" />
+    <Compile Include="Criteria\GetBetTypeGroupBySportCriteriaTest.cs" />
+    <Compile Include="Criteria\GetBalanceUpDayAndMoveBetsDayCriteriaTest.cs" />
+    <Compile Include="Criteria\GetArchiveDateCriteriaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BettypeGroupServiceTest.cs" />
     <Compile Include="Services\SportGroupServiceTest.cs" />

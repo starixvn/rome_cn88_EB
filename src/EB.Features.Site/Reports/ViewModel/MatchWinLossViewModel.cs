@@ -5,6 +5,7 @@
     using System.Linq;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared;
+    using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Resources;
     using EB.Features.Shared.Utilities;
@@ -53,6 +54,6 @@
 
         public MatchWinLossFilterViewModel ReportFilterViewModel { get; }
 
-        public static decimal TotalHeadlineStockPercent => CommonConstants.ReduceNumber;
+        public static decimal TotalHeadlineStockPercent => AppSettings.ReduceNumber;
     }
 }

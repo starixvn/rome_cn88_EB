@@ -6,6 +6,7 @@
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
     using EB.Features.Shared;
+    using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -77,15 +78,15 @@
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / CommonConstants.ReduceNumber)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / CommonConstants.ReduceNumber)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / CommonConstants.ReduceNumber)
-                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
-                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
-                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / AppSettings.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / AppSettings.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / AppSettings.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / AppSettings.ReduceNumber)
+                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / AppSettings.ReduceNumber)
+                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / AppSettings.ReduceNumber)
+                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * AppSettings.ReduceNumber));
 
             return mapper;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web.Mvc;
@@ -6,6 +7,7 @@ using System.Web.Routing;
 using EB.Features.Shared.Configuration;
 using EB.Features.Site.App_Start;
 using EB.Features.Site.Shared;
+using EB.Features.Site.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.CrossCutting.WrappingException;
 using Fanex.Data.OldConnectionStringProvider;
@@ -53,7 +55,16 @@ namespace EB.Features.Site
                 return;
             }
 
-            ExceptionHandler.Handle(Server.GetLastError());
+            var ex = Server.GetLastError();
+            var user = UserSessionImpl.Current;
+
+            ExceptionHandler.Handle(ex,
+                new Dictionary<string, object>
+                {
+                    ["UserId"] = user?.UserId,
+                    ["UserName"] = user?.UserName,
+                    ["Language"] = user?.Language
+                });
         }
 
         private static string GetBuildVersion()

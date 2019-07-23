@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using AutoFixture;
 using EB.Features.Reports;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Reports.ViewModel;
+using EB.Features.Shared.Configuration;
 using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
@@ -240,19 +242,24 @@ namespace EB.Features.Site.Tests.Reports.Handler
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>())
                 .Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "100" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
 
             // Act
             handler.Handle(new HouseWinLossExcelQuery(currentSession));
 
             // Assert
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == 0.02m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == 0.03m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == 0.04m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == 0.05m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == 0.06m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == 0.07m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == 0.08m), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == 0.09m), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake/AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.SuperComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.HouseWinLoss / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.HouseComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.HouseIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.HeadlineStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == 100m), Arg.Any<Mapper<HouseWinLossModel>>());
         }
 

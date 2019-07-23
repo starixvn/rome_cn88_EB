@@ -35,9 +35,13 @@
 
         public string BetTypeGroupName { get; set; }
 
+        public string BetTypeGroupNameByEnglish { get; set; }
+
         public string LeagueName { get; set; }
 
         public string LeagueNameByEnglish { get; set; }
+
+        public bool IsNonSports { get; set; }
 
         public static MatchWinLossModel operator +(MatchWinLossModel match1, MatchWinLossModel match2)
             => new MatchWinLossModel

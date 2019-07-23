@@ -12,7 +12,7 @@
     {
         IEnumerable<SportGroup> GetSportGroups();
 
-        IEnumerable<SportGroup> GetSportGroupsForSportbook();
+        SportGroup GetSportGroupById(int sportGroupId);
     }
 
     public class SportGroupServiceImpl : ISportGroupService
@@ -34,13 +34,16 @@
             this.fanexCacheService = fanexCacheService;
         }
 
+        public SportGroup GetSportGroupById(int sportGroupId)
+            => GetSportGroups().SingleOrDefault(i => i.Id == sportGroupId);
+
         public IEnumerable<SportGroup> GetSportGroups()
             => fanexCacheService.GetOrSet(
                 SportGroupsCacheKey,
-                () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
+                () => sportGroupDataAccess.GetSportGroups(
+                    new GetSportGroupsCriteria(), 
+                    cacheRefService.GetSportName, 
+                    cacheRefService.GetSportNameByEnglish),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
-
-        public IEnumerable<SportGroup> GetSportGroupsForSportbook()
-            => GetSportGroups().Where(s => s.ProductId != 0);
     }
 }

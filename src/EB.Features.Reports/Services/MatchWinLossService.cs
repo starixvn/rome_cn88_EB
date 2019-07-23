@@ -21,15 +21,18 @@
         private readonly IDynamicRepository dynamicRepository;
         private readonly IReportDateService reportDateService;
         private readonly ICacheRefService cacheRefService;
+        private readonly ISportGroupService sportGroupService;
 
         public MatchWinLossService(
             IDynamicRepository dynamicRepository,
             IReportDateService reportDateService,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ISportGroupService sportGroupService)
         {
             this.dynamicRepository = dynamicRepository;
             this.reportDateService = reportDateService;
             this.cacheRefService = cacheRefService;
+            this.sportGroupService = sportGroupService;
         }
 
         public MatchWinLossViewModel Get(MatchWinLossParam param)
@@ -46,7 +49,16 @@
         {
             foreach (var row in reportData)
             {
-                row.BetTypeGroupName = cacheRefService.GetBetTypeName(row.BetTypeGroup);
+                if (row.IsNonSports)
+                {
+                    var sportGroup = sportGroupService.GetSportGroupById(row.BetTypeGroup);
+                    row.BetTypeGroupName = sportGroup.DisplayName;
+                    row.BetTypeGroupNameByEnglish = sportGroup.DisplayNameByEnglish;
+                }
+                else
+                {
+                    row.BetTypeGroupName = cacheRefService.GetBetTypeName(row.BetTypeGroup);
+                }
 
                 if (row.BetTypeGroup == BetTypeIdConstants.SystemParlay)
                 {

@@ -8,9 +8,11 @@
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
+    using EB.Features.Shared.Model;
     using EB.Features.Shared.Resources;
     using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
+    using EB.Features.Site.Shared.Helpers;
     using EB.Features.Site.Shared.ViewModels;
     using EB.Features.Site.Shared.ViewModels.Components;
 
@@ -87,6 +89,6 @@
             return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
         }
 
-        public string LanguageCode { get; }
+        public string LanguageCode { get; }        
     }
 }

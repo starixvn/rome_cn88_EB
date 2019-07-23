@@ -10,12 +10,12 @@
 
     public interface SportGroupDataAccess
     {
-        IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName);
+        IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName, Func<int, string> getSportGroupDisplayNameEnglish);
     }
 
     public class SportGroupDataAccessImpl : SportGroupDataAccess
     {
-        public IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName)
+        public IEnumerable<SportGroup> GetSportGroups(ICriteria criteria, Func<int, string> getSportGroupDisplayName, Func<int, string> getSportGroupDisplayNameEnglish)
         {
             var groups = new List<SportGroup>();
 
@@ -29,9 +29,9 @@
                         {
                             var group = new SportGroup(
                                 id: Converter.ToInt(reader["SportTypeGroup"]),
-                                productId: Converter.ToInt(reader["ProductID"]),
-                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),                                
-                                getSportGroupDisplayName: getSportGroupDisplayName);
+                                displaySportIds: Converter.ToString2(reader["DisplaySport"]).Split(',').Select(int.Parse),
+                                getSportGroupDisplayName: getSportGroupDisplayName,
+                                getSportGroupDisplayNameEnglish: getSportGroupDisplayNameEnglish);
 
                             groups.Add(group);
                         }

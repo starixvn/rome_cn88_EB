@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Shared">
+    <Setting Key="CS_SportType_Sel" SpName="CS_SportType_Sel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="CS_BetType_Sel" SpName="CS_BetType_Sel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0">
+      <Mapping DataField="BetTypeGroup" ObjectProperty="Id" />
+    </Setting>
+    <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="CS_SelArchiveDate" SpName="CS_SelArchiveDate" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+  </Function>
+  
+  <Function Name="Reports">
+    <Setting Key="CS_Rpt_Winloss_Headline" SpName="CS_Rpt_Winloss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Rpt_MatchWinLoss_Headline" SpName="CS_Rpt_MatchWinLoss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+  </Function>
+
+</Functions>

@@ -279,6 +279,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SPNames\Dev\DB042.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBAGE.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBCust.CustDB.xml" />
     <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml" />
     <Content Include="App_Data\SPNames\Main\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml" />
@@ -721,6 +724,9 @@
     </Content>
     <Content Include="assets\shared\scripts\components\date-picker.js.map">
       <DependentUpon>date-picker.ts</DependentUpon>
+    </Content>
+    <Content Include="Configurations\appSettings.local.config">
+      <DependentUpon>appSettings.config</DependentUpon>
     </Content>
     <Content Include="Configurations\appSettings.pro.config">
       <DependentUpon>appSettings.config</DependentUpon>

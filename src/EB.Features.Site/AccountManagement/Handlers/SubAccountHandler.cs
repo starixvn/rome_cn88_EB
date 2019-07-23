@@ -27,7 +27,7 @@
         public async Task<Result> Handle(UpdateCommand message)
             => await subAccountService.UpdateSubAccountAsync(ToUpdateSubAccountParam(message));
 
-        private UpdateSubAccountParam ToUpdateSubAccountParam(UpdateCommand message)
+        private static UpdateSubAccountParam ToUpdateSubAccountParam(UpdateCommand message)
             => new UpdateSubAccountParam(
                 message.CustId,
                 message.SubAccId,

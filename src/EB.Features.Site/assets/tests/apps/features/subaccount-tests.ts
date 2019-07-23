@@ -1,0 +1,363 @@
+﻿describe("SubAccount", () => {
+    const jQueryFake = $;
+    const template = {
+        normal: `<div id="message"></div>
+                <form action="/SubAccount/Search" id="formSearch" method="get">
+	                <div class="form-group">
+		                <label for="name">Sub Account Username or Nickname</label>
+                        <input type="text" class="control" id="name" autocomplete="off" maxlength="50" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn-submit" id="btnSearch" />
+                    </div>
+                </form>
+                <form action="/SubAccount/Update" id="formUpdate" method="post">
+	                <input name="__RequestVerificationToken" type="hidden" value="4iaEf5KxG_faMdj-gJgOMfx2uLic4iOIM_I5rQ4hqWCeHmYL1X6HMjiUIuDbcwb0LhS-DXuW_vAWL5wt3_NO3zS840qO9n7Mkx0dwV-49G41" />	<div class="form-group">
+		                <label class="control-label">SMA Username (Nickname)</label>
+		                <span class="control-span" id="smaUsername"></span>
+	                </div>
+	                <div class="form-group">
+		                <label class="control-label">Sub Account Username (Nickname)</label>
+		                <span class="control-span" id="subAccountUsername"></span>
+	                </div>
+	                <hr />
+	                <div class="form-group">
+		                <div class="checkbox">
+			                <label><input type="checkbox" id="totalbets" value="[D]"> Total Bets</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="acViewOnly" value="[H]"> Account Management - View Only</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="acEditView" value="[B]"> Account Management - Edit &amp; View</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label><input type="checkbox" id="reports" value="[E]"> Reports</label>
+                        </div>
+                    </div>
+                    <div class="list-button text-center">
+                        <input type="submit" class="btn-submit" value="Save" />
+                    </div>
+                </form>
+                <input type="hidden" id="InvalidSMASubAccount" value="Invalid SMA Sub Account" />
+                <input type="hidden" id="NoAuthorized" value="You are not authorized on this function." />`
+    };
+    let subacc: SubAccount;
+
+    beforeEach(() => {
+        subacc = new SubAccount(jQueryFake);
+    });
+
+    describe("_init_Always", () => {
+        beforeEach(() => {
+            // arrange
+            setFixtures(template.normal);
+            spyOn(subacc, "cacheElements");
+            spyOn(subacc, "bindEvents");
+
+            // act
+            subacc.init();
+        });
+
+        it("_Calls cacheElements", () => {
+            // assert
+            expect(subacc.cacheElements).toHaveBeenCalled();
+        });
+
+        it("_Calls bindEvents", () => {
+            // assert
+            expect(subacc.bindEvents).toHaveBeenCalled();
+        });
+    });
+
+    describe("_cacheElements_Always", () => {
+        it("_Returns Correct elements Object", () => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+
+            // act
+            subacc.init();
+
+            // assert
+            expect(subacc.elements.message).toBeDefined();
+            expect(subacc.elements.formUpdate).toBeDefined();
+            expect(subacc.elements.name).toBeDefined();
+            expect(subacc.elements.smaUsername).toBeDefined();
+            expect(subacc.elements.subAccountUsername).toBeDefined();
+            expect(subacc.elements.totalbets).toBeDefined();
+            expect(subacc.elements.acViewOnly).toBeDefined();
+            expect(subacc.elements.acEditView).toBeDefined();
+            expect(subacc.elements.reports).toBeDefined();
+            expect(subacc.resources.invalidSMASubAccount).toBe("Invalid SMA Sub Account");
+            expect(subacc.resources.noAuthorized).toBe("You are not authorized on this function.");
+
+        });
+    });
+
+    describe("_bindEvents_Always", () => {
+        beforeEach(() => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+            subacc.bindEvents();
+        });
+
+        it("_Registers acViewOnlyChanged Successfully", () => {
+            // arrange
+            spyOn(subacc, "acViewOnlyChanged");
+
+            // act
+            subacc.elements.acViewOnly.trigger("change");
+
+            // assert
+            expect(subacc.acViewOnlyChanged).toHaveBeenCalled();
+        });
+
+        it("_Registers acEditViewChanged Successfully", () => {
+            // arrange
+            spyOn(subacc, "acEditViewChanged");
+
+            // act
+            subacc.elements.acEditView.trigger("change");
+
+            // assert
+            expect(subacc.acEditViewChanged).toHaveBeenCalled();
+        });
+
+        it("_Registers formSearchSubmitted Successfully", () => {
+            // arrange
+            spyOn(subacc, "formSearchSubmitted");
+
+            // act
+            jQueryFake("#formSearch").trigger("submit");
+
+            // assert
+            expect(subacc.formSearchSubmitted).toHaveBeenCalled();
+        });
+
+        it("_Registers updateSubAccountPermissions Successfully", () => {
+            // arrange
+            subacc.updateData.custId = 1;
+            subacc.updateData.subAccId = 2;
+            spyOn(subacc, "updateSubAccountPermissions");
+
+            // act
+            subacc.elements.formUpdate.trigger("submit");
+
+            // assert
+            expect(subacc.updateSubAccountPermissions).toHaveBeenCalled();
+        });
+    });
+
+    describe("_acViewOnlyChanged_Always", () => {
+        it("_Unchecked will Unchecked A/C Edit & View", () => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+            subacc.elements.acEditView.prop("checked", true);
+            subacc.elements.acViewOnly.prop("checked", false);
+
+            // act
+            subacc.acViewOnlyChanged(subacc.elements.acViewOnly);
+
+            // assert
+            expect(subacc.elements.acEditView.is(":checked")).toBeFalsy();
+        });
+    });
+
+    describe("_acEditViewChanged_Always", () => {
+        it("_Checked will Checked A/C View Only", () => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+            subacc.elements.acViewOnly.prop("checked", false);
+            subacc.elements.acEditView.prop("checked", true);
+
+            // act
+            subacc.acEditViewChanged(subacc.elements.acEditView);
+
+            // assert
+            expect(subacc.elements.acViewOnly.is(":checked")).toBeTruthy();
+        });
+    });
+
+    describe("_formSearchSubmitted_Always", () => {
+        beforeEach(() => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+        });
+
+        it("_Name is Empty Show Error Message", () => {
+            // act
+            subacc.formSearchSubmitted(jQueryFake("#formSearch"));
+
+            // assert
+            expect(subacc.elements.message).toBeVisible();
+        });
+
+        it("_Name is Not Empty Call blockUI and ajax", () => {
+            // arrange
+            subacc.elements.name.val("starksub01");
+            spyOn(jQueryFake, "blockUI");
+            spyOn(jQueryFake, "ajax");
+
+            // act
+            subacc.formSearchSubmitted(jQueryFake("#formSearch"));
+
+            // assert
+            expect(subacc.$.blockUI).toHaveBeenCalled();
+            expect(subacc.$.ajax).toHaveBeenCalled();
+        });
+    });
+
+    describe("_showInvalidSMASubAccountMessage_Always", () => {
+        it("_Shows Correct Message", () => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.init();
+
+            // act
+            subacc.showInvalidSMASubAccountMessage();
+
+            // assert
+            expect(subacc.elements.message).toBeVisible();
+            expect(subacc.elements.formUpdate.hasClass("hide")).toBeTruthy();
+        });
+    });
+
+    describe("_showSubAccountInfoOnUI_Always", () => {
+        beforeEach(() => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.cacheElements();
+        });
+
+        it("_data is Empty Show Error Message", () => {
+            // arrange
+            spyOn(subacc, "showInvalidSMASubAccountMessage");
+            const data = { CustId: 0, SubAccId: 0, UserName: "" };
+
+            // act
+            subacc.showSubAccountInfoOnUI(data);
+
+            // assert
+            expect(subacc.showInvalidSMASubAccountMessage).toHaveBeenCalled();
+        });
+
+        it("_data is OK Show Info on UI", () => {
+            // arrange
+            const data = {
+                SMAUsername: "stark",
+                SMANickname: "starknn",
+                CustId: 37539517,
+                SubAccId: 1234960,
+                UserName: "STARKSub01",
+                NickName: "starksub01nn",
+                Permissions: {
+                    UpdateAccount: true,
+                    ViewTotalBets: true,
+                    ViewReports: true,
+                    ViewMemberInfo: true
+                }
+            }
+
+            // act
+            subacc.showSubAccountInfoOnUI(data);
+
+            // assert
+            expect(subacc.elements.smaUsername.html()).toEqual("stark (starknn)");
+            expect(subacc.elements.subAccountUsername.html()).toEqual("STARKSub01 (starksub01nn)");
+            expect(subacc.elements.totalbets).toBeChecked();
+            expect(subacc.elements.acViewOnly).toBeChecked();
+            expect(subacc.elements.acEditView).toBeChecked();
+            expect(subacc.elements.reports).toBeChecked();
+        });
+    });
+
+    describe("_isInvalidUpdateData_Always", () => {
+        it("_custId = 0 Returns Truthy", () => {
+            // arrange
+            subacc.updateData.custId = 0;
+            subacc.updateData.subAccId = 1;
+
+            // act
+            const isInvalid = subacc.isInvalidUpdateData();
+
+            // assert
+            expect(isInvalid).toBeTruthy();
+        });
+
+        it("_subAccId = 0 Returns Truthy", () => {
+            // arrange
+            subacc.updateData.custId = 1;
+            subacc.updateData.subAccId = 0;
+
+            // act
+            const isInvalid = subacc.isInvalidUpdateData();
+
+            // assert
+            expect(isInvalid).toBeTruthy();
+        });
+
+        it("_custId and subAccId are Differ 0 Returns Falsy", () => {
+            // arrange
+            subacc.updateData.custId = 1;
+            subacc.updateData.subAccId = 2;
+
+            // act
+            const isInvalid = subacc.isInvalidUpdateData();
+
+            // assert
+            expect(isInvalid).toBeFalsy();
+        });
+    });
+
+    describe("_getPageAccess_Always", () => {
+        beforeEach(() => {
+            // arrange
+            setFixtures(template.normal);
+            subacc.init();
+        });
+
+        it("_Returns Empty String", () => {
+            // act
+            const permissions = subacc.getPageAccess();
+
+            // assert
+            expect(permissions).toEqual("");
+        });
+
+        it("_Returns Correct String", () => {
+            // arrange
+            subacc.elements.totalbets.prop("checked", true);
+            subacc.elements.reports.prop("checked", true);
+
+            // act
+            const permissions = subacc.getPageAccess();
+
+            // assert
+            expect(permissions).toEqual("[D],[E]");
+        });
+    });
+
+    describe("_setupAntiXSRF_Always", () => {
+        it("_Returns Correct Value", () => {
+            // arrange
+            setFixtures(template.normal);
+
+            // act
+            const actualHeaders = subacc.setupAntiXSRF();
+
+            // assert
+            expect(actualHeaders["__RequestVerificationToken"]).toBeDefined();
+        });
+    });
+});

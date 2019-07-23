@@ -53,7 +53,7 @@
       <HintPath>..\..\packages\CouchbaseNetClient.1.2.6.3\lib\net40\Couchbase.dll</HintPath>
     </Reference>
     <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Dapper.1.60.1\lib\net451\Dapper.dll</HintPath>
+      <HintPath>..\..\packages\Dapper.1.60.6\lib\net451\Dapper.dll</HintPath>
     </Reference>
     <Reference Include="dotless.AspNet, Version=1.6.7.0, Culture=neutral, PublicKeyToken=96b446c9e63eae34, processorArchitecture=MSIL">
       <HintPath>..\..\packages\dotless.AspNetHandler.1.6.7\lib\net461\dotless.AspNet.dll</HintPath>
@@ -280,9 +280,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SPNames\Dev\DB042.bodb02.xml" />
-    <Content Include="App_Data\SPNames\Dev\DBAGE.bodb02.xml" />
-    <Content Include="App_Data\SPNames\Dev\DBCust.CustDB.xml" />
     <Content Include="AccountManagement\bundles\subaccount.css" />
     <Content Include="AccountManagement\bundles\subaccount.js" />
     <Content Include="AccountManagement\bundles\subaccount.min.css">
@@ -297,7 +294,13 @@
     <Content Include="AccountManagement\Styles\subaccount.min.css">
       <DependentUpon>subaccount.css</DependentUpon>
     </Content>
-    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml" />
+    <Content Include="App_Data\SPNames\Dev\DB042.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBAGE.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBCust.CustDB.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBONUSER.ON_USER.xml" />
+    <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\SPNames\Local\DBONUSER.ON_USER.xml" />
     <Content Include="App_Data\SPNames\Main\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml" />
@@ -742,9 +745,10 @@
     <Content Include="assets\shared\scripts\components\date-picker.js.map">
       <DependentUpon>date-picker.ts</DependentUpon>
     </Content>
-    <Content Include="Configurations\appSettings.local.config">
-      <DependentUpon>appSettings.config</DependentUpon>
-    </Content>
+    <Content Include="assets\tests\libs\jasmine-jquery.js" />
+    <Content Include="assets\tests\libs\jasmine.js" />
+    <Content Include="assets\tests\libs\jquery-blockui.js" />
+    <Content Include="assets\tests\libs\jquery.js" />
     <Content Include="Configurations\appSettings.pro.config">
       <DependentUpon>appSettings.config</DependentUpon>
     </Content>
@@ -791,6 +795,7 @@
     <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\core.ts" />
     <TypeScriptCompile Include="assets\shared\scripts\components\date-picker.ts" />
+    <TypeScriptCompile Include="assets\tests\apps\features\subaccount-tests.ts" />
     <TypeScriptCompile Include="typings\globals\bootstrap\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine-jquery\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\jasmine\index.d.ts" />
@@ -1186,6 +1191,7 @@
     <Content Include="AccountManagement\Views\SubAccount\Index.cshtml" />
     <Content Include="AccountManagement\Views\web.config" />
     <Content Include="AccountManagement\Styles\subaccount.scss" />
+    <Content Include="assets\tests\chutzpah.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
@@ -1215,9 +1221,7 @@
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AccountManagement\ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\EB.Features.AccountManagement\EB.Features.AccountManagement.csproj">
       <Project>{f15ee746-2f01-4cb9-baae-211353f918bd}</Project>

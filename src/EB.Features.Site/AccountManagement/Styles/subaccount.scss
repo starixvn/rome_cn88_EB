@@ -1,8 +1,4 @@
-﻿html {
-    height: 100%;
-}
-
-.subaccount {
+﻿.subaccount {
     padding: 0 20px;
     width: 680px;
 
@@ -24,6 +20,10 @@
             .control-label {
                 text-align: left;
                 width: 222px;
+            }
+
+            .control-span {
+                margin-left: 5px;
             }
 
             .checkbox {

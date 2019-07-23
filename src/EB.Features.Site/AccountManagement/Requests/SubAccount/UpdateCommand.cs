@@ -26,9 +26,6 @@
         public int ActorId { get; }
 
         public override bool IsValid()
-            => CustId > 0
-            && SubAccId > 0
-            && !string.IsNullOrWhiteSpace(PageAccess)
-            && ActorId > 0;
+            => CustId > 0 && SubAccId > 0 && ActorId > 0 && !string.IsNullOrWhiteSpace(Username);
     }
 }

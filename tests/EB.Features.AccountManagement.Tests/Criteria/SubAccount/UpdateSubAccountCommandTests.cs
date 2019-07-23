@@ -39,5 +39,22 @@
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [Test]
+        public void ErrCodeErrMsg_Always_AssignsCorrectValue()
+        {
+            // Arrange
+            var param = new UpdateSubAccountParam(1, 2, "supertestsub01", "[D],[H],[B],[E]", "en-US", "::1", 3);
+
+            // Act
+            var criteria = new UpdateSubAccountCommand(param)
+            {
+                ErrCode = 102,
+                ErrMsg = "Invalid sub account id."
+            };
+
+            // Assert
+            Assert.IsTrue(criteria.ErrCode == 102 && criteria.ErrMsg == "Invalid sub account id.");
+        }
     }
 }

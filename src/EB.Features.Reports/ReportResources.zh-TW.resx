@@ -142,10 +142,10 @@
     <value>排除測試資料</value>
   </data>
   <data name="HeadlineStock" xml:space="preserve">
-    <value>大股東佔貨比</value>
+    <value>公司佔貨比</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
-    <value>大股東佔貨比(%)</value>
+    <value>佔貨比(%)</value>
   </data>
   <data name="MatchWinLossReport" xml:space="preserve">
     <value>賽事輸贏</value>
@@ -187,7 +187,7 @@
     <value>投注類別</value>
   </data>
   <data name="Headline" xml:space="preserve">
-    <value>大股東</value>
+    <value>總監</value>
   </data>
   <data name="HouseWinLossReport" xml:space="preserve">
     <value>注單報表</value>

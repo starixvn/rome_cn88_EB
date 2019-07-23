@@ -28,7 +28,7 @@
         public async Task GetSuperSubAccountAsync_ValidUsername_ReturnsSubAccountItem()
         {
             // Arrange
-            var expectedResult = new SubAccountItem("stark", "starknn", 1, 2, "starksub01", "starksub01nn", "starix", "[D],[H],[B],[E]");
+            var expectedResult = new SubAccountItem("stark", "starknn", 1, 2, "starksub01", "starksub01nn", "starix", "[D][E][H][B]");
 
             dynamicRepository.GetAsync<SubAccountItem>(
                 Arg.Is<GetSuperSubAccountCriteria>(criteria => criteria.Username == "starksub01"))
@@ -104,19 +104,22 @@
         }
 
         [Test]
-        public async Task UpdateSubAccountAsync_ValidParam_ReturnsInvalidSMASubAccountMessage()
+        public async Task UpdateSubAccountAsync_ValidParam_CallsExecuteAsyncOfUpdateSubAccount()
         {
             // Arrange
-            var param = new UpdateSubAccountParam(1, 2, "starksub01", "[D],[H],[B],[E]", "EN", "::1", 3);
+            var param = new UpdateSubAccountParam(1, 2, "starksub01", "[D],[H],[B],[E]", "EN", "::1", 3)
+            {
+                Name = "starix"
+            };
             var subAccountItem = new SubAccountItem(
-                "stark", "starknn", param.CustId, param.SubAccId, param.Username, "starksub01nn", param.Name, "[D],[H],[B],[E]");
+                "stark", "starknn", param.CustId, param.SubAccId, param.Username, "starksub01nn", param.Name, "[D][E][H][B]");
 
             dynamicRepository.GetAsync<SubAccountItem>(
                 Arg.Is<GetSuperSubAccountCriteria>(criteria => criteria.Username == "starksub01"))
                 .Returns(subAccountItem);
 
             // Act
-            var actualResult = await subAccountService.UpdateSubAccountAsync(param);
+            await subAccountService.UpdateSubAccountAsync(param);
 
             // Assert
             await dynamicRepository.Received().ExecuteAsync(Arg.Is<UpdateSubAccountCommand>(cmd =>
@@ -127,6 +130,39 @@
                 && cmd.LanguageKey == param.LanguageKey
                 && cmd.LoginIP == param.IP
                 && cmd.UserId == param.ActorId));
+        }
+
+        [Test]
+        public async Task UpdateSubAccountAsync_ValidParam_CallsExecuteAsyncOfKickoutSubAccount()
+        {
+            // Arrange
+            var param = new UpdateSubAccountParam(1, 2, "starksub01", "[D],[E]", "EN", "::1", 3)
+            {
+                Name = "starix"
+            };
+            var subAccountItem = new SubAccountItem(
+                "stark", "starknn", param.CustId, param.SubAccId, param.Username, "starksub01nn", param.Name, "[D][E][H][B]");
+
+            dynamicRepository.GetAsync<SubAccountItem>(
+                Arg.Is<GetSuperSubAccountCriteria>(criteria => criteria.Username == "starksub01"))
+                .Returns(subAccountItem);
+            dynamicRepository.ExecuteAsync(Arg.Is<UpdateSubAccountCommand>(cmd =>
+                cmd.CustId == param.CustId
+                && cmd.SubAccId == param.SubAccId
+                && cmd.Name == param.Name
+                && cmd.PageAccess == param.PageAccess
+                && cmd.LanguageKey == param.LanguageKey
+                && cmd.LoginIP == param.IP
+                && cmd.UserId == param.ActorId))
+                .Returns(1);
+
+            // Act
+            await subAccountService.UpdateSubAccountAsync(param);
+
+            // Assert
+            await dynamicRepository.Received().ExecuteAsync(Arg.Is<KickoutSubAccountCommand>(cmd =>
+                cmd.CustId == param.CustId
+                && cmd.SubAccId == param.SubAccId));
         }
     }
 }

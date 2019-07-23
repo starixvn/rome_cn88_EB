@@ -54,7 +54,7 @@
             // Kickout when updating Permissions.
             if (result.IsSuccess && subAccountItem.PageAccess != param.PageAccess)
             {
-                await KickoutSubAccountAsync(param.ActorId, param.SubAccId);
+                await KickoutSubAccountAsync(param.CustId, param.SubAccId);
             }
 
             return result;

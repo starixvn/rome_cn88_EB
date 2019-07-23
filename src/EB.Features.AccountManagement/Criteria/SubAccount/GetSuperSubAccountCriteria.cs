@@ -2,7 +2,7 @@
 {
     using Fanex.Data.Repository;
 
-    internal class GetSuperSubAccountCriteria : CriteriaBase
+    public class GetSuperSubAccountCriteria : CriteriaBase
     {
         public GetSuperSubAccountCriteria(string username)
         {

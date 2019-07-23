@@ -124,7 +124,11 @@ class SubAccount {
                     const messageHandler = result.IsSuccessful ? this.message.showSuccess : this.message.showError;
                     messageHandler(this.elements.message, result.Message);
                 },
-                error: _ => this.message.showError(this.elements.message, this.resources.noAuthorized),
+                error: (jqXHR: JQueryXHR) => {
+                    if (jqXHR.status === 403) {
+                        this.message.showError(this.elements.message, this.resources.noAuthorized);
+                    }
+                },
                 complete: this.$.unblockUI
             });
         });

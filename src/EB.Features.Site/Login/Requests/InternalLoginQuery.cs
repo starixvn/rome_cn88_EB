@@ -14,12 +14,6 @@
         public InternalLoginQuery(UserSession currentSession)
             : base(currentSession)
         {
-            AccId = currentSession.UserId;
-            
-            KeyPath = HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
-            EncryptParamFunc = (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
-            InternalLogInUMToken = HttpContext.Current.Session["AlphaUMToken"] as string;
-            IP = IPHelper.ClientIP();
         }
 
         public int CustId { get; set; }
@@ -34,15 +28,20 @@
 
         public string AfterLogInQuery { get; set; }
 
-        public int AccId { get; }
+        public int AccId
+            => CurrentSession.UserId;
 
-        public string KeyPath { get; }
+        public string KeyPath
+            => HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
 
-        public Func<string, int, string, string> EncryptParamFunc { get; }
+        public Func<string, int, string, string> EncryptParamFunc
+            => (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
 
-        public string InternalLogInUMToken { get; }
+        public string InternalLogInUMToken
+            => HttpContext.Current.Session["AlphaUMToken"] as string;
 
-        public string IP { get; }
+        public string IP
+            => IPHelper.ClientIP();
 
         public string InternalLogInURL
             => RoleId == 0 ? AppSettings.InternalLogInURLHeadline : AppSettings.InternalLogInURL;

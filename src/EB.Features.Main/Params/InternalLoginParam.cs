@@ -24,7 +24,7 @@
             AccId = accId;
             LogInLink = logInLink.StartsWith("http") ? logInLink : "http://" + logInLink;
             InternalLogInUMToken = string.IsNullOrWhiteSpace(internalLogInUMToken) ? string.Empty : $"UMToken={internalLogInUMToken}&";
-            IP = string.IsNullOrWhiteSpace(ip) ? IPHelper.ClientIP() : ip;
+            IP = ip;
 
             AfterLogInSite = afterLogInSite;
             AfterLogInQuery = afterLogInQuery;

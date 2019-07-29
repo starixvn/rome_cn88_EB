@@ -124,19 +124,19 @@
     <value>账户管理 - 只能看帐</value>
   </data>
   <data name="InvalidSMASubAccount" xml:space="preserve">
-    <value>Invalid SMA Sub Account</value>
+    <value>无效的超级代理子帐户</value>
   </data>
   <data name="Reports" xml:space="preserve">
     <value>报表</value>
   </data>
   <data name="SMAUsername" xml:space="preserve">
-    <value>SMA Username (登入账号)</value>
+    <value>超级代理用户名(昵称)</value>
   </data>
   <data name="SubAccountUsername" xml:space="preserve">
-    <value>Sub Account Username (登入账号)</value>
+    <value>子帐户用户名(昵称)</value>
   </data>
   <data name="SubAccountUsernameOrNickname" xml:space="preserve">
-    <value>Sub Account Username or Nickname</value>
+    <value>子帐户用户名或昵称</value>
   </data>
   <data name="TotalBets" xml:space="preserve">
     <value>即时注单</value>

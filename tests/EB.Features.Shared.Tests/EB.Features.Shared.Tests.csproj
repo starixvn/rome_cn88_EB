@@ -73,7 +73,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Criteria\GetSportGroupsCriteriaTest.cs" />
     <Compile Include="Criteria\GetBetTypeGroupBySportCriteriaTest.cs" />
     <Compile Include="Criteria\GetBalanceUpDayAndMoveBetsDayCriteriaTest.cs" />

@@ -85,5 +85,20 @@ namespace EB.Features.Site.Tests.Reports.ViewModel
             // Assert
             Assert.AreEqual(currentDate, act.CurrentDate);
         }
+
+
+        [Test]
+        public void TotalHeadlineStockPercent_Always_100()
+        {
+            // Arrange
+
+
+            // Act
+            var act = MatchWinLossReportViewModel.TotalHeadlineStockPercent;
+
+
+            // Assert
+            Assert.AreEqual(100, act);
+        }
     }
 }

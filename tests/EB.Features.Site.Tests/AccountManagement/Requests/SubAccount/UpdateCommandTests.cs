@@ -1,6 +1,7 @@
 ﻿namespace EB.Features.Site.Tests.AccountManagement.Requests.SubAccount
 {
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
+    using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Web.Session;
     using NSubstitute;
     using NUnit.Framework;
@@ -8,12 +9,12 @@
     [TestFixture]
     public class UpdateCommandTests
     {
-        private ICurrentSession currentSession;
+        private UserSession currentSession;
 
         [SetUp]
         public void SetUp()
         {
-            currentSession = Substitute.For<ICurrentSession>();
+            currentSession = Substitute.For<UserSession>();
         }
 
         [Test]

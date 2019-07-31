@@ -13,8 +13,8 @@
 
     public class SubAccountController : BaseController
     {
-        public SubAccountController(IMediator mediator)
-            : base(mediator)
+        public SubAccountController(IMediator mediator, UserSession userSession)
+            : base(mediator, userSession)
         {
         }
 

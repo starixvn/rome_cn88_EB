@@ -1,13 +1,13 @@
 ﻿namespace EB.Features.Site.AccountManagement.Requests.SubAccount
 {
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using Features.Shared.Model;
     using Features.Site.Shared;
     using MediatR;
 
     public class UpdateCommand : BaseQuery, IRequest<Result>
     {
-        public UpdateCommand(ICurrentSession currentSession)
+        public UpdateCommand(UserSession currentSession)
             : base(currentSession)
         {
             ActorId = currentSession.UserId;

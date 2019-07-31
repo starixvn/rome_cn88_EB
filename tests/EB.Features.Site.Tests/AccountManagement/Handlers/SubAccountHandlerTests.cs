@@ -4,6 +4,7 @@
     using EB.Features.AccountManagement.Services;
     using EB.Features.Site.AccountManagement.Handlers;
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
+    using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Web.Session;
     using NSubstitute;
     using NUnit.Framework;
@@ -11,14 +12,14 @@
     [TestFixture]
     public class SubAccountHandlerTests
     {
-        ICurrentSession currentSession;
+        UserSession currentSession;
         private SubAccountService subAccountService;
         private SubAccountHandler subAccountHandler;
 
         [SetUp]
         public void SetUp()
         {
-            currentSession = Substitute.For<ICurrentSession>();
+            currentSession = Substitute.For<UserSession>();
             currentSession.UserId.Returns(8);
 
             subAccountService = Substitute.For<SubAccountService>();

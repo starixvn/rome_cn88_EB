@@ -5,7 +5,7 @@
     using EB.Features.Shared.Model;
     using EB.Features.Site.AccountManagement;
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
     using NSubstitute;
     using NUnit.Framework;
@@ -15,15 +15,15 @@
     {
         private IMediator mediator;
         private SubAccountController subAccountController;
-        private ICurrentSession currentSession;
+        private UserSession currentSession;
 
         [SetUp]
         public void SetUp()
         {
-            mediator = Substitute.For<IMediator>();
-            subAccountController = new SubAccountController(mediator);
-            currentSession = Substitute.For<ICurrentSession>();
+            currentSession = Substitute.For<UserSession>();
             currentSession.UserId.Returns(8);
+            mediator = Substitute.For<IMediator>();
+            subAccountController = new SubAccountController(mediator, currentSession);            
         }
 
         [Test]

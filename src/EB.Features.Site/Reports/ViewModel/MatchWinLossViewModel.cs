@@ -54,6 +54,6 @@
 
         public MatchWinLossFilterViewModel ReportFilterViewModel { get; }
 
-        public static decimal TotalHeadlineStockPercent => AppSettings.ReduceNumber;
+        public static decimal TotalHeadlineStockPercent => 100;
     }
 }

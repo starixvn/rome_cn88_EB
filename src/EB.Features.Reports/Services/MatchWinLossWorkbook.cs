@@ -182,8 +182,7 @@
         {
             RemoveTemplateRows(sheet);
 
-            var hasData = (ViewModel != null && ViewModel.SportbookMatches.Any())
-                || ViewModel.Parlay != null;
+            var hasData = ViewModel != null && ViewModel.IsShowTotalRow;
 
             if (hasData)
             {

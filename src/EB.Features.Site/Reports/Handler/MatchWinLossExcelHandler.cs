@@ -84,7 +84,7 @@
                 .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
                 .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / AppSettings.ReduceNumber)
                 .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * AppSettings.ReduceNumber));
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }

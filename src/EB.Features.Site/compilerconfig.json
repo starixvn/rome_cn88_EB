@@ -1,6 +1,4 @@
 ﻿[
- 
-  ///////////////////LOGIN
   {
     "outputFile": "assets/login/styles/vendors-extensions/login/bootstrap-ex.css",
     "inputFile": "assets/login/styles/vendors-extensions/login/bootstrap-ex.scss"
@@ -24,7 +22,7 @@
   {
     "outputFile": "assets/login/styles/pages/error3.css",
     "inputFile": "assets/login/styles/pages/error3.scss"
-  }, ///////////////////////MAIN
+  },
   {
     "outputFile": "assets/main/styles/site.css",
     "inputFile": "assets/main/styles/site.scss"
@@ -33,7 +31,6 @@
     "outputFile": "assets/main/styles/home.css",
     "inputFile": "assets/main/styles/home.scss"
   },
-
   {
     "outputFile": "assets/main/styles/password/change-password.css",
     "inputFile": "assets/main/styles/password/change-password.scss"
@@ -41,7 +38,7 @@
   {
     "outputFile": "assets/main/styles/error-page.css",
     "inputFile": "assets/main/styles/error-page.scss"
-  }, //////////////////////REPORT
+  },
   {
     "outputFile": "assets/report/styles/reports.css",
     "inputFile": "assets/report/styles/reports.scss"
@@ -53,5 +50,9 @@
   {
     "outputFile": "assets/report/styles/security.css",
     "inputFile": "assets/report/styles/security.scss"
+  },
+  {
+    "outputFile": "AccountManagement/Styles/subaccount.css",
+    "inputFile": "AccountManagement/Styles/subaccount.scss"
   }
 ]

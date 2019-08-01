@@ -130,7 +130,7 @@
     <value>會員</value>
   </data>
   <data name="Headline" xml:space="preserve">
-    <value>股東</value>
+    <value>總監</value>
   </data>
   <data name="AllBetTypes" xml:space="preserve">
     <value>所有玩法</value>
@@ -203,5 +203,11 @@
   </data>
   <data name="BetType" xml:space="preserve">
     <value>投注類別</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="NoAuthorized" xml:space="preserve">
+    <value>您沒有使用此功能的權限.</value>
   </data>
 </root>

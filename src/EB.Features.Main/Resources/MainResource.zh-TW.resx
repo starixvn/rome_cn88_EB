@@ -204,4 +204,13 @@
   <data name="PasswordHint01" xml:space="preserve">
     <value>新密碼長度至少2個字元，至多到50個字元。</value>
   </data>
+  <data name="AccountManagement" xml:space="preserve">
+    <value>帳戶管理</value>
+  </data>
+  <data name="SubAccount" xml:space="preserve">
+    <value>子帳號</value>
+  </data>
+  <data name="SessionKickedOut" xml:space="preserve">
+    <value>您已登出，您的帳戶已透過其他裝置登入。若對此登入活動沒有印象，請聯繫您的上線取得協助。</value>
+  </data>
 </root>

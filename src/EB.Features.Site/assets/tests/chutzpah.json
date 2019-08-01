@@ -1,0 +1,32 @@
+﻿{
+  "Framework": "jasmine",
+  "EnableCodeCoverage": "true",
+  "Compile": {
+    "Mode": "External",
+    "Extensions": [ ".ts" ]
+  },
+  "CodeCoverageExcludes": [
+    "*\\libs\\*"
+  ],
+  "CodeCoverageIgnores": [
+    "*\\tests\\*"
+  ],
+  "CodeCoverageExecutionMode": "Manual",
+  "TestHarnessLocationMode": "SettingsFileAdjacent",
+  "References": [
+    { "Path": "libs/jquery.js" },
+    { "Path": "libs/jquery-blockui.js" },
+    { "Path": "libs/jasmine.js" },
+    { "Path": "libs/jasmine-jquery.js" },
+
+    { "Path": "../report/components/message.ts" },
+
+    { "Path": "../../AccountManagement/Scripts/subaccount.ts" }
+  ],
+  "Tests": [
+    {
+      "Path": "apps/features",
+      "Excludes": [ "**.js.map", "**.js" ]
+    }
+  ]
+}

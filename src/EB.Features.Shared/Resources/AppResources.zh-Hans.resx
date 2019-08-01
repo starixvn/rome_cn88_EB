@@ -130,7 +130,7 @@
     <value>会员</value>
   </data>
   <data name="Headline" xml:space="preserve">
-    <value>大股东</value>
+    <value>总监</value>
   </data>
   <data name="AllBetTypes" xml:space="preserve">
     <value>所有玩法</value>
@@ -203,5 +203,11 @@
   </data>
   <data name="InPlay" xml:space="preserve">
     <value>滚球</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="NoAuthorized" xml:space="preserve">
+    <value>您没有使用此功能的权限.</value>
   </data>
 </root>

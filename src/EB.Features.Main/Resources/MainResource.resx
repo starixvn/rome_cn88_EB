@@ -207,4 +207,10 @@
   <data name="SessionKickedOut" xml:space="preserve">
     <value>You have been logged out because your account has logged into another session. Don't recognize this activity? Please contact admin for assistance.</value>
   </data>
+  <data name="AccountManagement" xml:space="preserve">
+    <value>Account Management</value>
+  </data>
+  <data name="SubAccount" xml:space="preserve">
+    <value>Sub Account</value>
+  </data>
 </root>

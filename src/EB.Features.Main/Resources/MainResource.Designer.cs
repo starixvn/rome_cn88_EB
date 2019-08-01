@@ -61,6 +61,15 @@ namespace EB.Features.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Management.
+        /// </summary>
+        public static string AccountManagement {
+            get {
+                return ResourceManager.GetString("AccountManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -300,6 +309,15 @@ namespace EB.Features.Main.Resources {
         public static string ShowPassword {
             get {
                 return ResourceManager.GetString("ShowPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub Account.
+        /// </summary>
+        public static string SubAccount {
+            get {
+                return ResourceManager.GetString("SubAccount", resourceCulture);
             }
         }
         

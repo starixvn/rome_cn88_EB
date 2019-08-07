@@ -876,7 +876,7 @@
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\CookieHelper.cs" />
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
-    <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" >
+    <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\Helpers\StaticResources.cs" />

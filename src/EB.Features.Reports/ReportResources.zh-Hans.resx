@@ -240,4 +240,7 @@
   <data name="Month" xml:space="preserve">
     <value>月</value>
   </data>
+  <data name="NonSportProducts" xml:space="preserve">
+    <value>其他非体育产品</value>
+  </data>
 </root>

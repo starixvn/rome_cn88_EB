@@ -23,12 +23,12 @@
                 message.AccId,
                 message.Languagekey,
                 message.InternalLogInURL,
-                message.InternalLogInUMToken,
+                InternalLoginQuery.InternalLogInUMToken,
                 message.IP,
                 message.AfterLogInSite,
                 message.AfterLogInQuery,
-                message.KeyPath,
-                message.EncryptParamFunc);
+                InternalLoginQuery.KeyPath,
+                InternalLoginQuery.EncryptParamFunc);
 
             return service.GetInternalLogInLink(param);
         }

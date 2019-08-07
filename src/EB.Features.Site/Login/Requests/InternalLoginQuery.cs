@@ -30,13 +30,13 @@
         public int AccId
             => CurrentSession.UserId;
 
-        public string KeyPath
+        public static string KeyPath
             => HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
 
-        public Func<string, int, string, string> EncryptParamFunc
+        public static Func<string, int, string, string> EncryptParamFunc
             => (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
 
-        public string InternalLogInUMToken
+        public static string InternalLogInUMToken
             => HttpContext.Current.Session["AlphaUMToken"] as string;
 
         public string IP => CurrentSession.Ip;

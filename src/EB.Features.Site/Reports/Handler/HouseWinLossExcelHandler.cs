@@ -22,15 +22,18 @@
         private readonly IHouseWinLossService houseWinLossService;
         private readonly IHouseWinLossWorkbook workbook;
         private readonly ICacheRefService cacheRefService;
+        private readonly ISportGroupService sportGroupService;
 
         public HouseWinLossExcelHandler(
             IHouseWinLossService matchWinLossService,
             IHouseWinLossWorkbook workbook,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ISportGroupService sportGroupService)
         {
             this.houseWinLossService = matchWinLossService;
             this.workbook = workbook;
             this.cacheRefService = cacheRefService;
+            this.sportGroupService = sportGroupService;
         }
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
@@ -115,7 +118,8 @@
             var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
             var ticketStatus = TicketStatusConstants.TicketStatuses[param.UserSelectedTicketStatusId];
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
-            var sportType = param.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(param.UserSelectedSportGroupId);
+            var sportGroup = sportGroupService.GetSportGroupById(param.UserSelectedSportGroupId);
+            var sportType = param.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
 
             return $"{title} - {GetResourcesText(ticketStatus)} - {sportType} - {betType} - {GetResourcesText(liveStatus)}";
         }

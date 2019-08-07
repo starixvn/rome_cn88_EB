@@ -23,15 +23,18 @@
         private readonly IMatchWinLossService matchWinLossService;
         private readonly IMatchWinLossWorkbook workbook;
         private readonly ICacheRefService cacheRefService;
+        private readonly ISportGroupService sportGroupService;
 
         public MatchWinLossExcelHandler(
             IMatchWinLossService matchWinLossService,
             IMatchWinLossWorkbook workbook,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ISportGroupService sportGroupService)
         {
             this.matchWinLossService = matchWinLossService;
             this.workbook = workbook;
             this.cacheRefService = cacheRefService;
+            this.sportGroupService = sportGroupService;
         }
 
         public ExcelFileViewModel Handle(MatchWinLossExcelQuery message)
@@ -107,12 +110,13 @@
             var date = $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
             var liveStatus = LiveStatusConstants.LiveStatuses[query.UserSelectedLiveStatusId];
             var betType = query.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(query.UserSelectedBetTypeId);
-            var sportType = query.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(query.UserSelectedSportGroupId);
+            var sportGroup = sportGroupService.GetSportGroupById(query.UserSelectedSportGroupId);
+            var sportType = query.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
 
             return $"{date} - {sportType} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
         }
 
         internal string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
-    }    
+    }
 }

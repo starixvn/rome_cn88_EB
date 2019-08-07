@@ -31,14 +31,17 @@ namespace EB.Features.Site.Tests.Reports.Handler
         private UserSession currentSession;
         private Fixture fixture;
         private Workbook<HouseWinLossModel> onebookWorkbook;
+        private ISportGroupService sportGroupService;
+
         [SetUp]
         public void Setup()
         {
+            sportGroupService = Substitute.For<ISportGroupService>();
             houseWinLossService = Substitute.For<IHouseWinLossService>();
             workbook = Substitute.For<IHouseWinLossWorkbook>();
             cacheRefService = Substitute.For<ICacheRefService>();
             currentSession = Substitute.For<UserSession>();
-            handler = new HouseWinLossExcelHandler(houseWinLossService, workbook, cacheRefService);
+            handler = new HouseWinLossExcelHandler(houseWinLossService, workbook, cacheRefService, sportGroupService);
             fixture = new Fixture();
             handler.MapPath = (path) => path;
             handler.IsFileExist = (path) => true;

@@ -812,21 +812,33 @@
     <Compile Include="AccountManagement\Requests\SubAccount\SearchQuery.cs" />
     <Compile Include="AccountManagement\Requests\SubAccount\UpdateCommand.cs" />
     <Compile Include="AccountManagement\SubAccountController.cs" />
-    <Compile Include="App_Start\DependencyConfig.cs" />
-    <Compile Include="App_Start\LoggingManager.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\DependencyConfig.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="App_Start\LoggingManager.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="App_Start\RouteConfig.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Login\Handlers\LoginHandler.cs" />
     <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
-    <Compile Include="Login\InternalLoginController.cs" />
+    <Compile Include="Login\InternalLoginController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Login\ViewModel\LoginViewModel.cs" />
     <Compile Include="Login\Requests\LoginQuery.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
     <Compile Include="Main\Handlers\UserInfoHandler.cs" />
-    <Compile Include="Main\LanguageController.cs" />
+    <Compile Include="Main\LanguageController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Main\Requests\ChangePasswordQuery.cs" />
-    <Compile Include="Main\UserInfoController.cs" />
+    <Compile Include="Main\UserInfoController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Main\Requests\AllLanguagesQuery.cs" />
     <Compile Include="Main\Requests\ChangeLanguageCommand.cs" />
     <Compile Include="Main\Requests\IndexQuery.cs" />
@@ -848,7 +860,9 @@
     <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
-    <Compile Include="Shared\BaseController.cs" />
+    <Compile Include="Shared\BaseController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\BrowserHelperImpl.cs" />
     <Compile Include="Shared\Filters\AntiForgeryValidator.cs" />
     <Compile Include="Shared\Filters\AntiXSRFFilter.cs" />
@@ -857,20 +871,29 @@
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" />
     <Compile Include="Shared\Helpers\StaticResources.cs" />
-    <Compile Include="Home\HomeController.cs" />
+    <Compile Include="Home\HomeController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Login\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+      <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Main\Handlers\MainHandler.cs" />
     <Compile Include="Shared\BaseQuery.cs" />
     <Compile Include="Main\Requests\MenuBarQuery.cs" />
     <Compile Include="Main\ViewModel\IndexViewModel.cs" />
-    <Compile Include="Main\MainController.cs" />
+    <Compile Include="Main\MainController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\ReportsController.cs" />
+    <Compile Include="Reports\ReportsController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Models\UserSession.cs" />
-    <Compile Include="Shared\MultipleLanguageController.cs" />
+    <Compile Include="Shared\MultipleLanguageController.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
     <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />

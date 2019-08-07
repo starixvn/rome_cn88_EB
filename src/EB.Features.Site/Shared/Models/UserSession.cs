@@ -11,6 +11,7 @@
         int UserId { get; set; }
         int OnUserId { get; set; }
         string SessionId { get; set; }
+        string Ip { get; }
     }
 
     public class UserSessionImpl : UserSession
@@ -89,6 +90,16 @@
             }
         }
 
+        public string Ip
+        {
+            get
+            {
+                var ip = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ??
+                HttpContext.Current.Request.ServerVariables["REMOTE_ADDR"];
+
+                return string.IsNullOrEmpty(ip) || ip.Equals("::1") ? "127.0.0.1" : ip.Split(',')[0];
+            }
+        }
         private object GetProperty(string propertyName)
             => HttpContext.Current.Session[$"{ApplicationName}-{propertyName}"];
 

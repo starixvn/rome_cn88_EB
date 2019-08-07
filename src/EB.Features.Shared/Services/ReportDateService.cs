@@ -33,8 +33,6 @@
             this.fanexCacheService = fanexCacheService;
         }
 
-        public static IReportDateService Instance { get; set; }
-
         public DateTime GetBalanceUpDay() => GetBalanceUpDayAndMoveBetsDay().BalanceUpDay;
 
         public DateTime GetMoveBetsDay() => GetBalanceUpDayAndMoveBetsDay().MoveBetsDay;

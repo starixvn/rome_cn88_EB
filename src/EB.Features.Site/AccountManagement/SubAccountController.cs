@@ -29,10 +29,6 @@
         [HttpPost, AntiXSRFFilter]
         [NapAuth(FunctionKey = SiteFunctionKeys.SubAccount, Policy = Constant.Policy.Host)]
         public async Task<ActionResult> Update(UpdateCommand message)
-        {
-            message.Language = message.Language ?? UserSessionImpl.Current.Language;
-
-            return await JsonDataAsync(message);
-        }
+            => await JsonDataAsync(message);
     }
 }

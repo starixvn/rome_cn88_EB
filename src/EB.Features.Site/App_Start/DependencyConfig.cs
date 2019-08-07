@@ -55,17 +55,17 @@
 
         private static void RegisterShareModule(Container container)
         {
-            container.RegisterSingleton<ICacheService>(new CacheService());
+            container.RegisterInstance<ICacheService>(new CacheService());
             container.Register<IDynamicRepository, DynamicRepository>();
             container.Register<SportGroupDataAccess, SportGroupDataAccessImpl>();
             container.Register<IBettypeGroupService, BettypeGroupServiceImpl>();
             container.Register<ICacheRefService, CacheRefServiceImpl>();
             container.Register<IReportDateService, ReportDateServiceImpl>();
             container.Register<ISportGroupService, SportGroupServiceImpl>();
-            container.RegisterSingleton<IBrowserHelper, BrowserHelperImpl>();
+            container.Register<IBrowserHelper, BrowserHelperImpl>();
 
-            container.RegisterSingleton<InternalLoginService, InternalLoginServiceImpl>();
-            container.RegisterSingleton<InternalLoginDataAccess, InternalLoginDataAccessImpl>();
+            container.Register<InternalLoginService, InternalLoginServiceImpl>();
+            container.Register<InternalLoginDataAccess, InternalLoginDataAccessImpl>();
             container.Register<UserSession, UserSessionImpl>();
         }
 
@@ -98,8 +98,8 @@
             container.Collection.Register(typeof(ICancellableAsyncNotificationHandler<>), assemblies);
             container.Collection.Register(typeof(IPipelineBehavior<,>), assemblies);
 
-            container.RegisterSingleton(new SingleInstanceFactory(container.GetInstance));
-            container.RegisterSingleton(new MultiInstanceFactory(container.GetAllInstances));
+            container.RegisterInstance(new SingleInstanceFactory(container.GetInstance));
+            container.RegisterInstance(new MultiInstanceFactory(container.GetAllInstances));
         }
 
         private static IEnumerable<Assembly> GetAssemblies()

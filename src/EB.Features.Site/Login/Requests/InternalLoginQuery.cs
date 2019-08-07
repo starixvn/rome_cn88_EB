@@ -3,7 +3,6 @@
     using System;
     using System.Web;
     using EB.Features.Shared.Configuration;
-    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Models;
     using MediatR;
@@ -40,8 +39,7 @@
         public string InternalLogInUMToken
             => HttpContext.Current.Session["AlphaUMToken"] as string;
 
-        public string IP
-            => IPHelper.ClientIP();
+        public string IP => CurrentSession.Ip;
 
         public string InternalLogInURL
             => RoleId == 0 ? AppSettings.InternalLogInURLHeadline : AppSettings.InternalLogInURL;

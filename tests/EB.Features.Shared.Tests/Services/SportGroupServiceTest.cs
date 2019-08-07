@@ -39,5 +39,45 @@
             // Assert
             fanexCacheService.Received().GetOrSet(key, Arg.Any<Func<IEnumerable<SportGroup>>>(), Arg.Any<CacheItemOptions>());
         }        
+
+        [Test]
+        public void GetSportGroupById_Return_CorrectGroup()
+        {
+            // Arrange
+            var func = Substitute.For<Func<int, string>>();
+            var groups = new List<SportGroup>
+            {
+                new SportGroup(1, new List<int>{1}, func, func),
+                new SportGroup(2, new List<int>{2}, func, func)
+            };
+            fanexCacheService.GetOrSet(Arg.Any<string>(), Arg.Any<Func<IEnumerable<SportGroup>>>(), Arg.Any<CacheItemOptions>())
+                .Returns(groups);
+
+            // Act
+            var act = sportGroupService.GetSportGroupById(1);
+
+            // Assert
+            Assert.AreEqual(1, act.Id);
+        }
+
+        [Test]
+        public void GetSportGroupById_NotFoundSportGroup_ReturnNull()
+        {
+            // Arrange
+            var func = Substitute.For<Func<int, string>>();
+            var groups = new List<SportGroup>
+            {
+                new SportGroup(1, new List<int>{1}, func, func),
+                new SportGroup(2, new List<int>{2}, func, func)
+            };
+            fanexCacheService.GetOrSet(Arg.Any<string>(), Arg.Any<Func<IEnumerable<SportGroup>>>(), Arg.Any<CacheItemOptions>())
+                .Returns(groups);
+
+            // Act
+            var act = sportGroupService.GetSportGroupById(3);
+
+            // Assert
+            Assert.IsNull(act);
+        }
     }
 }

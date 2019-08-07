@@ -10,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
 
-    [TestFixture]
     public class SubAccountControllerTests
     {
         private IMediator mediator;
@@ -55,12 +54,12 @@
         public async Task Update_IsValid_CallsMediatorSendUpdateCommand()
         {
             // Arrange
+            currentSession.Language = "en-US";
             var expectedCommand = new UpdateCommand(currentSession)
             {
                 CustId = 1,
                 SubAccId = 2,
                 PageAccess = "[D],[H],[B],[E]",
-                Language = "en-US",
                 Username = "starksub01"
             };
 
@@ -83,10 +82,8 @@
         public async Task Update_Invalid_CallsMediatorSendUpdateCommand()
         {
             // Arrange
-            var expectedCommand = new UpdateCommand(currentSession)
-            {
-                Language = "en-US"
-            };
+            currentSession.Language = "en-US";
+            var expectedCommand = new UpdateCommand(currentSession);
 
             // Act
             var actualResult = await subAccountController.Update(expectedCommand) as JsonResult;

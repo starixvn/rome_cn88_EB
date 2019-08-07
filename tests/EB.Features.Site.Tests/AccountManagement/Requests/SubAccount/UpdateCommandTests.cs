@@ -35,6 +35,7 @@
         {
             // Arrange
             currentSession.UserId.Returns(8);
+            currentSession.Language = "en-US";
 
             // Act
             var actualResult = new UpdateCommand(currentSession)
@@ -42,7 +43,6 @@
                 CustId = 1,
                 SubAccId = 2,
                 PageAccess = "[D],[H],[B],[E]",
-                Language = "en-US",
                 Username = "starksub01"
             };
 

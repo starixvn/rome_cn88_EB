@@ -1,6 +1,7 @@
 ﻿namespace EB.Features.Site.Tests.AccountManagement.Handlers
 {
     using System.Threading.Tasks;
+    using EB.Features.AccountManagement.Params.SubAccount;
     using EB.Features.AccountManagement.Services;
     using EB.Features.Site.AccountManagement.Handlers;
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
@@ -9,7 +10,6 @@
     using NSubstitute;
     using NUnit.Framework;
 
-    [TestFixture]
     public class SubAccountHandlerTests
     {
         UserSession currentSession;
@@ -39,6 +39,20 @@
             await subAccountService
                 .Received()
                 .GetSuperSubAccountAsync(Arg.Is<string>(cmd => cmd == message.Name));
+        }
+
+
+        [Test]
+        public async Task HandleUpdateCommand_Always_CallServiceUpdate()
+        {
+            // Arrange
+            var message = new UpdateCommand(currentSession);
+
+            // Act
+            await subAccountHandler.Handle(message);
+
+            // Assert
+            await subAccountService.UpdateSubAccountAsync(Arg.Any<UpdateSubAccountParam>());
         }
     }
 }

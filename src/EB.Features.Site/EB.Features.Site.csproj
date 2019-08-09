@@ -296,14 +296,18 @@
     </Content>
     <Content Include="App_Data\SPNames\Dev\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Dev\DBAGE.bodb02.xml" />
-    <Content Include="App_Data\SPNames\Dev\DBCust.CustDB.xml" />
+    <Content Include="App_Data\SPNames\Dev\DBCust.CustDB.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\SPNames\Dev\DBONUSER.ON_USER.xml" />
     <Content Include="App_Data\SPNames\Local\DBCust.CustDB.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\SPNames\Local\DBONUSER.ON_USER.xml" />
     <Content Include="App_Data\SPNames\Main\DB042.bodb02.xml" />
-    <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml" />
+    <Content Include="App_Data\SPNames\Main\DBAGE.bodb02.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\SPNames\Local\DB042.bodb02.xml" />
     <Content Include="App_Data\SPNames\Local\DBAGE.bodb02.xml" />
     <Content Include="App_Data\SPNames\Main\DBCust.CustDB.xml" />
@@ -749,6 +753,9 @@
     <Content Include="assets\tests\libs\jasmine.js" />
     <Content Include="assets\tests\libs\jquery-blockui.js" />
     <Content Include="assets\tests\libs\jquery.js" />
+    <Content Include="Configurations\appSettings.local.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+    </Content>
     <Content Include="Configurations\appSettings.pro.config">
       <DependentUpon>appSettings.config</DependentUpon>
     </Content>
@@ -815,7 +822,7 @@
     <Compile Include="App_Start\DependencyConfig.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="App_Start\LoggingManager.cs" >
+    <Compile Include="App_Start\LoggingManager.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs">
@@ -824,7 +831,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Login\Handlers\LoginHandler.cs" />
     <Compile Include="Login\Handlers\InternalLoginHandler.cs" />
-    <Compile Include="Login\InternalLoginController.cs" >
+    <Compile Include="Login\InternalLoginController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Login\ViewModel\LoginViewModel.cs" />
@@ -832,11 +839,11 @@
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
     <Compile Include="Main\Handlers\LanguageHandler.cs" />
     <Compile Include="Main\Handlers\UserInfoHandler.cs" />
-    <Compile Include="Main\LanguageController.cs" >
+    <Compile Include="Main\LanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Main\Requests\ChangePasswordQuery.cs" />
-    <Compile Include="Main\UserInfoController.cs" >
+    <Compile Include="Main\UserInfoController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Main\Requests\AllLanguagesQuery.cs" />
@@ -860,7 +867,7 @@
     <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossViewModel.cs" />
-    <Compile Include="Shared\BaseController.cs" >
+    <Compile Include="Shared\BaseController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\BrowserHelperImpl.cs" />
@@ -869,9 +876,11 @@
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\CookieHelper.cs" />
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
-    <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" />
+    <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs" >
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Helpers\StaticResources.cs" />
-    <Compile Include="Home\HomeController.cs" >
+    <Compile Include="Home\HomeController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Login\LoginController.cs" />
@@ -883,15 +892,15 @@
     <Compile Include="Shared\BaseQuery.cs" />
     <Compile Include="Main\Requests\MenuBarQuery.cs" />
     <Compile Include="Main\ViewModel\IndexViewModel.cs" />
-    <Compile Include="Main\MainController.cs" >
+    <Compile Include="Main\MainController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\ReportsController.cs" >
+    <Compile Include="Reports\ReportsController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\Models\UserSession.cs" />
-    <Compile Include="Shared\MultipleLanguageController.cs" >
+    <Compile Include="Shared\MultipleLanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
@@ -1278,11 +1287,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>51062</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:51062/</IISUrl>
+          <IISUrl>http://localhost:5100/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

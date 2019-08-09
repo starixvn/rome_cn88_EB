@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Functions>
   <Function Name="Sub Account">
-    <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout_xtest" DbName="DBONUSER.ON_USER.bodbAdminNet" />
+    <Setting Key="Age_On_UserKickedout" SpName="Age_On_UserKickedout" DbName="DBONUSER.ON_USER.bodbAdminNet" />
   </Function>
 </Functions>

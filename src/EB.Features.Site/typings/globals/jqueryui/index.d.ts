@@ -181,6 +181,7 @@ declare namespace JQueryUI {
          * String: A string in the format defined by the dateFormat option, or a relative date. Relative dates must contain value and period pairs; valid periods are "y" for years, "m" for months, "w" for weeks, and "d" for days. For example, "+1m +7d" represents one month and seven days from today.
          */
         defaultDate?: any; // Date, number or string
+        locale?: any; // Date, number or string
         /**
          * Control the speed at which the datepicker appears, it may be a time in milliseconds or a string representing one of the three predefined speeds ("slow", "normal", "fast").
          */

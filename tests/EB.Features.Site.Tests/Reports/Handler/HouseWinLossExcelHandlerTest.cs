@@ -174,29 +174,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
             // Assert
             onebookWorkbook.Received().Header(Arg.Any<Func<string, string>>());
-        }
-
-        [Test]
-        public void Handle_Always_CallFooterOfWorkbook()
-        {
-            // Arrange
-            var viewModel = fixture.Create<HouseWinLossViewModel>();
-            houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
-            workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>())
-                .Returns(workbook);
-            workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
-                .Returns(workbook);
-            workbook.UseTemplate(Arg.Any<TemplateInfo>()).Returns(onebookWorkbook);
-            onebookWorkbook.Sheet(Arg.Is<string>(i => i == "ReportData")).Returns(onebookWorkbook);
-            onebookWorkbook.Title(Arg.Any<string>()).Returns(onebookWorkbook);
-            onebookWorkbook.Header(Arg.Any<Func<string, string>>()).Returns(onebookWorkbook);
-
-            // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
-
-            // Assert
-            onebookWorkbook.Received().Footer(Arg.Any<HouseWinLossModel>(), Arg.Any<Mapper<HouseWinLossModel>>());
-        }
+        }        
 
         [Test]
         public void Handle_Always_CallExportToBytesOfWorkbook()
@@ -258,13 +236,19 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake/AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.SuperComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.HouseWinLoss / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.HouseComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.HouseIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.HeadlineStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == 100m), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberWinLoss / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.MemberComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.SuperComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.HouseWinLoss / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.HouseComm / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == match.HouseIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[L](match) == match.HouseTurnover / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[M](match) == match.HeadlineResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[N](match) == match.RebateRoundDown / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[O](match) == match.HeadlineResultNet / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[P](match) == match.HeadlineStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[Q](match) == 100m), Arg.Any<Mapper<HouseWinLossModel>>());
         }
 
 
@@ -357,7 +341,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 Date = new DateTime(2019, 1, 1),
                 IsHistoricReport = true
             };
-            var expectedFileName = $"Wager Report - {query.FromDate.ToShortDate()}-{query.ToDate.ToShortDate()}";
+            var expectedFileName = $"Wager Report - {query.FromDate.ToShortDate()}-{query.ToDate.ToShortDate()} - Headline";
 
             // Act
             var act = handler.GetExcelFileName(query);
@@ -375,7 +359,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 Date = new DateTime(2019, 1, 1),
                 IsHistoricReport = false
             };
-            var expectedFileName = $"Wager Report - {query.Date.ToShortDate()}";
+            var expectedFileName = $"Wager Report - {query.Date.ToShortDate()} - Headline";
 
             // Act
             var act = handler.GetExcelFileName(query);

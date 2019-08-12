@@ -295,6 +295,15 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SMA.
+        /// </summary>
+        public static string SMA {
+            get {
+                return ResourceManager.GetString("SMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sport.
         /// </summary>
         public static string Sport {
@@ -309,15 +318,6 @@ namespace EB.Features.Shared.Resources {
         public static string Submit {
             get {
                 return ResourceManager.GetString("Submit", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Super.
-        /// </summary>
-        public static string Super {
-            get {
-                return ResourceManager.GetString("Super", resourceCulture);
             }
         }
         
@@ -363,6 +363,15 @@ namespace EB.Features.Shared.Resources {
         public static string UnSettled {
             get {
                 return ResourceManager.GetString("UnSettled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string Viewer {
+            get {
+                return ResourceManager.GetString("Viewer", resourceCulture);
             }
         }
         

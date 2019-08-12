@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using EB.Features.Reports.Extension;
+    using EB.Features.Shared.Model;
     using EB.Features.Site.Shared.Models;
     using Features.Shared.Constants;
     using Features.Shared.Utilities;
@@ -19,12 +20,21 @@
             FromDate = SystemTime.Today;
             ToDate = SystemTime.Today;
             IsTest = true;
+            BreadcrumbLevel = new List<CustInfo>();
         }
 
         public IEnumerable<int> SelectedSportGroupIds
             => UserSelectedSportGroupIds.ToListInt();
 
         public string UserSelectedSportGroupIds { get; set; }
+        public int CustId { get; set; }
+
+        public byte RoleId { get; set; }
+
+        public UserLevel Role => Enumeration.FromValue<UserLevel>(RoleId);
+
+        public int UserSelectedViewer { get; set; }
+
 
         public int UserSelectedBetTypeId { get; set; }
 
@@ -41,5 +51,9 @@
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
+
+        public IEnumerable<CustInfo> BreadcrumbLevel { get; set; }
+
+        public string CustName { get; set; }
     }
 }

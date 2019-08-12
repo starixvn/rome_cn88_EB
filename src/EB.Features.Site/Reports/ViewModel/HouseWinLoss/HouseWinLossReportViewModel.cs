@@ -47,6 +47,15 @@
                     Value = s.Key.ToString(),
                     Selected = s.Key == query.UserSelectedTicketStatusId
                 });
+            var viewers = ViewerConstants.Viewers
+                .Select(s => new SelectListItemExt
+                {
+                    Text = AppResources.ResourceManager.GetString(s.Value),
+                    Value = s.Key.ToString(),
+                    Selected = s.Key == query.UserSelectedViewer
+                });
+
+            var viewerSelectionViewModel = new SingleSelectionViewModel(viewers, query.UserSelectedViewer);
             var liveStatusSelectionViewModel = new SingleSelectionViewModel(liveStatuses, query.UserSelectedLiveStatusId);
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
@@ -59,6 +68,7 @@
                 datePickerViewModel,
                 dateRangePickerViewModel,
                 query.IsTest,
+                viewerSelectionViewModel,
                 sportGroupSelectionViewModel,
                 betTypeSelectionViewModel,
                 liveStatusSelectionViewModel,
@@ -67,7 +77,15 @@
             ReportData = reportData;
             Query = query;
             LanguageCode = languageCode;
+            breadcrumbLevel = GetBreadcrumbLevel();
         }
+
+        public decimal ProfitMargin
+            => Query.Role.IsSuperLevel() && ReportData.Total.SuperStock != 0
+            ? ReportData.Total.SuperResult / ReportData.Total.SuperStock * 100
+            : 0;
+
+        private IEnumerable<CustInfo> breadcrumbLevel { get; }
 
         public HouseWinLossQuery Query { get; }
 
@@ -79,17 +97,52 @@
 
         public static string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 
-        public static string GetDownlineLink()
+        public string GetDownlineLink(int custId, string custName, byte roleId)
         {
+            var breadscrumbToDonwline = breadcrumbLevel.ToList();
+            breadscrumbToDonwline.Add(new CustInfo(Query.CustId, custName, Query.RoleId));
+
             var param = new Dictionary<string, object>
-            {                
-                ["DisplayMode"] = 1,
-                ["IsSetMenu"] = true
+            {
+                ["RoleId"] = roleId,
+                ["UserSelectedViewer"] = Query.UserSelectedViewer,
+                ["UserSelectedSportGroupIds"] = Query.UserSelectedSportGroupIds,
+                ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
+                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
+                ["UserSelectedTicketStatusId"] = Query.UserSelectedTicketStatusId,
+                ["Date"] = Query.Date,
+                ["IsTest"] = Query.IsTest,
+                ["IsHistoricReport"] = Query.IsHistoricReport,
+                ["FromDate"] = Query.FromDate,
+                ["ToDate"] = Query.ToDate,
+                ["CustId"] = custId,
+                ["CustName"] = custName,
+                ["BreadcrumbLevelJson"] = JsonHelper.ToJsonFunc(breadscrumbToDonwline)
             };
 
-            return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+            return HttpContext.Current.Response.ApplyAppPathModifier("~/Reports/HouseWinLoss?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value)));
         }
 
-        public string LanguageCode { get; }        
+        public string LanguageCode { get; }
+
+        public BreadcrumbLevelViewModel BreadcrumbLevelViewModel
+            => new BreadcrumbLevelViewModel(breadcrumbLevel);
+
+        private IEnumerable<CustInfo> GetBreadcrumbLevel()
+        {
+            var breadcrumbLevel = new List<CustInfo>();
+
+            foreach (var custInfo in Query.BreadcrumbLevel)
+            {
+                if (custInfo.RoleId == Query.RoleId)
+                {
+                    break;
+                }
+
+                breadcrumbLevel.Add(custInfo);
+            }
+
+            return breadcrumbLevel;
+        }
     }
 }

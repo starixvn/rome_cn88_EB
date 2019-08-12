@@ -177,9 +177,6 @@
   <data name="VirtualSports" xml:space="preserve">
     <value>Virtual Sports</value>
   </data>
-  <data name="Super" xml:space="preserve">
-    <value>Super</value>
-  </data>
   <data name="MasterAgent" xml:space="preserve">
     <value>Master Agent</value>
   </data>
@@ -211,10 +208,14 @@
     <value>You are not authorized on this function.</value>
   </data>
   <data name="SelectSport" xml:space="preserve">
-    <value>Select Sports</value>
+    <value>Select Sports</value></data>
+  <data name="Viewer" xml:space="preserve">
+    <value>View</value>
   </data>
   <data name="Selected" xml:space="preserve">
-    <value>Selected</value>
+    <value>Selected</value></data>
+  <data name="SMA" xml:space="preserve">
+    <value>SMA</value>
   </data>
   <data name="ThereIsNoSportGroup" xml:space="preserve">
     <value>There is no Sport</value>

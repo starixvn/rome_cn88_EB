@@ -12,7 +12,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_ValidInput_ReturnTrue()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteria = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 SportTypeGroups = "0",
                 BetTypeGroup = 0,
@@ -33,7 +33,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_InvalidInput_ReturnFalse(int betTypeGroup, int isLive, DateTime fromDate, DateTime toDate)
         {
             // Arrange
-            var criteria = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteria = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 BetTypeGroup = betTypeGroup,
                 IsLive = isLive,
@@ -54,7 +54,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedArchiveDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 ArchiveDate = expectedArchiveDate
             });
@@ -71,7 +71,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedMoveBetsDayDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 MoveBetsDay = expectedMoveBetsDayDate
             });
@@ -88,7 +88,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedFromDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 FromDate = expectedFromDate
             });
@@ -105,7 +105,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedIsExcludedTest = true;
-            var criteia = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 IsExcludedTest = expectedIsExcludedTest
             });
@@ -123,7 +123,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void ReportMode_Always_SetInConstructor(bool isHistory, int expectedReportMode)
         {
             // Arrange
-            var criteria = new SettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteria = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 IsHistoricReport = isHistory
             });
@@ -140,13 +140,13 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_Always_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossCriteria(new HouseWinLossParam());
+            var criteria = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam());
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_Winloss_Headline", act);
+            Assert.AreEqual("CS_Rpt_EBWinloss_Headline", act);
         }
     }
 }

@@ -888,6 +888,7 @@
     <Compile Include="Shared\Helpers\AuthInfoHelper.cs" />
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\CookieHelper.cs" />
+    <Compile Include="Shared\Helpers\JsonHelper.cs" />
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
@@ -912,10 +913,12 @@
     <Compile Include="Reports\ReportsController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Shared\Helpers\UrlHelper.cs" />
     <Compile Include="Shared\Models\UserSession.cs" />
     <Compile Include="Shared\MultipleLanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Shared\ViewModels\BreadcrumbLevelViewModel.cs" />
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
     <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />
@@ -1214,7 +1217,7 @@
     <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
     <Content Include="App_Code\Components\DatePicker.cshtml" />
     <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
-    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Headline.xls" />
     <Content Include="EB.Features.Site.ruleset" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\connectionStrings.config">
@@ -1239,6 +1242,12 @@
     <Content Include="AccountManagement\Styles\subaccount.scss" />
     <Content Include="assets\tests\chutzpah.json" />
     <Content Include="App_Code\Components\SportGroupMultiSelection.cshtml" />
+    <Content Include="App_Code\Components\ViewerSelection.cshtml" />
+    <Content Include="App_Code\Components\Breadcrumb.cshtml" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Super.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Master.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Agent.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Member.xls" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
@@ -1267,6 +1276,11 @@
     <Content Include="Web.staging.config">
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
+    <Content Include="Reports\Views\HouseWinLoss\HeadlineTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\SuperTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\MasterTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\AgentTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -1325,12 +1339,12 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
-      cd ..
-      cd ..
-      cd build
-      assets.build.cmd
-      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
-      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
+cd ..
+cd ..
+cd build
+assets.build.cmd
+if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

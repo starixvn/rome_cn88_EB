@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
   <Function Name="Reports">
-    <Setting Key="CS_Rpt_Outstanding_Headline" SpName="CS_Rpt_Outstanding_Headline_xtest" DbName="DB042.bodb02.bodbAdminNet" Plain="0"></Setting>
+    <Setting Key="CS_Rpt_EBOutstanding_Headline" SpName="CS_Rpt_EBOutstanding_Headline" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Rpt_EBOutstanding_Super" SpName="CS_Rpt_EBOutstanding_Super" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Rpt_EBOutstanding_Master" SpName="CS_Rpt_EBOutstanding_Master" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Rpt_EBOutstanding_Agent" SpName="CS_Rpt_EBOutstanding_Agent" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Rpt_EBOutstanding_Member" SpName="CS_Rpt_EBOutstanding_Member" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
   </Function>
 </Functions>

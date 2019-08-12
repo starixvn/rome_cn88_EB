@@ -40,6 +40,9 @@
 
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
+                CustId = message.CustId,
+                Role = message.Role,
+                Viewer = message.UserSelectedViewer,
                 IsHistoricReport = message.IsHistoricReport,
                 TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,

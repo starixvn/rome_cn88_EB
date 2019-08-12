@@ -1,0 +1,113 @@
+﻿@using EB.Features.Shared.Model;
+@using EB.Features.Site.Reports.ViewModel.HouseWinLoss
+@using EB.Features.Reports;
+
+@model HouseWinLossReportViewModel
+@{
+    var colIndex = 0;
+}
+
+<div class="tab-content main-content" id="tab-main-content">
+    <table class="tbl-noborder tbl-report settlement-report" id="tbl-report"
+           data-sortedcolumn="UserName"
+           data-descendingsort="True"
+           data-totalrecords="@Model.ReportData.Matches.Count()">
+        <thead class="tableFloatingHeaderOriginal">
+            <tr>
+                <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="Headline"><span class="sorting-item">@ReportResources.Headline</span></th>
+                <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="UserName"><span class="sorting-item">@ReportResources.SMAUserName</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Wagers"><span class="sorting-item">@ReportResources.Wagers</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Stake"><span class="sorting-item">@ReportResources.Stake</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="ValidStake"><span class="sorting-item">@ReportResources.ValidStake</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="MemberIncom"><span class="sorting-item">@ReportResources.MemberIncome</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Agent"><span class="sorting-item">@ReportResources.Agent</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="AgentResult"><span class="sorting-item">@ReportResources.AgentResult</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="MAResult"><span class="sorting-item">@ReportResources.MAResult</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="SMA"><span class="sorting-item">@ReportResources.SMA</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="SMAResult"><span class="sorting-item">@ReportResources.SMAResult</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="HeadlineIncome"><span class="sorting-item">@ReportResources.HeadlineIncome</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="HeadlineResult"><span class="sorting-item">@ReportResources.HeadlineResult</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="Rebate"><span class="sorting-item">@ReportResources.RebateRoundDown10</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="RebateRoundDown"><span class="sorting-item">@ReportResources.RebateRoundDown</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="HeadlineResultNet"><span class="sorting-item">@ReportResources.HeadlineResultNet</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="HeadlineStock"><span class="sorting-item">@ReportResources.HeadlineStock</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="HeadlineStockPercent"><span class="sorting-item">@ReportResources.HeadlineStockPercent</span></th>
+            </tr>
+        </thead>
+
+        @if (Model.ReportData.Matches.Any())
+        {
+            <tbody>
+                @foreach (var row in Model.ReportData.Matches)
+                {
+                <tr>
+                    <td>@row.HeadlineUserName</td>
+                    <td class="text-left">
+                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Master.Value)"> @row.UserName </a>
+                    </td>
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.Agent)
+                    @HtmlHelpers.RenderNumberCell(row.AgentResult)
+                    @HtmlHelpers.RenderNumberCell(row.MasterResult)
+                    @HtmlHelpers.RenderNumberCell(row.Super)
+                    @HtmlHelpers.RenderNumberCell(row.SuperResult)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineIncome)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineResult)
+                    @HtmlHelpers.RenderNumberCell(row.Rebate)
+                    @HtmlHelpers.RenderNumberCell(row.RebateRoundDown)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineResultNet)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td id="profit-margin" class="profit-margin" colspan="18" align="right">
+                        <strong>@ReportResources.ProfitMargin <span class="@(Model.ProfitMargin < 0 ? "negative-value" : string.Empty)">@HtmlHelpers.FormatNumber(Model.ProfitMargin) %</span></strong>
+                    </td>
+                </tr>
+            </tfoot>
+        }
+        @if (Model.ReportData.IsShowTotalRow)
+        {
+            <tfoot>
+                <tr class="total">
+                    <th class="text-left header" colspan="2">@ReportResources.Total</th>
+                    @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Agent)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.AgentResult)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MasterResult)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Super)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperResult)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineIncome)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResult)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Rebate)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.RebateRoundDown)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResultNet)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                </tr>
+            </tfoot>
+        }
+        else
+        {
+            <tbody>
+                <tr>
+                    <td id="no-data-row" colspan="18"
+                        data-isNoInfo="true"
+                        align="center">
+                        @AppResources.NoInformationIsAvailable
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+

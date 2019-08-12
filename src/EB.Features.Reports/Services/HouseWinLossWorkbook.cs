@@ -90,7 +90,7 @@
             var sheet = GetSheetAt(TemplateInfo.SheetIndex);
 
             MatchTitleRowTemplate = sheet.GetRow(currentRowIndex++);
-            currentRowIndex = TemplateInfo.BodyStartIndex;            
+            currentRowIndex = TemplateInfo.BodyStartIndex;
             OddRowTemplate = sheet.GetRow(currentRowIndex++);
             EvenRowTemplate = sheet.GetRow(currentRowIndex++);
             GrandTotalRowTemplate = sheet.GetRow(currentRowIndex++);
@@ -154,7 +154,7 @@
 
         protected override void FillFooterRows(Sheet sheet)
         {
-            if (SpreadSheet.FooterRows.Any())
+            if (GrandTotal != null)
             {
                 var row = sheet.GetRow(currentRowIndex);
                 row.CopyCellsFrom(GrandTotalRowTemplate);

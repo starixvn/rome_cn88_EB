@@ -32,18 +32,18 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
             SystemTime.Yesterday = SystemTime.Today.AddDays(-1);
         }
 
-        [Test]
-        public void GetDownlineLink_Always_CorrectFormat()
-        {
-            // Arrange
-            var expectedFormat = "~/Reports/Index?DisplayMode=1&IsSetMenu=True";
+        //[Test]
+        //public void GetDownlineLink_Always_CorrectFormat()
+        //{
+        //    // Arrange
+        //    var expectedFormat = "~/Reports/Index?DisplayMode=1&IsSetMenu=True";
 
-            // Act
-            var act = HouseWinLossReportViewModel.GetDownlineLink();
+        //    // Act
+        //    var act = HouseWinLossReportViewModel.GetDownlineLink();
 
-            // Assert
-            Assert.AreEqual(expectedFormat, act);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expectedFormat, act);
+        //}
 
 
         [Test]

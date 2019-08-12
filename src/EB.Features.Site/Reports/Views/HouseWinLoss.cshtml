@@ -1,9 +1,9 @@
 ﻿@using EB.Features.Shared.Extensions;
-@using EB.Features.Shared.Configuration;
+@using EB.Features.Shared.Constants;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
 @using EB.Features.Reports.Extension;
-@using EB.Features.Site.Shared.Models;
+@using EB.Features.Shared.Model;
 
 @model HouseWinLossReportViewModel
 @{
@@ -18,35 +18,16 @@
         <ul class="nav nav-tabs" role="tablist">
             <li class="report-name">@ViewBag.Title</li>
         </ul>
-        <div class="breadcrumb-container">
-            <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
-        </div>
+        @Breadcrumb.Render(Model.BreadcrumbLevelViewModel, Request.Url.Query)
     </div>
     <form class="form-inline filter report-form" role="form" id="report-form">
+        @ViewerSelection.Render(Model.ReportFilterViewModel.ViewerSelectionViewModel, true)
         <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
             @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
         </div>
         @SportGroupMultiSelection.Render(Model.ReportFilterViewModel.SportGroupMultiSelectionViewModel)
-        <div class="form-group js-month-group"
-             id="dateRangeContainer"
-             data-longmonths-inyear="@HouseWinLossFilterViewModel.MonthNames.JoinWithComma()"
-             data-mindate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MinDate.ToShortDate()"
-             data-maxdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.MaxDate.ToShortDate()"
-             data-fromdate="@Model.ReportFilterViewModel.DateRangePickerViewModel.FromDate.ToShortDate()"
-             data-todate="@Model.ReportFilterViewModel.DateRangePickerViewModel.ToDate.ToShortDate()">
-            <label>@ReportResources.Month</label>
-            <div id="monPickr1">
-            </div>
-        </div>
-        <div class="form-group js-month-group">
-            <label>@ReportResources.From</label>
-            <div id="fromDay1">
-            </div>
-        </div>
-        <div class="form-group js-month-group">
-            <label>@ReportResources.To</label>
-            <div id="toDay1">
-            </div>
+        <div id="dateRangeContainer" style="display:none">
+             @DateRangePicker.Render(Model.ReportFilterViewModel.DateRangePickerViewModel)
         </div>
         @RenderDatePicker()
         @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
@@ -71,8 +52,11 @@
         <input type="hidden" name="FromDate" id="fromDate" />
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />
+        <input type="hidden" name="RoleId" id="RoleId" value="@(Model.Query.UserSelectedViewer == ViewerConstants.Headline?UserLevel.Headline.Value:UserLevel.Super.Value)" />
     </form>
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
+        @Html.Hidden("UserSelectedViewer", Model.Query.UserSelectedViewer)
+        @Html.Hidden("RoleId", Model.Query.UserSelectedViewer == ViewerConstants.Headline ? UserLevel.Headline.Value : UserLevel.Super.Value)
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("FromDate", Model.Query.FromDate)
         @Html.Hidden("ToDate", Model.Query.ToDate)
@@ -83,86 +67,30 @@
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
         @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
     </form>
-    <div class="tab-content main-content" id="tab-main-content">
-        <table class="tbl-noborder tbl-report settlement-report" id="tbl-report">
-            <thead class="tableFloatingHeaderOriginal">
-                <tr>
-                    <th class="text-left header bettype">@ReportResources.Headline</th>
-                    <th class="text-right header">@ReportResources.Wagers</th>
-                    <th class="text-right header">@ReportResources.Stake</th>
-                    <th class="text-right header">@ReportResources.ValidStake</th>
-                    <th class="text-right header">@ReportResources.MemberIncome</th>
-                    <th class="text-right header">@ReportResources.SuperComm</th>
-                    <th class="text-right header">@ReportResources.HouseWL</th>
-                    <th class="text-right header">@ReportResources.HouseComm</th>
-                    <th class="text-right header">@ReportResources.HouseIncome</th>
-                    <th class="text-right header">@ReportResources.HeadlineStock</th>
-                    <th class="text-right header">@ReportResources.HeadlineStockPercent</th>
-                </tr>
-            </thead>
-            @foreach (var row in Model.ReportData.Matches)
-            {
-                <tr>
-                    <td class="text-left">
-                        <a href="javascript:void(0);" class="lnk-internal"
-                           data-cust-id="@row.CustId"
-                           data-cust-name="@row.UserName"
-                           data-role-id="0"
-                           data-languageKey="@Model.LanguageCode">@row.UserName</a>
-                    </td>
-                    @HtmlHelpers.RenderWagerCell(row.Wagers)
-                    @HtmlHelpers.RenderNumberCell(row.Stake)
-                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
-                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
-                    @HtmlHelpers.RenderNumberCell(row.SuperComm)
-                    @HtmlHelpers.RenderNumberCell(row.HouseWinLoss)
-                    @HtmlHelpers.RenderNumberCell(row.HouseComm)
-                    @HtmlHelpers.RenderNumberCell(row.HouseIncome)
-                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
-                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
-                </tr>
-            }
-            @if (Model.ReportData.IsShowTotalRow)
-            {
-                <tfoot>
-                    <tr class="total">
-                        <th class="text-right header"></th>
-                        @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperComm)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseWinLoss)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseComm)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseIncome)
-                        @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock)
-                        @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock)
-                    </tr>
-                </tfoot>
-            }
-            else
-            {
-                <tbody>
-                    <tr>
-                        <td id="no-data-row" colspan="11"
-                            data-isNoInfo="true"
-                            align="center">
-                            @AppResources.NoInformationIsAvailable
-                        </td>
-                    </tr>
-                </tbody>
-            }
-        </table>
-    </div>
+
+    @if (Model.Query.Role.IsHeadline())
+    {
+        @Html.Partial("~/Reports/Views/HouseWinLoss/HeadlineTable.cshtml", Model);
+    }
+    else if (Model.Query.Role.IsSuperLevel())
+    {
+        @Html.Partial("~/Reports/Views/HouseWinLoss/SuperTable.cshtml", Model);
+    }
+    else if (Model.Query.Role.IsMasterLevel())
+    {
+        @Html.Partial("~/Reports/Views/HouseWinLoss/MasterTable.cshtml", Model);
+    }
+    else if (Model.Query.Role.IsAgentLevel())
+    {
+        @Html.Partial("~/Reports/Views/HouseWinLoss/AgentTable.cshtml", Model);
+    }
+    else
+    {
+        @Html.Partial("~/Reports/Views/HouseWinLoss/MemberTable.cshtml", Model);
+    }
+
 </div>
-<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
-    <input type="hidden" id="custId" name="custId" value="" />
-    <input type="hidden" id="custName" name="custName" value="" />
-    <input type="hidden" id="roleId" name="roleId" value="" />
-    <input type="hidden" id="languageKey" name="languageKey" value="" />
-    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
-    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="@HouseWinLossReportViewModel.GetDownlineLink()" />
-</form>
+
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")
     <script>
@@ -172,7 +100,7 @@
 }
 @helper RenderDatePicker()
 {
-    <div class="form-group from-date-box" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
+    <div class="form-group date-box" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
         <label>@ReportResources.Date</label>
         <div class="control date">
             <div id="date-container"

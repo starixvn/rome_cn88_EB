@@ -1,0 +1,20 @@
+﻿@using EB.Features.Shared.Resources;
+@using EB.Features.Site.Shared.ViewModels
+
+@helper Render(BreadcrumbLevelViewModel viewModel, string currentRequestUrl)
+{
+    <div class="breadcrumb-container">
+        <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
+        <ul class="breadcrumb">           
+            @foreach (var custinfo in viewModel.BreadcrumbLevel)
+            {
+                <li>
+                    <a class="breadcrumb-link"
+                       href="@(viewModel.BuildBreadcrumbLink(custinfo, currentRequestUrl))">
+                        @(custinfo.CustName)
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
+}

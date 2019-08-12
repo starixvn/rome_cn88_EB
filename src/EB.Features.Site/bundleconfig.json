@@ -100,7 +100,6 @@
     "inputFiles": [
       "assets/report/components/link-builder.js",
       "assets/report/components/single-selection-dropdown.js",
-      "assets/report/components/daterangepicker.js",
       "assets/report/components/client-pager.js",
       "assets/report/components/sort.js",
       "assets/report/components/filter-toggle.js",
@@ -115,12 +114,12 @@
     "inputFiles": [
       "assets/report/components/link-builder.js",
       "assets/report/components/single-selection-dropdown.js",
-      "assets/report/components/daterangepicker.js",
       "assets/report/components/client-pager.js",
       "assets/report/components/sort.js",
       "assets/report/components/filter-toggle.js",
-      "assets/report/libs/monthPicker/monPickr-0.0.1.js",
+      "assets/report/components/daterangepicker.js",
       "assets/report/scripts/core.js",
+      "assets/shared/scripts/components/date-picker.js",
       "assets/report/components/sport-group-multiselection.js",
       "assets/report/scripts/housewinloss.js"
     ]

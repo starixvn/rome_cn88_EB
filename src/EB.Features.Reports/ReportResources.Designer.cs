@@ -61,6 +61,51 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Agent.
+        /// </summary>
+        public static string Agent {
+            get {
+                return ResourceManager.GetString("Agent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Result.
+        /// </summary>
+        public static string AgentResult {
+            get {
+                return ResourceManager.GetString("AgentResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Result A.
+        /// </summary>
+        public static string AgentResultA {
+            get {
+                return ResourceManager.GetString("AgentResultA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Stock.
+        /// </summary>
+        public static string AgentStock {
+            get {
+                return ResourceManager.GetString("AgentStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Agent Username.
+        /// </summary>
+        public static string AgentUserName {
+            get {
+                return ResourceManager.GetString("AgentUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apr.
         /// </summary>
         public static string April {
@@ -160,6 +205,33 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Headline Income.
+        /// </summary>
+        public static string HeadlineIncome {
+            get {
+                return ResourceManager.GetString("HeadlineIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headline Result.
+        /// </summary>
+        public static string HeadlineResult {
+            get {
+                return ResourceManager.GetString("HeadlineResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headline Result (Net).
+        /// </summary>
+        public static string HeadlineResultNet {
+            get {
+                return ResourceManager.GetString("HeadlineResultNet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Headline Stock.
         /// </summary>
         public static string HeadlineStock {
@@ -192,6 +264,15 @@ namespace EB.Features.Reports {
         public static string HouseIncome {
             get {
                 return ResourceManager.GetString("HouseIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to House TO.
+        /// </summary>
+        public static string HouseTO {
+            get {
+                return ResourceManager.GetString("HouseTO", resourceCulture);
             }
         }
         
@@ -250,6 +331,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MA Result.
+        /// </summary>
+        public static string MAResult {
+            get {
+                return ResourceManager.GetString("MAResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Match Win Loss.
         /// </summary>
         public static string MatchWinLossReport {
@@ -268,6 +358,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MA Username.
+        /// </summary>
+        public static string MAUserName {
+            get {
+                return ResourceManager.GetString("MAUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to May.
         /// </summary>
         public static string May {
@@ -277,11 +376,38 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Member Comm.
+        /// </summary>
+        public static string MemberComm {
+            get {
+                return ResourceManager.GetString("MemberComm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Member Income.
         /// </summary>
         public static string MemberIncome {
             get {
                 return ResourceManager.GetString("MemberIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member Username.
+        /// </summary>
+        public static string MemberUserName {
+            get {
+                return ResourceManager.GetString("MemberUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Member WL.
+        /// </summary>
+        public static string MemberWL {
+            get {
+                return ResourceManager.GetString("MemberWL", resourceCulture);
             }
         }
         
@@ -349,11 +475,83 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profit Margin.
+        /// </summary>
+        public static string ProfitMargin {
+            get {
+                return ResourceManager.GetString("ProfitMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rebate Round Down.
+        /// </summary>
+        public static string RebateRoundDown {
+            get {
+                return ResourceManager.GetString("RebateRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rebate(+/-) 10%.
+        /// </summary>
+        public static string RebateRoundDown10 {
+            get {
+                return ResourceManager.GetString("RebateRoundDown10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sep.
         /// </summary>
         public static string September {
             get {
                 return ResourceManager.GetString("September", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA.
+        /// </summary>
+        public static string SMA {
+            get {
+                return ResourceManager.GetString("SMA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA Result.
+        /// </summary>
+        public static string SMAResult {
+            get {
+                return ResourceManager.GetString("SMAResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA Stock.
+        /// </summary>
+        public static string SMAStock {
+            get {
+                return ResourceManager.GetString("SMAStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA Stock %.
+        /// </summary>
+        public static string SMAStockPercent {
+            get {
+                return ResourceManager.GetString("SMAStockPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMA Username.
+        /// </summary>
+        public static string SMAUserName {
+            get {
+                return ResourceManager.GetString("SMAUserName", resourceCulture);
             }
         }
         
@@ -390,6 +588,24 @@ namespace EB.Features.Reports {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Rebate +/- 10% of SMA Round Down.
+        /// </summary>
+        public static string TotalRebateRoundDown {
+            get {
+                return ResourceManager.GetString("TotalRebateRoundDown", resourceCulture);
             }
         }
         

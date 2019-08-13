@@ -1,9 +1,6 @@
 ﻿namespace EB.Features.Main.Services
 {
-    using System;
     using System.Linq;
-    using System.Security.Cryptography;
-    using System.Text;
     using EB.Features.Main.Resources;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Models;
@@ -11,7 +8,7 @@
 
     public interface IAuthService
     {
-        string Login(string userName, string password);
+        string ValidateLogin(string userName, string password);
     }
 
     public class AuthService : IAuthService
@@ -26,7 +23,7 @@
             this.userService = userService;
         }
 
-        public string Login(string userName, string password)
+        public string ValidateLogin(string userName, string password)
         {
             var message = string.Empty;
             if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
@@ -42,7 +39,7 @@
                         if (!CheckUserSitePermission(user))
                         {
                             message = MainResource.You_have_no_authorization;
-                        }                        
+                        }
                     }
                     else
                     {
@@ -72,6 +69,6 @@
             return (group == null || group.IsActive) &&
                    siteLevelList.Any(x => x.Site.Id == NapSettings.Settings.SiteId && x.IsActive &&
                    menuList.Any());
-        }        
+        }
     }
 }

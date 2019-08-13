@@ -29,11 +29,11 @@
 
         public MatchWinLossReportViewModel Handle(MatchWinLossQuery message)
         {
-            var sportGroups = sportGroupService.GetSportGroupsForSportbook();
-            var allBetTypes = betTypeService.GetBetTypeGroupsBySportbook(sportGroups.Select(i => i.Id));
+            var sportGroups = sportGroupService.GetSportGroups();
+            var allBetTypes = betTypeService.GetBetTypeGroupsBySport(sportGroups.Select(i => i.Id));
             var betTypes = message.UserSelectedSportGroupId == 0 ?
-                allBetTypes :
-                allBetTypes.Where(betType => betType.SportTypeGroup == message.UserSelectedSportGroupId);
+                allBetTypes:
+                betTypeService.GetBetTypeGroupsBySport(message.UserSelectedSportGroupId);
 
             var reportData = matchWinLossService.Get(new MatchWinLossParam
             {

@@ -2,12 +2,15 @@
 {
     using System;
     using System.Threading;
+    using EB.Features.Shared.Constants;
     using Fanex.Caching;
     using Fanex.RemotingRef;
 
     public interface ICacheRefService
     {
         string GetSportName(int sportTypeId);
+
+        string GetSportNameByEnglish(int sportTypeId);
 
         string GetBetTypeName(int betTypeId);
 
@@ -26,14 +29,16 @@
         private const int CachedDay = 1;
 
         private readonly IRemotingRefService remotingRefService;
+        private readonly ICacheService fanexCacheService;
 
-        public CacheRefServiceImpl(IRemotingRefService remotingRefService)
+        public CacheRefServiceImpl(IRemotingRefService remotingRefService, ICacheService fanexCacheService)
         {
             this.remotingRefService = remotingRefService;
+            this.fanexCacheService = fanexCacheService;
         }
 
         public string GetBetTypeName(int betTypeId)
-            => ConfiguredCacheService.GetOrSet(
+            => fanexCacheService.GetOrSet(
                 $"{BetTypeNameCacheKey}.{LanguageCode}.{betTypeId}",
                 () => remotingRefService.GetBetTypeName(betTypeId.ToString(), LanguageCode),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
@@ -41,8 +46,11 @@
         public string GetSportName(int sportTypeId)
             => remotingRefService.GetSportName(sportTypeId.ToString(), LanguageCode);
 
+        public string GetSportNameByEnglish(int sportTypeId)
+            => remotingRefService.GetSportName(sportTypeId.ToString(), LanguageConstants.English);
+
         public string GetLeagueName(int leagueId, string languageCode)
-            => ConfiguredCacheService.GetOrSet(
+            => fanexCacheService.GetOrSet(
                 $"{LeagueNameCacheKey}.{LanguageCode}.{leagueId}{languageCode}",
                 () => remotingRefService.GetLeagueName(leagueId.ToString(), languageCode),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
@@ -51,7 +59,7 @@
             => GetLeagueName(leagueId, LanguageCode);
 
         public string GetTeamName(int teamId)
-            => ConfiguredCacheService.GetOrSet(
+            => fanexCacheService.GetOrSet(
                 $"{TeamNameCacheKey}.{LanguageCode}.{teamId}",
                 () => remotingRefService.GetTeamName(teamId.ToString(), LanguageCode),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));

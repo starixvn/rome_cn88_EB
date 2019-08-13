@@ -120,6 +120,16 @@
             sheet.SetCellRangeValue(rowIndex, row.FirstCellIndex, lastRowIndex, row.LastCellIndex - 1, title);
         }
 
+        internal void FillNonSportProductTitle(Sheet sheet, int rowIndex)
+        {
+            var lastRowIndex = rowIndex;
+            var row = sheet.GetRow(rowIndex);
+            row.CopyCellsFrom(MatchTitleRowTemplate);
+
+            var title = ReportResources.NonSportProducts.ToUpperInvariant();
+            sheet.SetCellRangeValue(rowIndex, row.FirstCellIndex, lastRowIndex, row.LastCellIndex - 1, title);
+        }
+
         internal void FillSystemParlayWinLoss(Sheet sheet, int rowIndex)
         {
             var row = sheet.GetRow(rowIndex);
@@ -172,8 +182,7 @@
         {
             RemoveTemplateRows(sheet);
 
-            var hasData = (ViewModel != null && ViewModel.NormalMatches.Any())
-                || ViewModel.Parlay != null;
+            var hasData = ViewModel != null && ViewModel.IsShowTotalRow;
 
             if (hasData)
             {
@@ -194,7 +203,7 @@
             row.CopyCellsFrom(GrandTotalRowTemplate);
             FillCells(row, ViewModel.Total, GrandTotalRowMapper.Mappings);
 
-            foreach (var data in ViewModel.NormalMatches.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
+            foreach (var data in ViewModel.SportbookMatches.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
             {
                 var isEvenRow = false;
                 var firstRowOfGroup = data.ToList();
@@ -204,19 +213,19 @@
 
                 FillMatchTitle(sheet, currentRowIndex++, firstRowOfGroup.First());
 
-                foreach (var betType in ViewModel.NormalMatchesHasMajorBetType.Where(i => i.MatchId == matchId))
+                foreach (var betType in ViewModel.SportbookMatchesHasMajorBetType.Where(i => i.MatchId == matchId))
                 {
                     FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
                     isEvenRow = !isEvenRow;
                 }
 
-                foreach (var betType in ViewModel.NormalMatchesHasMinorBetType.Where(i => i.MatchId == matchId))
+                foreach (var betType in ViewModel.SportbookMatchesHasMinorBetType.Where(i => i.MatchId == matchId))
                 {
                     FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
                     isEvenRow = !isEvenRow;
                 }
 
-                foreach (var betType in ViewModel.NormalMatchesHasOutright.Where(i => i.LeagueId == leagueId))
+                foreach (var betType in ViewModel.SportbookMatchesHasOutright.Where(i => i.LeagueId == leagueId))
                 {
                     FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, betType);
                     isEvenRow = !isEvenRow;
@@ -229,6 +238,20 @@
             {
                 FillSystemParlayWinLossTitle(sheet, currentRowIndex++);
                 FillSystemParlayWinLoss(sheet, currentRowIndex++);
+            }
+
+            if (ViewModel.NonSportMatches.Any())
+            {
+                FillNonSportProductTitle(sheet, currentRowIndex++);
+                var isEvenRow = false;
+                var subTotal = ViewModel.NonSportMatches.Sum();
+                foreach (var match in ViewModel.NonSportMatches)
+                {
+                    FillBetTypeWinLoss(sheet, currentRowIndex++, isEvenRow, match);
+                    isEvenRow = !isEvenRow;
+                }
+
+                FillMatchTotal(sheet, currentRowIndex++, subTotal);
             }
         }
 

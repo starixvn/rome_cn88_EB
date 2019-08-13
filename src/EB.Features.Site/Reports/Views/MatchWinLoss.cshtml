@@ -72,7 +72,7 @@
                     </tr>
                 }
             </thead>
-            @foreach (var row in Model.ReportData.NormalMatches.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
+            @foreach (var row in Model.ReportData.SportbookMatches.GroupBy(i => $"{i.LeagueId}_{i.MatchId}"))
             {
                 var firstRowOfGroup = row.ToList();
                 var matchId = firstRowOfGroup.First().MatchId;
@@ -91,7 +91,7 @@
                     </td>
                 </tr>
 
-                foreach (var betType in Model.ReportData.NormalMatchesHasMajorBetType.Where(m => m.MatchId == matchId))
+                foreach (var betType in Model.ReportData.SportbookMatchesHasMajorBetType.Where(m => m.MatchId == matchId))
                 {
                     <tr>
                         <td class="text-left">@betType.BetTypeGroupName</td>
@@ -101,7 +101,7 @@
                     </tr>
                 }
 
-                foreach (var betType in Model.ReportData.NormalMatchesHasOutright.Where(m => m.LeagueId == leagueId))
+                foreach (var betType in Model.ReportData.SportbookMatchesHasOutright.Where(m => m.LeagueId == leagueId))
                 {
                     <tr>
                         <td class="text-left">@betType.BetTypeGroupName</td>
@@ -111,9 +111,9 @@
                     </tr>
                 }
 
-                if (Model.ReportData.NormalMatchesHasMinorBetType.Any(m => m.MatchId == matchId))
+                if (Model.ReportData.SportbookMatchesHasMinorBetType.Any(m => m.MatchId == matchId))
                 {
-                    var otherGroup = Model.ReportData.NormalMatchesHasMinorBetType.Where(m => m.MatchId == matchId).Sum();
+                    var otherGroup = Model.ReportData.SportbookMatchesHasMinorBetType.Where(m => m.MatchId == matchId).Sum();
                     <tr class="group" data-leagueid="@($"{leagueId}_{matchId}")">
                         <td class="col-event-span-desktop text-left">
                             <span class="group-name-wrapper">
@@ -126,7 +126,7 @@
                         @HtmlHelpers.RenderStockPercentCell(otherGroup.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                     </tr>
 
-                    foreach (var betType in Model.ReportData.NormalMatchesHasMinorBetType.Where(m => m.MatchId == matchId))
+                    foreach (var betType in Model.ReportData.SportbookMatchesHasMinorBetType.Where(m => m.MatchId == matchId))
                     {
                         <tr class="childrow-@($"{leagueId}_{matchId}") hide">
                             <td class="text-left child">@betType.BetTypeGroupName</td>
@@ -157,6 +157,31 @@
                     @RenderRow(Model.ReportData.Parlay)
 
                     @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Parlay.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                </tr>
+            }
+
+            @if (Model.ReportData.NonSportMatches.Any())
+            {
+                var subTotal = Model.ReportData.NonSportMatches.Sum();
+                <tr class="match-title-row">
+                    <td class="text-left col-username" colspan="8">
+                        <span class="league-title" title="@ReportResources.NonSportProducts">@ReportResources.NonSportProducts</span>
+                    </td>
+                </tr>
+                foreach (var row in Model.ReportData.NonSportMatches)
+                {
+                    <tr>
+                        <td class="text-left">@row.BetTypeGroupName</td>
+                        @RenderRow(row)
+
+                        @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                    </tr>
+                }
+                <tr class="sub-total-row">
+                    <td class="text-left">@ReportResources.SubTotal</td>
+                    @RenderRow(subTotal)
+
+                    @HtmlHelpers.RenderStockPercentCell(subTotal.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                 </tr>
             }
 

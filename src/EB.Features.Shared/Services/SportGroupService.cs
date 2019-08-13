@@ -12,7 +12,7 @@
     {
         IEnumerable<SportGroup> GetSportGroups();
 
-        IEnumerable<SportGroup> GetSportGroupsForSportbook();
+        SportGroup GetSportGroupById(int sportGroupId);
     }
 
     public class SportGroupServiceImpl : ISportGroupService
@@ -22,22 +22,28 @@
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
         private readonly ICacheRefService cacheRefService;
+        private readonly ICacheService fanexCacheService;
 
         public SportGroupServiceImpl(
             SportGroupDataAccess sportGroupDataAccess,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ICacheService fanexCacheService)
         {
             this.sportGroupDataAccess = sportGroupDataAccess;
             this.cacheRefService = cacheRefService;
+            this.fanexCacheService = fanexCacheService;
         }
 
-        public IEnumerable<SportGroup> GetSportGroups()
-            => ConfiguredCacheService.GetOrSet(
-                SportGroupsCacheKey,
-                () => sportGroupDataAccess.GetSportGroups(new GetSportGroupsCriteria(), cacheRefService.GetSportName),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
+        public SportGroup GetSportGroupById(int sportGroupId)
+            => GetSportGroups().SingleOrDefault(i => i.Id == sportGroupId);
 
-        public IEnumerable<SportGroup> GetSportGroupsForSportbook()
-            => GetSportGroups().Where(s => s.ProductId != 0);
+        public IEnumerable<SportGroup> GetSportGroups()
+            => fanexCacheService.GetOrSet(
+                SportGroupsCacheKey,
+                () => sportGroupDataAccess.GetSportGroups(
+                    new GetSportGroupsCriteria(), 
+                    cacheRefService.GetSportName, 
+                    cacheRefService.GetSportNameByEnglish),
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
     }
 }

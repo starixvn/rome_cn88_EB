@@ -63,7 +63,7 @@
     </div>
     
     @Html.Hidden("changeLanguagePath", HttpContext.Current.Response.ApplyAppPathModifier("~/Language/Change"))
-    @Html.Hidden("currentLanguage", UserSessionImpl.Current.Language)
+    @Html.Hidden("currentLanguage", Model.LanguageCode)
     
     @StaticResources.RenderScripts("~/assets/login/bundles/login")
     <script type="text/javascript">

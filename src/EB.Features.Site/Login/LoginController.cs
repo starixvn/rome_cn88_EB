@@ -5,45 +5,35 @@
     using System.Web.Mvc;
     using System.Web.Security;
     using EB.Features.Main.Services;
-    using EB.Features.Shared.Constants;
-    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Login;
     using EB.Features.Site.Login.Requests;
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Context;
     using Fanex.NAP.Core.Models;
-    using Fanex.NAP.Core.Models.ParameterObject;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
     using Fanex.NAP.Core.Web.Auth;
-    using Fanex.NAP.Core.Web.Context;
-    using Fanex.NAP.Core.Web.Session;
     using MediatR;
 
     [AllowAnonymous]
     public class LoginController : MultipleLanguageController
     {
         private readonly IMediator mediator;
-        private readonly ICurrentSession currentSession;
-        private readonly ICurrentContext currentContext;
         private readonly IUnderMainternanceService maintenanceService;
         private readonly ISecurityService securityService;
-
+        private readonly UserSession userSession;
 
         public LoginController(
             IMediator mediator,
-            ICurrentContext currentContext,
             ISecurityService securityService,
             IUnderMainternanceService maintenanceService,
-            ICurrentSession currentSession)
+            UserSession userSession)
         {
             this.mediator = mediator;
-            this.currentSession = currentSession;
-            this.currentContext = currentContext;
             this.securityService = securityService;
             this.maintenanceService = maintenanceService;
+            this.userSession = userSession;
         }
 
         [AllowAnonymous]
@@ -58,20 +48,21 @@
 
             SetUMToken();
 
-            return View("~/Login/Views/Index.cshtml", new LoginViewModel());
+            return View("~/Login/Views/Index.cshtml", new LoginViewModel(userSession.Language));
         }
 
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Index(LoginQuery query)
         {
+            query.SessionId = HttpContext.Session.SessionID;
+            query.SiteId = NapSettings.Settings.SiteId;
+
             var viewModel = mediator.Send(query).ConfigureAwait(false).GetAwaiter().GetResult();
 
             if (string.IsNullOrEmpty(viewModel.ErrorMessage))
             {
-                CheckIn(viewModel.UserInfo);
                 CreateAuthInfo(viewModel.UserInfo);
-                AssignSettingLanguage(query.HideLanguage);
 
                 var redirectUrl = string.IsNullOrEmpty(query.ReturnUrl) ||
                                   query.ReturnUrl.IndexOf("Logout", StringComparison.CurrentCultureIgnoreCase) >=
@@ -96,7 +87,7 @@
         public ActionResult ReCheckin()
         {
             var isKickedOut = NapSettings.Settings.EnableReCheckIn
-                && securityService.ReCheckIn(currentSession.OnUserId, NapSettings.Settings.SiteId) > 0;
+                && securityService.ReCheckIn(userSession.OnUserId, NapSettings.Settings.SiteId) > 0;
 
             return Json(isKickedOut);
         }
@@ -131,9 +122,9 @@
 
         private void DoSignOut()
         {
-            if (currentSession != null && currentSession.OnUserId != 0)
+            if (userSession.OnUserId != 0)
             {
-                securityService.Logout(currentSession.OnUserId);
+                securityService.Logout(userSession.OnUserId);
             }
 
             Session.Clear();
@@ -146,7 +137,7 @@
             var authInfo = new AuthInfo
             {
                 UserId = user.Id,
-                OnUserId = currentSession.OnUserId
+                OnUserId = userSession.OnUserId
             };
 
             var authTicket = new FormsAuthenticationTicket(
@@ -167,38 +158,6 @@
             };
 
             Response.Cookies.Add(authCookie);
-        }
-       
-        private static void AssignSettingLanguage(string language)
-        {
-            var languageCode = LanguageConstants.Standardize(language);
-
-            UserSessionImpl.Current.Language = languageCode;
-        }
-
-        private void CheckIn(User user)
-        {
-            // check-in user
-            var loginParameter = new LoginParameter
-            {
-                UserId = user.Id,
-                SiteId = NapSettings.Settings.SiteId,
-                NetSessionId = Session.SessionID,
-                Ip = IPHelper.ClientIP(),
-                LoginDate = DateTime.Now,
-                BrowserName = currentContext.BrowserName,
-                CountryCode = currentContext.CountryCode,
-                Domain = currentContext.DomainName,
-                Platform = currentContext.Platform
-            };
-
-            var onUserId = securityService.Login(loginParameter);
-
-            // saves user session
-            currentSession.UserId = user.Id;
-            currentSession.Username = user.Username;
-            currentSession.OnUserId = onUserId;
-            currentSession.SessionId = Session.SessionID;
         }
     }
 }

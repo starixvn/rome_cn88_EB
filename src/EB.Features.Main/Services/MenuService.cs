@@ -44,12 +44,14 @@ namespace EB.Features.Main.Services
                 .ToList()
                 .ForEach(napMenuItem =>
                 {
-                    var menuItem = new MenuItem(napMenuItem);
-                    menuItem.SubMenus = napMenuItems
+                    var menuItem = new MenuItem(napMenuItem)
+                    {
+                        SubMenus = napMenuItems
                         .Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id)
                         .OrderBy(i => i.DisplayOrder)
                         .Select(i => new MenuItem(i))
-                        .ToList();
+                        .ToList()
+                    };
 
                     menuItems.Add(menuItem);
                 });

@@ -147,7 +147,7 @@ Sphinx.Login = {
         domElements.lblShowPass.html(resource.ShowPassword);
 
         domElements.btnLogin.val(resource.Login);
-        domElements.formTitle.text(resource.Login);;
+        domElements.formTitle.text(resource.Login);
         document.title = resource.Login;
 
         Sphinx.Core.setUserData('LANGUAGE', languageCode);
@@ -225,6 +225,7 @@ Sphinx.Login = {
         var language = Sphinx.Resources.getLanguage(Sphinx.Login.currentLanguageCode);
         var domeElements = Sphinx.Login.domElements;
         if (domeElements.txtUsername.val() === ""
+            || $.trim(domeElements.txtUsername.val()) === ""
             || domeElements.txtUsername.val() === language.Username) {
             domeElements.errorMsg
                 .attr('errCode', Sphinx.Error.InvalidUserAndPass)
@@ -237,6 +238,7 @@ Sphinx.Login = {
         }
 
         if (domeElements.txtPassword.val() === ""
+            || $.trim(domeElements.txtPassword.val()) === ""
             || domeElements.txtPassword.val() === language.Password) {
             domeElements.errorMsg
                 .html(language.errUserName)

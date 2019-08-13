@@ -1,4 +1,6 @@
 ﻿@using EB.Features.Shared.Extensions
+@using EB.Features.Shared.Configuration;
+
 @helper FormatNumber(decimal value)
 {
     @value.ToString("#,##0.00")
@@ -19,7 +21,7 @@
 @helper RenderHeaderNumberCell(decimal cellValue, string cellClass = "", bool isHiddenOnMobile = false)
 {
 
-    var value = (cellValue / 100).Round();
+    var value = (cellValue / AppSettings.ReduceNumber).Round();
 
     <th class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass" data-stack-column="@(isHiddenOnMobile.ToString().ToLowerInvariant())">
         @FormatNumber(value)
@@ -36,7 +38,7 @@
 
 @helper RenderNumberCell(decimal cellValue, string cellClass = "")
 {
-    var value = (cellValue / 100).Round();
+    var value = (cellValue / AppSettings.ReduceNumber).Round();
     <td class="text-right @(value < 0 ? "negative-value" : string.Empty) @cellClass">
         @FormatNumber(value)
     </td>

@@ -9,25 +9,25 @@
 
         public int CustId { get; }
 
-        public string UserName { get; }
+        public string UserName { get; internal set; }
 
-        public int Wagers { get; private set; }
+        public int Wagers { get; internal set; }
 
-        public decimal Stake { get; private set; }
+        public decimal Stake { get; internal set; }
 
-        public decimal ValidStake { get; private set; }
+        public decimal ValidStake { get; internal set; }
 
-        public decimal MemberIncome { get; private set; }
+        public decimal MemberIncome { get; internal set; }
 
-        public decimal SuperComm { get; private set; }
+        public decimal SuperComm { get; internal set; }
 
-        public decimal HouseWinLoss { get; private set; }
+        public decimal HouseWinLoss { get; internal set; }
 
-        public decimal HouseComm { get; private set; }
+        public decimal HouseComm { get; internal set; }
 
-        public decimal HouseIncome { get; private set; }
+        public decimal HouseIncome { get; internal set; }
 
-        public decimal HeadlineStock { get; private set; }
+        public decimal HeadlineStock { get; internal set; }
 
         public static HouseWinLossModel operator +(HouseWinLossModel model1, HouseWinLossModel model2)
             => new HouseWinLossModel

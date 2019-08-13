@@ -10,7 +10,7 @@
               string currentLanguageCode = LanguageConstants.Default)
         {
             Data = data ?? LanguageConstants.CodeNames;
-            CurrentLanguageCode = currentLanguageCode;
+            CurrentLanguageCode = LanguageConstants.Standardize(currentLanguageCode);
 
             CurrentLanguageName = LanguageConstants.CodeNames[CurrentLanguageCode];
         }

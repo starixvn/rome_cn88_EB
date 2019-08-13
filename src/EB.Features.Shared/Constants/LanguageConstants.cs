@@ -24,6 +24,14 @@
             [English] = "English"
         };
 
+        public static string GetLanguageCode(string languageName)
+            => CodeKeys.TryGetValue(languageName ?? "zh-Hans", out var languageKey)
+                ? languageKey
+                : "CN";
+
+        public static string GetLanguageName(string languageCode)
+            => !string.IsNullOrEmpty(languageCode) && CodeNames.ContainsKey(languageCode) ? CodeNames[languageCode] : CodeNames[Default];
+
         public static string Standardize(string languageCode)
             => IsValidLanguage(languageCode) ? languageCode : Default;
 

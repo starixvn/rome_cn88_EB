@@ -7,6 +7,7 @@
     using EB.Features.Reports.Services;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared;
+    using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -22,15 +23,18 @@
         private readonly IMatchWinLossService matchWinLossService;
         private readonly IMatchWinLossWorkbook workbook;
         private readonly ICacheRefService cacheRefService;
+        private readonly ISportGroupService sportGroupService;
 
         public MatchWinLossExcelHandler(
             IMatchWinLossService matchWinLossService,
             IMatchWinLossWorkbook workbook,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ISportGroupService sportGroupService)
         {
             this.matchWinLossService = matchWinLossService;
             this.workbook = workbook;
             this.cacheRefService = cacheRefService;
+            this.sportGroupService = sportGroupService;
         }
 
         public ExcelFileViewModel Handle(MatchWinLossExcelQuery message)
@@ -59,7 +63,7 @@
             return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
-        internal static Mapper<MatchWinLossModel> GetRowMapper(decimal totalStock, int rowType)
+        private static Mapper<MatchWinLossModel> GetRowMapper(decimal totalStock, int rowType)
         {
             var mapper = new Mapper<MatchWinLossModel>();
 
@@ -78,12 +82,12 @@
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
-                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / AppSettings.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / AppSettings.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.HouseIncome / AppSettings.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(H, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -106,12 +110,13 @@
             var date = $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
             var liveStatus = LiveStatusConstants.LiveStatuses[query.UserSelectedLiveStatusId];
             var betType = query.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(query.UserSelectedBetTypeId);
-            var sportType = query.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(query.UserSelectedSportGroupId);
+            var sportGroup = sportGroupService.GetSportGroupById(query.UserSelectedSportGroupId);
+            var sportType = query.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
 
             return $"{date} - {sportType} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
         }
 
-        internal static string GetExcelFileName(MatchWinLossExcelQuery query)
+        internal string GetExcelFileName(MatchWinLossExcelQuery query)
             => $"Match Win Loss - {query.Date.ToShortDate()}";
-    }    
+    }
 }

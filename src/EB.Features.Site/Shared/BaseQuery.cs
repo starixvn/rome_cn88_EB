@@ -1,17 +1,15 @@
 ﻿namespace EB.Features.Site.Shared
 {
-    using System.Collections.Generic;
-    using Fanex.NAP.Core.Models;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
 
     public class BaseQuery
     {
-        public BaseQuery(ICurrentSession currentSession)
+        public BaseQuery(UserSession currentSession)
         {
             CurrentSession = currentSession;
         }
 
-        public ICurrentSession CurrentSession { get; }
+        public UserSession CurrentSession { get; }
 
         public virtual bool IsValid() => true;
     }

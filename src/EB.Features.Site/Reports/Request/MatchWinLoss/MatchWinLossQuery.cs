@@ -5,12 +5,12 @@
     using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.ViewModel;
     using EB.Features.Site.Shared;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
-    public class MatchWinLossQuery : BaseQuery, IRequest<MatchWinLossReportViewModel>
+    public class MatchWinLossQuery : ReportBaseQuery, IRequest<MatchWinLossReportViewModel>
     {
-        public MatchWinLossQuery(ICurrentSession currentSession)
+        public MatchWinLossQuery(UserSession currentSession)
             : base(currentSession)
         {
             Date = SystemTime.Today;

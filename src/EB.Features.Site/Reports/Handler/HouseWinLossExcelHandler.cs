@@ -6,6 +6,7 @@
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
     using EB.Features.Shared;
+    using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -21,15 +22,18 @@
         private readonly IHouseWinLossService houseWinLossService;
         private readonly IHouseWinLossWorkbook workbook;
         private readonly ICacheRefService cacheRefService;
+        private readonly ISportGroupService sportGroupService;
 
         public HouseWinLossExcelHandler(
             IHouseWinLossService matchWinLossService,
             IHouseWinLossWorkbook workbook,
-            ICacheRefService cacheRefService)
+            ICacheRefService cacheRefService,
+            ISportGroupService sportGroupService)
         {
             this.houseWinLossService = matchWinLossService;
             this.workbook = workbook;
             this.cacheRefService = cacheRefService;
+            this.sportGroupService = sportGroupService;
         }
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
@@ -77,15 +81,15 @@
 
             mapper
                 .Map(B, betTypeWinLoss => betTypeWinLoss.Wagers)
-                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / CommonConstants.ReduceNumber)
-                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / CommonConstants.ReduceNumber)
-                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / CommonConstants.ReduceNumber)
-                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / CommonConstants.ReduceNumber)
-                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / CommonConstants.ReduceNumber)
-                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / CommonConstants.ReduceNumber)
-                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / CommonConstants.ReduceNumber)
-                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / CommonConstants.ReduceNumber)
-                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * CommonConstants.ReduceNumber));
+                .Map(C, betTypeWinLoss => betTypeWinLoss.Stake / AppSettings.ReduceNumber)
+                .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / AppSettings.ReduceNumber)
+                .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
+                .Map(F, betTypeWinLoss => betTypeWinLoss.SuperComm / AppSettings.ReduceNumber)
+                .Map(G, betTypeWinLoss => betTypeWinLoss.HouseWinLoss / AppSettings.ReduceNumber)
+                .Map(H, betTypeWinLoss => betTypeWinLoss.HouseComm / AppSettings.ReduceNumber)
+                .Map(I, betTypeWinLoss => betTypeWinLoss.HouseIncome / AppSettings.ReduceNumber)
+                .Map(J, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(K, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -114,15 +118,16 @@
             var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
             var ticketStatus = TicketStatusConstants.TicketStatuses[param.UserSelectedTicketStatusId];
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
-            var sportType = param.UserSelectedSportGroupId == 0 ? AppResources.AllSports : cacheRefService.GetSportName(param.UserSelectedSportGroupId);
+            var sportGroup = sportGroupService.GetSportGroupById(param.UserSelectedSportGroupId);
+            var sportType = param.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
 
             return $"{title} - {GetResourcesText(ticketStatus)} - {sportType} - {betType} - {GetResourcesText(liveStatus)}";
         }
 
-        internal static string GetResourcesText(string key)
+        private static string GetResourcesText(string key)
             => AppResources.ResourceManager.GetString(key);
 
-        internal static string GetExcelFileName(HouseWinLossExcelQuery param)
+        internal string GetExcelFileName(HouseWinLossExcelQuery param)
             => param.IsHistoricReport ?
             $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()}" :
             $"Wager Report - {param.Date.ToShortDate()}";

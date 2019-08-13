@@ -295,6 +295,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Non - Sport Products.
+        /// </summary>
+        public static string NonSportProducts {
+            get {
+                return ResourceManager.GetString("NonSportProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can view the report data up to {0}..
         /// </summary>
         public static string NoteViewCurrentReport {

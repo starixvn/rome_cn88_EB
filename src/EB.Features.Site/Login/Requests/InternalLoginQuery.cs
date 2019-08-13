@@ -3,23 +3,16 @@
     using System;
     using System.Web;
     using EB.Features.Shared.Configuration;
-    using EB.Features.Shared.Utilities;
     using EB.Features.Site.Shared;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
     using RSACryptoPad;
 
     public class InternalLoginQuery : BaseQuery, IRequest<string>
     {
-        public InternalLoginQuery(ICurrentSession currentSession)
+        public InternalLoginQuery(UserSession currentSession)
             : base(currentSession)
         {
-            AccId = currentSession.UserId;
-            
-            KeyPath = HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
-            EncryptParamFunc = (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
-            InternalLogInUMToken = HttpContext.Current.Session["AlphaUMToken"] as string;
-            IP = IPHelper.ClientIP();
         }
 
         public int CustId { get; set; }
@@ -34,15 +27,19 @@
 
         public string AfterLogInQuery { get; set; }
 
-        public int AccId { get; }
+        public int AccId
+            => CurrentSession.UserId;
 
-        public string KeyPath { get; }
+        public static string KeyPath
+            => HttpContext.Current.Request.PhysicalApplicationPath + "/IbcKeys/ibcpkey.snk";
 
-        public Func<string, int, string, string> EncryptParamFunc { get; }
+        public static Func<string, int, string, string> EncryptParamFunc
+            => (str, size, path) => new EncryptionThread().EncryptString(str, size, path);
 
-        public string InternalLogInUMToken { get; }
+        public static string InternalLogInUMToken
+            => HttpContext.Current.Session["AlphaUMToken"] as string;
 
-        public string IP { get; }
+        public string IP => CurrentSession.Ip;
 
         public string InternalLogInURL
             => RoleId == 0 ? AppSettings.InternalLogInURLHeadline : AppSettings.InternalLogInURL;

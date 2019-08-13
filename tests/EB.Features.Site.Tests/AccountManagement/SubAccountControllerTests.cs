@@ -5,25 +5,24 @@
     using EB.Features.Shared.Model;
     using EB.Features.Site.AccountManagement;
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
-    using Fanex.NAP.Core.Web.Session;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
     using NSubstitute;
     using NUnit.Framework;
 
-    [TestFixture]
     public class SubAccountControllerTests
     {
         private IMediator mediator;
         private SubAccountController subAccountController;
-        private ICurrentSession currentSession;
+        private UserSession currentSession;
 
         [SetUp]
         public void SetUp()
         {
-            mediator = Substitute.For<IMediator>();
-            subAccountController = new SubAccountController(mediator);
-            currentSession = Substitute.For<ICurrentSession>();
+            currentSession = Substitute.For<UserSession>();
             currentSession.UserId.Returns(8);
+            mediator = Substitute.For<IMediator>();
+            subAccountController = new SubAccountController(mediator, currentSession);            
         }
 
         [Test]
@@ -55,12 +54,12 @@
         public async Task Update_IsValid_CallsMediatorSendUpdateCommand()
         {
             // Arrange
+            currentSession.Language = "en-US";
             var expectedCommand = new UpdateCommand(currentSession)
             {
                 CustId = 1,
                 SubAccId = 2,
                 PageAccess = "[D],[H],[B],[E]",
-                Language = "en-US",
                 Username = "starksub01"
             };
 
@@ -83,10 +82,8 @@
         public async Task Update_Invalid_CallsMediatorSendUpdateCommand()
         {
             // Arrange
-            var expectedCommand = new UpdateCommand(currentSession)
-            {
-                Language = "en-US"
-            };
+            currentSession.Language = "en-US";
+            var expectedCommand = new UpdateCommand(currentSession);
 
             // Act
             var actualResult = await subAccountController.Update(expectedCommand) as JsonResult;

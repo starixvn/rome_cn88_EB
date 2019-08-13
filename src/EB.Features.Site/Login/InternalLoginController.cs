@@ -3,12 +3,13 @@
     using System.Web.Mvc;
     using EB.Features.Site.Login.Requests;
     using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Models;
     using MediatR;
 
     public class InternalLoginController : BaseController
     {
-        public InternalLoginController(IMediator mediator)
-            : base(mediator)
+        public InternalLoginController(IMediator mediator, UserSession userSession)
+            : base(mediator, userSession)
         {
         }
 

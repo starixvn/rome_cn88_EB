@@ -11,6 +11,8 @@
     {
         private readonly Func<int, string> getSportGroupDisplayName;
 
+        private readonly Func<int, string> getSportGroupDisplayNameEnglish;
+
         public SportGroup()
         {
 
@@ -18,25 +20,26 @@
 
         internal SportGroup(
             int id,
-            int productId,
             IEnumerable<int> displaySportIds,
-            Func<int, string> getSportGroupDisplayName)
+            Func<int, string> getSportGroupDisplayName,
+            Func<int, string> getSportGroupDisplayNameEnglish)
         {
             Id = id;
-            ProductId = productId;
             DisplaySportIds = displaySportIds;
             this.getSportGroupDisplayName = getSportGroupDisplayName;
+            this.getSportGroupDisplayNameEnglish = getSportGroupDisplayNameEnglish;
         }
 
         public int Id { get; }
 
-        public int ProductId { get; }
 
         public IEnumerable<int> DisplaySportIds { get; }
 
-        public string DisplayName => GetDisplayName();
+        public string DisplayName => GetDisplayName(getSportGroupDisplayName);
 
-        private string GetDisplayName()
+        public string DisplayNameByEnglish => GetDisplayName(getSportGroupDisplayNameEnglish);
+
+        private string GetDisplayName(Func<int, string> functionToGetDisplayName)
         {
             if (Id == SportGroupConstants.ParlaySportGroupId)
             {
@@ -53,7 +56,7 @@
 
             for (int i = 0; i < length; i++)
             {
-                stringBuilder.Append($"{getSportGroupDisplayName(DisplaySportIds.ElementAt(i))}");
+                stringBuilder.Append($"{functionToGetDisplayName(DisplaySportIds.ElementAt(i))}");
 
                 if (i != length - 1)
                 {

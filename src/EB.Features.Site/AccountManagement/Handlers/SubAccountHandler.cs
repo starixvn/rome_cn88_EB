@@ -2,12 +2,11 @@
 {
     using System.Threading.Tasks;
     using AccountManagement.Requests.SubAccount;
+    using EB.Features.Shared.Constants;
     using Features.AccountManagement.Models.SubAccount;
     using Features.AccountManagement.Params.SubAccount;
     using Features.AccountManagement.Services;
     using Features.Shared.Model;
-    using Features.Shared.Utilities;
-    using Features.Site.Shared.Helpers;
     using MediatR;
 
     public class SubAccountHandler :
@@ -33,8 +32,8 @@
                 message.SubAccId,
                 message.Username,
                 message.PageAccess,
-                LanguageHelper.GetLanguageKey(message.Language),
-                IPHelper.ClientIP(),
+                LanguageConstants.GetLanguageCode(message.Language),
+                message.IP,
                 message.ActorId);
     }
 }

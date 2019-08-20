@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Web.Mvc;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared;
     using EB.Features.Shared.Configuration;
@@ -19,11 +20,11 @@
             MatchWinLossViewModel reportData,
             MatchWinLossQuery query,
             DateTime balanceUpDate,
-            IEnumerable<SelectListItemExt> sportGroups,
-            IEnumerable<SelectListItemExt> betTypes,            
+            IEnumerable<SelectListItem> sportGroups,
+            IEnumerable<SelectListItemExt> betTypes,
             IEnumerable<SelectListItemExt> allBetTypes)
         {
-            var sportGroupSelectionViewModel = new SingleSelectionViewModel(sportGroups, query.UserSelectedSportGroupId);
+            var sportGroupSelectionViewModel = new SportGroupMultiSelectionViewModel(sportGroups, query.UserSelectedSportGroupIds,query.CurrentSession.Language);
             var betTypeSelectionViewModel = new SingleSelectionViewModel(betTypes, query.UserSelectedBetTypeId);
             var allBetTypesSelectionViewModel = new SingleSelectionViewModel(allBetTypes, 0);
 

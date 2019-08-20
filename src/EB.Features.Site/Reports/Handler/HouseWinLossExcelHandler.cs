@@ -1,7 +1,9 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System.Linq;
     using EB.Features.Reports;
     using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
@@ -45,7 +47,7 @@
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
-                SportTypeGroup = message.UserSelectedSportGroupId,
+                SportTypeGroups = message.UserSelectedSportGroupIds,
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
                 Date = message.Date
@@ -118,10 +120,9 @@
             var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
             var ticketStatus = TicketStatusConstants.TicketStatuses[param.UserSelectedTicketStatusId];
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
-            var sportGroup = sportGroupService.GetSportGroupById(param.UserSelectedSportGroupId);
-            var sportType = param.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
+            var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 
-            return $"{title} - {GetResourcesText(ticketStatus)} - {sportType} - {betType} - {GetResourcesText(liveStatus)}";
+            return $"{title} - {GetResourcesText(ticketStatus)} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)}";
         }
 
         private static string GetResourcesText(string key)

@@ -798,6 +798,7 @@
     <TypeScriptCompile Include="assets\report\components\pager.ts" />
     <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\sort.ts" />
+    <TypeScriptCompile Include="assets\report\components\sport-group-multiselection.ts" />
     <TypeScriptCompile Include="assets\report\scripts\housewinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\core.ts" />
@@ -909,6 +910,7 @@
     <Compile Include="Shared\ViewModels\Components\DateRangePickerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\PagerViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\SingleSelectionViewModel.cs" />
+    <Compile Include="Shared\ViewModels\Components\SportGroupMultiSelectionViewModel.cs" />
     <Compile Include="Shared\ViewModels\SelectListItemExt.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1224,6 +1226,7 @@
     <Content Include="AccountManagement\Views\web.config" />
     <Content Include="AccountManagement\Styles\subaccount.scss" />
     <Content Include="assets\tests\chutzpah.json" />
+    <Content Include="App_Code\Components\SportGroupMultiSelection.cshtml" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>

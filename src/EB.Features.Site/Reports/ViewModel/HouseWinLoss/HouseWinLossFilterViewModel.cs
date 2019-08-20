@@ -9,7 +9,7 @@
             DatePickerViewModel datePickerViewModel,
             DateRangePickerViewModel dateRangePickerViewModel,
             bool isTest,
-            SingleSelectionViewModel sportGroupSelectionViewModel,
+            SportGroupMultiSelectionViewModel sportGroupMultiSelectionViewModel,
             SingleSelectionViewModel betTypeSelectionViewModel,
             SingleSelectionViewModel liveStatusSelectionViewModel,
             SingleSelectionViewModel ticketStatusSelectionViewModel,
@@ -19,7 +19,7 @@
             LiveStatusSelectionViewModel = liveStatusSelectionViewModel;
             TicketStatusSelectionViewModel = ticketStatusSelectionViewModel;
             AllBetTypesSelectionViewModel = allBetTypesSelectionViewModel;
-            SportGroupSelectionViewModel = sportGroupSelectionViewModel;
+            SportGroupMultiSelectionViewModel = sportGroupMultiSelectionViewModel;
             DatePickerViewModel = datePickerViewModel;
             DateRangePickerViewModel = dateRangePickerViewModel;
             IsTest = isTest;
@@ -33,7 +33,7 @@
 
         public SingleSelectionViewModel AllBetTypesSelectionViewModel { get; }
 
-        public SingleSelectionViewModel SportGroupSelectionViewModel { get; }
+        public SportGroupMultiSelectionViewModel SportGroupMultiSelectionViewModel { get; }
 
         public DatePickerViewModel DatePickerViewModel { get; }
 

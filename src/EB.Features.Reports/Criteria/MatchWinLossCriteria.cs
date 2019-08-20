@@ -9,7 +9,7 @@
         public MatchWinLossCriteria(MatchWinLossParam param)
         {
             WinLostDate = param.WinLossDate;
-            SportTypeGroup = param.SportTypeGroup;
+            SportTypeGroups = param.SportTypeGroups;
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
@@ -18,7 +18,7 @@
 
         public DateTime WinLostDate { get; }
 
-        public int SportTypeGroup { get; }
+        public string SportTypeGroups { get; }
 
         public int BetTypeGroup { get; }
 
@@ -29,7 +29,7 @@
         public DateTime MoveBetsDay { get; }
 
         public override bool IsValid()
-            => SportTypeGroup >= 0 && BetTypeGroup >= 0 && IsLive >= 0;
+            => BetTypeGroup >= 0 && IsLive >= 0;
 
         public override string GetSettingKey()
             => "CS_Rpt_MatchWinLoss_Headline";

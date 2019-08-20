@@ -49,7 +49,9 @@
                 {
                     var betTypes = dynamicRepository.Fetch<BetTypeGroup>(new GetBetTypeGroupBySportCriteria());
 
-                    return betTypes.Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName));
+                    return betTypes
+                    .Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName))
+                    .OrderBy(bettype => bettype.Id);
                 },
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
     }

@@ -1,8 +1,13 @@
 ﻿namespace EB.Features.Site.Reports
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.IO;
     using System.Web;
+    using EB.Features.Reports.Extension;
+    using EB.Features.Shared.Model;
+    using EB.Features.Shared.Resources;
 
     public class ExcelBaseHandler
     {
@@ -52,6 +57,20 @@
             var templateFolderName = reportNamespace.Substring(lastIndexOfDot);
 
             return templateFolderName;
+        }
+
+        protected internal string GetValidSportGroupNames(IEnumerable<SportGroup> allSports, IEnumerable<int> sportGroupIds)
+        {
+            if (sportGroupIds == null || !sportGroupIds.Any())
+            {
+                return AppResources.AllSports;
+            }
+
+            var validSports = allSports
+                .Where(sport => sportGroupIds.Contains(sport.Id))
+                .Select(sport => sport.DisplayName);
+
+            return validSports.Count() == allSports.Count() ? AppResources.AllSports : validSports.JoinWithComma();
         }
     }
 }

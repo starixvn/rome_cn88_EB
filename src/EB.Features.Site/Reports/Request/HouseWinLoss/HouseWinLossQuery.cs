@@ -1,6 +1,8 @@
 ﻿namespace EB.Features.Site.Reports.Request.HouseWinLoss
 {
     using System;
+    using System.Collections.Generic;
+    using EB.Features.Reports.Extension;
     using EB.Features.Site.Shared.Models;
     using Features.Shared.Constants;
     using Features.Shared.Utilities;
@@ -19,7 +21,10 @@
             IsTest = true;
         }
 
-        public int UserSelectedSportGroupId { get; set; }
+        public IEnumerable<int> SelectedSportGroupIds
+            => UserSelectedSportGroupIds.ToListInt();
+
+        public string UserSelectedSportGroupIds { get; set; }
 
         public int UserSelectedBetTypeId { get; set; }
 

@@ -1,25 +1,27 @@
 ﻿"use strict";
 var betTypes: any = betTypes;
+var allBetTypeText: any = allBetTypeText;
 
 class MatchWinLossReport {
     $: JQueryStatic;
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
-    sportGroupSelectionComponent: SingleSelectionDropdownComponent;
+    sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     pagerComponent: ClientPagerComponent;
     datePickerComponent: DatePickerComponent;
+    $buttonSportGroup: JQuery;
 
     constructor($: JQueryStatic,
-        sportGroupSelectionComponent: SingleSelectionDropdownComponent,
+        sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         pagerComponent: ClientPagerComponent,
         toggleHandler: ToggleHandler,
         datePickerComponent: DatePickerComponent) {
         this.$ = $;
-        this.sportGroupSelectionComponent = sportGroupSelectionComponent;
+        this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.pagerComponent = pagerComponent;
@@ -65,43 +67,61 @@ class MatchWinLossReport {
         this.$exportExcelForm.submit();
     };
 
-    onReportSubmit = () => {
-        this.sportGroupSelectionComponent.updateSelectedValue();
+    onReportSubmit = (e: any) => {
+        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        if (sportGroups.length <= 0) {
+            this.$buttonSportGroup.addClass("error");
+            e.preventDefault();
+
+            return;
+        }
+
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
     };
 
     renderComponents(): void {
-        this.sportGroupSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-sportgroup", "UserSelectedSportGroupId", () => { this.onchangeSportType(); }));
         this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
+        this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));        
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
+        this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
     }
 
-    onchangeSportType(): void {
-        let sportType = this.sportGroupSelectionComponent.$dropdown.val();
-        this.betTypeSelectionComponent.$dropdown.empty();
-        for (var i = 0; i < betTypes.length; i++) {
-            var betTypeGroup = betTypes[i];
-            if (betTypeGroup.SportTypeGroup == 0 ||
-                betTypeGroup.SportTypeGroup == sportType) {
-                this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup.Value + '>' + betTypeGroup.Text + '</option>');
+    onchangeSportGroup(): void {
+        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        if (this.betTypeSelectionComponent.$dropdown != null) {
+            this.betTypeSelectionComponent.$dropdown.empty();
+            this.betTypeSelectionComponent.$dropdown.append('<option value = 0>' + allBetTypeText + '</option>');
+
+            const exists = [];
+            for (const betType of betTypes) {
+                if (sportGroups.indexOf(betType.SportTypeGroup.toString()) != -1) {
+                    var key = betType.Value;
+
+                    if (exists[key]) {
+                        continue;
+                    }
+
+                    exists[key] = true;
+                    this.betTypeSelectionComponent.$dropdown.append(`<option value="${betType.Value}">${betType.Text}</option>`);
+                }
             }
+            
+            this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
+            this.betTypeSelectionComponent.$dropdown.multiselect({
+                multiple: false,
+                maxHeight: 300,
+                numberDisplayed: 1,
+                includeSelectAllOption: false
+            });
         }
-
-        this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
-        this.betTypeSelectionComponent.$dropdown.multiselect({
-            multiple: false,
-            maxHeight: 300,
-            numberDisplayed: 1,
-            includeSelectAllOption: false
-        });
-    }
+    };
 }
 
 $(function () {
     const matchWinLossReport = new MatchWinLossReport(
         $,
-        new SingleSelectionDropdownComponent($),
+        new SportGroupMultiSelectionComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new ClientPagerComponent($),

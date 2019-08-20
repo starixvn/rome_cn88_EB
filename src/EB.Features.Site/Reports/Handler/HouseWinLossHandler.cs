@@ -1,7 +1,10 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System.Linq;
+    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
+    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
@@ -31,7 +34,12 @@
         {
             var sportGroups = sportGroupService.GetSportGroups();
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport();
-            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.UserSelectedSportGroupId);
+            message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
+
+            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds)
+                .GroupBy(i => i.Id)
+                .Select(i => i.First());
+
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
                 IsHistoricReport = message.IsHistoricReport,
@@ -39,7 +47,7 @@
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
-                SportTypeGroup = message.UserSelectedSportGroupId,
+                SportTypeGroups = message.UserSelectedSportGroupIds,
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
                 Date = message.Date
@@ -48,7 +56,7 @@
             return new HouseWinLossReportViewModel(
                 reportData,
                 message,
-                BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
+                BuildSportGroupSelectListItems(sportGroups, message.SelectedSportGroupIds),
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0),
                 userSession.Language);

@@ -13,7 +13,7 @@ namespace EB.Features.Reports.Tests.Criteria
             // Arrange
             var criteria = new MatchWinLossCriteria(new MatchWinLossParam
             {
-                SportTypeGroup = 0,
+                SportTypeGroups = "0",
                 BetTypeGroup = 0,
                 IsLive = 0
             });
@@ -24,15 +24,13 @@ namespace EB.Features.Reports.Tests.Criteria
             // Assert
             Assert.IsTrue(act);
         }
-        [TestCase(-1, 1, 1)]
-        [TestCase(1, -1, 1)]
-        [TestCase(1, 1, -1)]
-        public void IsValid_InvalidInput_ReturnFalse(int sportTypeGroup, int betTypeGroup, int isLive)
+        [TestCase(-1, 1)]
+        [TestCase(1, -1)]
+        public void IsValid_InvalidInput_ReturnFalse(int betTypeGroup, int isLive)
         {
             // Arrange
             var criteria = new MatchWinLossCriteria(new MatchWinLossParam
             {
-                SportTypeGroup = sportTypeGroup,
                 BetTypeGroup = betTypeGroup,
                 IsLive = isLive
             });

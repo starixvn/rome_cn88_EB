@@ -73,40 +73,20 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
 
         [Test]
-        public void Handle_IsFirstTimeLoading_CallGetBetTypeGroupsBySportOneTimes()
+        public void Handle_Always_CallGetBetTypeGroupsBySport()
         {
             // Arrange
             var query = new MatchWinLossQuery(currentSession)
             {
-                UserSelectedSportGroupId = 0
+                UserSelectedSportGroupIds = "0"
             };
 
             // Act
             hander.Handle(query);
 
             // Assert
-            betTypeService.Received(1).GetBetTypeGroupsBySport(Arg.Any<IEnumerable<int>>());
+            betTypeService.Received(2).GetBetTypeGroupsBySport(Arg.Any<IEnumerable<int>>());
         }
-
-
-        [Test]
-        public void Handle_IsSecondTimeLoading_CallGetBetTypeGroupsBySportTwoTimes()
-        {
-            // Arrange
-            var expectedGroupId = 1;            
-            var query = new MatchWinLossQuery(currentSession)
-            {
-                UserSelectedSportGroupId = expectedGroupId
-            };
-
-            // Act
-            hander.Handle(query);
-
-            // Assert
-            betTypeService.Received(1).GetBetTypeGroupsBySport(Arg.Any<IEnumerable<int>>());
-            betTypeService.Received(1).GetBetTypeGroupsBySport(Arg.Any<int>());
-        }
-
 
         [Test]
         public void Handle_Always_CallGetOfMatchWinLossService()

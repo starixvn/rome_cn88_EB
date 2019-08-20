@@ -14,7 +14,7 @@
 
         public DateTime ToDate { get; set; }
 
-        public int SportTypeGroup { get; set; }
+        public string SportTypeGroups { get; set; }
 
         public int BetTypeGroup { get; set; }
 

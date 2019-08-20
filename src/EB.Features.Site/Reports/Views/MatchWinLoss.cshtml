@@ -22,7 +22,7 @@
     </div>
 
     <form class="form-inline filter report-form" role="form" id="report-form">
-        @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+        @SportGroupMultiSelection.Render(Model.ReportFilterViewModel.SportGroupMultiSelectionViewModel)
         @DatePicker.Render(Model.ReportFilterViewModel.DatePickerViewModel)
         @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
         @LiveStatusSelection.Render(Model.ReportFilterViewModel.LiveStatusSelectionViewModel, true)
@@ -39,7 +39,7 @@
 
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportMatchWinLoss","Reports")">
         @Html.Hidden("Date", Model.Query.Date)
-        @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
+        @Html.Hidden("UserSelectedSportGroupIds", Model.Query.UserSelectedSportGroupIds)
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
         @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
@@ -214,6 +214,7 @@
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/matchwinloss")
     <script>
+        var allBetTypeText = '@AppResources.AllBetTypes';
         var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items));
     </script>
 }

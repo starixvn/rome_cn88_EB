@@ -26,7 +26,7 @@
         <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
             @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
         </div>
-        @SportGroupSelection.Render(Model.ReportFilterViewModel.SportGroupSelectionViewModel, true)
+        @SportGroupMultiSelection.Render(Model.ReportFilterViewModel.SportGroupMultiSelectionViewModel)
         <div class="form-group js-month-group"
              id="dateRangeContainer"
              data-longmonths-inyear="@HouseWinLossFilterViewModel.MonthNames.JoinWithComma()"
@@ -77,7 +77,7 @@
         @Html.Hidden("FromDate", Model.Query.FromDate)
         @Html.Hidden("ToDate", Model.Query.ToDate)
         @Html.Hidden("IsHistoricReport", Model.Query.IsHistoricReport.ToString())
-        @Html.Hidden("UserSelectedSportGroupId", Model.Query.UserSelectedSportGroupId)
+        @Html.Hidden("UserSelectedSportGroupIds", Model.Query.UserSelectedSportGroupIds)
         @Html.Hidden("UserSelectedBetTypeId", Model.Query.UserSelectedBetTypeId)
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
@@ -166,7 +166,8 @@
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")
     <script>
-        var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items.GroupBy(i => i.SportTypeGroup)));
+        var allBetTypeText = '@AppResources.AllBetTypes';
+        var betTypes = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.ReportFilterViewModel.AllBetTypesSelectionViewModel.Items));
     </script>
 }
 @helper RenderDatePicker()

@@ -35,7 +35,12 @@
         }
 
         public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(IEnumerable<int> sportGroupIds)
-            => GetBetTypeGroups().Where(b => sportGroupIds.Contains(b.SportTypeGroup));
+            => GetBetTypeGroups()
+            .Where(b => sportGroupIds.Contains(b.SportTypeGroup))
+            .GroupBy(i => i.Id)
+            .Select(i => i.First())
+            .OrderBy(i => i.SportTypeGroup)
+            .ThenBy(i => i.Id);
 
         public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(int sportGroupId = 0)
             => sportGroupId == 0

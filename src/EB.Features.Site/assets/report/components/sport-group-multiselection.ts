@@ -41,6 +41,7 @@ class SportGroupMultiSelectionComponent {
                 : this.$dropdown.data("label-there-is-no-sport"),
             nSelectedText: ` ${this.$dropdown.data("label-selected")}`,
             allSelectedText: this.$dropdown.data("label-all-sport"),
+            selectAllText: this.$dropdown.data("label-select-all"),
             includeSelectAllOption: hasAnyItems,
             onChange: this.onChange,
             onSelectAll: this.onChange,

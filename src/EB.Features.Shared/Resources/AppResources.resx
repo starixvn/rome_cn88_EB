@@ -219,4 +219,7 @@
   <data name="ThereIsNoSportGroup" xml:space="preserve">
     <value>There is no Sport</value>
   </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
 </root>

@@ -85,7 +85,8 @@ namespace EB.Features.Site.Tests.Reports.Handler
             hander.Handle(query);
 
             // Assert
-            betTypeService.Received(2).GetBetTypeGroupsBySport(Arg.Any<IEnumerable<int>>());
+            betTypeService.Received().GetBetTypeGroupsBySport();
+            betTypeService.Received().GetBetTypeGroupsBySport(Arg.Any<IEnumerable<int>>());            
         }
 
         [Test]

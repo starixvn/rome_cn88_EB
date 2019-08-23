@@ -36,9 +36,7 @@
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport();
             message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
 
-            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds)
-                .GroupBy(i => i.Id)
-                .Select(i => i.First());
+            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds);
 
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {

@@ -1,19 +1,17 @@
 ﻿namespace EB.Features.Site
 {
     using System;
-    using System.Web;
     using System.Web.Mvc;
     using System.Web.Security;
     using EB.Features.Main.Services;
     using EB.Features.Site.Login;
     using EB.Features.Site.Login.Requests;
     using EB.Features.Site.Shared;
+    using EB.Features.Site.Shared.Helpers;
     using EB.Features.Site.Shared.Models;
     using Fanex.NAP.Core.Configuration;
-    using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Service.Interface;
     using Fanex.NAP.Core.Web.Attribute;
-    using Fanex.NAP.Core.Web.Auth;
     using MediatR;
 
     [AllowAnonymous]
@@ -62,7 +60,7 @@
 
             if (string.IsNullOrEmpty(viewModel.ErrorMessage))
             {
-                CreateAuthInfo(viewModel.UserInfo);
+                AuthInfoHelper.CreateAuthInfo(viewModel.UserInfo, userSession.OnUserId, HttpContext);
 
                 var redirectUrl = string.IsNullOrEmpty(query.ReturnUrl) ||
                                   query.ReturnUrl.IndexOf("Logout", StringComparison.CurrentCultureIgnoreCase) >=
@@ -106,7 +104,6 @@
             return View("~/Login/Views/UnderMaintenance.cshtml", downTime);
         }
 
-
         private void SetUMToken()
         {
             if (Request.QueryString["UMToken"] != null)
@@ -130,34 +127,6 @@
             Session.Clear();
             Response.Cookies.Clear();
             FormsAuthentication.SignOut();
-        }
-
-        private void CreateAuthInfo(User user)
-        {
-            var authInfo = new AuthInfo
-            {
-                UserId = user.Id,
-                OnUserId = userSession.OnUserId
-            };
-
-            var authTicket = new FormsAuthenticationTicket(
-                1,
-                user.Username,
-                DateTime.Now,
-                DateTime.Now + FormsAuthentication.Timeout,
-                false,
-                authInfo.ToXml(),
-                Request.ApplicationPath);
-
-            var encryptedTicket = FormsAuthentication.Encrypt(authTicket);
-            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket)
-            {
-                HttpOnly = true,
-                Path = Request.ApplicationPath,
-                Name = FormsAuthentication.FormsCookieName
-            };
-
-            Response.Cookies.Add(authCookie);
         }
     }
 }

@@ -2,7 +2,6 @@
 {
     using EB.Features.Site.AccountManagement.Requests.SubAccount;
     using EB.Features.Site.Shared.Models;
-    using Fanex.NAP.Core.Web.Session;
     using NSubstitute;
     using NUnit.Framework;
 

@@ -117,6 +117,7 @@
     <Compile Include="AccountManagement\Requests\SubAccount\UpdateCommandTests.cs" />
     <Compile Include="AccountManagement\SubAccountControllerTests.cs" />
     <Compile Include="Login\Handlers\LoginHandlerTest.cs" />
+    <Compile Include="Login\Requests\SSOQueryTests.cs" />
     <Compile Include="Main\Handlers\LanguageHandlerTest.cs" />
     <Compile Include="Main\Handlers\MainHandlerTest.cs" />
     <Compile Include="Main\Handlers\UserInfoHandlerTest.cs" />

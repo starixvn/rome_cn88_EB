@@ -844,6 +844,8 @@
     <Compile Include="Login\InternalLoginController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Login\Requests\SSOQuery.cs" />
+    <Compile Include="Login\UserLoginController.cs" />
     <Compile Include="Login\ViewModel\LoginViewModel.cs" />
     <Compile Include="Login\Requests\LoginQuery.cs" />
     <Compile Include="Login\Requests\InternalLoginQuery.cs" />
@@ -883,6 +885,7 @@
     <Compile Include="Shared\BrowserHelperImpl.cs" />
     <Compile Include="Shared\Filters\AntiForgeryValidator.cs" />
     <Compile Include="Shared\Filters\AntiXSRFFilter.cs" />
+    <Compile Include="Shared\Helpers\AuthInfoHelper.cs" />
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\CookieHelper.cs" />
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />

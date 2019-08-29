@@ -17,6 +17,8 @@
         Result ChangePassword(ChangePasswordParam param);
 
         User GetUserInfo(string userName);
+
+        User GetUserInfo(int userId);
     }
 
     public class UserInfoService : IUserInfoService
@@ -33,6 +35,9 @@
 
         public User GetUserInfo(string userName)
             => userService.Get(userName.Trim());
+
+        public User GetUserInfo(int userId)
+            => userService.Get(userId);
 
         public Result ChangePassword(ChangePasswordParam param)
         {

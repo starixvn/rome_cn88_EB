@@ -37,6 +37,18 @@ namespace EB.Features.Main.Tests.Services
             userService.Received().Get(Arg.Is<string>(i => i == userName.Trim()));
         }
 
+        [Test]
+        public void GetUserInfo_Always_ReceivedCorrectFunction()
+        {
+            // Arrange
+            var userId = 8;
+
+            // Act
+            userInfoService.GetUserInfo(userId);
+
+            // Assert
+            userService.Received().Get(Arg.Is<int>(i => i == userId));
+        }
 
         [Test]
         public void ChangePassword_NoMatchOldPass_ReturnWrongOldPasssMessage()
@@ -51,7 +63,6 @@ namespace EB.Features.Main.Tests.Services
             // Assert
             Assert.AreEqual(MainResource.WrongOldPasswordMessage, act.Message);
         }
-
 
         [Test]
         public void ChangePassword_MatchOldPass_ReturnSuccessfullyMessage()
@@ -90,7 +101,6 @@ namespace EB.Features.Main.Tests.Services
             // Assert
             Assert.AreEqual(AppResources.SystemErrorMessage, act.Message);
         }
-
 
         [Test]
         public void ChangePassword_Always_NewPassMustBeEncryted()

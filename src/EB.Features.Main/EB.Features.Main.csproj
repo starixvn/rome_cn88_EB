@@ -91,6 +91,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\CheckIPOfficeCommand.cs" />
     <Compile Include="Criteria\InternalLogin\GetDBTimeCriteria.cs" />
     <Compile Include="DataAccesses\InternalLoginDataAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />

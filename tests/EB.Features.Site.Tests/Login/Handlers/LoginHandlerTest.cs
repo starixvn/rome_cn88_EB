@@ -41,7 +41,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         {
             // Arrange
             var expectedError = "Incorrect user name";
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(expectedError);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(expectedError);
 
             // Act
             var act = handler.Handle(new LoginQuery());
@@ -54,7 +54,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Fail_ReturnEmptyUser()
         {
             // Arrange            
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
 
             // Act
             var act = handler.Handle(new LoginQuery());
@@ -69,7 +69,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         {
             // Arrange
             var expectedLanguageCode = "en-US";
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
 
             // Act
             var act = handler.Handle(new LoginQuery { HideLanguage = expectedLanguageCode });
@@ -82,7 +82,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Fail_NotCallGetUserInfo()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns("Incorrect user name");
 
             // Act
             handler.Handle(new LoginQuery());
@@ -96,7 +96,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_CallGetUserInfo()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User());
 
             // Act
@@ -111,7 +111,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_CallLoginOfSecurityService()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User());
 
             // Act
@@ -125,7 +125,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetUserIdToSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User { Id = 1 });
 
             // Act
@@ -139,7 +139,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetUserNameToSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User { Username = "razor" });
 
             // Act
@@ -153,7 +153,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetOnUserIdToSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User());
             securityService.Login(Arg.Any<LoginParameter>()).Returns(1);
 
@@ -168,7 +168,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetSessionIdToSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User());
 
             // Act
@@ -182,7 +182,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetLanguageToSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User());
 
             // Act
@@ -196,7 +196,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetUserNameToNapClientSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User { Username = "razor" });
 
             // Act
@@ -210,7 +210,7 @@ namespace EB.Features.Site.Tests.Login.Handlers
         public void ValidateLogin_Success_SetUserIdToNapClientSession()
         {
             // Arrange
-            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
+            authService.ValidateLogin(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>()).Returns(string.Empty);
             userInfoService.GetUserInfo(Arg.Any<string>()).Returns(new User { Id = 123 });
 
             // Act

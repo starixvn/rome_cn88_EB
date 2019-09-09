@@ -259,6 +259,33 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select all.
+        /// </summary>
+        public static string SelectAll {
+            get {
+                return ResourceManager.GetString("SelectAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected.
+        /// </summary>
+        public static string Selected {
+            get {
+                return ResourceManager.GetString("Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Sports.
+        /// </summary>
+        public static string SelectSport {
+            get {
+                return ResourceManager.GetString("SelectSport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settled.
         /// </summary>
         public static string Settled {
@@ -300,6 +327,15 @@ namespace EB.Features.Shared.Resources {
         public static string SystemErrorMessage {
             get {
                 return ResourceManager.GetString("SystemErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no Sport.
+        /// </summary>
+        public static string ThereIsNoSportGroup {
+            get {
+                return ResourceManager.GetString("ThereIsNoSportGroup", resourceCulture);
             }
         }
         

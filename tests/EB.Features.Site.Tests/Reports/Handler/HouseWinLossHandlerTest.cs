@@ -1,4 +1,5 @@
-﻿using EB.Features.Reports.Params;
+﻿using System.Collections.Generic;
+using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
@@ -57,24 +58,6 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             betTypeService.Received().GetBetTypeGroupsBySport();
         }
-
-
-        [Test]
-        public void Handle_Always_CallGetBetTypeGroupBySportId()
-        {
-            // Arrange
-            var query = new HouseWinLossQuery(currentSession)
-            {
-                UserSelectedSportGroupId = 1
-            };
-
-            // Act
-            hander.Handle(query);
-
-            // Assert
-            betTypeService.Received().GetBetTypeGroupsBySport(Arg.Is<int>(i => i == 1));
-        }
-
 
         [Test]
         public void Handle_Always_CallGetOfHouseWinLossService()

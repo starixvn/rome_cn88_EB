@@ -11,7 +11,7 @@
         {
             FromDate = param.FromDate;
             ToDate = param.ToDate;
-            SportTypeGroup = param.SportTypeGroup;
+            SportTypeGroups = param.SportTypeGroups;
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
@@ -30,7 +30,7 @@
 
         public DateTime ToDate { get; }
 
-        public int SportTypeGroup { get; }
+        public string SportTypeGroups { get; }
 
         public int BetTypeGroup { get; }
 
@@ -39,7 +39,7 @@
         public bool IsExcludedTest { get; }
 
         public override bool IsValid()
-            => SportTypeGroup >= 0 && BetTypeGroup >= 0 && IsLive >= 0 && FromDate <= ToDate;
+            => BetTypeGroup >= 0 && IsLive >= 0 && FromDate <= ToDate;
 
         public override string GetSettingKey()
             => "CS_Rpt_Winloss_Headline";

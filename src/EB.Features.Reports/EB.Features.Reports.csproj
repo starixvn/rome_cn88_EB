@@ -123,6 +123,7 @@
     <Compile Include="Criteria\SettledHouseWinLossCriteria.cs" />
     <Compile Include="Criteria\MatchWinLossCriteria.cs" />
     <Compile Include="Extension\EnumerableExtensions.cs" />
+    <Compile Include="Extension\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\HouseWinLossModel.cs" />
     <Compile Include="Model\MatchWinLossModel.cs" />

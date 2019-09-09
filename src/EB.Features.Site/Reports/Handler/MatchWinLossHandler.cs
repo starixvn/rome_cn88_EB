@@ -1,8 +1,10 @@
 ﻿namespace EB.Features.Site.Reports
 {
     using System.Linq;
+    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
+    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;
@@ -30,17 +32,17 @@
         public MatchWinLossReportViewModel Handle(MatchWinLossQuery message)
         {
             var sportGroups = sportGroupService.GetSportGroups();
-            var allBetTypes = betTypeService.GetBetTypeGroupsBySport(sportGroups.Select(i => i.Id));
-            var betTypes = message.UserSelectedSportGroupId == 0 ?
-                allBetTypes:
-                betTypeService.GetBetTypeGroupsBySport(message.UserSelectedSportGroupId);
+            var allBetTypes = betTypeService.GetBetTypeGroupsBySport();
+            message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
+
+            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds);
 
             var reportData = matchWinLossService.Get(new MatchWinLossParam
             {
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
-                SportTypeGroup = message.UserSelectedSportGroupId,
+                SportTypeGroups = message.UserSelectedSportGroupIds,
                 WinLossDate = message.Date
             });
 
@@ -48,7 +50,7 @@
                 reportData,
                 message,
                 reportDateService.GetBalanceUpDay(),
-                BuildSportGroupSelectListItems(sportGroups, message.UserSelectedSportGroupId),
+                BuildSportGroupSelectListItems(sportGroups, message.SelectedSportGroupIds),
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0));
         }

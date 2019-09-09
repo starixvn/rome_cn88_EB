@@ -1,32 +1,37 @@
 ﻿namespace EB.Features.Main.Services
 {
     using System.Linq;
+    using EB.Features.Main.Criteria.InternalLogin;
     using EB.Features.Main.Resources;
+    using Fanex.Data.Repository;
     using Fanex.NAP.Core.Configuration;
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Service.Interface;
 
     public interface IAuthService
     {
-        string ValidateLogin(string userName, string password);
+        string ValidateLogin(string userName, string password, string loginIp);
     }
 
     public class AuthService : IAuthService
     {
         private readonly IUserService userService;
         private readonly IGroupService groupService;
+        private readonly IDynamicRepository dynamiceRepository;
 
-
-        public AuthService(IUserService userService, IGroupService groupService)
+        public AuthService(IUserService userService, IGroupService groupService, IDynamicRepository dynamiceRepository)
         {
             this.groupService = groupService;
             this.userService = userService;
+            this.dynamiceRepository = dynamiceRepository;
         }
 
-        public string ValidateLogin(string userName, string password)
+        public string ValidateLogin(string userName, string password, string loginIp)
         {
             var message = string.Empty;
-            if (!string.IsNullOrEmpty(userName) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(userName) 
+                && !string.IsNullOrEmpty(password) 
+                && CheckIPOffice(userName, loginIp))
             {
                 var user = userService.Get(userName.Trim());
 
@@ -57,6 +62,14 @@
             }
 
             return message;
+        }
+
+        private bool CheckIPOffice(string userName, string ip)
+        {
+            var criteria = new CheckIPOfficeCommand(userName, ip);
+            dynamiceRepository.Execute(criteria);
+
+            return criteria.IsAccess;
         }
 
         private bool CheckUserSitePermission(User user)

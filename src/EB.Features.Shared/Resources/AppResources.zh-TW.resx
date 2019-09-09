@@ -210,4 +210,13 @@
   <data name="NoAuthorized" xml:space="preserve">
     <value>您沒有使用此功能的權限.</value>
   </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>全選</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>選定</value>
+  </data>
+  <data name="SelectSport" xml:space="preserve">
+    <value>選擇球類</value>
+  </data>
 </root>

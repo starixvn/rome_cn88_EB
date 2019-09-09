@@ -7,7 +7,7 @@
         public MatchWinLossFilterViewModel(
             DatePickerViewModel datePickerViewModel,
             bool isTest,
-            SingleSelectionViewModel sportGroupSelectionViewModel,
+            SportGroupMultiSelectionViewModel sportGroupMultiSelectionViewModel,
             SingleSelectionViewModel betTypeSelectionViewModel,
             SingleSelectionViewModel liveStatusSelectionViewModel,
             SingleSelectionViewModel allBetTypesSelectionViewModel = null)
@@ -15,7 +15,7 @@
             BetTypeSelectionViewModel = betTypeSelectionViewModel;
             LiveStatusSelectionViewModel = liveStatusSelectionViewModel;
             AllBetTypesSelectionViewModel = allBetTypesSelectionViewModel;
-            SportGroupSelectionViewModel = sportGroupSelectionViewModel;
+            SportGroupMultiSelectionViewModel = sportGroupMultiSelectionViewModel;
             DatePickerViewModel = datePickerViewModel;
             IsTest = isTest;
         }
@@ -26,7 +26,7 @@
 
         public SingleSelectionViewModel AllBetTypesSelectionViewModel { get; }
 
-        public SingleSelectionViewModel SportGroupSelectionViewModel { get; }
+        public SportGroupMultiSelectionViewModel SportGroupMultiSelectionViewModel { get; }
 
         public DatePickerViewModel DatePickerViewModel { get; }
 

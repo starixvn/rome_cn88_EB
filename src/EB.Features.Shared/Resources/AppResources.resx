@@ -210,4 +210,16 @@
   <data name="NoAuthorized" xml:space="preserve">
     <value>You are not authorized on this function.</value>
   </data>
+  <data name="SelectSport" xml:space="preserve">
+    <value>Select Sports</value>
+  </data>
+  <data name="Selected" xml:space="preserve">
+    <value>Selected</value>
+  </data>
+  <data name="ThereIsNoSportGroup" xml:space="preserve">
+    <value>There is no Sport</value>
+  </data>
+  <data name="SelectAll" xml:space="preserve">
+    <value>Select all</value>
+  </data>
 </root>

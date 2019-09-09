@@ -1,7 +1,9 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System.Linq;
     using EB.Features.Reports;
     using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
@@ -44,7 +46,7 @@
                 BetTypeGroup = message.UserSelectedBetTypeId,
                 IsExcludedTest = message.IsTest,
                 IsLive = message.UserSelectedLiveStatusId,
-                SportTypeGroup = message.UserSelectedSportGroupId,
+                SportTypeGroups = message.UserSelectedSportGroupIds,
                 WinLossDate = message.Date
             });
             var fileContent = workbook
@@ -110,10 +112,9 @@
             var date = $"{ReportResources.MatchWinLossReport} {ReportResources.Of} {query.Date.ToShortDate()}";
             var liveStatus = LiveStatusConstants.LiveStatuses[query.UserSelectedLiveStatusId];
             var betType = query.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(query.UserSelectedBetTypeId);
-            var sportGroup = sportGroupService.GetSportGroupById(query.UserSelectedSportGroupId);
-            var sportType = query.UserSelectedSportGroupId == 0 || sportGroup == null ? AppResources.AllSports : sportGroup.DisplayName;
+            var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), query.SelectedSportGroupIds);
 
-            return $"{date} - {sportType} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
+            return $"{date} - {sportGroup} - {betType} - {AppResources.ResourceManager.GetString(liveStatus)}";
         }
 
         internal string GetExcelFileName(MatchWinLossExcelQuery query)

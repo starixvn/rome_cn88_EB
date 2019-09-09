@@ -1,0 +1,23 @@
+﻿@using EB.Features.Shared.Resources
+@using EB.Features.Site.Shared.ViewModels.Components
+@helper Render(SportGroupMultiSelectionViewModel model)
+{
+    <div class="form-group">
+        <label>@AppResources.Sport</label>
+        <select id="dropdown-sportgroup"
+                data-has-any-sport="@model.SportGroups.Any()"
+                data-label-select-sport="@AppResources.SelectSport"
+                data-label-selected="@AppResources.Selected"
+                data-label-select-all="@AppResources.SelectAll"
+                data-label-all-sport="@AppResources.AllSports"
+                data-label-there-is-no-sport="@AppResources.ThereIsNoSportGroup"
+                data-language="@model.Language"
+                multiple="multiple" class="select-multiple">
+            @foreach (var item in model.SportGroups)
+            {
+                <option value="@item.Value" @(item.Selected ? " selected=\"selected\"" : string.Empty)>@item.Text</option>
+            }
+        </select>
+        <input type="hidden" name="UserSelectedSportGroupIds" id="sportgroup-ids" value="@model.UserSelectedSportGroupIds" />
+    </div>
+}

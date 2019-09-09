@@ -18,7 +18,7 @@
     public class SportGroupServiceImpl : ISportGroupService
     {
         private const string SportGroupsCacheKey = "EB.Features.Shared.Services.SportServiceImpl.SportGroups";
-        private const int CachedSecond = 30;
+        private const int CachedDay = 1;
 
         private readonly SportGroupDataAccess sportGroupDataAccess;
         private readonly ICacheRefService cacheRefService;
@@ -44,6 +44,6 @@
                     new GetSportGroupsCriteria(), 
                     cacheRefService.GetSportName, 
                     cacheRefService.GetSportNameByEnglish),
-                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedSecond)));
+                new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(CachedDay)));
     }
 }

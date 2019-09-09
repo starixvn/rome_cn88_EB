@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
+    using System.Web.Mvc;
     using EB.Features.Reports;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
@@ -23,12 +24,12 @@
         public HouseWinLossReportViewModel(
             HouseWinLossViewModel reportData,
             HouseWinLossQuery query,
-            IEnumerable<SelectListItemExt> sportGroups,
+            IEnumerable<SelectListItem> sportGroups,
             IEnumerable<SelectListItemExt> betTypes,
             IEnumerable<SelectListItemExt> allBetTypes,
             string languageCode)
         {
-            var sportGroupSelectionViewModel = new SingleSelectionViewModel(sportGroups, query.UserSelectedSportGroupId);
+            var sportGroupSelectionViewModel = new SportGroupMultiSelectionViewModel(sportGroups, query.UserSelectedSportGroupIds, query.CurrentSession.Language);
             var betTypeSelectionViewModel = new SingleSelectionViewModel(betTypes, query.UserSelectedBetTypeId);
             var allBetTypesSelectionViewModel = new SingleSelectionViewModel(allBetTypes, 0);
 

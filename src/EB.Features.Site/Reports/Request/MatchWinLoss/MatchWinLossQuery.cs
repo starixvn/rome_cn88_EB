@@ -1,6 +1,8 @@
 ﻿namespace EB.Features.Site.Reports.Request
 {
     using System;
+    using System.Collections.Generic;
+    using EB.Features.Reports.Extension;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.ViewModel;
@@ -18,7 +20,10 @@
             IsTest = true;
         }
 
-        public int UserSelectedSportGroupId { get; set; }
+        public IEnumerable<int> SelectedSportGroupIds
+            => UserSelectedSportGroupIds.ToListInt();
+
+        public string UserSelectedSportGroupIds { get; set; }
 
         public int UserSelectedBetTypeId { get; set; }
 

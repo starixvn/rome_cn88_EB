@@ -13,7 +13,7 @@ namespace EB.Features.Reports.Tests.Criteria
             // Arrange
             var criteria = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
             {
-                SportTypeGroup = 0,
+                SportTypeGroups = "0",
                 BetTypeGroup = 0,
                 IsLive = 0,
                 FromDate = DateTime.Now,
@@ -26,16 +26,14 @@ namespace EB.Features.Reports.Tests.Criteria
             // Assert
             Assert.IsTrue(act);
         }
-        [TestCase(-1, 1, 1, "1/1/2019", "1/1/2019")]
-        [TestCase(1, -1, 1, "1/1/2019", "1/1/2019")]
-        [TestCase(1, 1, -1, "1/1/2019", "1/1/2019")]
-        [TestCase(1, 1, 1, "2/2/2019", "1/1/2019")]
-        public void IsValid_InvalidInput_ReturnFalse(int sportTypeGroup, int betTypeGroup, int isLive, DateTime fromDate, DateTime toDate)
+        [TestCase(-1, 1, "1/1/2019", "1/1/2019")]
+        [TestCase(1, -1, "1/1/2019", "1/1/2019")]
+        [TestCase(1, 1, "2/2/2019", "1/1/2019")]
+        public void IsValid_InvalidInput_ReturnFalse(int betTypeGroup, int isLive, DateTime fromDate, DateTime toDate)
         {
             // Arrange
             var criteria = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
             {
-                SportTypeGroup = sportTypeGroup,
                 BetTypeGroup = betTypeGroup,
                 IsLive = isLive,
                 FromDate = fromDate,

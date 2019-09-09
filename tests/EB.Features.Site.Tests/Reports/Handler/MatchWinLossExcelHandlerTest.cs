@@ -9,6 +9,7 @@ using EB.Features.Reports.Services;
 using EB.Features.Reports.ViewModel;
 using EB.Features.Shared.Configuration;
 using EB.Features.Shared.Extensions;
+using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
@@ -356,5 +357,8 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             Assert.AreEqual(expectedFileName, act);
         }
+
+        private string GetSporGroupName(int id)
+            => "all";
     }
 }

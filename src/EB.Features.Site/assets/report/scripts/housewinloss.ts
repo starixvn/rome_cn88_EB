@@ -1,5 +1,6 @@
 ﻿"use strict";
 var betTypes: any = betTypes;
+var allBetTypeText: any = allBetTypeText;
 
 class HouseWinLossReport {
     $: JQueryStatic;
@@ -14,19 +15,20 @@ class HouseWinLossReport {
     $internalCustName: JQuery;
     $internalRoleId: JQuery;
 
-    sportGroupSelectionComponent: SingleSelectionDropdownComponent;
+    sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     ticketStatusSelectionComponent: SingleSelectionDropdownComponent;
+    $buttonSportGroup: JQuery;
 
     constructor($: JQueryStatic,
-        sportGroupSelectionComponent: SingleSelectionDropdownComponent,
+        sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         ticketStatusSelectionComponent: SingleSelectionDropdownComponent,
         toggleHandler: ToggleHandler) {
         this.$ = $;
-        this.sportGroupSelectionComponent = sportGroupSelectionComponent;
+        this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.ticketStatusSelectionComponent = ticketStatusSelectionComponent;
@@ -103,7 +105,7 @@ class HouseWinLossReport {
             this.$("#GroupBackToCurrent").css("display", "none");
             this.$('.from-date-box').css('display', 'inline-block');
             this.$('.js-month-group').css('display', 'none');
-        }       
+        }
     }
 
     initMonthlyCalendar = () => {
@@ -133,7 +135,7 @@ class HouseWinLossReport {
             this.$("#fromDate").val(this.$("#monPickr1").monPickr("getFromDate", "MM/dd/yyyy"));
             this.$("#toDate").val(this.$("#monPickr1").monPickr("getToDate", "MM/dd/yyyy"));
         } else {
-            this.$("#fromDate").val(this.$("#date").val()); 
+            this.$("#fromDate").val(this.$("#date").val());
             this.$("#toDate").val(this.$("#date").val());
         }
     }
@@ -142,8 +144,15 @@ class HouseWinLossReport {
         this.$exportExcelForm.submit();
     };
 
-    onReportSubmit = () => {
-        this.sportGroupSelectionComponent.updateSelectedValue();
+    onReportSubmit = (e: any) => {
+        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        if (sportGroups.length <= 0) {
+            this.$buttonSportGroup.addClass("error");
+            e.preventDefault();
+
+            return;
+        }
+
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
         this.ticketStatusSelectionComponent.updateSelectedValue();
@@ -151,42 +160,44 @@ class HouseWinLossReport {
         this.UpdateFromDateToDate();
     };
 
-    renderComponents(): void {
-        this.sportGroupSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-sportgroup", "UserSelectedSportGroupId", () => { this.onchangeSportType(); }));
+    renderComponents(): void {        
+        this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));
         this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
         this.ticketStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-ticketstatus", "UserSelectedTicketStatusId"));
+        this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
     }
 
-    onchangeSportType(): void {
-        let sportType = this.sportGroupSelectionComponent.$dropdown.val();
-        this.betTypeSelectionComponent.$dropdown.empty();
-        for (var i = 0; i < betTypes.length; i++) {
-            var betTypeGroup = betTypes[i];
-            if (betTypeGroup[0].SportTypeGroup == 0) {
-                this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup[0].Value + '>' + betTypeGroup[0].Text + '</option>');
+    onchangeSportGroup(): void {
+        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        if (this.betTypeSelectionComponent.$dropdown != null) {
+            this.betTypeSelectionComponent.$dropdown.empty();
+            this.betTypeSelectionComponent.$dropdown.append('<option value = 0>' + allBetTypeText + '</option>');
 
-                if (sportType == 0)
-                    break;
-            }
+            const exists = [];
+            for (const betType of betTypes) {
+                if (sportGroups.indexOf(betType.SportTypeGroup.toString()) != -1) {
+                    var key = betType.Value;
 
-            if (betTypeGroup[0].SportTypeGroup == sportType) {
-                for (var j = 0; j < betTypeGroup.length; j++) {
-                    this.betTypeSelectionComponent.$dropdown.append('<option value=' + betTypeGroup[j].Value + '>' + betTypeGroup[j].Text + '</option>');
+                    if (exists[key]) {
+                        continue;
+                    }
+
+                    exists[key] = true;
+                    this.betTypeSelectionComponent.$dropdown.append(`<option value="${betType.Value}">${betType.Text}</option>`);
                 }
-
-                break;
             }
-        }
 
-        this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
-        this.betTypeSelectionComponent.$dropdown.multiselect({
-            multiple: false,
-            maxHeight: 300,
-            numberDisplayed: 1,
-            includeSelectAllOption: false
-        });
+            this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
+            this.betTypeSelectionComponent.$dropdown.multiselect({
+                multiple: false,
+                maxHeight: 300,
+                numberDisplayed: 1,
+                includeSelectAllOption: false
+            });
+        }
     };
+
     internalLogin = (options) => {
         this.$internalCustId.val(options.custId);
         this.$internalLanguageKey.val(options.languageKey);
@@ -199,7 +210,7 @@ class HouseWinLossReport {
 $(function () {
     const houseWinLossReport = new HouseWinLossReport(
         $,
-        new SingleSelectionDropdownComponent($),
+        new SportGroupMultiSelectionComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),

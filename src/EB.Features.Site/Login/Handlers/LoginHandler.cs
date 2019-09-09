@@ -40,7 +40,7 @@
 
         public LoginViewModel Handle(LoginQuery message)
         {
-            var errorMessage = service.ValidateLogin(message.UserName, message.Password);
+            var errorMessage = service.ValidateLogin(message.UserName, message.Password, userSession.Ip);
             var userInfo = new User();
             if(string.IsNullOrEmpty(errorMessage))
             {

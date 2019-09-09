@@ -139,7 +139,7 @@
     <value>所有盘口类型</value>
   </data>
   <data name="AllSports" xml:space="preserve">
-    <value>所有球类</value>
+    <value>全部</value>
   </data>
   <data name="ExportToExcel" xml:space="preserve">
     <value>导出Excel</value>

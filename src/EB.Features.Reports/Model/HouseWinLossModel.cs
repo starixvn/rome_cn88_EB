@@ -47,7 +47,18 @@ namespace EB.Features.Reports.Model
 
         public decimal Rebate { get; internal set; }
 
-        public decimal HeadlineResultNet => HeadlineResult + RebateRoundDown;
+        public decimal HeadlineResultNet
+        {
+            get
+            {
+                return HeadlineResult + RebateRoundDown;
+            }
+
+            internal set
+            {
+
+            }
+        }
 
         public decimal HeadlineStock { get; internal set; }
 
@@ -67,6 +78,7 @@ namespace EB.Features.Reports.Model
         public static HouseWinLossModel operator +(HouseWinLossModel model1, HouseWinLossModel model2)
             => new HouseWinLossModel
             {
+                HeadlineResultNet = model1.HeadlineResultNet + model2.HeadlineResultNet,
                 Wagers = model1.Wagers + model2.Wagers,
                 Stake = model1.Stake + model2.Stake,
                 ValidStake = model1.ValidStake + model2.ValidStake,
@@ -88,7 +100,8 @@ namespace EB.Features.Reports.Model
                 SuperResult = model1.SuperResult + model2.SuperResult,
                 SuperStock = model1.SuperStock + model2.SuperStock,
                 HeadlineIncome = model1.HeadlineIncome + model2.HeadlineIncome,
-                Rebate = model1.Rebate + model1.Rebate
+                Rebate = model1.Rebate + model2.Rebate,
+                RebateRoundDown = model1.RebateRoundDown + model2.RebateRoundDown
             };
     }
 }

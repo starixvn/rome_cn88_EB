@@ -27,6 +27,7 @@
             => UserSelectedSportGroupIds.ToListInt();
 
         public string UserSelectedSportGroupIds { get; set; }
+
         public int CustId { get; set; }
 
         public byte RoleId { get; set; }

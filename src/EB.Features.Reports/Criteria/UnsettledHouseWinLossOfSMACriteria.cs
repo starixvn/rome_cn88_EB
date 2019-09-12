@@ -10,6 +10,7 @@
     {
         public UnsettledHouseWinLossOfSMACriteria(HouseWinLossParam param)
         {
+            CustId = param.CustId;
             Role = param.Role;
             FromDate = param.FromDate;
             ToDate = param.ToDate;

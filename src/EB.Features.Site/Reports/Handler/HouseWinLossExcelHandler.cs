@@ -58,10 +58,11 @@
             });
 
             var fileContent = workbook
-                .SetData(reportData.Matches, reportData.Total)
+                .SetData(reportData.Matches, reportData.Total, message.Role.IsSuperLevel())
                 .SetRowMappers(
                     GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.NormalRow),
-                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.GrandTotal))
+                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.GrandTotal),
+                    GetFooterRowMapper())
                 .UseTemplate(GetTemplateInfo(message.Role))
                 .Sheet("ReportData")
                 .Title(GetReportTitle(message))
@@ -173,8 +174,7 @@
                 .Map(H, betTypeWinLoss => betTypeWinLoss.MasterResult / AppSettings.ReduceNumber)
                 .Map(I, betTypeWinLoss => betTypeWinLoss.Super / AppSettings.ReduceNumber)
                 .Map(J, betTypeWinLoss => betTypeWinLoss.SuperResult / AppSettings.ReduceNumber)
-                .Map(L, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber)
-                .Map(M, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.SuperStock / totalStock * 100));
+                .Map(L, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber);
 
             return mapper;
         }
@@ -223,6 +223,15 @@
                 .Map(D, betTypeWinLoss => betTypeWinLoss.ValidStake / AppSettings.ReduceNumber)
                 .Map(E, betTypeWinLoss => betTypeWinLoss.MemberIncome / AppSettings.ReduceNumber)
                 .Map(F, betTypeWinLoss => betTypeWinLoss.AgentResult / AppSettings.ReduceNumber);
+
+            return mapper;
+        }
+
+        internal static Mapper<HouseWinLossModel> GetFooterRowMapper()
+        {
+            var mapper = new Mapper<HouseWinLossModel>();
+            mapper.Map(Q, data => ReportResources.ProfitMargin);
+            mapper.Map(R, data => data.SuperStock != 0 ? data.SuperResult / data.SuperStock : 0);
 
             return mapper;
         }

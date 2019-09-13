@@ -66,6 +66,7 @@
         @Html.Hidden("UserSelectedLiveStatusId", Model.Query.UserSelectedLiveStatusId)
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
         @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
+        @Html.Hidden("CustId", Model.Query.CustId)
     </form>
 
     @if (Model.Query.Role.IsHeadline())

@@ -142,6 +142,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to - You can compare the accurate data by viewing the current Wager report..
+        /// </summary>
+        public static string CompareAccuratedDataLegend {
+            get {
+                return ResourceManager.GetString("CompareAccuratedDataLegend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string Date {
@@ -291,6 +300,15 @@ namespace EB.Features.Reports {
         public static string HouseWL {
             get {
                 return ResourceManager.GetString("HouseWL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - Data may be inaccurate if there have resettled tickets..
+        /// </summary>
+        public static string InaccurateDataLegend {
+            get {
+                return ResourceManager.GetString("InaccurateDataLegend", resourceCulture);
             }
         }
         

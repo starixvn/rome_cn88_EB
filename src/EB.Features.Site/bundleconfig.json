@@ -123,7 +123,13 @@
       "assets/report/components/sport-group-multiselection.js",
       "assets/report/scripts/housewinloss.js"
     ]
-  }, ////////////////SUB ACCOUNT
+  },
+  {
+    "outputFileName": "assets/report/bundles/legend.css",
+    "inputFiles": [
+      "assets/report/styles/legend.css"
+    ]
+  },////////////////SUB ACCOUNT
   {
     "outputFileName": "AccountManagement/bundles/subaccount.js",
     "inputFiles": [

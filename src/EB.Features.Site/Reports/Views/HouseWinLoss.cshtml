@@ -27,7 +27,7 @@
         </div>
         @SportGroupMultiSelection.Render(Model.ReportFilterViewModel.SportGroupMultiSelectionViewModel)
         <div id="dateRangeContainer" style="display:none">
-             @DateRangePicker.Render(Model.ReportFilterViewModel.DateRangePickerViewModel)
+            @DateRangePicker.Render(Model.ReportFilterViewModel.DateRangePickerViewModel)
         </div>
         @RenderDatePicker()
         @BetTypeSelection.Render(Model.ReportFilterViewModel.BetTypeSelectionViewModel, true)
@@ -43,12 +43,24 @@
         </div>
         <div class="form-group note">
             <div id="GroupViewHistory" class="">
-                <div>@ReportResources.NoteViewHistory <span id="ViewHistoryReport" class="history"><span class="txt-history">@ReportResources.ViewHistoryReport</span></span></div>
+                <div>
+                    @ReportResources.NoteViewHistory
+                    <span id="ViewHistoryReport" class="history">
+                        <span class="txt-history">@ReportResources.ViewHistoryReport</span>
+                    </span>
+                </div>
             </div>
             <div id="GroupBackToCurrent" class="" style="display: none">
-                <div>@HouseWinLossReportViewModel.NoteMaxDateDescription <span id="BackToCurrentReport" class="history"><span class="txt-history">@ReportResources.BackToCurrentReport</span></span></div>
+                <div>
+                    @HouseWinLossReportViewModel.NoteMaxDateDescription
+                    <span id="BackToCurrentReport" class="history">
+                        <span class="txt-history">@ReportResources.BackToCurrentReport</span>
+                    </span>
+                    <span id="icon-information" class="icon-info"></span>
+                </div>
             </div>
         </div>
+        @Html.Hidden("LoadLegendURL", Url.Action("LegendHouseWinLoss", "Reports"))
         <input type="hidden" name="FromDate" id="fromDate" />
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />

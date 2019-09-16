@@ -21,7 +21,11 @@ class HouseWinLossReport {
     $custLevelId: JQuery;
     $tableReport: JQuery;
 
+    $loadLegendURL: JQuery;
+    topWindow: JQuery;
+
     constructor($: JQueryStatic,
+        topWindow: any,
         dateRangePickerComponent: DateRangePickerComponent,
         sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
         viewerSelectionComponent: SingleSelectionDropdownComponent,
@@ -33,6 +37,7 @@ class HouseWinLossReport {
         linkBuilderComponent: LinkBuilderComponent,
         datePickerComponent: DatePickerComponent) {
         this.$ = $;
+        this.topWindow = topWindow;
         this.dateRangePickerComponent = dateRangePickerComponent;
         this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
@@ -59,6 +64,8 @@ class HouseWinLossReport {
         this.$dateRangeContainer = this.$("#dateRangeContainer");
 
         this.$tableReport = this.$("#tbl-report");
+
+        this.$loadLegendURL = this.$("#LoadLegendURL");        
     }
 
     public registerEvents() {
@@ -77,9 +84,21 @@ class HouseWinLossReport {
             this.$("#tab-main-content").remove();
             this.switchCalendarType();
         });
+        this.$("#icon-information").on("click", this.showLegend);
         this.switchCalendarType();
         var this$ = this.$;
     }
+
+    showLegend = () => {
+        this.topWindow.popupManager.init(this.$, top);
+        this.topWindow.popupManager.open({
+            title: "",
+            url: this.$loadLegendURL.val(),
+            top: 300,
+            width: 600,
+            height: 100
+        });
+    };
 
     switchCalendarType = () => {
         if (this.$("#IsHistoricReport").val() == "True") {
@@ -189,6 +208,7 @@ $(function () {
     const linkBuilderComponent = new LinkBuilderComponent($);
     const houseWinLossReport = new HouseWinLossReport(
         $,
+        window.top,
         new DateRangePickerComponent($),
         new SportGroupMultiSelectionComponent($),
         new SingleSelectionDropdownComponent($),

@@ -715,6 +715,10 @@
     <Content Include="assets\report\bundles\housewinloss.min.js">
       <DependentUpon>housewinloss.js</DependentUpon>
     </Content>
+    <Content Include="assets\report\bundles\legend.css" />
+    <Content Include="assets\report\bundles\legend.min.css">
+      <DependentUpon>legend.css</DependentUpon>
+    </Content>
     <Content Include="assets\report\bundles\matchwinloss.js" />
     <Content Include="assets\report\bundles\matchwinloss.min.js">
       <DependentUpon>matchwinloss.js</DependentUpon>
@@ -734,6 +738,12 @@
     <Content Include="assets\report\libs\monthPicker\images\spindown-open.png" />
     <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.css" />
     <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.js" />
+    <Content Include="assets\report\styles\legend.css">
+      <DependentUpon>legend.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\legend.min.css">
+      <DependentUpon>legend.css</DependentUpon>
+    </Content>
     <Content Include="assets\report\styles\reports.css">
       <DependentUpon>reports.scss</DependentUpon>
     </Content>
@@ -870,6 +880,7 @@
     <Compile Include="Reports\ReportsBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\ReportLegendQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossQuery.cs" />
@@ -1248,6 +1259,7 @@
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Master.xls" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Agent.xls" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Member.xls" />
+    <Content Include="assets\report\styles\legend.scss" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
@@ -1281,6 +1293,7 @@
     <Content Include="Reports\Views\HouseWinLoss\MasterTable.cshtml" />
     <Content Include="Reports\Views\HouseWinLoss\AgentTable.cshtml" />
     <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
+    <Content Include="Reports\Views\ReportLegend.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

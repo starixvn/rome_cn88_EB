@@ -318,4 +318,10 @@
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="InaccurateDataLegend" xml:space="preserve">
+    <value>- Data may be inaccurate if there have resettled tickets.</value>
+  </data>
+  <data name="CompareAccuratedDataLegend" xml:space="preserve">
+    <value>- You can compare the accurate data by viewing the current Wager report.</value>
+  </data>
 </root>

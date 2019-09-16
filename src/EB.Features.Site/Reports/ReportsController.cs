@@ -28,6 +28,9 @@
         public async Task<ActionResult> ExportHouseWinLoss(HouseWinLossExcelQuery query)
             => await ExcelView(query);
 
+        public async Task<ActionResult> LegendHouseWinLoss(ReportLegendQuery query)
+            => await ViewAsync(query, $"{ViewsPath}/ReportLegend.cshtml");
+
         [NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> MatchWinLoss(MatchWinLossQuery query)
             => await ViewAsync(query, $"{ViewsPath}/MatchWinLoss.cshtml");

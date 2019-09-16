@@ -216,4 +216,7 @@
   <data name="SelectSport" xml:space="preserve">
     <value>选择球类</value>
   </data>
+  <data name="SMA" xml:space="preserve">
+    <value>股东</value>
+  </data>
 </root>

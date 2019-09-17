@@ -130,19 +130,19 @@
 
         private IEnumerable<CustInfo> GetBreadcrumbLevel()
         {
-            var breadcrumbLevel = new List<CustInfo>();
+            var breadcrumb = new List<CustInfo>();
 
             foreach (var custInfo in Query.BreadcrumbLevel)
             {
                 if (custInfo.RoleId == Query.RoleId)
                 {
-                    break;
+                    return breadcrumb;
                 }
 
-                breadcrumbLevel.Add(custInfo);
+                breadcrumb.Add(custInfo);
             }
 
-            return breadcrumbLevel;
+            return breadcrumb;
         }
     }
 }

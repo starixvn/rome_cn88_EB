@@ -47,6 +47,7 @@ namespace EB.Features.Reports.Model
 
         public decimal Rebate { get; internal set; }
 
+
         public decimal HeadlineResultNet
         {
             get
@@ -56,7 +57,7 @@ namespace EB.Features.Reports.Model
 
             internal set
             {
-
+                
             }
         }
 

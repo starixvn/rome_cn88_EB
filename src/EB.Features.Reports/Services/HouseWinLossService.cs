@@ -36,7 +36,7 @@
             param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
             param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;
 
-            var reportData = Enumerable.Empty<HouseWinLossModel>();
+            IEnumerable<HouseWinLossModel> reportData;
             if (param.Role.IsHeadline())
             {
                 reportData = IsSettled(param) ?

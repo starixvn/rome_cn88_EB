@@ -59,7 +59,7 @@
             return templateFolderName;
         }
 
-        protected internal string GetValidSportGroupNames(IEnumerable<SportGroup> allSports, IEnumerable<int> sportGroupIds)
+        protected static internal string GetValidSportGroupNames(IEnumerable<SportGroup> allSports, IEnumerable<int> sportGroupIds)
         {
             if (sportGroupIds == null || !sportGroupIds.Any())
             {

@@ -135,7 +135,7 @@ class HouseWinLossReport {
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");
             e.preventDefault();
-
+            this.$.unblockUI();
             return;
         }
 

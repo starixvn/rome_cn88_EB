@@ -39,7 +39,7 @@
             return items;
         }
 
-        protected internal string GetValidSportGroupIds(IEnumerable<int> allSportIds, string sportGroupIds)
+        protected internal static string GetValidSportGroupIds(IEnumerable<int> allSportIds, string sportGroupIds)
         {
             if (string.IsNullOrEmpty(sportGroupIds))
             {

@@ -64,11 +64,11 @@
         <input type="hidden" name="FromDate" id="fromDate" />
         <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />
-        <input type="hidden" name="RoleId" id="RoleId" value="@(Model.Query.UserSelectedViewer == ViewerConstants.Headline?UserLevel.Headline.Value:UserLevel.Super.Value)" />
+        <input type="hidden" name="RoleId" id="RoleId" value="@Model.Query.RoleId" />
     </form>
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
         @Html.Hidden("UserSelectedViewer", Model.Query.UserSelectedViewer)
-        @Html.Hidden("RoleId", Model.Query.UserSelectedViewer == ViewerConstants.Headline ? UserLevel.Headline.Value : UserLevel.Super.Value)
+        @Html.Hidden("RoleId", Model.Query.RoleId)
         @Html.Hidden("Date", Model.Query.Date)
         @Html.Hidden("FromDate", Model.Query.FromDate)
         @Html.Hidden("ToDate", Model.Query.ToDate)

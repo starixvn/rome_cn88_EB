@@ -1,11 +1,11 @@
 ﻿namespace EB.Features.Site.Login.Handlers
 {
     using System;
-    using System.Web;
+    using EB.Features.Main.Resources;
     using EB.Features.Main.Services;
     using EB.Features.Site.Login.Requests;
     using EB.Features.Site.Shared.Models;
-    using Fanex.NAP.Core.Configuration;
+    using Fanex.Common;
     using Fanex.NAP.Core.Models;
     using Fanex.NAP.Core.Models.ParameterObject;
     using Fanex.NAP.Core.Service.Interface;
@@ -13,8 +13,12 @@
     using Fanex.NAP.Core.Web.Session;
     using MediatR;
 
-    public class LoginHandler : IRequestHandler<LoginQuery, LoginViewModel>
+    public class LoginHandler :
+        IRequestHandler<LoginQuery, LoginViewModel>,
+        IRequestHandler<SSOQuery, LoginViewModel>
     {
+        private const int SSOExpiredTimeInSeconds = 30;
+
         private readonly IAuthService service;
         private readonly IUserInfoService userInfoService;
         private readonly ICurrentContext napClientContext;
@@ -60,18 +64,78 @@
 
                 var onUserId = securityService.Login(loginParameter);
 
-                userSession.UserId = userInfo.Id;
-                userSession.UserName = userInfo.Username;
-                userSession.OnUserId = onUserId;
-                userSession.SessionId = loginParameter.NetSessionId;
-                userSession.Language = message.HideLanguage;
-
-                napClientSession.Username = userInfo.Username;
-                napClientSession.UserId = userInfo.Id;
+                AssignUserSession(userInfo, onUserId, message.SessionId, message.HideLanguage);
             }
             
             return new LoginViewModel(errorMessage, userInfo, message.HideLanguage);
         }
 
+        public LoginViewModel Handle(SSOQuery message)
+        {
+            if (ValidateSSOTime(message.Time))
+            {
+                var userId = Convert.ToInt32(Decrypt(message.UserId));
+                var onUserId = SSOLogin(userId, message);
+
+                if (onUserId > 0)
+                {
+                    var user = userInfoService.GetUserInfo(userId);
+
+                    if (user != null && service.CheckUserSitePermission(user))
+                    {
+                        AssignUserSession(user, onUserId, message.SessionId, message.Language);
+
+                        return new LoginViewModel(string.Empty, user, message.Language);
+                    }
+                }
+            }
+
+            return new LoginViewModel(MainResource.You_have_no_authorization, new User(), message.Language);
+        }
+
+        private bool ValidateSSOTime(string time)
+        {
+            var currentTime = Convert.ToDateTime(securityService.GetTime());
+            var ssoTime = Convert.ToDateTime(Decrypt(time));
+            var expiration = currentTime - ssoTime;
+
+            return expiration.TotalSeconds <= SSOExpiredTimeInSeconds;
+        }
+
+        private int SSOLogin(int userId, SSOQuery message)
+        {
+            var onlineUserId = Convert.ToInt32(Decrypt(message.OnUserId));
+            var loginParam = new SSOLoginParameter
+            {
+                UserId = userId,
+                SiteId = message.SiteId,
+                CheckOnUserId = Convert.ToInt32(onlineUserId),
+                OnUserId = 0,
+                IP = napClientContext.IP,
+                NetSessionId = message.SessionId,
+                LoginDate = DateTime.Now,
+                BrowserName = napClientContext.BrowserName,
+                CountryCode = napClientContext.CountryCode,
+                Domain = napClientContext.DomainName,
+                Platform = napClientContext.Platform
+            };
+
+            return securityService.SSOLogin(loginParam);
+        }
+
+        private void AssignUserSession(User user, int onUserId, string sessionId, string language)
+        {
+            napClientSession.UserId = user.Id;
+            napClientSession.Username = user.Username;
+
+            userSession.UserId = user.Id;
+            userSession.UserName = user.Username;
+            userSession.OnUserId = onUserId;
+            userSession.SessionId = sessionId;
+            userSession.Language = language;
+        }
+
+        private static string Decrypt(string text)
+            => Cryptography.CfsDeCrypt(text.Replace(" ", "+"));
     }
 }

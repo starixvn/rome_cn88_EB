@@ -1,4 +1,5 @@
-﻿using EB.Features.Main.Services;
+﻿using EB.Features.Main.Resources;
+using EB.Features.Main.Services;
 using EB.Features.Site.Login.Handlers;
 using EB.Features.Site.Login.Requests;
 using EB.Features.Site.Shared.Models;
@@ -34,7 +35,6 @@ namespace EB.Features.Site.Tests.Login.Handlers
 
             handler = new LoginHandler(authService, userInfoService, securityService, napClientContext, napClientSession, userSession);
         }
-
 
         [Test]
         public void ValidateLogin_Fail_ReturnErrorMessage()
@@ -91,7 +91,6 @@ namespace EB.Features.Site.Tests.Login.Handlers
             userInfoService.DidNotReceive().GetUserInfo(Arg.Any<string>());
         }
 
-
         [Test]
         public void ValidateLogin_Success_CallGetUserInfo()
         {
@@ -105,7 +104,6 @@ namespace EB.Features.Site.Tests.Login.Handlers
             // Assert
             userInfoService.Received().GetUserInfo(Arg.Any<string>());
         }
-
 
         [Test]
         public void ValidateLogin_Success_CallLoginOfSecurityService()
@@ -218,6 +216,219 @@ namespace EB.Features.Site.Tests.Login.Handlers
 
             // Assert
             napClientSession.Received().UserId = 123;
+        }
+
+        [Test]
+        public void ValidateSSOTime_Fail_ReturnsNoAuthoriazionMessage()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx"
+            };
+
+            securityService.GetTime().Returns("8/29/2019 2:06:33");
+
+            // Act
+            var vm = handler.Handle(message);
+
+            // Assert
+            Assert.AreEqual(MainResource.You_have_no_authorization, vm.ErrorMessage);
+        }
+
+        [Test]
+        public void ValidateSSOTime_Success_CallsSSOLogin()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            // Act
+            handler.Handle(message);
+
+            // Assert
+            securityService.Received().SSOLogin(Arg.Any<SSOLoginParameter>());
+        }
+
+        [Test]
+        public void SSOLogin_Fail_ReturnsNoAuthoriazionMessage()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            securityService.SSOLogin(Arg.Any<SSOLoginParameter>()).Returns(0);
+
+            // Act
+            var vm = handler.Handle(message);
+
+            // Assert
+            Assert.AreEqual(MainResource.You_have_no_authorization, vm.ErrorMessage);
+        }
+
+        [Test]
+        public void SSOLogin_Success_CallsGetUserInfo()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            securityService.SSOLogin(Arg.Any<SSOLoginParameter>()).Returns(149882);
+
+            // Act
+            handler.Handle(message);
+
+            // Assert
+            userInfoService.Received().GetUserInfo(Arg.Is<int>(i => i == 38123688));
+        }
+
+        [Test]
+        public void GetUserInfo_UserIsNull_ReturnsNoAuthoriazionMessage()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            securityService.SSOLogin(Arg.Any<SSOLoginParameter>()).Returns(149882);
+
+            User user = null;
+            userInfoService.GetUserInfo(38123688).Returns(user);
+
+            // Act
+            var vm = handler.Handle(message);
+
+            // Assert
+            Assert.AreEqual(MainResource.You_have_no_authorization, vm.ErrorMessage);
+        }
+
+        [Test]
+        public void GetUserInfo_DontHaveMenus_ReturnsNoAuthoriazionMessage()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            securityService.SSOLogin(Arg.Any<SSOLoginParameter>()).Returns(149882);
+
+            User user = new User();
+            userInfoService.GetUserInfo(38123688).Returns(user);
+            authService.CheckUserSitePermission(user).Returns(false);
+
+            // Act
+            var vm = handler.Handle(message);
+
+            // Assert
+            Assert.AreEqual(MainResource.You_have_no_authorization, vm.ErrorMessage);
+        }
+
+        [Test]
+        public void GetUserInfo_Success_ReturnsCorrectViewModel()
+        {
+            // Arrange
+            var message = new SSOQuery
+            {
+                UserId = "GbxI81VVtCZCnZCORy414g==",
+                OnUserId = "A9Ut41LUDzQ=",
+                Time = "uxF3G7phU5cYyNad9MFWd2KjIdTPHbLx",
+                RedirectUrl = "~/SubAccount/Index",
+                SessionId = "5jkkuqkbs0mrz3ed0xy2qji1",
+                SiteId = 105
+            };
+
+            securityService.GetTime().Returns("8/28/2019 23:33:16 PM");
+
+            napClientContext.IP.Returns("10.21.10.52");
+            napClientContext.BrowserName.Returns("Chrome/76.0");
+            napClientContext.CountryCode.Returns("244");
+            napClientContext.DomainName.Returns("localhost");
+            napClientContext.Platform.Returns("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.87 Safari/537.36");
+
+            securityService.SSOLogin(Arg.Any<SSOLoginParameter>()).Returns(149882);
+
+            User user = new User { Id = 38123688, Name = "kanrome" };
+            userInfoService.GetUserInfo(38123688).Returns(user);
+            authService.CheckUserSitePermission(user).Returns(true);
+
+            // Act
+            var vm = handler.Handle(message);
+
+            // Assert
+            Assert.AreEqual(string.Empty, vm.ErrorMessage);
         }
     }
 }

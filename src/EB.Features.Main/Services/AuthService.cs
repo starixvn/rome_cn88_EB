@@ -11,6 +11,8 @@
     public interface IAuthService
     {
         string ValidateLogin(string userName, string password, string loginIp);
+
+        bool CheckUserSitePermission(User user);
     }
 
     public class AuthService : IAuthService
@@ -72,7 +74,7 @@
             return criteria.IsAccess;
         }
 
-        private bool CheckUserSitePermission(User user)
+        public bool CheckUserSitePermission(User user)
         {
             var group = user.Group == null ? null : groupService.Get(user.Group.Id);
             var siteLevelList = userService.GetSiteLevel(user.Id, NapSettings.Settings.Environment);

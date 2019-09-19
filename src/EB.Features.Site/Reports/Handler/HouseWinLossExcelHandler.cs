@@ -251,7 +251,7 @@
 
         internal string GetReportTitle(HouseWinLossExcelQuery param)
         {
-            var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.FromDate.ToShortDate()}";
+            var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}";
             if (param.IsHistoricReport)
             {
                 title = $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";

@@ -138,7 +138,13 @@ class HouseWinLossReport {
             this.$.unblockUI();
             return;
         }
-
+        var viewerId = this.viewerSelectionComponent.getSelectedItem();
+        if (viewerId === "0") {
+            this.$("#RoleId").val("0"); //Headline
+        } else {
+            this.$("#RoleId").val("4"); //SMA
+        }
+        
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
         this.ticketStatusSelectionComponent.updateSelectedValue();        

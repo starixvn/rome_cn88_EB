@@ -31,7 +31,6 @@
 
         public HouseWinLossViewModel Get(HouseWinLossParam param)
         {
-            param.ArchiveDate = reportDateService.GetArchiveDate();
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
             param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
             param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;

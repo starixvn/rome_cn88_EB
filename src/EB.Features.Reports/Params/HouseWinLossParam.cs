@@ -29,8 +29,6 @@
 
         public bool IsExcludedTest { get; set; }
 
-        public DateTime ArchiveDate { get; set; }
-
         public DateTime MoveBetsDay { get; set; }
     }
 }

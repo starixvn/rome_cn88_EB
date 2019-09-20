@@ -29,26 +29,6 @@ namespace EB.Features.Reports.Tests.Services
             reportService = new HouseWinLossService(dynamicRepository, reportDateService);
         }
 
-
-        [Test]
-        public void Get_Always_SetArchiveDate()
-        {
-            // Arrange
-            var expectedArchiveDate = DateTime.Now;
-            reportDateService.GetArchiveDate().Returns(expectedArchiveDate);
-            var param = new HouseWinLossParam
-            {
-                ArchiveDate = DateTime.MinValue,
-                Role = UserLevel.Headline
-            };
-
-            // Act
-            reportService.Get(param);
-
-            // Assert
-            Assert.AreEqual(expectedArchiveDate, param.ArchiveDate);
-        }
-
         [Test]
         public void Get_Always_SetMoveBetsDay()
         {

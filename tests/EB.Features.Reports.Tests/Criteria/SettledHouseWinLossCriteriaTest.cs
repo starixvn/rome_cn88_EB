@@ -48,24 +48,6 @@ namespace EB.Features.Reports.Tests.Criteria
             Assert.IsFalse(act);
         }
 
-
-        [Test]
-        public void ArchiveDate_Always_SetInConstructor()
-        {
-            // Arrange
-            var expectedArchiveDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
-            {
-                ArchiveDate = expectedArchiveDate
-            });
-
-            // Act
-            var act = criteia.ArchiveDate;
-
-            // Assert
-            Assert.AreEqual(expectedArchiveDate, act);
-        }
-
         [Test]
         public void MoveBetsDay_Always_SetInConstructor()
         {

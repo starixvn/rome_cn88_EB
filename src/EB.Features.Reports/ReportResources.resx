@@ -130,10 +130,10 @@
     <value>Headline</value>
   </data>
   <data name="HeadlineStock" xml:space="preserve">
-    <value>Headline Stock</value>
+    <value>HL Stock</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
-    <value>Headline Stock %</value>
+    <value>HL Stock %</value>
   </data>
   <data name="HouseComm" xml:space="preserve">
     <value>House Comm</value>
@@ -256,7 +256,7 @@
     <value>House TO</value>
   </data>
   <data name="HeadlineResult" xml:space="preserve">
-    <value>Headline Result</value>
+    <value>HL Result</value>
   </data>
   <data name="SMAUserName" xml:space="preserve">
     <value>SMA Username</value>
@@ -301,7 +301,7 @@
     <value>Rebate Round Down</value>
   </data>
   <data name="HeadlineResultNet" xml:space="preserve">
-    <value>Headline Result (Net)</value>
+    <value>HL Result (Net)</value>
   </data>
   <data name="ProfitMargin" xml:space="preserve">
     <value>Profit Margin</value>
@@ -310,7 +310,7 @@
     <value>Total Rebate +/- 10% of SMA Round Down</value>
   </data>
   <data name="HeadlineIncome" xml:space="preserve">
-    <value>Headline Income</value>
+    <value>HL Income</value>
   </data>
   <data name="RebateRoundDown10" xml:space="preserve">
     <value>Rebate(+/-) 10%</value>

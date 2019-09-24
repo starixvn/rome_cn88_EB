@@ -214,7 +214,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline Income.
+        ///   Looks up a localized string similar to HL Income.
         /// </summary>
         public static string HeadlineIncome {
             get {
@@ -223,7 +223,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline Result.
+        ///   Looks up a localized string similar to HL Result.
         /// </summary>
         public static string HeadlineResult {
             get {
@@ -232,7 +232,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline Result (Net).
+        ///   Looks up a localized string similar to HL Result (Net).
         /// </summary>
         public static string HeadlineResultNet {
             get {
@@ -241,7 +241,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline Stock.
+        ///   Looks up a localized string similar to HL Stock.
         /// </summary>
         public static string HeadlineStock {
             get {
@@ -250,7 +250,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Headline Stock %.
+        ///   Looks up a localized string similar to HL Stock %.
         /// </summary>
         public static string HeadlineStockPercent {
             get {

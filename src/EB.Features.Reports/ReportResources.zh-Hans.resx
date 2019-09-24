@@ -310,12 +310,15 @@
     <value>总监结果(纯利)</value>
   </data>
   <data name="RebateRoundDown10" xml:space="preserve">
-    <value>返水(+/-)10%</value>
+    <value>返水(正负10%)</value>
   </data>
   <data name="InaccurateDataLegend" xml:space="preserve">
     <value>数据准确性会受重新结算的注单影响。</value>
   </data>
   <data name="CompareAccuratedDataLegend" xml:space="preserve">
     <value>利用当前的注单报表来与正确数据相互比较。</value>
+  </data>
+  <data name="TotalRebateRoundDown" xml:space="preserve">
+    <value>无条件舍去股东的总返水金额(正负10%)</value>
   </data>
 </root>

@@ -294,4 +294,28 @@
   <data name="Total" xml:space="preserve">
     <value>总计</value>
   </data>
+  <data name="MemberWL" xml:space="preserve">
+    <value>会员输赢</value>
+  </data>
+  <data name="MemberComm" xml:space="preserve">
+    <value>会员退水</value>
+  </data>
+  <data name="HouseTO" xml:space="preserve">
+    <value>公司营业额</value>
+  </data>
+  <data name="RebateRoundDown" xml:space="preserve">
+    <value>返水无条件舍去</value>
+  </data>
+  <data name="HeadlineResultNet" xml:space="preserve">
+    <value>总监结果(纯利)</value>
+  </data>
+  <data name="RebateRoundDown10" xml:space="preserve">
+    <value>返水(+/-)10%</value>
+  </data>
+  <data name="InaccurateDataLegend" xml:space="preserve">
+    <value>数据准确性会受重新结算的注单影响。</value>
+  </data>
+  <data name="CompareAccuratedDataLegend" xml:space="preserve">
+    <value>利用当前的注单报表来与正确数据相互比较。</value>
+  </data>
 </root>

@@ -5,9 +5,9 @@
     [Serializable]
     public class UserLevel : Enumeration
     {
-        public static readonly UserLevel Super = new UserLevel(4, "Super");
+        public static readonly UserLevel Super = new UserLevel(4, "SMA");
 
-        public static readonly UserLevel Master = new UserLevel(3, "Master");
+        public static readonly UserLevel Master = new UserLevel(3, "MA");
 
         public static readonly UserLevel Agent = new UserLevel(2, "Agent");
 

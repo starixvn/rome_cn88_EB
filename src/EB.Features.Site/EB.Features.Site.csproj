@@ -1256,8 +1256,8 @@
     <Content Include="App_Code\Components\SportGroupMultiSelection.cshtml" />
     <Content Include="App_Code\Components\ViewerSelection.cshtml" />
     <Content Include="App_Code\Components\Breadcrumb.cshtml" />
-    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Super.xls" />
-    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Master.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\SMA.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\MA.xls" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Agent.xls" />
     <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Member.xls" />
     <Content Include="assets\report\styles\legend.scss" />

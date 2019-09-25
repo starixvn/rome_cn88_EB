@@ -326,7 +326,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 IsHistoricReport = true
             };
             var expectedTitle = $"{ReportResources.HouseWinLossReport} {query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
-            expectedTitle += $" - {AppResources.Settled} - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets}";
+            expectedTitle += $" - {AppResources.Settled} - Headline - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets}";
 
             // Act
             var act = handler.GetReportTitle(query);

@@ -262,22 +262,15 @@
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
             var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 
-            return $"{title} - {GetResourcesText(ticketStatus)} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)}";
+            return $"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)}";
         }
 
         private static string GetResourcesText(string key)
             => AppResources.ResourceManager.GetString(key);
 
         internal string GetExcelFileName(HouseWinLossExcelQuery param)
-        {
-            var roleName = param.Role.IsSuperLevel() ? "SMA"
-                : param.Role.IsMasterLevel() ? "MA"
-                : param.Role.DisplayName;
-
-            return param.IsHistoricReport ?
-                $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()} - {roleName}" :
-                $"Wager Report - {param.Date.ToShortDate()} - {roleName}";
-        }
-
+            => param.IsHistoricReport ?
+                $"Wager Report - {param.FromDate.ToShortDate()}-{param.ToDate.ToShortDate()} - {param.Role.DisplayName}" :
+                $"Wager Report - {param.Date.ToShortDate()} - {param.Role.DisplayName}";
     }
 }

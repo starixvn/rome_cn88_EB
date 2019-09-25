@@ -219,4 +219,7 @@
   <data name="SMA" xml:space="preserve">
     <value>股东</value>
   </data>
+  <data name="Viewer" xml:space="preserve">
+    <value>检视</value>
+  </data>
 </root>

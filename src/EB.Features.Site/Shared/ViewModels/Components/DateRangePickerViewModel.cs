@@ -8,13 +8,17 @@
             DateTime minDate,
             DateTime maxDate,
             DateTime fromDate,
-            DateTime toDate)
+            DateTime toDate,
+            int? dayRange)
         {
+            DayRange = dayRange;
             MinDate = minDate;
             MaxDate = maxDate;
             FromDate = fromDate;
             ToDate = toDate;
         }
+
+        public int? DayRange { get; }
 
         public DateTime MinDate { get; }
 

@@ -110,6 +110,18 @@
     ]
   },
   {
+    "outputFileName": "assets/report/bundles/performancebonus.js",
+    "inputFiles": [
+      "assets/report/components/link-builder.js",
+      "assets/report/components/single-selection-dropdown.js",
+      "assets/report/components/daterangepicker.js",
+      "assets/report/components/filter-toggle.js",
+      "assets/report/libs/monthPicker/monPickr-0.0.1.js",
+      "assets/report/scripts/core.js",
+      "assets/report/scripts/performance-bonus.js"
+    ]
+  },
+  {
     "outputFileName": "assets/report/bundles/housewinloss.js",
     "inputFiles": [
       "assets/report/components/link-builder.js",

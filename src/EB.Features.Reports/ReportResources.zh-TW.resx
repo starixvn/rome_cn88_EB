@@ -321,4 +321,7 @@
   <data name="TotalRebateRoundDown" xml:space="preserve">
     <value>無條件捨去股東的總返水金額(正負10%)</value>
   </data>
+  <data name="And" xml:space="preserve">
+    <value>和</value>
+  </data>
 </root>

@@ -1,0 +1,18 @@
+﻿@using EB.Features.Shared.Resources
+@using EB.Features.Site.Shared.ViewModels.Components
+@helper Render(PeriodSelectionViewModel model, bool showLabel)
+{
+    <div class="form-group">
+        @if (showLabel)
+        {
+            <label>@AppResources.Period</label>
+        }
+        <select id="dropdown-period">
+            @foreach (var group in model.Items)
+            {
+                <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
+            }
+        </select>
+        <input type="hidden" name="UserSelectedPeriodId" id="UserSelectedPeriodId" value="@model.UserSelectedId" />
+    </div>
+}

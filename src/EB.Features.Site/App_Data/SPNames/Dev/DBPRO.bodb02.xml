@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Functions>
+  <Function Name="Reports">
+    <Setting Key="CS_AccountingPeriod_Sel" SpName="CS_AccountingPeriod_Sel" DbName="DBPRO.bodb02.bodbAdminNet" Plain="0" />
+  </Function>
+</Functions>

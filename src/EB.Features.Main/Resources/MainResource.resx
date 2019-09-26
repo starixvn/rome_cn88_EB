@@ -213,4 +213,7 @@
   <data name="SubAccount" xml:space="preserve">
     <value>Sub Account</value>
   </data>
+  <data name="PerformanceBonus" xml:space="preserve">
+    <value>Performance Bonus Calculator</value>
+  </data>
 </root>

@@ -1,0 +1,63 @@
+{
+  "_from": "@types/cleave.js",
+  "_id": "@types/cleave.js@1.4.0",
+  "_inBundle": false,
+  "_integrity": "sha512-q7o9rhVZTVa+mRBHyfAGnD0s/OHK2KJdGCslpd+zzxy7ARkVnmVQ1pGK0xjdLyQTR9KdC0PUnHVrU8ilt7d/Ww==",
+  "_location": "/@types/cleave.js",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "@types/cleave.js",
+    "name": "@types/cleave.js",
+    "escapedName": "@types%2fcleave.js",
+    "scope": "@types",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/@types/cleave.js/-/cleave.js-1.4.0.tgz",
+  "_shasum": "9b94145f2218560accb4ea1719e94ab360e39832",
+  "_spec": "@types/cleave.js",
+  "_where": "F:\\GitLabProject\\CN88\\CN88-Features\\src\\CN88.Features.Site",
+  "bugs": {
+    "url": "https://github.com/DefinitelyTyped/DefinitelyTyped/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "C Lentfort",
+      "url": "https://github.com/clentfort"
+    },
+    {
+      "name": "J Giancono",
+      "url": "https://github.com/jasongi-at-sportsbet"
+    },
+    {
+      "name": "Alex Shakun",
+      "url": "https://github.com/sashashakun"
+    }
+  ],
+  "dependencies": {
+    "@types/react": "*"
+  },
+  "deprecated": false,
+  "description": "TypeScript definitions for cleave.js",
+  "homepage": "https://github.com/DefinitelyTyped/DefinitelyTyped#readme",
+  "license": "MIT",
+  "main": "",
+  "name": "@types/cleave.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+  },
+  "scripts": {},
+  "typeScriptVersion": "2.8",
+  "types": "index",
+  "typesPublisherContentHash": "0ec2ebdbe77bc5bf612c1913ca2b34105223a460e4c17df95bb31ecff452fc1a",
+  "version": "1.4.0"
+}

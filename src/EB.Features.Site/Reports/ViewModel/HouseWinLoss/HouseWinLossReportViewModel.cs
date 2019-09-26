@@ -19,7 +19,6 @@
 
     public class HouseWinLossReportViewModel
     {
-        private readonly DateTime MinDate = new DateTime(2019, 1, 1);
         private readonly int DayRange = 90;
 
         public HouseWinLossReportViewModel(
@@ -60,10 +59,10 @@
             var liveStatusSelectionViewModel = new SingleSelectionViewModel(liveStatuses, query.UserSelectedLiveStatusId);
             var ticketStatusSelectionViewModel = new SingleSelectionViewModel(ticketStatuses, query.UserSelectedLiveStatusId);
 
-            var datePickerViewModel = new DatePickerViewModel(MinDate, SystemTime.Today, query.Date);
+            var datePickerViewModel = new DatePickerViewModel(SystemTime.MinDate, SystemTime.Today, query.Date);
             var fromDate = query.FromDate <= SystemTime.Yesterday ? query.FromDate : SystemTime.Yesterday.AddDays(-DayRange);
             var toDate = query.ToDate < SystemTime.Yesterday ? query.ToDate : SystemTime.Yesterday;
-            var dateRangePickerViewModel = new DateRangePickerViewModel(MinDate, SystemTime.Yesterday, fromDate, toDate, DayRange);
+            var dateRangePickerViewModel = new DateRangePickerViewModel(SystemTime.MinDate, SystemTime.Yesterday, fromDate, toDate, DayRange);
 
             ReportFilterViewModel = new HouseWinLossFilterViewModel(
                 datePickerViewModel,

@@ -5,6 +5,17 @@
 
     public static class EnumerableExtensions
     {
+        public static PerformanceBonusModel Sum(this IEnumerable<PerformanceBonusModel> models)
+        {            
+            var total = new PerformanceBonusModel();
+            foreach (var model in models)
+            {
+                total += model;
+            }
+
+            return total;
+        }
+
         public static MatchWinLossModel Sum(this IEnumerable<MatchWinLossModel> matches)
         {
             var total = new MatchWinLossModel();

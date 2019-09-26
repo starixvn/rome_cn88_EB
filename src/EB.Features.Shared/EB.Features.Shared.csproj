@@ -103,6 +103,7 @@
     <Compile Include="DataAccesses\SportGroupDataAccess.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\NumberExtensions.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\BalanceUpDayAndMoveBetsDay.cs" />
     <Compile Include="Model\BetTypeGroup.cs" />
     <Compile Include="Model\CustInfo.cs" />

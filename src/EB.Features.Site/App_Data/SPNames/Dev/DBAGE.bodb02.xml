@@ -2,7 +2,7 @@
 <Functions>
   <Function Name="Shared">
     <Setting Key="CS_SportType_Sel" SpName="CS_SportType_Sel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="CS_BetType_Sel" SpName="CS_BetType_Sel_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0">
+    <Setting Key="CS_BetType_Sel" SpName="CS_BetType_Sel" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0">
       <Mapping DataField="BetTypeGroup" ObjectProperty="Id" />
     </Setting>
     <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
@@ -15,5 +15,8 @@
     <Setting Key="CS_Rpt_EBWinloss_Agent" SpName="CS_Rpt_EBWinloss_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_EBWinloss_Member" SpName="CS_Rpt_EBWinloss_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_MatchWinLoss_Headline" SpName="CS_Rpt_MatchWinLoss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_Customer_CheckValidUsername" SpName="CS_Customer_CheckValidUsername" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="CS_EB_Rpt_PerformanceBonus" SpName="CS_EB_Rpt_PerformanceBonus" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+
   </Function>
 </Functions>

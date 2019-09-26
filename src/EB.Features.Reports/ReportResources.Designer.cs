@@ -106,6 +106,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AND.
+        /// </summary>
+        public static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apr.
         /// </summary>
         public static string April {
@@ -142,11 +151,29 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonus Rate.
+        /// </summary>
+        public static string BonusRate {
+            get {
+                return ResourceManager.GetString("BonusRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - You can compare the accurate data by viewing the current Wager report..
         /// </summary>
         public static string CompareAccuratedDataLegend {
             get {
                 return ResourceManager.GetString("CompareAccuratedDataLegend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CY.
+        /// </summary>
+        public static string CY {
+            get {
+                return ResourceManager.GetString("CY", resourceCulture);
             }
         }
         
@@ -313,6 +340,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid username(s): .
+        /// </summary>
+        public static string InvalidUserNames {
+            get {
+                return ResourceManager.GetString("InvalidUserNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jan.
         /// </summary>
         public static string January {
@@ -439,6 +475,24 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * 1.035.
+        /// </summary>
+        public static string Multiply1035 {
+            get {
+                return ResourceManager.GetString("Multiply1035", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * 1.035 Round Down to 100.
+        /// </summary>
+        public static string Multiply1035RoundDown {
+            get {
+                return ResourceManager.GetString("Multiply1035RoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non - Sport Products.
         /// </summary>
         public static string NonSportProducts {
@@ -489,6 +543,33 @@ namespace EB.Features.Reports {
         public static string Of {
             get {
                 return ResourceManager.GetString("Of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performance Bonus.
+        /// </summary>
+        public static string PerformanceBonus {
+            get {
+                return ResourceManager.GetString("PerformanceBonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performance Bonus Calculator.
+        /// </summary>
+        public static string PerformanceBonusTitle {
+            get {
+                return ResourceManager.GetString("PerformanceBonusTitle", resourceCulture);
             }
         }
         
@@ -624,6 +705,15 @@ namespace EB.Features.Reports {
         public static string TotalRebateRoundDown {
             get {
                 return ResourceManager.GetString("TotalRebateRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UUS.
+        /// </summary>
+        public static string UUS {
+            get {
+                return ResourceManager.GetString("UUS", resourceCulture);
             }
         }
         

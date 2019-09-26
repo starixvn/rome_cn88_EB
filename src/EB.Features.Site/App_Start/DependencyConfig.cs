@@ -71,10 +71,13 @@
 
         private static void RegisterReportModule(Container container)
         {
+            container.Register<IPerformanceBonusService, PerformanceBonusService>();
+            container.Register<AccountingPeriodService, AccountingPeriodServiceImpl>();
             container.Register<IHouseWinLossService, HouseWinLossService>();
             container.Register<IMatchWinLossService, MatchWinLossService>();
             container.Register<IMatchWinLossWorkbook, MatchWinLossWorkbookImpl>();
             container.Register<IHouseWinLossWorkbook, HouseWinLossWorkbookImpl>();
+            container.Register<IPerformanceBonusWorkbook, PerformanceBonusWorkbookImpl>();
         }
 
         private static void RegisterMainModule(Container container)

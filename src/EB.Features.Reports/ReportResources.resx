@@ -324,4 +324,34 @@
   <data name="CompareAccuratedDataLegend" xml:space="preserve">
     <value>- You can compare the accurate data by viewing the current Wager report.</value>
   </data>
+  <data name="PerformanceBonusTitle" xml:space="preserve">
+    <value>Performance Bonus Calculator</value>
+  </data>
+  <data name="PerformanceBonus" xml:space="preserve">
+    <value>Performance Bonus</value>
+  </data>
+  <data name="BonusRate" xml:space="preserve">
+    <value>Bonus Rate</value>
+  </data>
+  <data name="Multiply1035" xml:space="preserve">
+    <value>* 1.035</value>
+  </data>
+  <data name="Multiply1035RoundDown" xml:space="preserve">
+    <value>* 1.035 Round Down to 100</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>AND</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="UUS" xml:space="preserve">
+    <value>UUS</value>
+  </data>
+  <data name="CY" xml:space="preserve">
+    <value>CY</value>
+  </data>
+  <data name="InvalidUserNames" xml:space="preserve">
+    <value>Invalid username(s): </value>
+  </data>
 </root>

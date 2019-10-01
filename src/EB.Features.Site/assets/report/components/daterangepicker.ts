@@ -44,6 +44,7 @@ class DateRangePickerComponent {
             datePickerFormat: {
                 dateFormat: cn88Features.format.shortDate_DatePicker
             },
+            dayRange: dateRangePicker.data("dayrange"),
             selectedItem: dateRangePicker.data("selecteddaterange"),
             minDate: new Date(minDate),
             maxDate: maxDate === "" ? null : maxDate,

@@ -19,7 +19,8 @@ class DatePickerComponent {
             allowInputToggle: true,
             minDate: this.$dateContainer.data("mindate"),
             defaultDate: this.$dateContainer.data("currentdate"),
-            format: 'YYYY-MM-DD'
+            format: 'YYYY-MM-DD',
+            locale: moment.locale("en-us", { week: { dow: 1 } })
         });
     }
 }

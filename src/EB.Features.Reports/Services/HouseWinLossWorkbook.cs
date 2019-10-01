@@ -23,17 +23,21 @@
 
         IHouseWinLossWorkbook SetData(
             IEnumerable<HouseWinLossModel> reportData,
-            HouseWinLossModel grandTotal);
+            HouseWinLossModel grandTotal,
+            bool isShowProfitMargin);
 
         IHouseWinLossWorkbook SetRowMappers(
             Mapper<HouseWinLossModel> rowMapper,
-            Mapper<HouseWinLossModel> grandTotalRowMapper);
+            Mapper<HouseWinLossModel> grandTotalRowMapper,
+            Mapper<HouseWinLossModel> footerRowMapper);
 
     }
 
     public class HouseWinLossWorkbookImpl : NpoiWorkbook<HouseWinLossModel>, IHouseWinLossWorkbook
     {
         private const int ReportSheetIndex = 1;
+
+        internal bool IsShowProfitMargin;
 
         private int currentRowIndex;
 
@@ -42,6 +46,8 @@
         internal HouseWinLossModel GrandTotal { get; set; }
 
         internal Mapper<HouseWinLossModel> RowMapper { get; set; }
+
+        internal Mapper<HouseWinLossModel> FooterRowMapper { get; set; }
 
         internal Mapper<HouseWinLossModel> GrandTotalRowMapper { get; set; }
 
@@ -53,10 +59,14 @@
 
         internal Row GrandTotalRowTemplate { get; set; }
 
+        internal Row ProfitRowTemplate { get; set; }
+
         public IHouseWinLossWorkbook SetData(
             IEnumerable<HouseWinLossModel> reportData,
-            HouseWinLossModel grandTotal)
+            HouseWinLossModel grandTotal,
+            bool isShowProfitMargin)
         {
+            IsShowProfitMargin = isShowProfitMargin;
             ModelDetails = reportData;
             GrandTotal = grandTotal;
 
@@ -65,8 +75,10 @@
 
         public IHouseWinLossWorkbook SetRowMappers(
             Mapper<HouseWinLossModel> rowMapper,
-            Mapper<HouseWinLossModel> grandTotalRowMapper)
+            Mapper<HouseWinLossModel> grandTotalRowMapper,
+            Mapper<HouseWinLossModel> footerRowMapper)
         {
+            FooterRowMapper = footerRowMapper;
             RowMapper = rowMapper;
             GrandTotalRowMapper = grandTotalRowMapper;
             return this;
@@ -90,10 +102,11 @@
             var sheet = GetSheetAt(TemplateInfo.SheetIndex);
 
             MatchTitleRowTemplate = sheet.GetRow(currentRowIndex++);
-            currentRowIndex = TemplateInfo.BodyStartIndex;            
+            currentRowIndex = TemplateInfo.BodyStartIndex;
             OddRowTemplate = sheet.GetRow(currentRowIndex++);
             EvenRowTemplate = sheet.GetRow(currentRowIndex++);
             GrandTotalRowTemplate = sheet.GetRow(currentRowIndex++);
+            ProfitRowTemplate = sheet.GetRow(currentRowIndex++);
 
             return GetSheetAt(ReportSheetIndex);
         }
@@ -154,11 +167,18 @@
 
         protected override void FillFooterRows(Sheet sheet)
         {
-            if (SpreadSheet.FooterRows.Any())
+            if (GrandTotal != null)
             {
-                var row = sheet.GetRow(currentRowIndex);
+                var row = sheet.GetRow(currentRowIndex++);
                 row.CopyCellsFrom(GrandTotalRowTemplate);
                 FillCells(row, GrandTotal, GrandTotalRowMapper.Mappings);
+            }
+
+            if (IsShowProfitMargin)
+            {
+                var row = sheet.GetRow(currentRowIndex);
+                row.CopyCellsFrom(ProfitRowTemplate);
+                FillCells(row, GrandTotal, FooterRowMapper.Mappings);
             }
         }
     }

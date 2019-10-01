@@ -33,10 +33,11 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;CODE_ANALYSIS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
+    <RunCodeAnalysis>true</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -715,6 +716,10 @@
     <Content Include="assets\report\bundles\housewinloss.min.js">
       <DependentUpon>housewinloss.js</DependentUpon>
     </Content>
+    <Content Include="assets\report\bundles\legend.css" />
+    <Content Include="assets\report\bundles\legend.min.css">
+      <DependentUpon>legend.css</DependentUpon>
+    </Content>
     <Content Include="assets\report\bundles\matchwinloss.js" />
     <Content Include="assets\report\bundles\matchwinloss.min.js">
       <DependentUpon>matchwinloss.js</DependentUpon>
@@ -734,6 +739,12 @@
     <Content Include="assets\report\libs\monthPicker\images\spindown-open.png" />
     <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.css" />
     <Content Include="assets\report\libs\monthPicker\monPickr-0.0.1.js" />
+    <Content Include="assets\report\styles\legend.css">
+      <DependentUpon>legend.scss</DependentUpon>
+    </Content>
+    <Content Include="assets\report\styles\legend.min.css">
+      <DependentUpon>legend.css</DependentUpon>
+    </Content>
     <Content Include="assets\report\styles\reports.css">
       <DependentUpon>reports.scss</DependentUpon>
     </Content>
@@ -870,6 +881,7 @@
     <Compile Include="Reports\ReportsBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\ReportLegendQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossQuery.cs" />
@@ -888,6 +900,7 @@
     <Compile Include="Shared\Helpers\AuthInfoHelper.cs" />
     <Compile Include="Shared\Helpers\BrowserHelper.cs" />
     <Compile Include="Shared\Helpers\CookieHelper.cs" />
+    <Compile Include="Shared\Helpers\JsonHelper.cs" />
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
@@ -912,10 +925,12 @@
     <Compile Include="Reports\ReportsController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Shared\Helpers\UrlHelper.cs" />
     <Compile Include="Shared\Models\UserSession.cs" />
     <Compile Include="Shared\MultipleLanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
+    <Compile Include="Shared\ViewModels\BreadcrumbLevelViewModel.cs" />
     <Compile Include="Shared\ViewModels\BrowserInfo.cs" />
     <Compile Include="Shared\ViewModels\BrowserViewModel.cs" />
     <Compile Include="Shared\ViewModels\Components\DatePickerViewModel.cs" />
@@ -1214,7 +1229,7 @@
     <Content Include="App_Data\ExcelTemplates\MatchWinLossReport.xls" />
     <Content Include="App_Code\Components\DatePicker.cshtml" />
     <Content Include="App_Code\Components\TicketStatusSelection.cshtml" />
-    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Headline.xls" />
     <Content Include="EB.Features.Site.ruleset" />
     <Content Include="Configurations\appSettings.config" />
     <Content Include="Configurations\connectionStrings.config">
@@ -1239,6 +1254,13 @@
     <Content Include="AccountManagement\Styles\subaccount.scss" />
     <Content Include="assets\tests\chutzpah.json" />
     <Content Include="App_Code\Components\SportGroupMultiSelection.cshtml" />
+    <Content Include="App_Code\Components\ViewerSelection.cshtml" />
+    <Content Include="App_Code\Components\Breadcrumb.cshtml" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\SMA.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\MA.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Agent.xls" />
+    <Content Include="App_Data\ExcelTemplates\HouseWinLossReport\Member.xls" />
+    <Content Include="assets\report\styles\legend.scss" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
@@ -1267,8 +1289,18 @@
     <Content Include="Web.staging.config">
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>
+    <Content Include="Reports\Views\HouseWinLoss\HeadlineTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\SuperTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\MasterTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\AgentTable.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
+    <Content Include="Reports\Views\ReportLegend.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EB.Features.AccountManagement\EB.Features.AccountManagement.csproj">
       <Project>{f15ee746-2f01-4cb9-baae-211353f918bd}</Project>
@@ -1325,12 +1357,12 @@
   </Target>
   <PropertyGroup>
     <PostBuildEvent>cd $(ProjectDir)
-      cd ..
-      cd ..
-      cd build
-      assets.build.cmd
-      if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
-      start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
+cd ..
+cd ..
+cd build
+assets.build.cmd
+if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
+start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

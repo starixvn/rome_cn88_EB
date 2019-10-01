@@ -130,10 +130,10 @@
     <value>Headline</value>
   </data>
   <data name="HeadlineStock" xml:space="preserve">
-    <value>Headline Stock</value>
+    <value>HL Stock</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
-    <value>Headline Stock %</value>
+    <value>HL Stock %</value>
   </data>
   <data name="HouseComm" xml:space="preserve">
     <value>House Comm</value>
@@ -245,5 +245,83 @@
   </data>
   <data name="NonSportProducts" xml:space="preserve">
     <value>Non - Sport Products</value>
+  </data>
+  <data name="MemberWL" xml:space="preserve">
+    <value>Member WL</value>
+  </data>
+  <data name="MemberComm" xml:space="preserve">
+    <value>Member Comm</value>
+  </data>
+  <data name="HouseTO" xml:space="preserve">
+    <value>House TO</value>
+  </data>
+  <data name="HeadlineResult" xml:space="preserve">
+    <value>HL Result</value>
+  </data>
+  <data name="SMAUserName" xml:space="preserve">
+    <value>SMA Username</value>
+  </data>
+  <data name="Agent" xml:space="preserve">
+    <value>Agent</value>
+  </data>
+  <data name="AgentResult" xml:space="preserve">
+    <value>Agent Result</value>
+  </data>
+  <data name="MAResult" xml:space="preserve">
+    <value>MA Result</value>
+  </data>
+  <data name="SMAResult" xml:space="preserve">
+    <value>SMA Result</value>
+  </data>
+  <data name="SMA" xml:space="preserve">
+    <value>SMA</value>
+  </data>
+  <data name="MAUserName" xml:space="preserve">
+    <value>MA Username</value>
+  </data>
+  <data name="SMAStock" xml:space="preserve">
+    <value>SMA Stock</value>
+  </data>
+  <data name="SMAStockPercent" xml:space="preserve">
+    <value>SMA Stock %</value>
+  </data>
+  <data name="AgentUserName" xml:space="preserve">
+    <value>Agent Username</value>
+  </data>
+  <data name="AgentStock" xml:space="preserve">
+    <value>Agent Stock</value>
+  </data>
+  <data name="MemberUserName" xml:space="preserve">
+    <value>Member Username</value>
+  </data>
+  <data name="AgentResultA" xml:space="preserve">
+    <value>Agent Result A</value>
+  </data>
+  <data name="RebateRoundDown" xml:space="preserve">
+    <value>Rebate Round Down</value>
+  </data>
+  <data name="HeadlineResultNet" xml:space="preserve">
+    <value>HL Result (Net)</value>
+  </data>
+  <data name="ProfitMargin" xml:space="preserve">
+    <value>Profit Margin</value>
+  </data>
+  <data name="TotalRebateRoundDown" xml:space="preserve">
+    <value>Total Rebate +/- 10% of SMA Round Down</value>
+  </data>
+  <data name="HeadlineIncome" xml:space="preserve">
+    <value>HL Income</value>
+  </data>
+  <data name="RebateRoundDown10" xml:space="preserve">
+    <value>Rebate(+/-) 10%</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="InaccurateDataLegend" xml:space="preserve">
+    <value>- Data may be inaccurate if there have resettled tickets.</value>
+  </data>
+  <data name="CompareAccuratedDataLegend" xml:space="preserve">
+    <value>- You can compare the accurate data by viewing the current Wager report.</value>
   </data>
 </root>

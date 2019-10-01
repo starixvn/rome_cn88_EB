@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Super" xml:space="preserve">
-    <value>超級</value>
-  </data>
   <data name="MasterAgent" xml:space="preserve">
     <value>總代理</value>
   </data>
@@ -218,5 +215,11 @@
   </data>
   <data name="SelectSport" xml:space="preserve">
     <value>選擇球類</value>
+  </data>
+  <data name="SMA" xml:space="preserve">
+    <value>股東</value>
+  </data>
+  <data name="Viewer" xml:space="preserve">
+    <value>檢視</value>
   </data>
 </root>

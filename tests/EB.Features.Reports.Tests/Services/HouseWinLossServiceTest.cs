@@ -6,6 +6,7 @@ using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Constants;
+using EB.Features.Shared.Model;
 using EB.Features.Shared.Services;
 using Fanex.Data.Repository;
 using NSubstitute;
@@ -28,25 +29,6 @@ namespace EB.Features.Reports.Tests.Services
             reportService = new HouseWinLossService(dynamicRepository, reportDateService);
         }
 
-
-        [Test]
-        public void Get_Always_SetArchiveDate()
-        {
-            // Arrange
-            var expectedArchiveDate = DateTime.Now;
-            reportDateService.GetArchiveDate().Returns(expectedArchiveDate);
-            var param = new HouseWinLossParam
-            {
-                ArchiveDate = DateTime.MinValue
-            };
-
-            // Act
-            reportService.Get(param);
-
-            // Assert
-            Assert.AreEqual(expectedArchiveDate, param.ArchiveDate);
-        }
-
         [Test]
         public void Get_Always_SetMoveBetsDay()
         {
@@ -55,7 +37,8 @@ namespace EB.Features.Reports.Tests.Services
             reportDateService.GetMoveBetsDay().Returns(expectedMoveBetsDay);
             var param = new HouseWinLossParam
             {
-                MoveBetsDay = DateTime.MinValue
+                MoveBetsDay = DateTime.MinValue,
+                Role = UserLevel.Headline
             };
 
             // Act
@@ -74,7 +57,8 @@ namespace EB.Features.Reports.Tests.Services
             var param = new HouseWinLossParam
             {
                 IsHistoricReport = true,
-                FromDate = expectedFromDate
+                FromDate = expectedFromDate,
+                Role = UserLevel.Headline
             };
 
             // Act
@@ -93,7 +77,8 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 Date = expectedFromDate,
-                FromDate = DateTime.MinValue
+                FromDate = DateTime.MinValue,
+                Role = UserLevel.Headline
             };
 
             // Act
@@ -111,7 +96,8 @@ namespace EB.Features.Reports.Tests.Services
             var param = new HouseWinLossParam
             {
                 IsHistoricReport = true,
-                ToDate = expectedToDate
+                ToDate = expectedToDate,
+                Role = UserLevel.Headline
             };
 
             // Act
@@ -130,7 +116,8 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 Date = expectedToDate,
-                ToDate = DateTime.MinValue
+                ToDate = DateTime.MinValue,
+                Role = UserLevel.Headline
             };
 
             // Act
@@ -145,14 +132,18 @@ namespace EB.Features.Reports.Tests.Services
         public void Get_IsSettledTicket_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
         {
             // Arrange
-            var param = new HouseWinLossParam { IsHistoricReport = true };
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                Role = UserLevel.Headline
+            };
 
 
             // Act
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
         }
 
         [Test]
@@ -162,27 +153,33 @@ namespace EB.Features.Reports.Tests.Services
             var param = new HouseWinLossParam
             {
                 IsHistoricReport = false,
-                TicketStatusId = TicketStatusConstants.Settled
+                TicketStatusId = TicketStatusConstants.Settled,
+                Role = UserLevel.Headline
             };
 
             // Act
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
         }
 
         [Test]
         public void Get_IsUnSettledTicket_CallDynamicRepositoryWithUnsettledHouseWinLossCriteria()
         {
             // Arrange
-            var param = new HouseWinLossParam { IsHistoricReport = false, TicketStatusId = TicketStatusConstants.UnSettled };
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.UnSettled,
+                Role = UserLevel.Headline
+            };
 
             // Act
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>());
         }
 
 
@@ -195,11 +192,15 @@ namespace EB.Features.Reports.Tests.Services
                 new HouseWinLossModel{UserName = "razor"},
                 new HouseWinLossModel{UserName = "azor"}
             };
-            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossCriteria>())
+            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>())
                 .Returns(houseWinLoss);
 
             // Act
-            var act = reportService.Get(new HouseWinLossParam { IsHistoricReport = true });
+            var act = reportService.Get(new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                Role = UserLevel.Headline
+            });
 
             // Assert
             Assert.AreEqual("azor", act.Matches.ToList()[0].UserName);
@@ -215,11 +216,16 @@ namespace EB.Features.Reports.Tests.Services
                 new HouseWinLossModel{UserName = "razor"},
                 new HouseWinLossModel{UserName = "azor"}
             };
-            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossCriteria>())
+            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>())
                 .Returns(houseWinLoss);
 
             // Act
-            var act = reportService.Get(new HouseWinLossParam { IsHistoricReport = false, TicketStatusId = TicketStatusConstants.UnSettled });
+            var act = reportService.Get(new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.UnSettled,
+                Role = UserLevel.Headline
+            });
 
             // Assert
             Assert.AreEqual("azor", act.Matches.ToList()[0].UserName);

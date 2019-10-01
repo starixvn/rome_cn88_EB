@@ -11,7 +11,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_ValidInput_ReturnTrue()
         {
             // Arrange
-            var criteria = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteria = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 SportTypeGroups = "0",
                 BetTypeGroup = 0,
@@ -32,7 +32,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_InvalidInput_ReturnFalse(int betTypeGroup, int isLive, DateTime fromDate, DateTime toDate)
         {
             // Arrange
-            var criteria = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteria = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 BetTypeGroup = betTypeGroup,
                 IsLive = isLive,
@@ -52,7 +52,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedFromDate = DateTime.Now;
-            var criteia = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 FromDate = expectedFromDate
             });
@@ -69,7 +69,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedToDate = DateTime.Now;
-            var criteia = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 ToDate = expectedToDate
             });
@@ -86,7 +86,7 @@ namespace EB.Features.Reports.Tests.Criteria
         {
             // Arrange
             var expectedIsExcludedTest = true;
-            var criteia = new UnsettledHouseWinLossCriteria(new HouseWinLossParam
+            var criteia = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam
             {
                 IsExcludedTest = expectedIsExcludedTest
             });
@@ -102,13 +102,13 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_Always_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledHouseWinLossCriteria(new HouseWinLossParam());
+            var criteria = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam());
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_Outstanding_Headline", act);
+            Assert.AreEqual("CS_Rpt_EBOutstanding_Headline", act);
         }
     }
 }

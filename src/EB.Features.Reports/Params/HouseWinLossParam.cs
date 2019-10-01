@@ -1,9 +1,16 @@
 ﻿namespace EB.Features.Reports.Params
 {
     using System;
+    using EB.Features.Shared.Model;
 
     public class HouseWinLossParam
     {
+        public UserLevel Role { get; set; }
+
+        public int CustId { get; set; }
+
+        public int Viewer { get; set; }
+
         public bool IsHistoricReport { get; set; }
 
         public int TicketStatusId { get; set; }
@@ -21,8 +28,6 @@
         public int IsLive { get; set; }
 
         public bool IsExcludedTest { get; set; }
-
-        public DateTime ArchiveDate { get; set; }
 
         public DateTime MoveBetsDay { get; set; }
     }

@@ -2,27 +2,33 @@
 {
     using System;
     using EB.Features.Reports.Params;
+    using EB.Features.Shared.Model;
+    using Fanex.Data;
     using Fanex.Data.Repository;
 
-    public class SettledHouseWinLossCriteria : CriteriaBase
+    public class SettledHouseWinLossOfSMACriteria : CriteriaBase
     {
 
-        public SettledHouseWinLossCriteria(HouseWinLossParam param)
+        public SettledHouseWinLossOfSMACriteria(HouseWinLossParam param)
         {
+            Role = param.Role;
+            CustId = param.CustId;
             FromDate = param.FromDate;
             ToDate = param.ToDate;
             SportTypeGroups = param.SportTypeGroups;
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
-            ArchiveDate = param.ArchiveDate;
             MoveBetsDay = param.MoveBetsDay;
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
         }
 
-        public int ReportMode { get; }
+        [SpParam(Ignored = true)]
+        public UserLevel Role { get; }
 
-        public DateTime ArchiveDate { get; }
+        public int CustId { get; }
+
+        public int ReportMode { get; }
 
         public DateTime MoveBetsDay { get; }
 
@@ -42,6 +48,12 @@
             => BetTypeGroup >= 0 && IsLive >= 0 && FromDate <= ToDate;
 
         public override string GetSettingKey()
-            => "CS_Rpt_Winloss_Headline";
+            => Role.IsSuperLevel()?
+            "CS_Rpt_EBWinloss_Super" :
+             Role.IsMasterLevel() ?
+            "CS_Rpt_EBWinloss_Master" :
+            Role.IsAgentLevel() ?
+            "CS_Rpt_EBWinloss_Agent" :
+            "CS_Rpt_EBWinloss_Member";
     }
 }

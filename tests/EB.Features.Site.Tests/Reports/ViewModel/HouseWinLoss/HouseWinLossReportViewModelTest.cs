@@ -32,18 +32,18 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
             SystemTime.Yesterday = SystemTime.Today.AddDays(-1);
         }
 
-        [Test]
-        public void GetDownlineLink_Always_CorrectFormat()
-        {
-            // Arrange
-            var expectedFormat = "~/Reports/Index?DisplayMode=1&IsSetMenu=True";
+        //[Test]
+        //public void GetDownlineLink_Always_CorrectFormat()
+        //{
+        //    // Arrange
+        //    var expectedFormat = "~/Reports/Index?DisplayMode=1&IsSetMenu=True";
 
-            // Act
-            var act = HouseWinLossReportViewModel.GetDownlineLink();
+        //    // Act
+        //    var act = HouseWinLossReportViewModel.GetDownlineLink();
 
-            // Assert
-            Assert.AreEqual(expectedFormat, act);
-        }
+        //    // Assert
+        //    Assert.AreEqual(expectedFormat, act);
+        //}
 
 
         [Test]
@@ -163,10 +163,10 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
         }
 
         [Test]
-        public void DateRangePickerViewModel_Default_FromDateIsFirstDateOfMonth()
+        public void DateRangePickerViewModel_Default_FromDateIs90DaysAgo()
         {
             // Arrange
-            var firstDateOfMonth = SystemTime.Yesterday.FirstDateOfMonth();
+            var day90Ago = SystemTime.Yesterday.AddDays(-90);
             var viewModel = new HouseWinLossReportViewModel(
                fixture.Create<HouseWinLossViewModel>(),
                query,
@@ -179,7 +179,7 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
             var act = viewModel.ReportFilterViewModel.DateRangePickerViewModel;
 
             // Assert
-            Assert.AreEqual(firstDateOfMonth, act.FromDate);
+            Assert.AreEqual(day90Ago, act.FromDate);
         }
 
         [Test]
@@ -207,6 +207,7 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
         public void DateRangePickerViewModel_InvalidFromDate_FromDateIsFirstDateOfMonth()
         {
             // Arrange
+            var day90Ago = SystemTime.Yesterday.AddDays(-90);
             query.FromDate = DateTime.MaxValue;
             var viewModel = new HouseWinLossReportViewModel(
                fixture.Create<HouseWinLossViewModel>(),
@@ -220,7 +221,7 @@ namespace EB.Features.Site.Tests.Reports.ViewModel.HouseWinLoss
             var act = viewModel.ReportFilterViewModel.DateRangePickerViewModel;
 
             // Assert
-            Assert.AreEqual(SystemTime.Yesterday.FirstDateOfMonth(), act.FromDate);
+            Assert.AreEqual(day90Ago, act.FromDate);
         }
 
         [Test]

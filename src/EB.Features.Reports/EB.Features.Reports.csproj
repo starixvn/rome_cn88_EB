@@ -21,7 +21,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>EB.Features.Reports.ruleset</CodeAnalysisRuleSet>
-    <RunCodeAnalysis>true</RunCodeAnalysis>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -119,8 +119,10 @@
   <ItemGroup>
     <Compile Include="Constants\ReportMode.cs" />
     <Compile Include="Constants\RowTypeConstant.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossCriteria.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossCriteria.cs" />
+    <Compile Include="Criteria\SettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\UnsettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\UnsettledHouseWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\SettledHouseWinLossOfHeadlineCriteria.cs" />
     <Compile Include="Criteria\MatchWinLossCriteria.cs" />
     <Compile Include="Extension\EnumerableExtensions.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
@@ -162,6 +164,11 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ReportResources.zh-Hans.resx" />
     <EmbeddedResource Include="ReportResources.zh-TW.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

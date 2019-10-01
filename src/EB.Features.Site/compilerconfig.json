@@ -48,6 +48,10 @@
     "inputFile": "assets/report/styles/reports.override.scss"
   },
   {
+    "outputFile": "assets/report/styles/legend.css",
+    "inputFile": "assets/report/styles/legend.scss"
+  },
+  {
     "outputFile": "assets/report/styles/security.css",
     "inputFile": "assets/report/styles/security.scss"
   },

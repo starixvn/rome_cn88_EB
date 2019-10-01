@@ -6,32 +6,47 @@ class HouseWinLossReport {
     $: JQueryStatic;
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
-    $dateContainer: JQuery;
     $dateRangeContainer: JQuery;
 
-    $internalLoginForm: JQuery;
-    $internalCustId: JQuery;
-    $internalLanguageKey: JQuery;
-    $internalCustName: JQuery;
-    $internalRoleId: JQuery;
-
     sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
+    viewerSelectionComponent: SingleSelectionDropdownComponent;
     betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     ticketStatusSelectionComponent: SingleSelectionDropdownComponent;
+    dateRangePickerComponent: DateRangePickerComponent;
     $buttonSportGroup: JQuery;
+    sortComponent: SortComponent;
+    datePickerComponent: DatePickerComponent;
+    linkBuilderComponent: LinkBuilderComponent;
+    $custLevelId: JQuery;
+    $tableReport: JQuery;
+
+    $loadLegendURL: JQuery;
+    topWindow: JQuery;
 
     constructor($: JQueryStatic,
+        topWindow: any,
+        dateRangePickerComponent: DateRangePickerComponent,
         sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
+        viewerSelectionComponent: SingleSelectionDropdownComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         ticketStatusSelectionComponent: SingleSelectionDropdownComponent,
-        toggleHandler: ToggleHandler) {
+        toggleHandler: ToggleHandler,
+        sortComponent: SortComponent,
+        linkBuilderComponent: LinkBuilderComponent,
+        datePickerComponent: DatePickerComponent) {
         this.$ = $;
+        this.topWindow = topWindow;
+        this.dateRangePickerComponent = dateRangePickerComponent;
         this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
         this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.ticketStatusSelectionComponent = ticketStatusSelectionComponent;
+        this.viewerSelectionComponent = viewerSelectionComponent;
+        this.sortComponent = sortComponent;
+        this.linkBuilderComponent = linkBuilderComponent;
+        this.datePickerComponent = datePickerComponent;
     }
 
     init = () => {
@@ -43,29 +58,22 @@ class HouseWinLossReport {
     }
 
     public cacheDOMElements() {
+        this.$custLevelId = this.$("#RoleId");
         this.$reportForm = this.$("#report-form");
         this.$exportExcelForm = this.$("#export-excel-form");
-        this.$dateContainer = this.$("#date-container");
         this.$dateRangeContainer = this.$("#dateRangeContainer");
 
-        this.$internalLoginForm = this.$("#internal-login-form");
-        this.$internalCustId = this.$internalLoginForm.find("#custId");
-        this.$internalLanguageKey = this.$internalLoginForm.find("#languageKey");
-        this.$internalCustName = this.$internalLoginForm.find("#custName");
-        this.$internalRoleId = this.$internalLoginForm.find("#roleId");
+        this.$tableReport = this.$("#tbl-report");
+
+        this.$loadLegendURL = this.$("#LoadLegendURL");        
     }
 
     public registerEvents() {
         this.$reportForm.submit(this.onReportSubmit);
-        this.$dateContainer.datepicker({
-            allowInputToggle: true,
-            minDate: this.$dateContainer.data("mindate"),
-            defaultDate: this.$dateContainer.data("currentdate"),
-            format: 'YYYY-MM-DD'
-        });
+        this.datePickerComponent.render(new DatePickerOption($, "date-container"));
 
         this.$("#icon-excel").on("click", this.onExportExcel);
-
+        
         this.$("#ViewHistoryReport").click(() => {
             this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
             this.$("#tab-main-content").remove();
@@ -76,68 +84,44 @@ class HouseWinLossReport {
             this.$("#tab-main-content").remove();
             this.switchCalendarType();
         });
-        this.initMonthlyCalendar();
-
+        this.$("#icon-information").on("click", this.showLegend);
+        this.switchCalendarType();
         var this$ = this.$;
-        var thisInternalLogin = this.internalLogin;
-        this.$(".lnk-internal").on("click touchend", function () {
-            var elm = this$(this);
-            thisInternalLogin({
-                custId: elm.attr("data-cust-id"),
-                languageKey: elm.attr("data-languageKey"),
-                custName: elm.attr("data-cust-name"),
-                roleId: elm.attr("data-role-id")
-            });
-        });
     }
+
+    showLegend = () => {
+        this.topWindow.popupManager.init(this.$, top);
+        this.topWindow.popupManager.open({
+            title: "",
+            url: this.$loadLegendURL.val(),
+            top: 300,
+            width: 600,
+            height: 100
+        });
+    };
 
     switchCalendarType = () => {
         if (this.$("#IsHistoricReport").val() == "True") {
             this.$("#GroupViewHistory").css("display", "none");
             this.$("#GroupBackToCurrent").css("display", "block");
-            this.$('.from-date-box').css('display', 'none');
-            this.$('.js-month-group').css('display', 'inline-block');
+            this.$('.date-box').css('display', 'none');
+            this.$dateRangeContainer.css('display', 'inline-block');
             this.$("#ticketStatusContainer").css("display", "none");
         }
         else {
             this.$("#ticketStatusContainer").css("display", "inline-block");
             this.$("#GroupViewHistory").css("display", "block");
             this.$("#GroupBackToCurrent").css("display", "none");
-            this.$('.from-date-box').css('display', 'inline-block');
-            this.$('.js-month-group').css('display', 'none');
+            this.$('.date-box').css('display', 'inline-block');
+            this.$dateRangeContainer.css('display', 'none');
         }
     }
-
-    initMonthlyCalendar = () => {
-        var maxDate = new Date(this.$dateRangeContainer.data("maxdate"));
-        var fromDate = new Date(this.$dateRangeContainer.data("fromdate"));
-        var toDate = new Date(this.$dateRangeContainer.data("todate"));
-        this.$("#monPickr1").monPickr({
-            today: fromDate,
-            maxDate: maxDate,
-            showDateRange: true,
-            fromDayId: "fromDay1",
-            toDayId: "toDay1",
-            shortMonthsInYear: this.$dateRangeContainer.data("longmonths-inyear").split(","),
-            longMonthsInYear: this.$dateRangeContainer.data("longmonths-inyear").split(","),
-        });
-
-
-        this.$("#monPickr1").monPickr("setMonth", fromDate);
-        this.$("#monPickr1").monPickr("setFromDay", fromDate.getDate());
-        this.$("#monPickr1").monPickr("setToDay", toDate.getDate());
-
-        this.switchCalendarType();
-    }
-
+    
     UpdateFromDateToDate = () => {
-        if (this.$("#IsHistoricReport").val() == "True") {
-            this.$("#fromDate").val(this.$("#monPickr1").monPickr("getFromDate", "MM/dd/yyyy"));
-            this.$("#toDate").val(this.$("#monPickr1").monPickr("getToDate", "MM/dd/yyyy"));
-        } else {
+        if (this.$("#IsHistoricReport").val() == "False") {
             this.$("#fromDate").val(this.$("#date").val());
             this.$("#toDate").val(this.$("#date").val());
-        }
+        } 
     }
 
     onExportExcel = () => {
@@ -145,27 +129,54 @@ class HouseWinLossReport {
     };
 
     onReportSubmit = (e: any) => {
+        this.$.blockUI();
         let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        this.viewerSelectionComponent.updateSelectedValue();
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");
             e.preventDefault();
-
+            this.$.unblockUI();
             return;
         }
-
+        var viewerId = this.viewerSelectionComponent.getSelectedItem();
+        if (viewerId === "0") {
+            this.$("#RoleId").val("0"); //Headline
+        } else {
+            this.$("#RoleId").val("4"); //SMA
+        }
+        
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
-        this.ticketStatusSelectionComponent.updateSelectedValue();
-
+        this.ticketStatusSelectionComponent.updateSelectedValue();        
         this.UpdateFromDateToDate();
     };
 
-    renderComponents(): void {        
+    renderComponents(): void {
+        this.dateRangePickerComponent.render();
         this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));
+        this.viewerSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-viewer", "UserSelectedViewer", () => { this.onChangeUserSelectedViewer() }));
         this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
         this.ticketStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-ticketstatus", "UserSelectedTicketStatusId"));
         this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
+        const headers = this.$custLevelId.val() === "4"
+            ? { 0: { sorter: "text" }, 1: { sorter: "text" } }
+            : { 0: { sorter: "text" } };
+            this.sortComponent.render(
+                new SortOption(
+                    this.$tableReport,
+                    parseInt(this.$tableReport.data("totalrecords"), 0) > 1,
+                    true,
+                    this.sortComponent.afterSort,
+                    headers,
+                    this.$reportForm));
+
+        this.linkBuilderComponent.render();
+    }
+
+    onChangeUserSelectedViewer(): void {
+        let value = this.viewerSelectionComponent.$dropdown.val();
+        this.$custLevelId.val(value == 0 ? "0" : "4");
     }
 
     onchangeSportGroup(): void {
@@ -197,24 +208,23 @@ class HouseWinLossReport {
             });
         }
     };
-
-    internalLogin = (options) => {
-        this.$internalCustId.val(options.custId);
-        this.$internalLanguageKey.val(options.languageKey);
-        this.$internalCustName.val(options.custName);
-        this.$internalRoleId.val(options.roleId);
-        this.$internalLoginForm.submit();
-    };
 }
 
 $(function () {
+    const linkBuilderComponent = new LinkBuilderComponent($);
     const houseWinLossReport = new HouseWinLossReport(
         $,
+        window.top,
+        new DateRangePickerComponent($),
         new SportGroupMultiSelectionComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
-        new ToggleHandler($));
+        new SingleSelectionDropdownComponent($),
+        new ToggleHandler($),
+        new SortComponent($, linkBuilderComponent),
+        linkBuilderComponent,
+        new DatePickerComponent());
 
     houseWinLossReport.init();
 })

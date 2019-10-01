@@ -243,4 +243,82 @@
   <data name="NonSportProducts" xml:space="preserve">
     <value>其他非體育產品</value>
   </data>
+  <data name="HeadlineResult" xml:space="preserve">
+    <value>總監結果</value>
+  </data>
+  <data name="HeadlineIncome" xml:space="preserve">
+    <value>總監收入</value>
+  </data>
+  <data name="SMAUserName" xml:space="preserve">
+    <value>超級代理用戶名</value>
+  </data>
+  <data name="Agent" xml:space="preserve">
+    <value>代理商</value>
+  </data>
+  <data name="AgentResultA" xml:space="preserve">
+    <value>代理商結果A</value>
+  </data>
+  <data name="AgentResult" xml:space="preserve">
+    <value>代理商結果</value>
+  </data>
+  <data name="MAResult" xml:space="preserve">
+    <value>總代理結果</value>
+  </data>
+  <data name="SMAResult" xml:space="preserve">
+    <value>股東結果</value>
+  </data>
+  <data name="SMA" xml:space="preserve">
+    <value>股東</value>
+  </data>
+  <data name="MAUserName" xml:space="preserve">
+    <value>總代理用戶名</value>
+  </data>
+  <data name="SMAStockPercent" xml:space="preserve">
+    <value>股東佔貨比(%)</value>
+  </data>
+  <data name="SMAStock" xml:space="preserve">
+    <value>股東佔貨比</value>
+  </data>
+  <data name="AgentUserName" xml:space="preserve">
+    <value>代理商用戶名</value>
+  </data>
+  <data name="AgentStock" xml:space="preserve">
+    <value>代理商實貨量</value>
+  </data>
+  <data name="MemberUserName" xml:space="preserve">
+    <value>會員用戶名</value>
+  </data>
+  <data name="ProfitMargin" xml:space="preserve">
+    <value>獲利率</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>總計</value>
+  </data>
+  <data name="MemberWL" xml:space="preserve">
+    <value>會員輸贏</value>
+  </data>
+  <data name="MemberComm" xml:space="preserve">
+    <value>會員退水</value>
+  </data>
+  <data name="HouseTO" xml:space="preserve">
+    <value>公司營業額</value>
+  </data>
+  <data name="RebateRoundDown" xml:space="preserve">
+    <value>返水無條件捨去</value>
+  </data>
+  <data name="HeadlineResultNet" xml:space="preserve">
+    <value>總監結果(純利)</value>
+  </data>
+  <data name="RebateRoundDown10" xml:space="preserve">
+    <value>返水(正負10%)</value>
+  </data>
+  <data name="InaccurateDataLegend" xml:space="preserve">
+    <value>數據準確性會受重新結算的注單影響。</value>
+  </data>
+  <data name="CompareAccuratedDataLegend" xml:space="preserve">
+    <value>利用目前的注單報表來與正確數據相互比較。</value>
+  </data>
+  <data name="TotalRebateRoundDown" xml:space="preserve">
+    <value>無條件捨去股東的總返水金額(正負10%)</value>
+  </data>
 </root>

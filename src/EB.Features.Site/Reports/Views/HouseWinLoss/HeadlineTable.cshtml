@@ -1,0 +1,99 @@
+﻿@using EB.Features.Shared.Model;
+@using EB.Features.Site.Reports.ViewModel.HouseWinLoss
+@using EB.Features.Reports;
+
+@model HouseWinLossReportViewModel
+@{ 
+    var colIndex = 0;
+}
+<div class="tab-content main-content" id="tab-main-content">
+    <table class="tbl-noborder tbl-report settlement-report" id="tbl-report"
+           data-sortedcolumn="Headline"
+           data-descendingsort="False"
+           data-totalrecords="@Model.ReportData.Matches.Count()">
+        <thead class="tableFloatingHeaderOriginal">
+            <tr>
+                <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="Headline"><span class="sorting-item">@ReportResources.Headline</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Wagers"><span class="sorting-item">@ReportResources.Wagers</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Stake"><span class="sorting-item">@ReportResources.Stake</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="ValidStake"><span class="sorting-item">@ReportResources.ValidStake</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="MemberWL"><span class="sorting-item">@ReportResources.MemberWL</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="MemberComm"><span class="sorting-item">@ReportResources.MemberComm</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="MemberIncome"><span class="sorting-item">@ReportResources.MemberIncome</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="SuperComm"><span class="sorting-item">@ReportResources.SuperComm</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseWL"><span class="sorting-item">@ReportResources.HouseWL</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseComm"><span class="sorting-item">@ReportResources.HouseComm</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseIncome"><span class="sorting-item">@ReportResources.HouseIncome</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseTO"><span class="sorting-item">@ReportResources.HouseTO</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResult"><span class="sorting-item">@ReportResources.HeadlineResult</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="RebateRoundDown"><span class="sorting-item">@ReportResources.TotalRebateRoundDown</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResultNet"><span class="sorting-item">@ReportResources.HeadlineResultNet</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStock"><span class="sorting-item">@ReportResources.HeadlineStock</span></th>
+                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStockPercent"><span class="sorting-item">@ReportResources.HeadlineStockPercent</span></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var row in Model.ReportData.Matches)
+            {
+                <tr>
+                    <td class="text-left">
+                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Super.Value)"> @row.UserName </a>
+                    </td>
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberWinLoss)
+                    @HtmlHelpers.RenderNumberCell(row.MemberComm)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.SuperComm)
+                    @HtmlHelpers.RenderNumberCell(row.HouseWinLoss)
+                    @HtmlHelpers.RenderNumberCell(row.HouseComm)
+                    @HtmlHelpers.RenderNumberCell(row.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(row.HouseTurnover)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineResult)
+                    @HtmlHelpers.RenderNumberCell(row.RebateRoundDown)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineResultNet)
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                </tr>
+            }
+        </tbody>
+        @if (Model.ReportData.IsShowTotalRow)
+        {
+            <tfoot>
+                <tr class="total">
+                    <th class="text-left header">@ReportResources.Total</th>
+                    @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberWinLoss)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberComm)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperComm)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseWinLoss)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseComm)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseIncome)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HouseTurnover)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResult)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.RebateRoundDown)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResultNet)
+                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock)
+                    @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock)
+                </tr>
+            </tfoot>
+        }
+        else
+        {
+            <tbody>
+                <tr>
+                    <td id="no-data-row" colspan="17"
+                        data-isNoInfo="true"
+                        align="center">
+                        @AppResources.NoInformationIsAvailable
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+</div>
+

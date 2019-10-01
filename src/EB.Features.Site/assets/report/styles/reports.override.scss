@@ -1,4 +1,7 @@
 ﻿
+[class^="icon-"], [class*=" icon-"]{
+    cursor: pointer;
+}
 .match-title-row {
     background-color: #f3f5e0;
 
@@ -89,6 +92,9 @@
         .negative-value {
             color: #ffbeb4;
         }
+    }
+    .width110{
+        width: 110px;
     }
 }
 

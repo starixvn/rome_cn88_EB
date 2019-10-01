@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+@using EB.Features.Site.Shared;
+
+@StaticResources.RenderStyles("~/assets/report/bundles/legend")
+
+@model IEnumerable<string>
+
+<ul class="list-msg">
+    @foreach (var legend in Model)
+    {
+        <li>
+            @legend
+        </li>
+    }
+</ul>

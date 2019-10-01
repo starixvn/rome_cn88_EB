@@ -241,6 +241,7 @@ var NexDatePickerHelper = NexDatePickerHelper ||
             me.$secondDatePicker = me.$parent.find("#to-date-container");
             me.$userRangeLavel = me.$dropDownList.find("#range-label");
             me.$userRangeOptionHidden = me.$dropDownList.find("#hidden-range-option");
+            me.$options = options;
 
             //// Format Date Picker
             me.FormatDatePicker();
@@ -283,8 +284,28 @@ var NexDatePickerHelper = NexDatePickerHelper ||
 
                 if (this.id === "from-date-container") {
                     me.$secondDatePicker.data("DateTimePicker").minDate((new Date(me.$firstDatePicker.find("input").val())).toISOString());
+                    if (me.$options.dayRange) {
+                        var newMaxDate = new Date(me.$firstDatePicker.find("input").val());
+                        newMaxDate.setDate(newMaxDate.getDate() + me.$options.dayRange);
+                        var maxDate = new Date(me.$options.maxDate);
+                        if (newMaxDate < maxDate) {
+                            me.$secondDatePicker.data("DateTimePicker").maxDate(newMaxDate.toISOString());
+                        } else {
+                            me.$secondDatePicker.data("DateTimePicker").maxDate(maxDate.toISOString());
+                        }
+                    }
                 } else {
                     me.$firstDatePicker.data("DateTimePicker").maxDate((new Date(me.$secondDatePicker.find("input").val())).toISOString());
+                    if (me.$options.dayRange) {
+                        var newMinDate = new Date(me.$secondDatePicker.find("input").val());
+                        newMinDate.setDate(newMinDate.getDate() - me.$options.dayRange);
+                        var minDate = new Date(me.$options.minDate);
+                        if (newMinDate > minDate) {
+                            me.$firstDatePicker.data("DateTimePicker").minDate(newMinDate.toISOString());
+                        } else {
+                            me.$firstDatePicker.data("DateTimePicker").minDate(minDate.toISOString());
+                        }
+                    }
                 }
 
                 options.onSelectDatePicker(date);

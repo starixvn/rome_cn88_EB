@@ -1,6 +1,8 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using EB.Features.Reports;
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
@@ -11,7 +13,9 @@
     using EB.Features.Site.Shared.Models;
     using MediatR;
 
-    public class HouseWinLossHandler : ReportsBaseHandler, IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>
+    public class HouseWinLossHandler : ReportsBaseHandler,
+        IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>,
+        IRequestHandler<ReportLegendQuery, IEnumerable<string>>
     {
         private readonly ISportGroupService sportGroupService;
         private readonly IBettypeGroupService betTypeService;
@@ -30,6 +34,13 @@
             this.userSession = userSession;
         }
 
+        public IEnumerable<string> Handle(ReportLegendQuery message)
+            => new List<string>
+            {
+                ReportResources.InaccurateDataLegend,
+                ReportResources.CompareAccuratedDataLegend
+            };
+
         public HouseWinLossReportViewModel Handle(HouseWinLossQuery message)
         {
             var sportGroups = sportGroupService.GetSportGroups();
@@ -40,6 +51,9 @@
 
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
+                CustId = message.CustId,
+                Role = message.Role,
+                Viewer = message.UserSelectedViewer,
                 IsHistoricReport = message.IsHistoricReport,
                 TicketStatusId = message.UserSelectedTicketStatusId,
                 BetTypeGroup = message.UserSelectedBetTypeId,

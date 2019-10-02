@@ -91,8 +91,7 @@
       "js/libs/raven/raven.js",
       "js/components/draggable/tiny-draggable.js",
       "js/components/resizable/resizable.js",
-      "js/components/popup-manager/popup-manager.js",
-      "js/libs/accounting.js/accounting.js"
+      "js/components/popup-manager/popup-manager.js"
     ]
   }
 ]

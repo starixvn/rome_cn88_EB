@@ -1,11 +1,9 @@
 ﻿"use strict";
-var accounting: any;
 var periods: any;
 let NexDatePickerHelper: any;
 
 class PerformanceBonusReport {
     $: JQueryStatic;
-    $BonusRateOnGrid: JQuery;
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
     $fromDateContainer: JQuery;
@@ -40,7 +38,6 @@ class PerformanceBonusReport {
     public cacheDOMElements() {
         this.$reportForm = this.$("#report-form");
         this.$exportExcelForm = this.$("#export-excel-form");
-        this.$BonusRateOnGrid = this.$("#BonusRateOnGrid");
         this.$fromDateContainer = this.$("#from-date-container");
         this.$toDateContainer = this.$("#to-date-container");
         this.$dateRangePicker = this.$("#" + this.dateRangePickerComponent.options.selectorId);
@@ -49,59 +46,30 @@ class PerformanceBonusReport {
     public registerEvents() {
         this.$reportForm.submit(this.onReportSubmit);
         this.$("#icon-excel").on("click", this.onExportExcel);
-        this.$BonusRateOnGrid.on("keyup", this.onRecaculate);
+        new Cleave("#BonusRate", {
+            numeral: true,
+            numeralThousandsGroupStyle: 'thousand'
+        });
         new Cleave("#HeadlineStock", {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
         });
     };
 
-    onRecaculate = () => {
-        let totalBonusRate = 0;
-        let totalBonusRate1035 = 0;
-        let totalRoundDown = 0;
-        this.$(".js-bonus-rate").each((index: number, element: Element) => {
-            const $this = this.$(element);
-            const headlineStock = Number($this.data("headlinestock"));
-            const bonusRate = Number(this.$BonusRateOnGrid.val());
-            const value = headlineStock * bonusRate
-            totalBonusRate += value;
-            $this.text(accounting.formatNumber(value,2,","));
-        });
-
-        this.$("#total-bonus-rate").text(accounting.formatNumber(totalBonusRate, 2, ","));
-
-        this.$(".js-bonus-rate1035").each((index: number, element: Element) => {
-            const $this = this.$(element);
-            const headlineStock = Number($this.data("headlinestock"));
-            const bonusValue = Number(this.$BonusRateOnGrid.val());
-            const value = headlineStock * bonusValue * 1.035;
-            totalBonusRate1035 += value;
-            $this.text(accounting.formatNumber(value, 2, ","));
-        });
-        this.$("#total-bonus-rate1035").text(accounting.formatNumber(totalBonusRate1035, 2, ","));
-
-        this.$(".js-bonus-rate-round-down").each((index: number, element: Element) => {
-            const $this = this.$(element);
-            const headlineStock = Number($this.data("headlinestock"));
-            const bonusRate = Number(this.$BonusRateOnGrid.val());
-            const value = Math.floor(Math.abs(headlineStock * bonusRate * 1.035 / 100)) * 100;
-            totalRoundDown += value;
-            $this.text(accounting.formatNumber(value, 2, ","));
-        });
-        this.$("#total-bonus-rate-round-down").text(accounting.formatNumber(totalRoundDown, 2, ","));
-    };   
-
-    onExportExcel = () => {
+    convertStringNumberToNumber = () => {
         const headlineStock = this.$("#HeadlineStock").val().replace(',', '');
         this.$("#HeadlineStock").val(headlineStock);
+
+        const bonusRate = this.$("#BonusRate").val().replace(',', '');
+        this.$("#BonusRate").val(bonusRate);
+    }
+    onExportExcel = () => {
+        this.convertStringNumberToNumber();
         this.$exportExcelForm.submit();
     };
 
     onReportSubmit = (e: any) => {
-        this.$("#BonusRate").val(this.$BonusRateOnGrid.val());
-        const headlineStock = this.$("#HeadlineStock").val().replace(',', '');
-        this.$("#HeadlineStock").val(headlineStock);
+        this.convertStringNumberToNumber();
         this.periodSelectionComponent.updateSelectedValue();
         this.currencySelectionComponent.updateSelectedValue();
         this.conjunctionSelectionComponent.updateSelectedValue();

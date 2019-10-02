@@ -1,6 +1,4 @@
-﻿@using EB.Features.Reports.Extension;
-@using EB.Features.Reports.Model;
-@using EB.Features.Reports;
+﻿@using EB.Features.Reports;
 @using EB.Features.Site.Reports.ViewModel.PerformanceBonus
 
 @model PerformanceBonusViewModel
@@ -27,6 +25,10 @@
         @DateRangePicker.Render(Model.DateRangePickerViewModel)
         @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
         <div class="form-group">
+            <label>@ReportResources.BonusRate</label>
+            <input type="text" name="BonusRate" id="BonusRate" value="@Model.Query.BonusRate" />
+        </div>
+        <div class="form-group">
             <label>@($"{ReportResources.HeadlineStock} >=")</label>
             <input type="text" name="HeadlineStock" id="HeadlineStock" value="@Model.Query.HeadlineStock" />
         </div>
@@ -38,8 +40,6 @@
         <div class="form-group">
             <input type="submit" value="@AppResources.Submit" class="btn-submit" />
         </div>
-
-        <input type="hidden" id="BonusRate" name="BonusRate" value="@Model.Query.BonusRate" />
     </form>
 
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportPerformanceBonus","Reports")">
@@ -65,11 +65,7 @@
                     <th colspan="3" class="text-center header">@ReportResources.PerformanceBonus</th>
                 </tr>
                 <tr>
-                    <th class="text-right header">
-                        @ReportResources.BonusRate
-                        <input type="text" name="BonusRateOnGrid" id="BonusRateOnGrid" value="@Model.Query.BonusRate" />
-                        %
-                    </th>
+                    <th class="text-right header">@ReportResources.BonusRate</th>
                     <th class="text-right header">@ReportResources.Multiply1035</th>
                     <th class="text-right header">@ReportResources.Multiply1035RoundDown</th>
                 </tr>
@@ -82,18 +78,9 @@
                     <td class="text-left">@row.UserName</td>
                     <td class="text-left">@row.HeadlineUserName</td>
                     @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
-                    <td class="text-right @(row.PerformanceBonus <0?"negative-value":string.Empty) js-bonus-rate"
-                        data-HeadlineStock="@row.HeadlineStock">
-                        @HtmlHelpers.FormatNumber(row.PerformanceBonus)
-                    </td>
-                    <td class="text-right @(row.PerformanceBonus1035 <0?"negative-value":string.Empty) js-bonus-rate1035"
-                        data-HeadlineStock="@row.HeadlineStock">
-                        @HtmlHelpers.FormatNumber(row.PerformanceBonus1035)
-                    </td>
-                    <td class="text-right @(row.RoundDown <0?"negative-value":string.Empty) js-bonus-rate-round-down"
-                        data-HeadlineStock="@row.HeadlineStock">
-                        @HtmlHelpers.FormatNumber(row.RoundDown)
-                    </td>
+                    @HtmlHelpers.RenderNumberCell(row.PerformanceBonus)
+                    @HtmlHelpers.RenderNumberCell(row.PerformanceBonus1035)
+                    @HtmlHelpers.RenderNumberCell(row.RoundDown)
                 </tr>
             }
 
@@ -103,15 +90,9 @@
                     <tr class="total">
                         <td colspan="2" class="text-left">@ReportResources.Total</td>
                         @HtmlHelpers.RenderNumberCell(Model.Total.HeadlineStock)
-                        <td class="text-right @(Model.Total.PerformanceBonus <0?"negative-value":string.Empty)" id="total-bonus-rate">
-                            @HtmlHelpers.FormatNumber(Model.Total.PerformanceBonus)
-                        </td>
-                        <td class="text-right @(Model.Total.PerformanceBonus1035 <0?"negative-value":string.Empty)" id="total-bonus-rate1035">
-                            @HtmlHelpers.FormatNumber(Model.Total.PerformanceBonus1035)
-                        </td>
-                        <td class="text-right @(Model.Total.RoundDown <0?"negative-value":string.Empty)" id="total-bonus-rate-round-down">
-                            @HtmlHelpers.FormatNumber(Model.Total.RoundDown)
-                        </td>
+                        @HtmlHelpers.RenderNumberCell(Model.Total.PerformanceBonus)
+                        @HtmlHelpers.RenderNumberCell(Model.Total.PerformanceBonus1035)
+                        @HtmlHelpers.RenderNumberCell(Model.Total.RoundDown)
                     </tr>
                 </tfoot>
             }

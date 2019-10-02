@@ -42,19 +42,14 @@ namespace EB.Features.Reports.Services
             .OrderBy(i => i.HeadlineUserName)
             .ThenBy(i => i.UserName);
 
-            if (param.BonusRate != 0)
+            return reports.Select(i =>
             {
-                return reports.Select(i => 
-                {
-                    i.BonusRate = param.BonusRate;
-                    i.PerformanceBonus = i.HeadlineStock * i.BonusRate;
-                    i.PerformanceBonus1035 = i.PerformanceBonus * SecretNumber;
-                    i.RoundDown = Math.Floor(Math.Abs(i.PerformanceBonus1035 / 100)) * 100;
-                    return i;
-                });
-            }
-
-            return reports;
+                i.BonusRate = param.BonusRate;
+                i.PerformanceBonus = i.HeadlineStock * i.BonusRate;
+                i.PerformanceBonus1035 = i.PerformanceBonus * SecretNumber;
+                i.RoundDown = Math.Floor(Math.Abs(i.PerformanceBonus1035 / 100)) * 100;
+                return i;
+            });
         }
     }
 }

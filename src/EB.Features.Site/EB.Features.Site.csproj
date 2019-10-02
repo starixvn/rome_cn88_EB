@@ -385,7 +385,6 @@
     <Content Include="assets\common\js\components\tablesorter\tablesorter.js" />
     <Content Include="assets\common\js\components\toastr\toastr.js" />
     <Content Include="assets\common\js\components\typeahead\typeahead.js" />
-    <Content Include="assets\common\js\libs\accounting.js\accounting.js" />
     <Content Include="assets\common\js\libs\angular\angular-1.5.3.js" />
     <Content Include="assets\common\js\libs\bootstrap-material\material.js" />
     <Content Include="assets\common\js\libs\bootstrap-material\ripples.js" />

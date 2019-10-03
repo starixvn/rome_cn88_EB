@@ -67,6 +67,7 @@
         <input type="hidden" name="RoleId" id="RoleId" value="@Model.Query.RoleId" />
     </form>
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportHouseWinLoss","Reports")">
+        @Html.Hidden("HeadlineId", Model.Query.HeadlineId)
         @Html.Hidden("UserSelectedViewer", Model.Query.UserSelectedViewer)
         @Html.Hidden("RoleId", Model.Query.RoleId)
         @Html.Hidden("Date", Model.Query.Date)

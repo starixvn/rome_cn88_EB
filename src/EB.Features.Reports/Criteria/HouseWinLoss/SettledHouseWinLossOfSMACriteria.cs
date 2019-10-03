@@ -7,14 +7,16 @@
 
     public class SettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
-
         public SettledHouseWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
         {
+            HeadlineId = param.HeadlineId;
             Role = param.Role;
             CustId = param.CustId;
             MoveBetsDay = param.MoveBetsDay;
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
         }
+
+        public int HeadlineId { get; }
 
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }
@@ -29,11 +31,11 @@
 
         public override string GetSettingKey()
             => Role.IsSuperLevel() ?
-            "CS_Rpt_EBWinloss_Super" :
+            "CS_EB_Rpt_Winloss_Super" :
              Role.IsMasterLevel() ?
-            "CS_Rpt_EBWinloss_Master" :
+            "CS_EB_Rpt_Winloss_Master" :
             Role.IsAgentLevel() ?
-            "CS_Rpt_EBWinloss_Agent" :
-            "CS_Rpt_EBWinloss_Member";
+            "CS_EB_Rpt_Winloss_Agent" :
+            "CS_EB_Rpt_Winloss_Member";
     }
 }

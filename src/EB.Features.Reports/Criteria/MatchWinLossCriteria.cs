@@ -32,6 +32,6 @@
             => BetTypeGroup >= 0 && IsLive >= 0;
 
         public override string GetSettingKey()
-            => "CS_Rpt_MatchWinLoss_Headline";
+            => "CS_EB_Rpt_MatchWinLoss_Headline";
     }
 }

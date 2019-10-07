@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <form class="form-inline filter report-form" role="form" id="report-form">
+    <form class="form-inline filter report-form filter-performance-bonus" role="form" id="report-form">
         @PeriodSelection.Render(Model.PeriodSelectionViewModel, true)
         @DateRangePicker.Render(Model.DateRangePickerViewModel)
         @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
@@ -28,18 +28,21 @@
             <label>@ReportResources.BonusRate</label>
             <input type="text" name="BonusRate" id="BonusRate" value="@Model.Query.BonusRate" />
         </div>
-        <div class="form-group">
-            <label>@($"{ReportResources.HeadlineStock} >=")</label>
-            <input type="text" name="HeadlineStock" id="HeadlineStock" value="@Model.Query.HeadlineStock" />
+        <div>
+            <div class="form-group">
+                <label>@($"{ReportResources.HeadlineStock} >=")</label>
+                <input type="text" name="HeadlineStock" id="HeadlineStock" class="txt-headline-stock" value="@Model.Query.HeadlineStock" />
+            </div>
+            @ConjunctionSelection.Render(Model.ConjunctionSelectionViewModel, false)
+            <div class="form-group">
+                <label>@ReportResources.SMA</label>
+                <textarea name="UserNames" id="UserNames" class="txt-username">@Model.Query.UserNames</textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@AppResources.Submit" class="btn-submit" />
+            </div>
         </div>
-        @ConjunctionSelection.Render(Model.ConjunctionSelectionViewModel, false)
-        <div class="form-group">
-            <label>@ReportResources.SMA</label>
-            <textarea name="UserNames" id="UserNames" rows="2" cols="50">@Model.Query.UserNames</textarea>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="@AppResources.Submit" class="btn-submit" />
-        </div>
+
     </form>
 
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportPerformanceBonus","Reports")">

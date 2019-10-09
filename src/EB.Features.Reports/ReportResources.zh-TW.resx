@@ -324,4 +324,25 @@
   <data name="And" xml:space="preserve">
     <value>和</value>
   </data>
+  <data name="InvalidUserNames" xml:space="preserve">
+    <value>無效的帳戶</value>
+  </data>
+  <data name="Dividend" xml:space="preserve">
+    <value>股利</value>
+  </data>
+  <data name="DividendRate" xml:space="preserve">
+    <value>股息率</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="Multiply1035" xml:space="preserve">
+    <value>紅利(*1.035)</value>
+  </data>
+  <data name="Multiply1035RoundDown" xml:space="preserve">
+    <value>紅利無條件捨去至100</value>
+  </data>
+  <data name="PerformanceBonusTitle" xml:space="preserve">
+    <value>績效獎金計算</value>
+  </data>
 </root>

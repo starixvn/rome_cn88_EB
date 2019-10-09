@@ -130,10 +130,10 @@
     <value>Headline</value>
   </data>
   <data name="HeadlineStock" xml:space="preserve">
-    <value>HL Stock</value>
+    <value>Headline Stock</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
-    <value>HL Stock %</value>
+    <value>Headline Stock %</value>
   </data>
   <data name="HouseComm" xml:space="preserve">
     <value>House Comm</value>
@@ -327,17 +327,11 @@
   <data name="PerformanceBonusTitle" xml:space="preserve">
     <value>Performance Bonus Calculator</value>
   </data>
-  <data name="PerformanceBonus" xml:space="preserve">
-    <value>Performance Bonus</value>
-  </data>
-  <data name="BonusRate" xml:space="preserve">
-    <value>Bonus Rate</value>
-  </data>
   <data name="Multiply1035" xml:space="preserve">
-    <value>* 1.035</value>
+    <value>Bonus (*1.035)</value>
   </data>
   <data name="Multiply1035RoundDown" xml:space="preserve">
-    <value>* 1.035 Round Down to 100</value>
+    <value>Bonus Round Down to 100</value>
   </data>
   <data name="And" xml:space="preserve">
     <value>AND</value>
@@ -353,5 +347,17 @@
   </data>
   <data name="InvalidUserNames" xml:space="preserve">
     <value>Invalid username(s): </value>
+  </data>
+  <data name="Dividend" xml:space="preserve">
+    <value>Dividend</value>
+  </data>
+  <data name="DividendRate" xml:space="preserve">
+    <value>Dividend Rate</value>
+  </data>
+  <data name="HLStock" xml:space="preserve">
+    <value>HL Stock</value>
+  </data>
+  <data name="HLStockPercent" xml:space="preserve">
+    <value>HL Stock %</value>
   </data>
 </root>

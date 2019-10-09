@@ -25,7 +25,7 @@
         @DateRangePicker.Render(Model.DateRangePickerViewModel)
         @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
         <div class="form-group">
-            <label>@ReportResources.BonusRate</label>
+            <label>@($"{ReportResources.DividendRate} (%)")</label>
             <input type="text" name="BonusRate" id="BonusRate" value="@Model.Query.BonusRate" />
         </div>
         <div>
@@ -62,13 +62,10 @@
         <table class="tbl-noborder tbl-report settlement-report @(string.IsNullOrEmpty(Model.ErrorMessage)?string.Empty: "hidden")" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
                 <tr>
-                    <th rowspan="2" class="text-left header">@ReportResources.SMAUserName</th>
-                    <th rowspan="2" class="text-left header">@ReportResources.Headline</th>
-                    <th rowspan="2" class="text-right header border-right">@ReportResources.HeadlineStock</th>
-                    <th colspan="3" class="text-center header">@ReportResources.PerformanceBonus</th>
-                </tr>
-                <tr>
-                    <th class="text-right header">@ReportResources.BonusRate</th>
+                    <th class="text-left header">@ReportResources.SMAUserName</th>
+                    <th class="text-left header">@ReportResources.Headline</th>
+                    <th class="text-right header">@ReportResources.HeadlineStock</th>
+                    <th class="text-right header">@ReportResources.Dividend</th>
                     <th class="text-right header">@ReportResources.Multiply1035</th>
                     <th class="text-right header">@ReportResources.Multiply1035RoundDown</th>
                 </tr>

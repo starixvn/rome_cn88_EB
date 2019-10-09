@@ -151,15 +151,6 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bonus Rate.
-        /// </summary>
-        public static string BonusRate {
-            get {
-                return ResourceManager.GetString("BonusRate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to - You can compare the accurate data by viewing the current Wager report..
         /// </summary>
         public static string CompareAccuratedDataLegend {
@@ -192,6 +183,24 @@ namespace EB.Features.Reports {
         public static string December {
             get {
                 return ResourceManager.GetString("December", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dividend.
+        /// </summary>
+        public static string Dividend {
+            get {
+                return ResourceManager.GetString("Dividend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dividend Rate.
+        /// </summary>
+        public static string DividendRate {
+            get {
+                return ResourceManager.GetString("DividendRate", resourceCulture);
             }
         }
         
@@ -268,7 +277,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HL Stock.
+        ///   Looks up a localized string similar to Headline Stock.
         /// </summary>
         public static string HeadlineStock {
             get {
@@ -277,11 +286,29 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HL Stock %.
+        ///   Looks up a localized string similar to Headline Stock %.
         /// </summary>
         public static string HeadlineStockPercent {
             get {
                 return ResourceManager.GetString("HeadlineStockPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HL Stock.
+        /// </summary>
+        public static string HLStock {
+            get {
+                return ResourceManager.GetString("HLStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HL Stock %.
+        /// </summary>
+        public static string HLStockPercent {
+            get {
+                return ResourceManager.GetString("HLStockPercent", resourceCulture);
             }
         }
         
@@ -475,7 +502,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * 1.035.
+        ///   Looks up a localized string similar to Bonus (*1.035).
         /// </summary>
         public static string Multiply1035 {
             get {
@@ -484,7 +511,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * 1.035 Round Down to 100.
+        ///   Looks up a localized string similar to Bonus Round Down to 100.
         /// </summary>
         public static string Multiply1035RoundDown {
             get {
@@ -552,15 +579,6 @@ namespace EB.Features.Reports {
         public static string Or {
             get {
                 return ResourceManager.GetString("Or", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Performance Bonus.
-        /// </summary>
-        public static string PerformanceBonus {
-            get {
-                return ResourceManager.GetString("PerformanceBonus", resourceCulture);
             }
         }
         

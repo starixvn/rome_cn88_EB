@@ -324,4 +324,25 @@
   <data name="And" xml:space="preserve">
     <value>和</value>
   </data>
+  <data name="InvalidUserNames" xml:space="preserve">
+    <value>无效的账户</value>
+  </data>
+  <data name="Dividend" xml:space="preserve">
+    <value>股利</value>
+  </data>
+  <data name="DividendRate" xml:space="preserve">
+    <value>股息率</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>或</value>
+  </data>
+  <data name="Multiply1035" xml:space="preserve">
+    <value>红利(*1.035)</value>
+  </data>
+  <data name="Multiply1035RoundDown" xml:space="preserve">
+    <value>红利无条件舍去至100</value>
+  </data>
+  <data name="PerformanceBonusTitle" xml:space="preserve">
+    <value>绩效奖金计算</value>
+  </data>
 </root>

@@ -222,4 +222,10 @@
   <data name="Viewer" xml:space="preserve">
     <value>检视</value>
   </data>
+  <data name="Period" xml:space="preserve">
+    <value>期间</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>货币</value>
+  </data>
 </root>

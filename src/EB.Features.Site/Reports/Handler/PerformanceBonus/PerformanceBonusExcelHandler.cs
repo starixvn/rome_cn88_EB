@@ -95,7 +95,7 @@
         internal static string GetReportTitle(PerformanceBonusExcelQuery query)
         {
             var currency = $"{ AppResources.Currency }: { CurrencyConstant.List[query.UserSelectedCurrencyId]}";
-            var bonusRate = $"{ReportResources.BonusRate}: {query.BonusRate}%";
+            var bonusRate = $"{ReportResources.DividendRate}: {query.BonusRate}%";
             var date = $"{query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
 
             return $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency}";

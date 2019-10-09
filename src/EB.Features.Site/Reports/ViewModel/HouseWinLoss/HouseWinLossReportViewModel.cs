@@ -128,8 +128,8 @@
         {
             var param = new Dictionary<string, object>
             {
-                ["FromDate"] = Query.FromDate,
-                ["ToDate"] = Query.ToDate,
+                ["FromDate"] = Query.IsHistoricReport ? Query.FromDate : Query.Date,
+                ["ToDate"] = Query.IsHistoricReport ? Query.ToDate : Query.Date,
                 ["CustId"] = custId,
                 ["CustName"] = custName,
                 ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupIds,

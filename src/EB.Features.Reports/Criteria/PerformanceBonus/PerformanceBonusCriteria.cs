@@ -29,7 +29,7 @@
         public int Conjunction { get; }
 
         public override bool IsValid()
-            => FromDate <= ToDate && Currency > 0 && Conjunction > 0;
+            => FromDate <= ToDate && Currency > 0;
 
         public override string GetSettingKey()
             => "CS_EB_Rpt_PerformanceBonus";

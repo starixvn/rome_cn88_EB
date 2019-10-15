@@ -124,6 +124,24 @@
             return HttpContext.Current.Response.ApplyAppPathModifier("~/Reports/HouseWinLoss?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value)));
         }
 
+        public string GetInternalLoginLink(int custId, string custName)
+        {
+            var param = new Dictionary<string, object>
+            {
+                ["FromDate"] = Query.IsHistoricReport ? Query.FromDate : Query.Date,
+                ["ToDate"] = Query.IsHistoricReport ? Query.ToDate : Query.Date,
+                ["CustId"] = custId,
+                ["CustName"] = custName,
+                ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupIds,
+                ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
+                ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
+                ["Type"] = Query.IsHistoricReport || Query.UserSelectedTicketStatusId == TicketStatusConstants.Settled ? 1 : 3,
+                ["ExcludeDataTest"] = Query.IsTest,
+            };
+
+            return "~/BetLists/BetListOfEBReport?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+        }
+
         public string LanguageCode { get; }
 
         public BreadcrumbLevelViewModel BreadcrumbLevelViewModel

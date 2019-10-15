@@ -22,6 +22,7 @@
 
         public string GetInternalLogInLink(InternalLoginParam param)
         {
+            const bool isHideTopMenu = true;
             var time = dataAccess.GetDBTime(new GetDBTimeCriteria()).Ticks;
             var queryParam = string.Join("&", new List<object>
             {
@@ -32,7 +33,8 @@
                 param.AfterLogInSite,
                 param.AfterLogInQuery.Replace("&", "|"),
                 string.Empty,
-                param.Language
+                param.Language,
+                isHideTopMenu
             });
 
             var encryptedParams = param.EncryptParamFunc(queryParam, 1024, param.KeyPath);

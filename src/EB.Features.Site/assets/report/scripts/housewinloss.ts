@@ -24,6 +24,8 @@ class HouseWinLossReport {
     $loadLegendURL: JQuery;
     topWindow: JQuery;
 
+    $internalLoginForm: JQuery;
+
     constructor($: JQueryStatic,
         topWindow: any,
         dateRangePickerComponent: DateRangePickerComponent,
@@ -66,6 +68,7 @@ class HouseWinLossReport {
         this.$tableReport = this.$("#tbl-report");
 
         this.$loadLegendURL = this.$("#LoadLegendURL");        
+        this.$internalLoginForm = this.$("#internal-login-form");
     }
 
     public registerEvents() {
@@ -86,8 +89,21 @@ class HouseWinLossReport {
         });
         this.$("#icon-information").on("click", this.showLegend);
         this.switchCalendarType();
+        var thisInternalLogin = this.internalLogin;
         var this$ = this.$;
-    }
+        this.$(".lnk-internal").on("click touchend", function () {
+            var elm = this$(this);
+            thisInternalLogin({
+                query: elm.attr("data-query")
+            });
+        });
+    };
+
+    internalLogin = (options) => {        
+        this.$("#AfterLogInQuery").val(options.query);
+        const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
+        window.open(url, "internallogin", "scrollbars=1,fullscreen=yes,top=290")
+    };
 
     showLegend = () => {
         this.topWindow.popupManager.init(this.$, top);

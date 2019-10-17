@@ -213,4 +213,7 @@
   <data name="SessionKickedOut" xml:space="preserve">
     <value>您已登出，您的账户于其他设备登录。若对此登录行为没有印象，请联系您的上线取得协助。</value>
   </data>
+  <data name="PerformanceBonus" xml:space="preserve">
+    <value>绩效奖金计算</value>
+  </data>
 </root>

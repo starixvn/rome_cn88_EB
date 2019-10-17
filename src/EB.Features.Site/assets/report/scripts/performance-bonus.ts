@@ -44,16 +44,40 @@ class PerformanceBonusReport {
     };
 
     public registerEvents() {
+        this.$("#UserNames").on("change", this.CorrectUserName);
         this.$reportForm.submit(this.onReportSubmit);
         this.$("#icon-excel").on("click", this.onExportExcel);
+        this.$("#HeadlineStock").on("keyup", this.CheckHeadlineStock);
         new Cleave("#BonusRate", {
             numeral: true,
-            numeralThousandsGroupStyle: 'thousand'
+            numeralDecimalScale: 4
         });
         new Cleave("#HeadlineStock", {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
         });
+    };
+
+    CheckHeadlineStock = (e: any) => {
+        const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
+        const newValue = Number(headlineStock);
+        if (newValue > 999999999999.99) {
+            this.$("#HeadlineStock").val(this.$("#HeadlineStock").data("oldvalue"));
+            new Cleave("#HeadlineStock", {
+                numeral: true,
+                numeralThousandsGroupStyle: 'thousand'
+            });
+        } else {
+            this.$("#HeadlineStock").data("oldvalue", newValue);
+        }
+    };
+
+    CorrectUserName = () => {
+        var userNames = this.$("#UserNames").val();
+        userNames = userNames.trim().split(/\r\n|\r|\n|\s/g).filter(function (el) {
+            return el != "";
+        }).join(",");
+        this.$("#UserNames").val(userNames);
     };
 
     convertStringNumberToNumber = () => {
@@ -64,7 +88,6 @@ class PerformanceBonusReport {
         this.$("#BonusRate").val(bonusRate);
     }
     onExportExcel = () => {
-        this.convertStringNumberToNumber();
         this.$exportExcelForm.submit();
     };
 

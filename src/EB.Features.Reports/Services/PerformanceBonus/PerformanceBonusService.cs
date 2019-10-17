@@ -47,7 +47,7 @@ namespace EB.Features.Reports.Services
                 i.BonusRate = param.BonusRate;
                 i.PerformanceBonus = i.HeadlineStock * i.BonusRate / 100;
                 i.PerformanceBonus1035 = i.PerformanceBonus * SecretNumber;
-                i.RoundDown = Math.Floor((i.PerformanceBonus1035 / 100)) * 100;
+                i.RoundDown = Math.Sign(i.PerformanceBonus1035) * Math.Floor(Math.Abs(i.PerformanceBonus1035 / 100)) * 100;
                 return i;
             });
         }

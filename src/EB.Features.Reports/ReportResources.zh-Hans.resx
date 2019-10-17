@@ -345,4 +345,10 @@
   <data name="PerformanceBonusTitle" xml:space="preserve">
     <value>绩效奖金计算</value>
   </data>
+  <data name="HLStock" xml:space="preserve">
+    <value>公司实货量</value>
+  </data>
+  <data name="HLStockPercent" xml:space="preserve">
+    <value>占货比(%)</value>
+  </data>
 </root>

@@ -85,12 +85,12 @@
               noInfomationText: AppResources.NoInformationIsAvailable,
               titleStartIndex: 1,
               headerStartIndex: 2,
-              bodyStartIndex: 4,
-              bodyEndIndex: 5,
-              freezeRowIndex: 4,
+              bodyStartIndex: 3,
+              bodyEndIndex: 4,
+              freezeRowIndex: 3,
               columnStartName: A,
               sheetIndex: 1,
-              footerEndIndex: 6);
+              footerEndIndex: 5);
 
         internal static string GetReportTitle(PerformanceBonusExcelQuery query)
         {

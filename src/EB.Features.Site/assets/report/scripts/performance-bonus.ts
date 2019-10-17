@@ -88,10 +88,10 @@ class PerformanceBonusReport {
         for (var i = 0; i < periods.length; i++) {
             if (periods[i].Id == id) {
                 var period = periods[i];
-                this.changeDateRange(period.FromDate, period.ToDate);
+                this.changeDateRange(new Date(period.FromDate), new Date(period.ToDate));
                 break;
             }
-        }        
+        }
     };
 
     changeDateRange(fromDate, toDate): void {
@@ -99,10 +99,10 @@ class PerformanceBonusReport {
         const maxDate = new Date(this.$dateRangePicker.data("maxdate"));
         const fDate = NexDatePickerHelper.correctDateInRange(fromDate, minDate, maxDate);
         const tDate = NexDatePickerHelper.correctDateInRange(toDate, minDate, maxDate);
-
+                
         this.$fromDateContainer.data("DateTimePicker").maxDate(tDate);
         this.$fromDateContainer.data("DateTimePicker").date(fDate);
-
+        
         this.$toDateContainer.data("DateTimePicker").minDate(fDate);
         this.$toDateContainer.data("DateTimePicker").date(tDate);
     }

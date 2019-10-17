@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EB.Features.Reports.Criteria.PerformanceBonus;
 using EB.Features.Reports.Model;
+using EB.Features.Shared.Utilities;
 using Fanex.Caching;
 using Fanex.Data.Repository;
 
@@ -25,7 +26,7 @@ namespace EB.Features.Reports.Services
         private readonly ICacheService fanexCacheService;
 
         public AccountingPeriodServiceImpl(
-            ICacheService fanexCacheService, 
+            ICacheService fanexCacheService,
             IDynamicRepository dynamicRepository)
         {
             this.dynamicRepository = dynamicRepository;
@@ -34,7 +35,7 @@ namespace EB.Features.Reports.Services
 
         public AccountingPeriod GetCurrentPeriod()
             => GetAccountingPeriods().FirstOrDefault(p => p.IsCurrentPeriod);
-       
+
         public IEnumerable<AccountingPeriod> GetOldAccountingPeriods()
         {
             var periods = GetAccountingPeriods().ToList();
@@ -50,7 +51,9 @@ namespace EB.Features.Reports.Services
         public IEnumerable<AccountingPeriod> GetAccountingPeriods()
             => fanexCacheService.GetOrSet(
                 AccountingPeriodsCacheKey,
-                () => dynamicRepository.Fetch<AccountingPeriod>(new GetAccountingPeriodsCriteria()),
+                () => dynamicRepository
+                .Fetch<AccountingPeriod>(new GetAccountingPeriodsCriteria())
+                .Where(i => i.ToDate >= SystemTime.MinDate),
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)));
     }
 }

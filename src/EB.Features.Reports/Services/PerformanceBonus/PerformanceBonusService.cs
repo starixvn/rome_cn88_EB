@@ -45,7 +45,7 @@ namespace EB.Features.Reports.Services
             return reports.Select(i =>
             {
                 i.BonusRate = param.BonusRate;
-                i.PerformanceBonus = i.HeadlineStock * i.BonusRate;
+                i.PerformanceBonus = i.HeadlineStock * i.BonusRate / 100;
                 i.PerformanceBonus1035 = i.PerformanceBonus * SecretNumber;
                 i.RoundDown = Math.Floor(Math.Abs(i.PerformanceBonus1035 / 100)) * 100;
                 return i;

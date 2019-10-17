@@ -15,8 +15,8 @@
             UserSelectedCurrencyId = CurrencyConstant.CY;
             UserSelectedConjunctionId = ConjunctionConstant.And;
             HeadlineStock = 1000000;
-            FromDate = SystemTime.MinDate;
-            ToDate = SystemTime.Yesterday;
+            FromDate = DateTime.MinValue;
+            ToDate = DateTime.MinValue;
         }
 
         public string UserSelectedPeriodId { get; set; }

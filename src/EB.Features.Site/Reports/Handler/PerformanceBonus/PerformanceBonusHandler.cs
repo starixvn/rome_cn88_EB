@@ -33,8 +33,8 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
             message.UserSelectedPeriodId = string.IsNullOrEmpty(message.UserSelectedPeriodId)?
                 accountingPeriodService.GetCurrentPeriod().Id :
                 message.UserSelectedPeriodId;
-            message.FromDate = message.FromDate == SystemTime.MinDate ? accountingPeriodService.GetCurrentPeriod().FromDate : message.FromDate;
-            message.ToDate = message.ToDate == SystemTime.Yesterday ? accountingPeriodService.GetCurrentPeriod().ToDate : message.ToDate;
+            message.FromDate = message.FromDate == DateTime.MinValue ? accountingPeriodService.GetCurrentPeriod().FromDate : message.FromDate;
+            message.ToDate = message.ToDate == DateTime.MinValue ? accountingPeriodService.GetCurrentPeriod().ToDate : message.ToDate;
 
             var periodSelectListItems = BuildPeriodSelectListItems(periods, message.UserSelectedPeriodId);
             var invalidSupersMessage = performanceBonusService.CheckValidSuper(message.UserNames);

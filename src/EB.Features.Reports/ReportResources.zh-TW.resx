@@ -351,4 +351,7 @@
   <data name="HLStockPercent" xml:space="preserve">
     <value>佔貨比(%)</value>
   </data>
+  <data name="PerformanceBonusTooltip" xml:space="preserve">
+    <value>帳戶 (以逗號分隔 ',')</value>
+  </data>
 </root>

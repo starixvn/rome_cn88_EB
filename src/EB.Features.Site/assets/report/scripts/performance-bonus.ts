@@ -88,7 +88,6 @@ class PerformanceBonusReport {
         this.$("#BonusRate").val(bonusRate);
     }
     onExportExcel = () => {
-        this.$.blockUI();
         this.$exportExcelForm.submit();
     };
 

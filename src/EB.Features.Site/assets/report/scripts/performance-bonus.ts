@@ -81,17 +81,19 @@ class PerformanceBonusReport {
     };
 
     convertStringNumberToNumber = () => {
-        const headlineStock = this.$("#HeadlineStock").val().replace(',', '');
+        const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
         this.$("#HeadlineStock").val(headlineStock);
 
-        const bonusRate = this.$("#BonusRate").val().replace(',', '');
+        const bonusRate = this.$("#BonusRate").val().replace(/,/g, '');
         this.$("#BonusRate").val(bonusRate);
     }
     onExportExcel = () => {
+        this.$.blockUI();
         this.$exportExcelForm.submit();
     };
 
     onReportSubmit = (e: any) => {
+        this.$.blockUI();
         this.convertStringNumberToNumber();
         this.periodSelectionComponent.updateSelectedValue();
         this.currencySelectionComponent.updateSelectedValue();

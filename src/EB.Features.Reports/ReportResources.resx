@@ -360,4 +360,7 @@
   <data name="HLStockPercent" xml:space="preserve">
     <value>HL Stock %</value>
   </data>
+  <data name="PerformanceBonusTooltip" xml:space="preserve">
+    <value>Username(s) (seperated by comma ',')</value>
+  </data>
 </root>

@@ -26,23 +26,30 @@
         @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
         <div class="form-group">
             <label>@($"{ReportResources.DividendRate} (%)")</label>
-            <input type="text" name="BonusRate" id="BonusRate" value="@Model.Query.BonusRate" />
+            <input type="text" name="BonusRate" id="BonusRate" value="@Model.Query.BonusRate" maxlength="10" />
         </div>
         <div>
             <div class="form-group">
                 <label>@($"{ReportResources.HeadlineStock} >=")</label>
-                <input type="text" name="HeadlineStock" id="HeadlineStock" class="txt-headline-stock" value="@Model.Query.HeadlineStock" data-oldValue="@Model.Query.HeadlineStock"/>
+                <input type="text" name="HeadlineStock" id="HeadlineStock" class="txt-headline-stock" value="@Model.Query.HeadlineStock" data-oldValue="@Model.Query.HeadlineStock" />
             </div>
             @ConjunctionSelection.Render(Model.ConjunctionSelectionViewModel, false)
             <div class="form-group">
-                <label>@ReportResources.SMA</label>
+                <label>
+                    @ReportResources.SMA
+                    <span id="icon-information" class="icon-info" data-toggle="tooltip" title="@ReportResources.PerformanceBonusTooltip"></span>
+                </label>
                 <textarea name="UserNames" id="UserNames" class="txt-username">@Model.Query.UserNames</textarea>
             </div>
             <div class="form-group">
                 <input type="submit" value="@AppResources.Submit" class="btn-submit" />
             </div>
         </div>
-
+        <div class="form-group invalid">
+            <div class="error-message @(string.IsNullOrEmpty(Model.ErrorMessage)?"hidden":string.Empty)">
+                @($"{ReportResources.InvalidUserNames} {Model.ErrorMessage}")
+            </div>
+        </div>
     </form>
 
     <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportPerformanceBonus","Reports")">
@@ -56,9 +63,7 @@
     </form>
 
     <div class="tab-content main-content" id="tab-main-content">
-        <div class="error-message @(string.IsNullOrEmpty(Model.ErrorMessage)?"hidden":string.Empty)">
-            @($"{ReportResources.InvalidUserNames} {Model.ErrorMessage}")
-        </div>
+        
         <table class="tbl-noborder tbl-report settlement-report @(string.IsNullOrEmpty(Model.ErrorMessage)?string.Empty: "hidden")" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
                 <tr>

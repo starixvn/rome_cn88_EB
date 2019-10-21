@@ -592,6 +592,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Username(s) (seperated by comma &apos;,&apos;).
+        /// </summary>
+        public static string PerformanceBonusTooltip {
+            get {
+                return ResourceManager.GetString("PerformanceBonusTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profit Margin.
         /// </summary>
         public static string ProfitMargin {

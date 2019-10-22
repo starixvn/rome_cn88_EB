@@ -1,0 +1,125 @@
+﻿@using EB.Features.Reports;
+@using EB.Features.Site.Reports.ViewModel.PerformanceBonus
+
+@model PerformanceBonusViewModel
+@{
+    Layout = "~/Shared/Views/_Layout.cshtml";
+    ViewBag.Title = ReportResources.PerformanceBonusTitle;
+}
+@section Styles {
+    @StaticResources.RenderStyles("~/assets/report/bundles/reports")
+}
+
+<div class="report-detail wager-report">
+    <div class="page-title title-report-detail">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="report-name">@ViewBag.Title</li>
+        </ul>
+        <div class="breadcrumb-container">
+            <span id="icon-excel" class="icon-excel" title="@AppResources.ExportToExcel" data-toggle="tooltip" data-placement="bottom"></span>
+        </div>
+    </div>
+
+    <form class="form-inline filter report-form filter-performance-bonus" role="form" id="report-form">
+        @PeriodSelection.Render(Model.PeriodSelectionViewModel, true)
+        @DateRangePicker.Render(Model.DateRangePickerViewModel)
+        @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
+        <div class="form-group">
+            <label>@($"{ReportResources.DividendRate} (%)")</label>
+            <input type="text" name="DividendRate" id="DividendRate" value="@Model.Query.DividendRate" maxlength="10" />
+        </div>
+        <div>
+            <div class="form-group">
+                <label>@($"{ReportResources.HeadlineStock} >=")</label>
+                <input type="text" name="HeadlineStock" id="HeadlineStock" class="txt-headline-stock" value="@Model.Query.HeadlineStock" data-oldValue="@Model.Query.HeadlineStock" />
+            </div>
+            @ConjunctionSelection.Render(Model.ConjunctionSelectionViewModel, false)
+            <div class="form-group">
+                <label>
+                    @ReportResources.SMA
+                    <span id="icon-information" class="icon-info" data-toggle="tooltip" title="@ReportResources.PerformanceBonusTooltip"></span>
+                </label>
+                <textarea name="UserNames" id="UserNames" class="txt-username">@Model.Query.UserNames</textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="@AppResources.Submit" class="btn-submit" />
+            </div>
+        </div>
+        <div class="form-group invalid">
+            <div class="error-message @(string.IsNullOrEmpty(Model.ErrorMessage)?"hidden":string.Empty)">
+                @($"{ReportResources.InvalidUserNames} {Model.ErrorMessage}")
+            </div>
+        </div>
+    </form>
+
+    <form class="form-inline hide" role="form" id="export-excel-form" action="@Url.Action("ExportPerformanceBonus","Reports")">
+        @Html.Hidden("FromDate", Model.Query.FromDate)
+        @Html.Hidden("ToDate", Model.Query.ToDate)
+        @Html.Hidden("UserSelectedCurrencyId", Model.Query.UserSelectedCurrencyId)
+        @Html.Hidden("HeadlineStock", Model.Query.HeadlineStock)
+        @Html.Hidden("UserSelectedConjunctionId", Model.Query.UserSelectedConjunctionId)
+        @Html.Hidden("UserNames", Model.Query.UserNames)
+        @Html.Hidden("DividendRate", Model.Query.DividendRate)
+    </form>
+
+    <div class="tab-content main-content" id="tab-main-content">
+        
+        <table class="tbl-noborder tbl-report settlement-report @(string.IsNullOrEmpty(Model.ErrorMessage)?string.Empty: "hidden")" id="tbl-report">
+            <thead class="tableFloatingHeaderOriginal">
+                <tr>
+                    <th class="text-left header">@ReportResources.SMAUserName</th>
+                    <th class="text-left header">@ReportResources.Headline</th>
+                    <th class="text-right header">@ReportResources.HeadlineStock</th>
+                    <th class="text-right header">@ReportResources.Dividend</th>
+                    <th class="text-right header">@ReportResources.Bonus</th>
+                    <th class="text-right header">@ReportResources.BonusRoundDown</th>
+                </tr>
+
+            </thead>
+
+            @foreach (var row in Model.Reports)
+            {
+                <tr>
+                    <td class="text-left">@row.UserName</td>
+                    <td class="text-left">@row.HeadlineUserName</td>
+                    @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
+                    @HtmlHelpers.RenderNumberCell(row.Dividend)
+                    @HtmlHelpers.RenderNumberCell(row.Bonus)
+                    @HtmlHelpers.RenderNumberCell(row.BonusRoundDown)
+                </tr>
+            }
+
+            @if (Model.Reports.Any())
+            {
+                <tfoot>
+                    <tr class="total">
+                        <td colspan="2" class="text-left">@ReportResources.Total</td>
+                        @HtmlHelpers.RenderNumberCell(Model.Total.HeadlineStock)
+                        @HtmlHelpers.RenderNumberCell(Model.Total.Dividend)
+                        @HtmlHelpers.RenderNumberCell(Model.Total.Bonus)
+                        @HtmlHelpers.RenderNumberCell(Model.Total.BonusRoundDown)
+                    </tr>
+                </tfoot>
+            }
+            else
+            {
+                <tbody>
+                    <tr>
+                        <td id="no-data-row" colspan="6"
+                            data-isNoInfo="true"
+                            align="center">
+                            @AppResources.NoInformationIsAvailable
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    @StaticResources.RenderScripts("~/assets/report/bundles/performancebonus")
+    <script>
+        var periods = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Periods));
+    </script>
+}

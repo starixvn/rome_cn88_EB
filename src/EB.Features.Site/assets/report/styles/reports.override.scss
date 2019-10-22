@@ -1,4 +1,5 @@
-﻿
+﻿@import "_variables.scss";
+
 [class^="icon-"], [class*=" icon-"]{
     cursor: pointer;
 }
@@ -202,4 +203,14 @@ span.selectedMonth {
 .error {
     border: 1px solid #e9322d;
     padding: 4px 10px;
+}
+
+.error-message {
+    color: $text-red-color;
+}
+.border-right {
+    border-right: 1px solid #c8c8c8;
+}
+.invalid{
+    margin-left: 350px !important;
 }

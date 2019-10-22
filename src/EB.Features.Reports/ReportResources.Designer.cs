@@ -106,6 +106,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AND.
+        /// </summary>
+        public static string And {
+            get {
+                return ResourceManager.GetString("And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apr.
         /// </summary>
         public static string April {
@@ -142,11 +151,38 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonus (*1.035).
+        /// </summary>
+        public static string Bonus {
+            get {
+                return ResourceManager.GetString("Bonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonus Round Down to 100.
+        /// </summary>
+        public static string BonusRoundDown {
+            get {
+                return ResourceManager.GetString("BonusRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - You can compare the accurate data by viewing the current Wager report..
         /// </summary>
         public static string CompareAccuratedDataLegend {
             get {
                 return ResourceManager.GetString("CompareAccuratedDataLegend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CY.
+        /// </summary>
+        public static string CY {
+            get {
+                return ResourceManager.GetString("CY", resourceCulture);
             }
         }
         
@@ -165,6 +201,24 @@ namespace EB.Features.Reports {
         public static string December {
             get {
                 return ResourceManager.GetString("December", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dividend.
+        /// </summary>
+        public static string Dividend {
+            get {
+                return ResourceManager.GetString("Dividend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dividend Rate.
+        /// </summary>
+        public static string DividendRate {
+            get {
+                return ResourceManager.GetString("DividendRate", resourceCulture);
             }
         }
         
@@ -241,7 +295,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HL Stock.
+        ///   Looks up a localized string similar to Headline Stock.
         /// </summary>
         public static string HeadlineStock {
             get {
@@ -250,11 +304,29 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to HL Stock %.
+        ///   Looks up a localized string similar to Headline Stock %.
         /// </summary>
         public static string HeadlineStockPercent {
             get {
                 return ResourceManager.GetString("HeadlineStockPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HL Stock.
+        /// </summary>
+        public static string HLStock {
+            get {
+                return ResourceManager.GetString("HLStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HL Stock %.
+        /// </summary>
+        public static string HLStockPercent {
+            get {
+                return ResourceManager.GetString("HLStockPercent", resourceCulture);
             }
         }
         
@@ -309,6 +381,15 @@ namespace EB.Features.Reports {
         public static string InaccurateDataLegend {
             get {
                 return ResourceManager.GetString("InaccurateDataLegend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid username(s): .
+        /// </summary>
+        public static string InvalidUserNames {
+            get {
+                return ResourceManager.GetString("InvalidUserNames", resourceCulture);
             }
         }
         
@@ -493,6 +574,33 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OR.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performance Bonus Calculator.
+        /// </summary>
+        public static string PerformanceBonusTitle {
+            get {
+                return ResourceManager.GetString("PerformanceBonusTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username(s) (seperated by comma &apos;,&apos;).
+        /// </summary>
+        public static string PerformanceBonusTooltip {
+            get {
+                return ResourceManager.GetString("PerformanceBonusTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profit Margin.
         /// </summary>
         public static string ProfitMargin {
@@ -624,6 +732,15 @@ namespace EB.Features.Reports {
         public static string TotalRebateRoundDown {
             get {
                 return ResourceManager.GetString("TotalRebateRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UUS.
+        /// </summary>
+        public static string UUS {
+            get {
+                return ResourceManager.GetString("UUS", resourceCulture);
             }
         }
         

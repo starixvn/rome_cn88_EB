@@ -223,4 +223,13 @@
   <data name="SelectAll" xml:space="preserve">
     <value>Select all</value>
   </data>
+  <data name="Period" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Conjunction" xml:space="preserve">
+    <value>Conjunction</value>
+  </data>
 </root>

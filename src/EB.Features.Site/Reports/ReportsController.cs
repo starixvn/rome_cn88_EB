@@ -38,5 +38,14 @@
         [NapAuth(FunctionKey = SiteFunctionKeys.MatchWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> ExportMatchWinLoss(MatchWinLossExcelQuery query)
             => await ExcelView(query);
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.PerformanceBonus, Policy = Constant.Policy.Read)]
+        public async Task<ActionResult> PerformanceBonus(PerformanceBonusQuery query)
+            => await ViewAsync(query, $"{ViewsPath}/PerformanceBonus.cshtml");
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.PerformanceBonus, Policy = Constant.Policy.Read)]
+        public async Task<ActionResult> ExportPerformanceBonus(PerformanceBonusExcelQuery query)
+            => await ExcelView(query);
+
     }
 }

@@ -259,6 +259,15 @@ namespace EB.Features.Main.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Performance Bonus Calculator.
+        /// </summary>
+        public static string PerformanceBonus {
+            get {
+                return ResourceManager.GetString("PerformanceBonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Report.
         /// </summary>
         public static string Report {

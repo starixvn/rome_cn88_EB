@@ -7,6 +7,13 @@
         [ThreadStatic]
         private static DateTime? today;
         private static DateTime? yesterday;
+        private static DateTime? minDate;
+
+        public static DateTime MinDate
+        {
+            get { return minDate ?? new DateTime(2019, 1, 1); }
+            internal set { minDate = value; }
+        }
 
         public static DateTime Today
         {

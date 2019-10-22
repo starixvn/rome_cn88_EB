@@ -453,6 +453,32 @@ body {
     }
 }
 
+// Performance Bonus Calculator
+
+.filter-performance-bonus {
+    .multiselect .multiselect-selected-text {
+        width: 150px;
+    }
+
+    .txt-username {
+        display: block;
+        width: 330px;
+        padding: 4px 8px;
+        border-color: #c8c8c8;
+        outline: none;
+        height: 53px;
+    }
+
+    .txt-headline-stock {
+        width: 182px;
+    }
+
+    #dropdown-conjunction + .btn-group .multiselect .multiselect-selected-text {
+        width: 99px;
+    }
+}
+
+
 // For Phone
 body.phone {
     background-color: #fff;

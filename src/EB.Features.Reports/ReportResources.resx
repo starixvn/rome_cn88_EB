@@ -130,10 +130,10 @@
     <value>Headline</value>
   </data>
   <data name="HeadlineStock" xml:space="preserve">
-    <value>HL Stock</value>
+    <value>Headline Stock</value>
   </data>
   <data name="HeadlineStockPercent" xml:space="preserve">
-    <value>HL Stock %</value>
+    <value>Headline Stock %</value>
   </data>
   <data name="HouseComm" xml:space="preserve">
     <value>House Comm</value>
@@ -323,5 +323,44 @@
   </data>
   <data name="CompareAccuratedDataLegend" xml:space="preserve">
     <value>- You can compare the accurate data by viewing the current Wager report.</value>
+  </data>
+  <data name="PerformanceBonusTitle" xml:space="preserve">
+    <value>Performance Bonus Calculator</value>
+  </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Bonus (*1.035)</value>
+  </data>
+  <data name="BonusRoundDown" xml:space="preserve">
+    <value>Bonus Round Down to 100</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>AND</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="UUS" xml:space="preserve">
+    <value>UUS</value>
+  </data>
+  <data name="CY" xml:space="preserve">
+    <value>CY</value>
+  </data>
+  <data name="InvalidUserNames" xml:space="preserve">
+    <value>Invalid username(s): </value>
+  </data>
+  <data name="Dividend" xml:space="preserve">
+    <value>Dividend</value>
+  </data>
+  <data name="DividendRate" xml:space="preserve">
+    <value>Dividend Rate</value>
+  </data>
+  <data name="HLStock" xml:space="preserve">
+    <value>HL Stock</value>
+  </data>
+  <data name="HLStockPercent" xml:space="preserve">
+    <value>HL Stock %</value>
+  </data>
+  <data name="PerformanceBonusTooltip" xml:space="preserve">
+    <value>Username(s) (seperated by comma ',')</value>
   </data>
 </root>

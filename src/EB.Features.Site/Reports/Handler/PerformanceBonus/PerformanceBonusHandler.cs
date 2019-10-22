@@ -57,7 +57,7 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
                 CurrencyId = message.UserSelectedCurrencyId,
                 HeadlineStock = message.HeadlineStock,
                 UserNames = message.UserNames,
-                BonusRate = message.BonusRate
+                DividendRate = message.DividendRate
             });
 
             return new PerformanceBonusViewModel(message, periodSelectListItems, periods, reports);

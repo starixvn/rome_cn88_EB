@@ -151,6 +151,24 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bonus (*1.035).
+        /// </summary>
+        public static string Bonus {
+            get {
+                return ResourceManager.GetString("Bonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonus Round Down to 100.
+        /// </summary>
+        public static string BonusRoundDown {
+            get {
+                return ResourceManager.GetString("BonusRoundDown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to - You can compare the accurate data by viewing the current Wager report..
         /// </summary>
         public static string CompareAccuratedDataLegend {
@@ -498,24 +516,6 @@ namespace EB.Features.Reports {
         public static string Month {
             get {
                 return ResourceManager.GetString("Month", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Bonus (*1.035).
-        /// </summary>
-        public static string Multiply1035 {
-            get {
-                return ResourceManager.GetString("Multiply1035", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Bonus Round Down to 100.
-        /// </summary>
-        public static string Multiply1035RoundDown {
-            get {
-                return ResourceManager.GetString("Multiply1035RoundDown", resourceCulture);
             }
         }
         

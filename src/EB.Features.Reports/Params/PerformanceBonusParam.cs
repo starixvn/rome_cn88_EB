@@ -16,6 +16,6 @@ namespace EB.Features.Reports.Params
 
         public string UserNames { get; set; }
 
-        public decimal BonusRate { get; set; }
+        public decimal DividendRate { get; set; }
     }
 }

@@ -327,10 +327,10 @@
   <data name="PerformanceBonusTitle" xml:space="preserve">
     <value>Performance Bonus Calculator</value>
   </data>
-  <data name="Multiply1035" xml:space="preserve">
+  <data name="Bonus" xml:space="preserve">
     <value>Bonus (*1.035)</value>
   </data>
-  <data name="Multiply1035RoundDown" xml:space="preserve">
+  <data name="BonusRoundDown" xml:space="preserve">
     <value>Bonus Round Down to 100</value>
   </data>
   <data name="And" xml:space="preserve">

@@ -15,7 +15,7 @@
             UserSelectedCurrencyId = CurrencyConstant.CY;
             UserSelectedConjunctionId = ConjunctionConstant.And;
             HeadlineStock = 1000000.00m;
-            BonusRate = 0.0000m;
+            DividendRate = 0.0000m;
             FromDate = DateTime.MinValue;
             ToDate = DateTime.MinValue;
         }
@@ -34,6 +34,6 @@
 
         public string UserNames { get; set; }
 
-        public decimal BonusRate { get; set; }
+        public decimal DividendRate { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace EB.Features.Reports.Services
 
     public class PerformanceBonusService : IPerformanceBonusService
     {
-        private readonly decimal SecretNumber = 1.035m;
+        private readonly decimal BonusRate = 1.035m;
         private readonly IDynamicRepository dynamiceRepository;
 
         public PerformanceBonusService(IDynamicRepository dynamiceRepository)
@@ -44,10 +44,10 @@ namespace EB.Features.Reports.Services
 
             return reports.Select(i =>
             {
-                i.BonusRate = param.BonusRate;
-                i.PerformanceBonus = i.HeadlineStock * i.BonusRate / 100;
-                i.PerformanceBonus1035 = i.PerformanceBonus * SecretNumber;
-                i.RoundDown = Math.Sign(i.PerformanceBonus1035) * Math.Floor(Math.Abs(i.PerformanceBonus1035 / 100)) * 100;
+                i.DividendRate = param.DividendRate;
+                i.Dividend = i.HeadlineStock * i.DividendRate / 100;
+                i.Bonus = i.Dividend * BonusRate;
+                i.BonusRoundDown = Math.Sign(i.Bonus) * Math.Floor(Math.Abs(i.Bonus / 100)) * 100;
                 return i;
             });
         }

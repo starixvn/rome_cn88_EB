@@ -19,20 +19,20 @@ namespace EB.Features.Reports.Model
 
         public decimal HeadlineStock { get; internal set; }
 
-        public decimal PerformanceBonus { get; set; }
+        public decimal Dividend { get; set; }
 
-        public decimal BonusRate { get; set; }
+        public decimal DividendRate { get; set; }
 
-        public decimal PerformanceBonus1035 { get; set; }
+        public decimal Bonus { get; set; }
 
-        public decimal RoundDown { get; set; }
+        public decimal BonusRoundDown { get; set; }
 
         public static PerformanceBonusModel operator +(PerformanceBonusModel match1, PerformanceBonusModel match2)
             => new PerformanceBonusModel
             {
-                PerformanceBonus = match1.PerformanceBonus + match2.PerformanceBonus,
-                PerformanceBonus1035 = match1.PerformanceBonus1035 + match2.PerformanceBonus1035,
-                RoundDown = match1.RoundDown + match2.RoundDown,
+                Dividend = match1.Dividend + match2.Dividend,
+                Bonus = match1.Bonus + match2.Bonus,
+                BonusRoundDown = match1.BonusRoundDown + match2.BonusRoundDown,
                 HeadlineStock = match1.HeadlineStock + match2.HeadlineStock
             };
     }

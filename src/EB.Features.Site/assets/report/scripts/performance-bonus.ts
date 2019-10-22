@@ -48,7 +48,7 @@ class PerformanceBonusReport {
         this.$reportForm.submit(this.onReportSubmit);
         this.$("#icon-excel").on("click", this.onExportExcel);
         this.$("#HeadlineStock").on("keyup", this.CheckHeadlineStock);
-        new Cleave("#BonusRate", {
+        new Cleave("#DividendRate", {
             numeral: true,
             numeralDecimalScale: 4
         });
@@ -84,8 +84,8 @@ class PerformanceBonusReport {
         const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
         this.$("#HeadlineStock").val(headlineStock);
 
-        const bonusRate = this.$("#BonusRate").val().replace(/,/g, '');
-        this.$("#BonusRate").val(bonusRate);
+        const bonusRate = this.$("#DividendRate").val().replace(/,/g, '');
+        this.$("#DividendRate").val(bonusRate);
     }
     onExportExcel = () => {
         this.$exportExcelForm.submit();

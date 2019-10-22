@@ -38,7 +38,7 @@
                 CurrencyId = message.UserSelectedCurrencyId,
                 HeadlineStock = message.HeadlineStock,
                 UserNames = message.UserNames,
-                BonusRate = message.BonusRate
+                DividendRate = message.DividendRate
             });
             var fileContent = workbook
                 .SetData(reportData)
@@ -72,9 +72,9 @@
 
             mapper
                 .Map(C, i => i.HeadlineStock)
-                .Map(D, i => i.PerformanceBonus)
-                .Map(E, i => i.PerformanceBonus1035)
-                .Map(F, i => i.RoundDown);
+                .Map(D, i => i.Dividend)
+                .Map(E, i => i.Bonus)
+                .Map(F, i => i.BonusRoundDown);
 
             return mapper;
         }
@@ -95,7 +95,7 @@
         internal static string GetReportTitle(PerformanceBonusExcelQuery query)
         {
             var currency = $"{ AppResources.Currency }: { CurrencyConstant.List[query.UserSelectedCurrencyId]}";
-            var bonusRate = $"{ReportResources.DividendRate}: {query.BonusRate}%";
+            var bonusRate = $"{ReportResources.DividendRate}: {query.DividendRate}%";
             var date = $"{query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
 
             return $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency}";

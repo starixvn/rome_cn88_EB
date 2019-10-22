@@ -336,10 +336,10 @@
   <data name="Or" xml:space="preserve">
     <value>或</value>
   </data>
-  <data name="Multiply1035" xml:space="preserve">
+  <data name="Bonus" xml:space="preserve">
     <value>紅利(*1.035)</value>
   </data>
-  <data name="Multiply1035RoundDown" xml:space="preserve">
+  <data name="BonusRoundDown" xml:space="preserve">
     <value>紅利無條件捨去至100</value>
   </data>
   <data name="PerformanceBonusTitle" xml:space="preserve">

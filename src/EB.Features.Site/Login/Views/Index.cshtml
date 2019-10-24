@@ -61,10 +61,10 @@
             </form>
         </div>
     </div>
-    
+
     @Html.Hidden("changeLanguagePath", HttpContext.Current.Response.ApplyAppPathModifier("~/Language/Change"))
     @Html.Hidden("currentLanguage", Model.LanguageCode)
-    
+
     @StaticResources.RenderScripts("~/assets/login/bundles/login")
     <script type="text/javascript">
         var _page = {
@@ -75,5 +75,6 @@
         _page.errMsg = document.getElementById("ModelErrMsg").value;
         _page.language = document.getElementById("ModelLanguage").value;
     </script>
+    @Html.Raw(Fanex.Logging.LogManager.RenderJavascriptLogger())
 </body>
 </html>

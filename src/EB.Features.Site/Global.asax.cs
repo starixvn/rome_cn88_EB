@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Alpha.Logging;
 using EB.Features.Shared.Configuration;
 using EB.Features.Site.App_Start;
 using EB.Features.Site.Shared;
@@ -11,6 +12,7 @@ using EB.Features.Site.Shared.Models;
 using Fanex.Data;
 using Fanex.Data.CrossCutting.WrappingException;
 using Fanex.Data.OldConnectionStringProvider;
+using Fanex.Logging.Extensions.Database;
 using Fanex.Logging.Extensions.Web;
 using Fanex.RemotingRef;
 using ONEbook.UM.Filters;
@@ -26,9 +28,11 @@ namespace EB.Features.Site
             MvcHandler.DisableMvcResponseHeader = true;
 
             AreaRegistration.RegisterAllAreas();
-
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            LoggingManager.Init();
+
+            var sensitivteInfo = new[] { "password", "seccode", "securitycode" };
+            LoggingConfig.Init(sensitivteInfo, DatabaseInfoGetters.GetDbExceptionInfo);
+
             DependencyConfig.Init();
             ModelBinders.Binders.DefaultBinder = new QueryEntityModelBinder();
 

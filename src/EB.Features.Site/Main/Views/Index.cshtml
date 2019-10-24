@@ -40,5 +40,6 @@
     @Html.Hidden("errorMessage", "Error")
     @StaticResources.RenderScripts("~/assets/common/bundles/common/common")
     @StaticResources.RenderScripts("~/assets/main/bundles/default-index")
+    @Html.Raw(Fanex.Logging.LogManager.RenderJavascriptLogger())
 </body>
 </html>

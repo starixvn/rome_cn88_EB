@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Web.Hosting;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Alpha.Logging;
@@ -31,7 +32,7 @@ namespace EB.Features.Site
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             var sensitivteInfo = new[] { "password", "seccode", "securitycode" };
-            LoggingConfig.Init(sensitivteInfo, DatabaseInfoGetters.GetDbExceptionInfo);
+            LoggingConfig.Init(sensitivteInfo, DatabaseInfoGetters.GetDbExceptionInfo, $"{GetVirtualAppPath()}/assets/common/bundles/raven.min.js");
 
             DependencyConfig.Init();
             ModelBinders.Binders.DefaultBinder = new QueryEntityModelBinder();
@@ -77,6 +78,12 @@ namespace EB.Features.Site
             FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
 
             return versionInfo.FileVersion;
+        }
+
+        private static string GetVirtualAppPath()
+        {
+            var virtualAppPath = HostingEnvironment.ApplicationVirtualPath;
+            return virtualAppPath.Equals("/") ? string.Empty : virtualAppPath;
         }
     }
 }

@@ -50,8 +50,8 @@
     <CodeAnalysisRuleSet>EB.Features.Site.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Alpha.Logging, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Alpha.Logging.1.0.1\lib\net461\Alpha.Logging.dll</HintPath>
+    <Reference Include="Alpha.Logging, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Alpha.Logging.1.0.1.1\lib\net461\Alpha.Logging.dll</HintPath>
     </Reference>
     <Reference Include="Couchbase, Version=1.2.6.0, Culture=neutral, PublicKeyToken=05e9c6b5a9ec94c2, processorArchitecture=MSIL">
       <HintPath>..\..\packages\CouchbaseNetClient.1.2.6.3\lib\net40\Couchbase.dll</HintPath>
@@ -794,6 +794,7 @@
     </Content>
     <Content Include="Configurations\appSettings.uat.config">
       <DependentUpon>appSettings.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Configurations\connectionStrings.pro.config">
       <DependentUpon>connectionStrings.config</DependentUpon>

@@ -309,7 +309,7 @@
   <data name="HeadlineResultNet" xml:space="preserve">
     <value>总监结果(纯利)</value>
   </data>
-  <data name="RebateRoundDown10" xml:space="preserve">
+  <data name="Rebate10" xml:space="preserve">
     <value>返水(正负10%)</value>
   </data>
   <data name="InaccurateDataLegend" xml:space="preserve">
@@ -318,7 +318,7 @@
   <data name="CompareAccuratedDataLegend" xml:space="preserve">
     <value>利用当前的注单报表来与正确数据相互比较。</value>
   </data>
-  <data name="TotalRebateRoundDown" xml:space="preserve">
+  <data name="RebateRoundDown10" xml:space="preserve">
     <value>无条件舍去股东的总返水金额(正负10%)</value>
   </data>
   <data name="And" xml:space="preserve">

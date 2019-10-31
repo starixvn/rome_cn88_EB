@@ -142,11 +142,8 @@
                 .Map(K, betTypeWinLoss => betTypeWinLoss.SuperResult / AppSettings.ReduceNumber)
                 .Map(L, betTypeWinLoss => betTypeWinLoss.HeadlineIncome / AppSettings.ReduceNumber)
                 .Map(M, betTypeWinLoss => betTypeWinLoss.HeadlineResult / AppSettings.ReduceNumber)
-                .Map(N, betTypeWinLoss => betTypeWinLoss.Rebate / AppSettings.ReduceNumber)
-                .Map(O, betTypeWinLoss => betTypeWinLoss.RebateRoundDown / AppSettings.ReduceNumber)
-                .Map(P, betTypeWinLoss => betTypeWinLoss.HeadlineResultNet / AppSettings.ReduceNumber)
-                .Map(Q, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
-                .Map(R, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
+                .Map(N, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(O, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -230,8 +227,8 @@
         internal static Mapper<HouseWinLossModel> GetFooterRowMapper()
         {
             var mapper = new Mapper<HouseWinLossModel>();
-            mapper.Map(Q, data => ReportResources.ProfitMargin);
-            mapper.Map(R, data => data.SuperStock != 0 ? data.SuperResult / data.SuperStock : 0);
+            mapper.Map(N, data => ReportResources.ProfitMargin);
+            mapper.Map(O, data => data.SuperStock != 0 ? data.SuperResult / data.SuperStock : 0);
 
             return mapper;
         }

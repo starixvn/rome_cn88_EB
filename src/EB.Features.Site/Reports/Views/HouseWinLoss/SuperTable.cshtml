@@ -1,6 +1,7 @@
 ﻿@using EB.Features.Shared.Model;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
+@using EB.Features.Shared.Configuration;
 
 @model HouseWinLossReportViewModel
 @{
@@ -16,6 +17,7 @@
             <tr>
                 <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="Headline"><span class="sorting-item">@ReportResources.Headline</span></th>
                 <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="UserName"><span class="sorting-item">@ReportResources.SMAUserName</span></th>
+                <th class="text-left header"></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Wagers"><span class="sorting-item">@ReportResources.Wagers</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Stake"><span class="sorting-item">@ReportResources.Stake</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="ValidStake"><span class="sorting-item">@ReportResources.ValidStake</span></th>
@@ -27,9 +29,6 @@
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="SMAResult"><span class="sorting-item">@ReportResources.SMAResult</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineIncome"><span class="sorting-item">@ReportResources.HeadlineIncome</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResult"><span class="sorting-item">@ReportResources.HeadlineResult</span></th>
-                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Rebate"><span class="sorting-item">@ReportResources.RebateRoundDown10</span></th>
-                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="RebateRoundDown"><span class="sorting-item">@ReportResources.RebateRoundDown</span></th>
-                <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResultNet"><span class="sorting-item">@ReportResources.HeadlineResultNet</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStock"><span class="sorting-item">@ReportResources.HLStock</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStockPercent"><span class="sorting-item">@ReportResources.HLStockPercent</span></th>
             </tr>
@@ -45,6 +44,13 @@
                     <td class="text-left">
                         <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Master.Value)"> @row.UserName </a>
                     </td>
+                    <td>
+                        <a href="javascript:void(0);" class="lnk-report"
+                           data-query="@HouseWinLossReportViewModel.GetReportLink()"
+                           data-cust-id="@row.CustId"
+                           data-cust-name="@row.UserName"
+                           data-role-id="@Model.Query.RoleId">Home</a>
+                    </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
                     @HtmlHelpers.RenderNumberCell(row.ValidStake)
@@ -56,9 +62,6 @@
                     @HtmlHelpers.RenderNumberCell(row.SuperResult)
                     @HtmlHelpers.RenderNumberCell(row.HeadlineIncome)
                     @HtmlHelpers.RenderNumberCell(row.HeadlineResult)
-                    @HtmlHelpers.RenderNumberCell(row.Rebate)
-                    @HtmlHelpers.RenderNumberCell(row.RebateRoundDown)
-                    @HtmlHelpers.RenderNumberCell(row.HeadlineResultNet)
                     @HtmlHelpers.RenderNumberCell(row.HeadlineStock)
                     @HtmlHelpers.RenderStockPercentCell(row.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                 </tr>
@@ -66,7 +69,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td id="profit-margin" class="profit-margin" colspan="18" align="right">
+                    <td id="profit-margin" class="profit-margin" colspan="16" align="right">
                         <strong>@ReportResources.ProfitMargin <span class="@(Model.ProfitMargin < 0 ? "negative-value" : string.Empty)">@HtmlHelpers.FormatNumber(Model.ProfitMargin) %</span></strong>
                     </td>
                 </tr>
@@ -76,7 +79,7 @@
         {
             <tfoot>
                 <tr class="total">
-                    <th class="text-left header" colspan="2">@ReportResources.Total</th>
+                    <th class="text-left header" colspan="3">@ReportResources.Total</th>
                     @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
@@ -88,9 +91,6 @@
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.SuperResult)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineIncome)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResult)
-                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Rebate)
-                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.RebateRoundDown)
-                    @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineResultNet)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.HeadlineStock)
                     @HtmlHelpers.RenderStockPercentCell(Model.ReportData.Total.HeadlineStock, Model.ReportData.Total.HeadlineStock)
                 </tr>
@@ -100,7 +100,7 @@
         {
             <tbody>
                 <tr>
-                    <td id="no-data-row" colspan="18"
+                    <td id="no-data-row" colspan="16"
                         data-isNoInfo="true"
                         align="center">
                         @AppResources.NoInformationIsAvailable
@@ -111,3 +111,11 @@
     </table>
 </div>
 
+<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
+    <input type="hidden" id="custId" name="custId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustId:0)" />
+    <input type="hidden" id="custName" name="custName" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustName:"")" />
+    <input type="hidden" id="roleId" name="roleId" value="@Model.Query.RoleId" />
+    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />
+    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
+    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
+</form>

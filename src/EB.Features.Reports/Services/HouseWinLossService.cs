@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Reports.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using EB.Features.Reports.Criteria;
@@ -49,7 +50,13 @@
                 dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossOfSMACriteria(param));
             }
 
-            return new HouseWinLossViewModel(reportData.OrderBy(i => i.UserName));
+            return new HouseWinLossViewModel(reportData
+                .Select(i =>
+                {
+                    i.Rebate = -1 * i.HeadlineResult * 10 / 100;
+                    i.RebateRoundDown = Math.Sign(i.Rebate) * Math.Floor(Math.Abs(i.Rebate / 100)) * 100;
+                    return i;
+                }).OrderBy(i => i.UserName));
         }
 
         private static bool IsSettled(HouseWinLossParam param)

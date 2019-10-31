@@ -1,9 +1,10 @@
 ﻿@using EB.Features.Shared.Model;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
+@using EB.Features.Shared.Configuration;
 
 @model HouseWinLossReportViewModel
-@{ 
+@{
     var colIndex = 0;
 }
 <div class="tab-content main-content" id="tab-main-content">
@@ -14,6 +15,7 @@
         <thead class="tableFloatingHeaderOriginal">
             <tr>
                 <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="Headline"><span class="sorting-item">@ReportResources.Headline</span></th>
+                <th class="text-left header"></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Wagers"><span class="sorting-item">@ReportResources.Wagers</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Stake"><span class="sorting-item">@ReportResources.Stake</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="ValidStake"><span class="sorting-item">@ReportResources.ValidStake</span></th>
@@ -26,7 +28,7 @@
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseIncome"><span class="sorting-item">@ReportResources.HouseIncome</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HouseTO"><span class="sorting-item">@ReportResources.HouseTO</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResult"><span class="sorting-item">@ReportResources.HeadlineResult</span></th>
-                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="RebateRoundDown"><span class="sorting-item">@ReportResources.TotalRebateRoundDown</span></th>
+                <th class="text-right header sorting width110" data-colindex="@(colIndex++)" data-sortedname="RebateRoundDown"><span class="sorting-item">@ReportResources.RebateRoundDown10</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineResultNet"><span class="sorting-item">@ReportResources.HeadlineResultNet</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStock"><span class="sorting-item">@ReportResources.HLStock</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="HeadlineStockPercent"><span class="sorting-item">@ReportResources.HLStockPercent</span></th>
@@ -38,6 +40,13 @@
                 <tr>
                     <td class="text-left">
                         <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Super.Value)"> @row.UserName </a>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" class="lnk-report"
+                           data-query="@HouseWinLossReportViewModel.GetReportLink()"
+                           data-cust-id="@row.CustId"
+                           data-cust-name="@row.UserName"
+                           data-role-id="@Model.Query.RoleId">Home</a>
                     </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
@@ -62,7 +71,7 @@
         {
             <tfoot>
                 <tr class="total">
-                    <th class="text-left header">@ReportResources.Total</th>
+                    <th class="text-left header" colspan="2">@ReportResources.Total</th>
                     @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
@@ -86,7 +95,7 @@
         {
             <tbody>
                 <tr>
-                    <td id="no-data-row" colspan="17"
+                    <td id="no-data-row" colspan="18"
                         data-isNoInfo="true"
                         align="center">
                         @AppResources.NoInformationIsAvailable
@@ -97,3 +106,11 @@
     </table>
 </div>
 
+<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
+    <input type="hidden" id="custId" name="custId" value="" />
+    <input type="hidden" id="custName" name="custName" value="" />
+    <input type="hidden" id="roleId" name="roleId" value="@Model.Query.RoleId" />
+    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />    
+    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
+    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
+</form>

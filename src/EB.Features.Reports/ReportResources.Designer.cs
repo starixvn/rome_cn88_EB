@@ -610,6 +610,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rebate(+/-) 10%.
+        /// </summary>
+        public static string Rebate10 {
+            get {
+                return ResourceManager.GetString("Rebate10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rebate Round Down.
         /// </summary>
         public static string RebateRoundDown {
@@ -619,7 +628,7 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rebate(+/-) 10%.
+        ///   Looks up a localized string similar to Rebate +/- 10% Round Down.
         /// </summary>
         public static string RebateRoundDown10 {
             get {
@@ -723,15 +732,6 @@ namespace EB.Features.Reports {
         public static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Total Rebate +/- 10% of SMA Round Down.
-        /// </summary>
-        public static string TotalRebateRoundDown {
-            get {
-                return ResourceManager.GetString("TotalRebateRoundDown", resourceCulture);
             }
         }
         

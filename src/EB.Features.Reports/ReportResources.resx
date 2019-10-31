@@ -306,13 +306,13 @@
   <data name="ProfitMargin" xml:space="preserve">
     <value>Profit Margin</value>
   </data>
-  <data name="TotalRebateRoundDown" xml:space="preserve">
-    <value>Total Rebate +/- 10% of SMA Round Down</value>
+  <data name="RebateRoundDown10" xml:space="preserve">
+    <value>Rebate +/- 10% Round Down</value>
   </data>
   <data name="HeadlineIncome" xml:space="preserve">
     <value>HL Income</value>
   </data>
-  <data name="RebateRoundDown10" xml:space="preserve">
+  <data name="Rebate10" xml:space="preserve">
     <value>Rebate(+/-) 10%</value>
   </data>
   <data name="Total" xml:space="preserve">

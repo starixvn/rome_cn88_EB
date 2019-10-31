@@ -13,6 +13,7 @@
             string logInLink,
             string internalLogInUMToken,
             string ip,
+            bool isHideTopMenu,
             string afterLogInSite,
             string afterLogInQuery,
             string keyPath,
@@ -25,13 +26,15 @@
             LogInLink = logInLink.StartsWith("http") ? logInLink : "http://" + logInLink;
             InternalLogInUMToken = string.IsNullOrWhiteSpace(internalLogInUMToken) ? string.Empty : $"UMToken={internalLogInUMToken}&";
             IP = ip;
-
+            IsHideTopMenu = isHideTopMenu;
             AfterLogInSite = afterLogInSite;
             AfterLogInQuery = afterLogInQuery;
 
             KeyPath = keyPath;
             EncryptParamFunc = encryptParamFunc;
         }
+
+        public bool IsHideTopMenu { get; }
 
         public int CustId { get; }
 

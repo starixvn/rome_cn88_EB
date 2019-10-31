@@ -123,7 +123,7 @@
             return HttpContext.Current.Response.ApplyAppPathModifier("~/Reports/HouseWinLoss?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value)));
         }
 
-        public string GetInternalLoginLink(int custId, string custName)
+        public string GetBetlistLink(int custId, string custName)
         {
             var param = new Dictionary<string, object>
             {
@@ -139,6 +139,17 @@
             };
 
             return "~/BetLists/BetListOfEBReport?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+        }
+
+        public static string GetReportLink()
+        {
+            var param = new Dictionary<string, object>
+            {
+                ["DisplayMode"] = 1,
+                ["IsSetMenu"] = true
+            };
+
+            return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
         }
 
         public string LanguageCode { get; }

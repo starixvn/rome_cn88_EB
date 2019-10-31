@@ -89,20 +89,40 @@ class HouseWinLossReport {
         });
         this.$("#icon-information").on("click", this.showLegend);
         this.switchCalendarType();
-        var thisInternalLogin = this.internalLogin;
+        var viewBetlist = this.viewbetlist;
+        var viewReport = this.viewReport;
         var this$ = this.$;
-        this.$(".lnk-internal").on("click touchend", function () {
+        this.$(".lnk-betlist").on("click touchend", function () {
             var elm = this$(this);
-            thisInternalLogin({
+            viewBetlist({
                 query: elm.attr("data-query")
+            });
+        });
+
+        this.$(".lnk-report").on("click touchend", function () {
+            var elm = this$(this);
+            viewReport({
+                query: elm.attr("data-query"),
+                custId: elm.attr("data-cust-id"),
+                custName: elm.attr("data-cust-name"),
+                roleId: elm.attr("data-role-id")
             });
         });
     };
 
-    internalLogin = (options) => {        
+    viewbetlist = (options) => {        
         this.$("#AfterLogInQuery").val(options.query);
         const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
         window.open(url, "internallogin", "scrollbars=1,fullscreen=yes,top=290")
+    };
+
+    viewReport = (options) => {
+        this.$("#AfterLogInQuery").val(options.query);
+        this.$internalLoginForm.find("#custId").val(options.custId);
+        this.$internalLoginForm.find("#custName").val(options.custName);
+        this.$internalLoginForm.find("#roleId").val(options.roleId);
+        const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
+        window.open(url, "scrollbars=1,fullscreen=yes,top=290")
     };
 
     showLegend = () => {

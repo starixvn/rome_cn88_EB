@@ -15,7 +15,6 @@
         <thead class="tableFloatingHeaderOriginal">
             <tr>
                 <th class="text-left header sorting" data-colindex="@(colIndex++)" data-sortedname="UserName"><span class="sorting-item">@ReportResources.AgentUserName</span></th>
-                <th class="text-left header"></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Wagers"><span class="sorting-item">@ReportResources.Wagers</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="Stake"><span class="sorting-item">@ReportResources.Stake</span></th>
                 <th class="text-right header sorting" data-colindex="@(colIndex++)" data-sortedname="ValidStake"><span class="sorting-item">@ReportResources.ValidStake</span></th>
@@ -36,13 +35,6 @@
                     <td class="text-left">
                         <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Member.Value)"> @row.UserName </a>
                     </td>
-                    <td>
-                        <a href="javascript:void(0);" class="lnk-report"
-                           data-query="@HouseWinLossReportViewModel.GetReportLink()"
-                           data-cust-id="@row.CustId"
-                           data-cust-name="@row.UserName"
-                           data-role-id="@Model.Query.RoleId">Home</a>
-                    </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
                     @HtmlHelpers.RenderNumberCell(row.ValidStake)
@@ -61,7 +53,7 @@
         {
             <tfoot>
                 <tr class="total">
-                    <th class="text-left header" colspan="2">@ReportResources.Total</th>
+                    <th class="text-left header">@ReportResources.Total</th>
                     @HtmlHelpers.RenderWagerCell(Model.ReportData.Total.Wagers)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.Stake)
                     @HtmlHelpers.RenderNumberCell(Model.ReportData.Total.ValidStake)
@@ -77,7 +69,7 @@
         {
             <tbody>
                 <tr>
-                    <td id="no-data-row" colspan="10"
+                    <td id="no-data-row" colspan="9"
                         data-isNoInfo="true"
                         align="center">
                         @AppResources.NoInformationIsAvailable
@@ -87,12 +79,3 @@
         }
     </table>
 </div>
-
-<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
-    <input type="hidden" id="custId" name="custId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustId:0)" />
-    <input type="hidden" id="custName" name="custName" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustName:"")" />
-    <input type="hidden" id="roleId" name="roleId" value="@Model.Query.RoleId" />
-    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />
-    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
-    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
-</form>

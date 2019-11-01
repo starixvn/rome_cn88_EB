@@ -363,4 +363,7 @@
   <data name="PerformanceBonusTooltip" xml:space="preserve">
     <value>Username(s) (seperated by comma ',')</value>
   </data>
+  <data name="MA" xml:space="preserve">
+    <value>MA</value>
+  </data>
 </root>

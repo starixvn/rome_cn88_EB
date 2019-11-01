@@ -81,6 +81,8 @@
         @Html.Hidden("CustId", Model.Query.CustId)
     </form>
 
+    @Html.Action("CountHouseWinLoss")
+
     @if (Model.Query.Role.IsHeadline())
     {
         @Html.Partial("~/Reports/Views/HouseWinLoss/HeadlineTable.cshtml", Model);

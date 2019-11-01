@@ -7,6 +7,8 @@
     {
         public UserLevel Role { get; set; }
 
+        public int HeadlineId { get; set; }
+
         public int CustId { get; set; }
 
         public int Viewer { get; set; }

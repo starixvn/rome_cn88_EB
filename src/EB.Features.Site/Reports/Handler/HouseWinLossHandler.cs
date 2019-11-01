@@ -4,6 +4,7 @@
     using System.Linq;
     using EB.Features.Reports;
     using EB.Features.Reports.Extension;
+    using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
     using EB.Features.Shared.Model;
@@ -15,7 +16,8 @@
 
     public class HouseWinLossHandler : ReportsBaseHandler,
         IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>,
-        IRequestHandler<ReportLegendQuery, IEnumerable<string>>
+        IRequestHandler<ReportLegendQuery, IEnumerable<string>>,
+        IRequestHandler<CountHouseWinLossQuery, CountHouseWinLossModel>
     {
         private readonly ISportGroupService sportGroupService;
         private readonly IBettypeGroupService betTypeService;
@@ -72,6 +74,29 @@
                 BuildBetTypeSelectListItems(betTypes, message.UserSelectedBetTypeId),
                 BuildBetTypeSelectListItems(allBetTypes, 0),
                 userSession.Language);
+        }
+
+        public CountHouseWinLossModel Handle(CountHouseWinLossQuery message)
+        {
+            var sportGroups = sportGroupService.GetSportGroups();
+            message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
+
+            return houseWinLossService.CountUsers(new HouseWinLossParam
+            {
+                HeadlineId = message.HeadlineId,
+                CustId = message.CustId,
+                Role = message.Role,
+                Viewer = message.UserSelectedViewer,
+                IsHistoricReport = message.IsHistoricReport,
+                TicketStatusId = message.UserSelectedTicketStatusId,
+                BetTypeGroup = message.UserSelectedBetTypeId,
+                IsExcludedTest = message.IsTest,
+                IsLive = message.UserSelectedLiveStatusId,
+                SportTypeGroups = message.UserSelectedSportGroupIds,
+                FromDate = message.FromDate,
+                ToDate = message.ToDate,
+                Date = message.Date
+            });
         }
     }
 }

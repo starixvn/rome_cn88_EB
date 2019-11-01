@@ -23,6 +23,8 @@
             BreadcrumbLevel = new List<CustInfo>();
         }
 
+        public int HeadlineId { get; set; }
+
         public IEnumerable<int> SelectedSportGroupIds
             => UserSelectedSportGroupIds.ToListInt();
 
@@ -35,7 +37,6 @@
         public UserLevel Role => Enumeration.FromValue<UserLevel>(RoleId);
 
         public int UserSelectedViewer { get; set; }
-
 
         public int UserSelectedBetTypeId { get; set; }
 

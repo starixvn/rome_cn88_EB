@@ -33,7 +33,7 @@
                 {
                 <tr>
                     <td class="text-left">
-                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Member.Value)"> @row.UserName </a>
+                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Member.Value, Model.Query.HeadlineId)"> @row.UserName </a>
                     </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)

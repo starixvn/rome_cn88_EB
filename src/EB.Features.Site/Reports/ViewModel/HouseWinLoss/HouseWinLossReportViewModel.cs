@@ -97,13 +97,14 @@
 
         public static string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 
-        public string GetDownlineLink(int custId, string custName, byte roleId)
+        public string GetDownlineLink(int custId, string custName, byte roleId, int headlineId)
         {
             var breadscrumbToDonwline = breadcrumbLevel.ToList();
             breadscrumbToDonwline.Add(new CustInfo(Query.CustId, custName, Query.RoleId));
 
             var param = new Dictionary<string, object>
             {
+                ["HeadlineId"] = headlineId,
                 ["RoleId"] = roleId,
                 ["UserSelectedViewer"] = Query.UserSelectedViewer,
                 ["UserSelectedSportGroupIds"] = Query.UserSelectedSportGroupIds,

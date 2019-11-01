@@ -891,6 +891,7 @@
     <Compile Include="Reports\ReportsBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\CountHouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\ReportLegendQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
@@ -1293,6 +1294,7 @@
     <Content Include="typings\globals\cleave.js\README.md" />
     <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
     <Content Include="Reports\Views\ReportLegend.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\CountUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />

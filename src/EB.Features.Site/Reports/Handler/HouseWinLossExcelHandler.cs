@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System;
     using System.Linq;
     using EB.Features.Reports;
     using EB.Features.Reports.Constants;
@@ -41,7 +42,7 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            var reportData = houseWinLossService.Get(new HouseWinLossParam
+            var param = new HouseWinLossParam
             {
                 CustId = message.CustId,
                 Role = message.Role,
@@ -55,7 +56,9 @@
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
                 Date = message.Date
-            });
+            };
+            var reportData = houseWinLossService.Get(param);
+            var countUsers = houseWinLossService.CountUsers(param);
 
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total, message.Role.IsSuperLevel())
@@ -65,7 +68,7 @@
                     GetFooterRowMapper())
                 .UseTemplate(GetTemplateInfo(message.Role))
                 .Sheet("ReportData")
-                .Title(GetReportTitle(message))
+                .Title(GetReportTitle(message, countUsers))
                 .Header(ReportResources.ResourceManager.GetString)
                 .ExportToBytes();
 
@@ -246,7 +249,7 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        internal string GetReportTitle(HouseWinLossExcelQuery param)
+        internal string GetReportTitle(HouseWinLossExcelQuery param, CountHouseWinLossModel countUsers)
         {
             var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}";
             if (param.IsHistoricReport)
@@ -259,7 +262,12 @@
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
             var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 
-            return $"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)}";
+            title = $"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)} {Environment.NewLine}";
+            title += $"{ ReportResources.Headline}: { countUsers.HeadlineCount} | { ReportResources.SMA}: { countUsers.SuperCount}";
+            title += $"| { ReportResources.MA}: { countUsers.MasterCount} | { ReportResources.Agent}: { countUsers.AgentCount}";
+            title += $"| { AppResources.Member}: { countUsers.MemberCount}";
+
+            return title;
         }
 
         private static string GetResourcesText(string key)

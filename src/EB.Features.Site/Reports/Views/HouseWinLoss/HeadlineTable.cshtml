@@ -39,14 +39,14 @@
             {
                 <tr>
                     <td class="text-left">
-                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Super.Value)"> @row.UserName </a>
+                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Super.Value, row.CustId)"> @row.UserName </a>
                     </td>
                     <td class="col-link">
                         <span class="icon-link lnk-report"
-                           data-query="@HouseWinLossReportViewModel.GetReportLink()"
-                           data-cust-id="@row.CustId"
-                           data-cust-name="@row.UserName"
-                           data-role-id="@Model.Query.RoleId"></span>
+                              data-query="@HouseWinLossReportViewModel.GetReportLink()"
+                              data-cust-id="@row.CustId"
+                              data-cust-name="@row.UserName"
+                              data-role-id="@Model.Query.RoleId"></span>
                     </td>
                     @HtmlHelpers.RenderWagerCell(row.Wagers)
                     @HtmlHelpers.RenderNumberCell(row.Stake)
@@ -110,7 +110,7 @@
     <input type="hidden" id="custId" name="custId" value="" />
     <input type="hidden" id="custName" name="custName" value="" />
     <input type="hidden" id="roleId" name="roleId" value="@Model.Query.RoleId" />
-    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />    
+    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />
     <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
     <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
 </form>

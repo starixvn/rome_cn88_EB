@@ -421,6 +421,15 @@ namespace EB.Features.Reports {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MA.
+        /// </summary>
+        public static string MA {
+            get {
+                return ResourceManager.GetString("MA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mar.
         /// </summary>
         public static string March {

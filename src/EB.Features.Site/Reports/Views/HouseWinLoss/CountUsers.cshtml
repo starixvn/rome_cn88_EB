@@ -1,0 +1,14 @@
+﻿@using EB.Features.Reports.Model;
+
+@model CountHouseWinLossModel
+@{
+    Layout = null;
+}
+
+<div class="countUsers">
+    @ReportResources.Headline: <b>@Model.HeadlineCount</b> |
+    @ReportResources.SMA: <b>@Model.SuperCount</b> |
+    @ReportResources.MA: <b>@Model.MasterCount</b> |
+    @ReportResources.Agent: <b>@Model.AgentCount</b> |
+    @AppResources.Member: <b>@Model.MemberCount</b>
+</div>

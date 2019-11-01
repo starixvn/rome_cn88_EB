@@ -15,6 +15,8 @@
     public interface IHouseWinLossService
     {
         HouseWinLossViewModel Get(HouseWinLossParam param);
+
+        CountHouseWinLossModel CountUsers(HouseWinLossParam param);
     }
 
     public class HouseWinLossService : IHouseWinLossService
@@ -28,6 +30,24 @@
         {
             this.dynamicRepository = dynamicRepository;
             this.reportDateService = reportDateService;
+        }
+
+        public CountHouseWinLossModel CountUsers(HouseWinLossParam param)
+        {
+            param.MoveBetsDay = reportDateService.GetMoveBetsDay();
+            param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
+            param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;
+
+            if (param.Role.IsHeadline())
+            {
+                return IsSettled(param) ?
+                   dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountHeadlineHouseWLCriteria(param)) :
+                   dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountHeadlineHouseWLCriteria(param));
+            }
+
+            return IsSettled(param) ?
+                dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountSMAHouseWLCriteria(param)) :
+                dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountSMAHouseWLCriteria(param));
         }
 
         public HouseWinLossViewModel Get(HouseWinLossParam param)

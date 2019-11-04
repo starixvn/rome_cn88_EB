@@ -74,6 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Criteria\MatchWinLossCriteriaCriteriaTest.cs" />
+    <Compile Include="Criteria\UnsettledCountSMAHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\UnsettledHouseWinLossOfHeadlineCriteriaTest.cs" />
+    <Compile Include="Criteria\SettledCountSMAHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\SettledCountHeadlineHouseWLCriteriaTest.cs" />
     <Compile Include="Criteria\SettledHouseWinLossCriteriaTest.cs" />
     <Compile Include="Criteria\UnsettledHouseWinLossCriteriaCriteriaTest.cs" />
     <Compile Include="Model\MatchWinLossModelTest.cs" />

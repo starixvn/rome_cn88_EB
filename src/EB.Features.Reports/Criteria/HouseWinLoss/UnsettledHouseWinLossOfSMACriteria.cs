@@ -6,18 +6,12 @@
     using Fanex.Data;
     using Fanex.Data.Repository;
 
-    public class UnsettledHouseWinLossOfSMACriteria : CriteriaBase
+    public class UnsettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
-        public UnsettledHouseWinLossOfSMACriteria(HouseWinLossParam param)
+        public UnsettledHouseWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
         {
             CustId = param.CustId;
             Role = param.Role;
-            FromDate = param.FromDate;
-            ToDate = param.ToDate;
-            SportTypeGroups = param.SportTypeGroups;
-            BetTypeGroup = param.BetTypeGroup;
-            IsLive = param.IsLive;
-            IsExcludedTest = param.IsExcludedTest;            
         }
 
         [SpParam(Ignored = true)]
@@ -25,27 +19,14 @@
 
         public int CustId { get; }
 
-        public DateTime FromDate { get; }
-
-        public DateTime ToDate { get; }
-
-        public string SportTypeGroups { get; }
-
-        public int BetTypeGroup { get; }
-
-        public int IsLive { get; }
-
-        public bool IsExcludedTest { get; }
-
-        public override bool IsValid()
-            => BetTypeGroup >= 0 && IsLive >= 0 && FromDate <= ToDate;
+        public override bool IsValid() => base.IsValid() && CustId >= 0;
 
         public override string GetSettingKey()
             => Role.IsSuperLevel() ?
             "CS_Rpt_EBOutstanding_Super" :
-            Role.IsMasterLevel()?
+            Role.IsMasterLevel() ?
             "CS_Rpt_EBOutstanding_Master" :
-            Role.IsAgentLevel()?
+            Role.IsAgentLevel() ?
             "CS_Rpt_EBOutstanding_Agent" :
             "CS_Rpt_EBOutstanding_Member";
     }

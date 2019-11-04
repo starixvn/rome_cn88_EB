@@ -34,8 +34,7 @@
                 IsHideTopMenu = param.IsHideTopMenu,
                 Language = param.Language,
                 SystemLogin = "EB",
-                TimeTick = time,
-                BrowserSize = string.Empty
+                TimeTick = time
             };
 
             var encryptedParams = param.EncryptParamFunc(JsonConvert.SerializeObject(internalLoginModel), 1024, param.KeyPath);

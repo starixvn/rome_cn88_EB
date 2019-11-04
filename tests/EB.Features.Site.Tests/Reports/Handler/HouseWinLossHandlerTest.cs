@@ -71,5 +71,31 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             houseWinLossService.Received().Get(Arg.Any<HouseWinLossParam>());
         }
+
+        [Test]
+        public void HandleCountHouseWinLossQuery_Always_CallGetSportGroups()
+        {
+            // Arrange
+
+
+            // Act
+            hander.Handle(new CountHouseWinLossQuery(currentSession));
+
+            // Assert
+            sportGroupService.Received().GetSportGroups();
+        }       
+
+        [Test]
+        public void HandleCountHouseWinLossQuery_Always_CallGetOfHouseWinLossService()
+        {
+            // Arrange
+
+
+            // Act
+            hander.Handle(new CountHouseWinLossQuery(currentSession));
+
+            // Assert
+            houseWinLossService.Received().CountUsers(Arg.Any<HouseWinLossParam>());
+        }
     }
 }

@@ -121,6 +121,7 @@
     <Compile Include="Constants\ConjunctionConstant.cs" />
     <Compile Include="Constants\ReportMode.cs" />
     <Compile Include="Constants\RowTypeConstant.cs" />
+    <Compile Include="Criteria\HouseWinLoss\HouseWinLossBaseCriteria.cs" />
     <Compile Include="Criteria\HouseWinLoss\SettledCountSMAHouseWLCriteria.cs" />
     <Compile Include="Criteria\HouseWinLoss\SettledCountHeadlineHouseWLCriteria.cs" />
     <Compile Include="Criteria\HouseWinLoss\SettledHouseWinLossOfSMACriteria.cs" />

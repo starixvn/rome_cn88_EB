@@ -23,7 +23,5 @@ namespace EB.Features.Main.Model
         public string AfterLogInSite { get; set; }
 
         public string AfterLoginQuery { get; set; }
-
-        public string BrowserSize { get; set; }
     }
 }

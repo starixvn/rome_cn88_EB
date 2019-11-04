@@ -6,14 +6,14 @@
         {
         }
 
-        public int HeadlineCount { get; }
+        public int HeadlineCount { get; internal set; }
 
-        public string SuperCount { get; }
+        public int SuperCount { get; internal set; }
 
-        public int MasterCount { get; }
+        public int MasterCount { get; internal set; }
 
-        public string AgentCount { get; }
+        public int AgentCount { get; internal set; }
 
-        public int MemberCount { get; }
+        public int MemberCount { get; internal set; }
     }
 }

@@ -50,7 +50,7 @@ namespace EB.Features.Reports.Tests.Services
 
 
         [Test]
-        public void void_IsHistoryReport_FromDateIsNotChange()
+        public void Get_IsHistoryReport_FromDateIsNotChange()
         {
             // Arrange
             var expectedFromDate = DateTime.Now;
@@ -89,7 +89,7 @@ namespace EB.Features.Reports.Tests.Services
         }
 
         [Test]
-        public void void_IsHistoryReport_ToDateIsNotChange()
+        public void Get_IsHistoryReport_ToDateIsNotChange()
         {
             // Arrange
             var expectedToDate = DateTime.Now;
@@ -126,7 +126,6 @@ namespace EB.Features.Reports.Tests.Services
             // Assert
             Assert.AreEqual(expectedToDate, param.ToDate);
         }
-
 
         [Test]
         public void Get_IsSettledTicket_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
@@ -182,9 +181,63 @@ namespace EB.Features.Reports.Tests.Services
             dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>());
         }
 
+        [Test]
+        public void Get_SMAIsSettledTicket_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                Role = UserLevel.Super
+            };
+
+
+            // Act
+            reportService.Get(param);
+
+            // Assert
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+        }
 
         [Test]
-        public void void_IsSettled_AlwaysOrderByUserName()
+        public void Get_SMATicketStatusIdIsSettled_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.Settled,
+                Role = UserLevel.Super
+            };
+
+            // Act
+            reportService.Get(param);
+
+            // Assert
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+        }
+
+        [Test]
+        public void Get_SMAIsUnSettledTicket_CallDynamicRepositoryWithUnsettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.UnSettled,
+                Role = UserLevel.Super
+            };
+
+            // Act
+            reportService.Get(param);
+
+            // Assert
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfSMACriteria>());
+        }
+
+
+        [Test]
+        public void Get_IsSettled_AlwaysOrderByUserName()
         {
             // Arrange
             var houseWinLoss = new List<HouseWinLossModel>
@@ -208,7 +261,7 @@ namespace EB.Features.Reports.Tests.Services
         }
 
         [Test]
-        public void void_IsUnSettled_AlwaysOrderByUserName()
+        public void Get_IsUnSettled_AlwaysOrderByUserName()
         {
             // Arrange
             var houseWinLoss = new List<HouseWinLossModel>
@@ -230,6 +283,214 @@ namespace EB.Features.Reports.Tests.Services
             // Assert
             Assert.AreEqual("azor", act.Matches.ToList()[0].UserName);
             Assert.AreEqual("razor", act.Matches.ToList()[1].UserName);
+        }
+
+        ///////
+
+        [Test]
+        public void CountUsers_Always_SetMoveBetsDay()
+        {
+            // Arrange
+            var expectedMoveBetsDay = DateTime.Now;
+            reportDateService.GetMoveBetsDay().Returns(expectedMoveBetsDay);
+            var param = new HouseWinLossParam
+            {
+                MoveBetsDay = DateTime.MinValue,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.AreEqual(expectedMoveBetsDay, param.MoveBetsDay);
+        }
+
+
+        [Test]
+        public void CountUsers_IsHistoryReport_FromDateIsNotChange()
+        {
+            // Arrange
+            var expectedFromDate = DateTime.Now;
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                FromDate = expectedFromDate,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.AreEqual(expectedFromDate, param.FromDate);
+        }
+
+        [Test]
+        public void CountUsers_IsNotHistoryReport_FromDateIsDate()
+        {
+            // Arrange
+            var expectedFromDate = DateTime.Now;
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                Date = expectedFromDate,
+                FromDate = DateTime.MinValue,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.AreEqual(expectedFromDate, param.FromDate);
+        }
+
+        [Test]
+        public void CountUsers_IsHistoryReport_ToDateIsNotChange()
+        {
+            // Arrange
+            var expectedToDate = DateTime.Now;
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                ToDate = expectedToDate,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.AreEqual(expectedToDate, param.ToDate);
+        }
+
+        [Test]
+        public void CountUsers_IsNotHistoryReport_ToDateIsDate()
+        {
+            // Arrange
+            var expectedToDate = DateTime.Now;
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                Date = expectedToDate,
+                ToDate = DateTime.MinValue,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.AreEqual(expectedToDate, param.ToDate);
+        }
+
+        [Test]
+        public void CountUsers_IsSettledTicket_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountHeadlineHouseWLCriteria>());
+        }
+
+        [Test]
+        public void CountUsers_TicketStatusIdIsSettled_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.Settled,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountHeadlineHouseWLCriteria>());
+        }
+
+        [Test]
+        public void CountUsers_IsUnSettledTicket_CallDynamicRepositoryWithUnsettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.UnSettled,
+                Role = UserLevel.Headline
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledCountHeadlineHouseWLCriteria>());
+        }
+
+
+        [Test]
+        public void CountUsers_SMAIsSettledTicket_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = true,
+                Role = UserLevel.Super
+            };
+
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountSMAHouseWLCriteria>());
+        }
+
+        [Test]
+        public void CountUsers_SMATicketStatusIdIsSettled_CallDynamicRepositoryWithSettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.Settled,
+                Role = UserLevel.Super
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountSMAHouseWLCriteria>());
+        }
+
+        [Test]
+        public void CountUsers_SMAIsUnSettledTicket_CallDynamicRepositoryWithUnsettledHouseWinLossCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam
+            {
+                IsHistoricReport = false,
+                TicketStatusId = TicketStatusConstants.UnSettled,
+                Role = UserLevel.Super
+            };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledCountSMAHouseWLCriteria>());
         }
     }
 }

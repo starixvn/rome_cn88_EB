@@ -6,6 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
     using EB.Features.Reports;
+    using EB.Features.Reports.Resources;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;

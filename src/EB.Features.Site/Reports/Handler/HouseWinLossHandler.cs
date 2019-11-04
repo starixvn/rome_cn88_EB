@@ -6,6 +6,7 @@
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
+    using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
     using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;

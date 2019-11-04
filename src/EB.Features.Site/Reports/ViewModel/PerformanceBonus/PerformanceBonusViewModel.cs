@@ -4,6 +4,7 @@ using EB.Features.Reports;
 using EB.Features.Reports.Constants;
 using EB.Features.Reports.Extension;
 using EB.Features.Reports.Model;
+using EB.Features.Reports.Resources;
 using EB.Features.Shared.Utilities;
 using EB.Features.Site.Reports.Request;
 using EB.Features.Site.Shared.ViewModels;

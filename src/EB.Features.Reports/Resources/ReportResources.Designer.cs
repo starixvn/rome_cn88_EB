@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EB.Features.Reports {
+namespace EB.Features.Reports.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EB.Features.Reports {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EB.Features.Reports.ReportResources", typeof(ReportResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EB.Features.Reports.Resources.ReportResources", typeof(ReportResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

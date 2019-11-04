@@ -1,5 +1,6 @@
 ﻿@using EB.Features.Reports;
 @using EB.Features.Site.Reports.ViewModel.PerformanceBonus
+@using EB.Features.Reports.Resources
 
 @model PerformanceBonusViewModel
 @{
@@ -63,7 +64,7 @@
     </form>
 
     <div class="tab-content main-content" id="tab-main-content">
-        
+
         <table class="tbl-noborder tbl-report settlement-report @(string.IsNullOrEmpty(Model.ErrorMessage)?string.Empty: "hidden")" id="tbl-report">
             <thead class="tableFloatingHeaderOriginal">
                 <tr>

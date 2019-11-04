@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using AutoFixture;
 using EB.Features.Reports;
+using EB.Features.Reports.Resources;
 using EB.Features.Reports.ViewModel;
 using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Utilities;

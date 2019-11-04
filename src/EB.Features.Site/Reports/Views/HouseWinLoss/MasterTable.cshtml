@@ -1,7 +1,6 @@
-﻿@using EB.Features.Shared.Model;
+﻿@using EB.Features.Shared.Model
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
-@using EB.Features.Reports;
-@using EB.Features.Shared.Configuration;
+@using EB.Features.Reports.Resources
 
 @model HouseWinLossReportViewModel
 @{
@@ -31,22 +30,22 @@
         <tbody>
             @foreach (var row in Model.ReportData.Matches)
             {
-            <tr>
-                <td class="text-left">
-                    <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Agent.Value, Model.Query.HeadlineId)"> @row.UserName </a>
-                </td>
-                @HtmlHelpers.RenderWagerCell(row.Wagers)
-                @HtmlHelpers.RenderNumberCell(row.Stake)
-                @HtmlHelpers.RenderNumberCell(row.ValidStake)
-                @HtmlHelpers.RenderNumberCell(row.MemberIncome)
-                @HtmlHelpers.RenderNumberCell(row.Agent)
-                @HtmlHelpers.RenderNumberCell(row.AgentResult)
-                @HtmlHelpers.RenderNumberCell(row.MasterResult)
-                @HtmlHelpers.RenderNumberCell(row.Super)
-                @HtmlHelpers.RenderNumberCell(row.SuperResult)
-                @HtmlHelpers.RenderNumberCell(row.SuperStock)
-                @HtmlHelpers.RenderStockPercentCell(row.SuperStock, Model.ReportData.Total.SuperStock)
-            </tr>
+                <tr>
+                    <td class="text-left">
+                        <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Agent.Value, Model.Query.HeadlineId)"> @row.UserName </a>
+                    </td>
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.Agent)
+                    @HtmlHelpers.RenderNumberCell(row.AgentResult)
+                    @HtmlHelpers.RenderNumberCell(row.MasterResult)
+                    @HtmlHelpers.RenderNumberCell(row.Super)
+                    @HtmlHelpers.RenderNumberCell(row.SuperResult)
+                    @HtmlHelpers.RenderNumberCell(row.SuperStock)
+                    @HtmlHelpers.RenderStockPercentCell(row.SuperStock, Model.ReportData.Total.SuperStock)
+                </tr>
             }
         </tbody>
         @if (Model.ReportData.IsShowTotalRow)

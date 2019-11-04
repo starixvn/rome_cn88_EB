@@ -1,6 +1,7 @@
 ﻿namespace EB.Features.Site.Reports.ViewModel
 {
     using EB.Features.Reports;
+    using EB.Features.Reports.Resources;
     using EB.Features.Site.Shared.ViewModels.Components;
 
     public class HouseWinLossFilterViewModel

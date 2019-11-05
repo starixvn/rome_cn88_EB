@@ -24,9 +24,6 @@
 
         public int HeadlineId { get; set; }
 
-        public IEnumerable<int> SelectedSportGroupIds
-            => UserSelectedSportGroupIds.ToListInt();
-
         public string UserSelectedSportGroupIds { get; set; }
 
         public int CustId { get; set; }

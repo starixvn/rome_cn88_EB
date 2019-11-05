@@ -1,5 +1,5 @@
 ﻿"use strict";
-var periods: any;
+let periods: any;
 let NexDatePickerHelper: any;
 
 class PerformanceBonusReport {
@@ -33,7 +33,7 @@ class PerformanceBonusReport {
         this.renderComponents();
         this.registerEvents();
         this.$.unblockUI();
-    };
+    }
 
     public cacheDOMElements() {
         this.$reportForm = this.$("#report-form");
@@ -41,7 +41,7 @@ class PerformanceBonusReport {
         this.$fromDateContainer = this.$("#from-date-container");
         this.$toDateContainer = this.$("#to-date-container");
         this.$dateRangePicker = this.$("#" + this.dateRangePickerComponent.options.selectorId);
-    };
+    }
 
     public registerEvents() {
         this.$("#UserNames").on("change", this.CorrectUserName);
@@ -56,7 +56,7 @@ class PerformanceBonusReport {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
         });
-    };
+    }
 
     CheckHeadlineStock = (e: any) => {
         const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
@@ -70,15 +70,15 @@ class PerformanceBonusReport {
         } else {
             this.$("#HeadlineStock").data("oldvalue", newValue);
         }
-    };
+    }
 
     CorrectUserName = () => {
-        var userNames = this.$("#UserNames").val();
+        let userNames = this.$("#UserNames").val();
         userNames = userNames.trim().split(/\r\n|\r|\n|\s/g).filter(function (el) {
             return el != "";
         }).join(",");
         this.$("#UserNames").val(userNames);
-    };
+    }
 
     convertStringNumberToNumber = () => {
         const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
@@ -89,7 +89,7 @@ class PerformanceBonusReport {
     }
     onExportExcel = () => {
         this.$exportExcelForm.submit();
-    };
+    }
 
     onReportSubmit = (e: any) => {
         this.$.blockUI();
@@ -97,26 +97,26 @@ class PerformanceBonusReport {
         this.periodSelectionComponent.updateSelectedValue();
         this.currencySelectionComponent.updateSelectedValue();
         this.conjunctionSelectionComponent.updateSelectedValue();
-    };
+    }
 
     renderComponents(): void {
         this.periodSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-period", "UserSelectedPeriodId", () => { this.onPeriodsChange(); }));
         this.currencySelectionComponent.render(new SingleSelectionDropdownOption("dropdown-currency", "UserSelectedCurrencyId"));
         this.conjunctionSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-conjunction", "UserSelectedConjunctionId"));
         this.dateRangePickerComponent.render();
-    };
+    }
 
     onPeriodsChange(): void {
         const id = this.periodSelectionComponent.$dropdown.val();
 
         for (var i = 0; i < periods.length; i++) {
             if (periods[i].Id == id) {
-                var period = periods[i];
+                const period = periods[i];
                 this.changeDateRange(new Date(period.FromDate), new Date(period.ToDate));
                 break;
             }
         }
-    };
+    }
 
     changeDateRange(fromDate, toDate): void {
         const minDate = new Date(this.$dateRangePicker.data("mindate"));
@@ -141,4 +141,4 @@ $(function () {
         new DateRangePickerComponent($));
 
     performanceBonusReport.init();
-})
+});

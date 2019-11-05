@@ -2,11 +2,12 @@
 using EB.Features.Reports.Constants;
 using EB.Features.Reports.Criteria;
 using EB.Features.Reports.Params;
+using EB.Features.Shared.Model;
 using NUnit.Framework;
 
 namespace EB.Features.Reports.Tests.Criteria
 {
-    public class SettledHouseWinLossCriteriaTest
+    public class SettledHouseWinLossOfHeadlineCriteriaTest
     {
         [TestCase()]
         public void IsValid_ValidInput_ReturnTrue()
@@ -117,7 +118,6 @@ namespace EB.Features.Reports.Tests.Criteria
             Assert.AreEqual(expectedReportMode, act);
         }
 
-
         [Test]
         public void GetSettingKey_Always_ReturnCorrectKey()
         {
@@ -130,5 +130,6 @@ namespace EB.Features.Reports.Tests.Criteria
             // Assert
             Assert.AreEqual("CS_Rpt_EBWinloss_Headline", act);
         }
+
     }
 }

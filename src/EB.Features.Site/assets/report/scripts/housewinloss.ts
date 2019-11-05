@@ -89,18 +89,18 @@ class HouseWinLossReport {
         });
         this.$("#icon-information").on("click", this.showLegend);
         this.switchCalendarType();
-        var viewBetlist = this.viewbetlist;
-        var viewReport = this.viewReport;
+        const viewBetlist = this.viewbetlist;
+        const viewReport = this.viewReport;
         var this$ = this.$;
         this.$(".lnk-betlist").on("click touchend", function () {
-            var elm = this$(this);
+            const elm = this$(this);
             viewBetlist({
                 query: elm.attr("data-query")
             });
         });
 
         this.$(".lnk-report").on("click touchend", function () {
-            var elm = this$(this);
+            const elm = this$(this);
             viewReport({
                 query: elm.attr("data-query"),
                 custId: elm.attr("data-cust-id"),
@@ -108,13 +108,13 @@ class HouseWinLossReport {
                 roleId: elm.attr("data-role-id")
             });
         });
-    };
+    }
 
     viewbetlist = (options) => {        
         this.$("#AfterLogInQuery").val(options.query);
         const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
-        window.open(url, "internallogin", "scrollbars=1,fullscreen=yes,top=290")
-    };
+        window.open(url, "internallogin", "scrollbars=1,fullscreen=yes,top=290");
+    }
 
     viewReport = (options) => {
         this.$("#AfterLogInQuery").val(options.query);
@@ -122,8 +122,8 @@ class HouseWinLossReport {
         this.$internalLoginForm.find("#custName").val(options.custName);
         this.$internalLoginForm.find("#roleId").val(options.roleId);
         const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
-        window.open(url, "scrollbars=1,fullscreen=yes,top=290")
-    };
+        window.open(url, "scrollbars=1,fullscreen=yes,top=290");
+    }
 
     showLegend = () => {
         this.topWindow.popupManager.init(this.$, top);
@@ -134,7 +134,7 @@ class HouseWinLossReport {
             width: 600,
             height: 100
         });
-    };
+    }
 
     switchCalendarType = () => {
         if (this.$("#IsHistoricReport").val() == "True") {
@@ -162,7 +162,7 @@ class HouseWinLossReport {
 
     onExportExcel = () => {
         this.$exportExcelForm.submit();
-    };
+    }
 
     onReportSubmit = (e: any) => {
         this.$.blockUI();
@@ -185,7 +185,7 @@ class HouseWinLossReport {
         this.liveStatusSelectionComponent.updateSelectedValue();
         this.ticketStatusSelectionComponent.updateSelectedValue();        
         this.UpdateFromDateToDate();
-    };
+    }
 
     renderComponents(): void {
         this.dateRangePickerComponent.render();
@@ -243,7 +243,7 @@ class HouseWinLossReport {
                 includeSelectAllOption: false
             });
         }
-    };
+    }
 }
 
 $(function () {
@@ -263,4 +263,4 @@ $(function () {
         new DatePickerComponent());
 
     houseWinLossReport.init();
-})
+});

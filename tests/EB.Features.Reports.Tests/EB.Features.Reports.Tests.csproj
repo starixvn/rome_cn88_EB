@@ -73,18 +73,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\HouseWinLossBaseCriteriaTest.cs" />
     <Compile Include="Criteria\MatchWinLossCriteriaCriteriaTest.cs" />
+    <Compile Include="Criteria\PerformanceBonus\CheckValidSuperUserNameCommandTest.cs" />
+    <Compile Include="Criteria\PerformanceBonus\GetAccountingPeriodsCriteriaTest.cs" />
+    <Compile Include="Criteria\PerformanceBonus\PerformanceBonusCriteriaTest.cs" />
+    <Compile Include="Criteria\SettledHouseWinLossOfHeadlineCriteriaTest.cs" />
+    <Compile Include="Criteria\UnsettledCountHeadlineHouseWLCriteriaTest.cs" />
     <Compile Include="Criteria\UnsettledCountSMAHouseWLCriteriaTest.cs" />
     <Compile Include="Criteria\UnsettledHouseWinLossOfHeadlineCriteriaTest.cs" />
     <Compile Include="Criteria\SettledCountSMAHouseWLCriteriaTest.cs" />
     <Compile Include="Criteria\SettledCountHeadlineHouseWLCriteriaTest.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossCriteriaTest.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossCriteriaCriteriaTest.cs" />
+    <Compile Include="Criteria\SettledHouseWinLossOfSMACriteriaTest.cs" />
+    <Compile Include="Criteria\UnsettledHouseWinLossOfSMACriteriaTest.cs" />
     <Compile Include="Model\MatchWinLossModelTest.cs" />
     <Compile Include="Model\HouseWinLossModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\HouseWinLossServiceTest.cs" />
     <Compile Include="Services\MatchWinLossServiceTest.cs" />
+    <Compile Include="Services\PerformanceBonus\PerformanceBonusServiceTest.cs" />
     <Compile Include="ViewModel\HouseWinLossViewModelTest.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModelTest.cs" />
   </ItemGroup>

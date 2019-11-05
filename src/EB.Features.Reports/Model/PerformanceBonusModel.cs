@@ -11,11 +11,11 @@ namespace EB.Features.Reports.Model
 
         public int CustId { get; }
 
-        public string UserName { get; }
+        public string UserName { get; internal set; }
 
         public int HeadlineId { get; }
 
-        public string HeadlineUserName { get; }
+        public string HeadlineUserName { get; internal set; }
 
         public decimal HeadlineStock { get; internal set; }
 

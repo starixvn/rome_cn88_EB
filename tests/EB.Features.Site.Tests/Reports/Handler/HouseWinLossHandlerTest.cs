@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EB.Features.Reports.Params;
+using EB.Features.Reports.Resources;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
@@ -31,6 +33,20 @@ namespace EB.Features.Site.Tests.Reports.Handler
             hander = new HouseWinLossHandler(sportGroupService, betTypeService, houseWinLossService, currentSession);
         }
 
+        [Test]
+        public void HandleReportLegendQuery_Always_ReturnExpectedList()
+        {
+            // Arrange
+
+
+            // Act
+            var act = hander.Handle(new ReportLegendQuery(currentSession)).ToList();
+
+            // Assert
+            Assert.AreEqual(2, act.Count);
+            Assert.AreEqual(ReportResources.InaccurateDataLegend, act[0]);
+            Assert.AreEqual(ReportResources.CompareAccuratedDataLegend, act[1]);
+        }
 
         [Test]
         public void Handle_Always_CallGetSportGroups()

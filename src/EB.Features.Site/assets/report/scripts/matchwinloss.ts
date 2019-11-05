@@ -65,7 +65,7 @@ class MatchWinLossReport {
 
     onExportExcel = () => {
         this.$exportExcelForm.submit();
-    };
+    }
 
     onReportSubmit = (e: any) => {
         let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
@@ -78,7 +78,7 @@ class MatchWinLossReport {
 
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
-    };
+    }
 
     renderComponents(): void {        
         this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));        
@@ -115,7 +115,7 @@ class MatchWinLossReport {
                 includeSelectAllOption: false
             });
         }
-    };
+    }
 }
 
 $(function () {
@@ -129,4 +129,4 @@ $(function () {
         new DatePickerComponent());
 
     matchWinLossReport.init();
-})
+});

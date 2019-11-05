@@ -358,8 +358,5 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             Assert.AreEqual(expectedFileName, act);
         }
-
-        private string GetSporGroupName(int id)
-            => "all";
     }
 }

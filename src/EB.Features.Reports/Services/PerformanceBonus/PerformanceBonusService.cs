@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using EB.Features.Reports.Criteria;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
@@ -20,17 +18,17 @@ namespace EB.Features.Reports.Services
     public class PerformanceBonusService : IPerformanceBonusService
     {
         private readonly decimal BonusRate = 1.035m;
-        private readonly IDynamicRepository dynamiceRepository;
+        private readonly IDynamicRepository dynamicRepository;
 
         public PerformanceBonusService(IDynamicRepository dynamiceRepository)
         {
-            this.dynamiceRepository = dynamiceRepository;
+            this.dynamicRepository = dynamiceRepository;
         }
 
         public string CheckValidSuper(string userNames)
         {
             var criteria = new CheckValidSuperUserNameCommand(userNames);
-            dynamiceRepository.Execute(criteria);
+            dynamicRepository.Execute(criteria);
 
             return criteria.InvalidUsernames;
         }
@@ -38,7 +36,7 @@ namespace EB.Features.Reports.Services
 
         public IEnumerable<PerformanceBonusModel> Get(PerformanceBonusParam param)
         {
-            var reports = dynamiceRepository.Fetch<PerformanceBonusModel>(new PerformanceBonusCriteria(param))
+            var reports = dynamicRepository.Fetch<PerformanceBonusModel>(new PerformanceBonusCriteria(param))
             .OrderBy(i => i.HeadlineUserName)
             .ThenBy(i => i.UserName);
 

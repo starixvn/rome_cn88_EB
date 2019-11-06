@@ -1,32 +1,38 @@
 ﻿"use strict";
+
 class ChangePassword {
     $: JQueryStatic;
     top: Window;
     resources: any;
     elements: any;
-
+    minLenghtPassword = 2;
+    maxLenghtPassword = 50;
     constructor($: JQueryStatic, top: Window) {
         this.$ = $;
         this.top = top;
     }
 
     init(): void {
-        let self: any = this;
+        const this$ = this.$;
+        const elements = this.elements;
+        const validatePasswords = this.validatePasswords;
+        const top: any = this.top;
+
         this.cacheElements();
         this.$("#formPassword").submit(function (): boolean {
-            self.$.blockUI();
-            let $currentPassword: JQuery = self.elements.currentPassword;
-            let $newPassword: JQuery = self.elements.newPassword;
-            let $confirmPassword: JQuery = self.elements.confirmPassword;
+            this$.blockUI();
+            const $currentPassword: JQuery = elements.currentPassword;
+            const $newPassword: JQuery = elements.newPassword;
+            const $confirmPassword: JQuery = elements.confirmPassword;
 
-            if (!self.validatePasswords($currentPassword, $newPassword, $confirmPassword, self.elements.isResetMemberPassword)) {
-                self.$.unblockUI();
+            if (!validatePasswords($currentPassword, $newPassword, $confirmPassword, elements.isResetMemberPassword)) {
+                this$.unblockUI();
                 return false;
             }
 
             if ($currentPassword.length > 0) {
-                var encryptedPwd = CryptoJS.CfsEnCode($currentPassword.val());
-                var hashPwd = CryptoJS.SHA256(encryptedPwd);
+                const encryptedPwd = CryptoJS.CfsEnCode($currentPassword.val());
+                const hashPwd = CryptoJS.SHA256(encryptedPwd);
                 $currentPassword.val(hashPwd);
             }
 
@@ -37,11 +43,11 @@ class ChangePassword {
             if (self.$("#mainRootPath").length > 0) {
                 siteInfrastructure.logout();
             } else {
-                self.top.popupManager.close();
+                top.popupManager.close();
             }
         });
 
-        let focusField: JQuery = this.elements.currentPassword.length > 0
+        const focusField: JQuery = this.elements.currentPassword.length > 0
             ? this.elements.currentPassword
             : this.elements.newPassword;
         focusField.focus();
@@ -56,7 +62,7 @@ class ChangePassword {
             validLengthPassword: this.$("#valid-length-password").val()
         };
 
-        let $memberHiddenField: JQuery = this.$("#isResetMemberPassword");
+        const $memberHiddenField: JQuery = this.$("#isResetMemberPassword");
         this.elements = {
             currentPassword: this.$("#currentPassword"),
             newPassword: this.$("#newPassword"),
@@ -68,10 +74,10 @@ class ChangePassword {
     }
 
     validatePasswords(currentPassword: JQuery, newPassword: JQuery, confirmPassword: JQuery, isResetMemberPassword: boolean): boolean {
-        let isChangePasswordPage: boolean = currentPassword.length > 0;
-        let currentPasswordValue: string = isChangePasswordPage ? currentPassword.val() : "";
-        let newPasswordValue: string = newPassword.val();
-        let confirmPasswordValue: string = confirmPassword.val();
+        const isChangePasswordPage: boolean = currentPassword.length > 0;
+        const currentPasswordValue: string = isChangePasswordPage ? currentPassword.val() : "";
+        const newPasswordValue: string = newPassword.val();
+        const confirmPasswordValue: string = confirmPassword.val();
 
         if (isChangePasswordPage && currentPasswordValue.length === 0) {
             siteInfrastructure.showError(this.elements.messsageContainer, this.resources.pleaseEnterOldPassword);
@@ -87,7 +93,7 @@ class ChangePassword {
             return false;
         }
 
-        if (newPasswordValue.length < 2 || newPasswordValue.length > 50 ) {
+        if (newPasswordValue.length < this.minLenghtPassword || newPasswordValue.length > this.maxLenghtPassword) {
             siteInfrastructure.showError(this.elements.messsageContainer, this.resources.validLengthPassword);
             newPassword.focus();
 

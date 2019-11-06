@@ -7,9 +7,9 @@ interface JQuery {
 
 class SportGroupMultiSelectionOption {
     constructor(
-        public dropdownId: string = "dropdown-sportgroup",
-        public validateBeforeSubmit: boolean = true,
-        public productsInputId: string = "sportgroup-ids",
+        public dropdownId = "dropdown-sportgroup",
+        public validateBeforeSubmit = true,
+        public productsInputId = "sportgroup-ids",
         public onChange: Function = null) {
     }
 }
@@ -27,10 +27,10 @@ class SportGroupMultiSelectionComponent {
     }
 
     render = (options: SportGroupMultiSelectionOption = new SportGroupMultiSelectionOption()) => {
-        this.options = <SportGroupMultiSelectionOption>this.$.extend({}, this.options, options);
+        this.options = this.$.extend({}, this.options, options) as SportGroupMultiSelectionOption;
 
         this.$dropdown = this.$("#" + this.options.dropdownId);
-        let hasAnyItems = cn88Features.convertAttributeToBool(this.$dropdown.data("has-any-sport"));
+        const hasAnyItems = cn88Features.convertAttributeToBool(this.$dropdown.data("has-any-sport"));
         this.$hiddenInput = this.$("#" + this.options.productsInputId);
 
         this.$dropdown.multiselect({
@@ -72,9 +72,9 @@ class SportGroupMultiSelectionComponent {
     };
 
     getSelectedItems = () => {
-        let selected = [];
-        let selectedOptions = this.$dropdown.find("option:selected");
-        let this$ = this.$;
+        const selected = [];
+        const selectedOptions = this.$dropdown.find("option:selected");
+        const this$ = this.$;
 
         selectedOptions.each(function () {
             selected.push(this$(this).val());

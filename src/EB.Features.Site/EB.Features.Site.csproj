@@ -814,6 +814,7 @@
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\http-status.ts" />
     <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
     <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
     <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
@@ -826,12 +827,15 @@
     <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\sort.ts" />
     <TypeScriptCompile Include="assets\report\components\sport-group-multiselection.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\ReportBase.ts" />
     <TypeScriptCompile Include="assets\report\scripts\housewinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\performance-bonus.ts" />
     <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\core.ts" />
     <TypeScriptCompile Include="assets\shared\scripts\components\date-picker.ts" />
-    <TypeScriptCompile Include="assets\tests\apps\features\subaccount-tests.ts" />
+    <TypeScriptCompile Include="assets\tests\apps\features\subaccount-tests.ts">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="typings\globals\bootstrap\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\cleave.js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\cleave.js\options\creditCard.d.ts" />

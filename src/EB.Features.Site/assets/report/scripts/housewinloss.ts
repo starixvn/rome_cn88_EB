@@ -1,16 +1,10 @@
 ﻿"use strict";
-var betTypes: any = betTypes;
-var allBetTypeText: any = allBetTypeText;
-
-class HouseWinLossReport {
-    $: JQueryStatic;
+class HouseWinLossReport extends ReportBase{
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
     $dateRangeContainer: JQuery;
 
-    sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
     viewerSelectionComponent: SingleSelectionDropdownComponent;
-    betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     ticketStatusSelectionComponent: SingleSelectionDropdownComponent;
     dateRangePickerComponent: DateRangePickerComponent;
@@ -23,7 +17,7 @@ class HouseWinLossReport {
 
     $loadLegendURL: JQuery;
     topWindow: JQuery;
-
+    $isHistoryReport: JQuery;
     $internalLoginForm: JQuery;
 
     constructor($: JQueryStatic,
@@ -38,11 +32,10 @@ class HouseWinLossReport {
         sortComponent: SortComponent,
         linkBuilderComponent: LinkBuilderComponent,
         datePickerComponent: DatePickerComponent) {
+        super($, sportGroupSelectionComponent, betTypeSelectionComponent);
         this.$ = $;
         this.topWindow = topWindow;
         this.dateRangePickerComponent = dateRangePickerComponent;
-        this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
-        this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.ticketStatusSelectionComponent = ticketStatusSelectionComponent;
         this.viewerSelectionComponent = viewerSelectionComponent;
@@ -66,7 +59,7 @@ class HouseWinLossReport {
         this.$dateRangeContainer = this.$("#dateRangeContainer");
 
         this.$tableReport = this.$("#tbl-report");
-
+        this.$isHistoryReport = this.$("#IsHistoricReport");
         this.$loadLegendURL = this.$("#LoadLegendURL");        
         this.$internalLoginForm = this.$("#internal-login-form");
     }
@@ -78,20 +71,16 @@ class HouseWinLossReport {
         this.$("#icon-excel").on("click", this.onExportExcel);
         
         this.$("#ViewHistoryReport").click(() => {
-            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
-            this.$("#tab-main-content").remove();
-            this.switchCalendarType();
+            this.changeReportMode();
         });
         this.$("#BackToCurrentReport").click(() => {
-            this.$("#IsHistoricReport").val(this.$("#IsHistoricReport").val() == "True" ? "False" : "True");
-            this.$("#tab-main-content").remove();
-            this.switchCalendarType();
+            this.changeReportMode();
         });
         this.$("#icon-information").on("click", this.showLegend);
         this.switchCalendarType();
         const viewBetlist = this.viewbetlist;
         const viewReport = this.viewReport;
-        var this$ = this.$;
+        const this$ = this.$;
         this.$(".lnk-betlist").on("click touchend", function () {
             const elm = this$(this);
             viewBetlist({
@@ -108,6 +97,11 @@ class HouseWinLossReport {
                 roleId: elm.attr("data-role-id")
             });
         });
+    }
+    changeReportMode = () => {
+        this.$isHistoryReport.val(this.$isHistoryReport.val() === "True" ? "False" : "True");
+        this.$("#tab-main-content").remove();
+        this.switchCalendarType();
     }
 
     viewbetlist = (options) => {        
@@ -137,24 +131,25 @@ class HouseWinLossReport {
     }
 
     switchCalendarType = () => {
-        if (this.$("#IsHistoricReport").val() == "True") {
+        const inlineBlock = "inline-block";
+        if (this.$isHistoryReport.val() === "True") {
             this.$("#GroupViewHistory").css("display", "none");
             this.$("#GroupBackToCurrent").css("display", "block");
             this.$('.date-box').css('display', 'none');
-            this.$dateRangeContainer.css('display', 'inline-block');
+            this.$dateRangeContainer.css('display', inlineBlock);
             this.$("#ticketStatusContainer").css("display", "none");
         }
         else {
-            this.$("#ticketStatusContainer").css("display", "inline-block");
+            this.$("#ticketStatusContainer").css("display", inlineBlock);
             this.$("#GroupViewHistory").css("display", "block");
             this.$("#GroupBackToCurrent").css("display", "none");
-            this.$('.date-box').css('display', 'inline-block');
+            this.$('.date-box').css('display', inlineBlock);
             this.$dateRangeContainer.css('display', 'none');
         }
     }
     
     UpdateFromDateToDate = () => {
-        if (this.$("#IsHistoricReport").val() == "False") {
+        if (this.$isHistoryReport.val() === "False") {
             this.$("#fromDate").val(this.$("#date").val());
             this.$("#toDate").val(this.$("#date").val());
         } 
@@ -166,7 +161,7 @@ class HouseWinLossReport {
 
     onReportSubmit = (e: any) => {
         this.$.blockUI();
-        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
         this.viewerSelectionComponent.updateSelectedValue();
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");
@@ -174,7 +169,7 @@ class HouseWinLossReport {
             this.$.unblockUI();
             return;
         }
-        var viewerId = this.viewerSelectionComponent.getSelectedItem();
+        const viewerId = this.viewerSelectionComponent.getSelectedItem();
         if (viewerId === "0") {
             this.$("#RoleId").val("0"); //Headline
         } else {
@@ -188,10 +183,9 @@ class HouseWinLossReport {
     }
 
     renderComponents(): void {
+        super.renderComponents();
         this.dateRangePickerComponent.render();
-        this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));
-        this.viewerSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-viewer", "UserSelectedViewer", () => { this.onChangeUserSelectedViewer() }));
-        this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
+        this.viewerSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-viewer", "UserSelectedViewer", () => { this.onChangeUserSelectedViewer(); }));
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
         this.ticketStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-ticketstatus", "UserSelectedTicketStatusId"));
         this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
@@ -211,38 +205,8 @@ class HouseWinLossReport {
     }
 
     onChangeUserSelectedViewer(): void {
-        let value = this.viewerSelectionComponent.$dropdown.val();
-        this.$custLevelId.val(value == 0 ? "0" : "4");
-    }
-
-    onchangeSportGroup(): void {
-        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
-        if (this.betTypeSelectionComponent.$dropdown != null) {
-            this.betTypeSelectionComponent.$dropdown.empty();
-            this.betTypeSelectionComponent.$dropdown.append('<option value = 0>' + allBetTypeText + '</option>');
-
-            const exists = [];
-            for (const betType of betTypes) {
-                if (sportGroups.indexOf(betType.SportTypeGroup.toString()) != -1) {
-                    var key = betType.Value;
-
-                    if (exists[key]) {
-                        continue;
-                    }
-
-                    exists[key] = true;
-                    this.betTypeSelectionComponent.$dropdown.append(`<option value="${betType.Value}">${betType.Text}</option>`);
-                }
-            }
-
-            this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
-            this.betTypeSelectionComponent.$dropdown.multiselect({
-                multiple: false,
-                maxHeight: 300,
-                numberDisplayed: 1,
-                includeSelectAllOption: false
-            });
-        }
+        const value = this.viewerSelectionComponent.$dropdown.val();
+        this.$custLevelId.val(value === "0" ? "0" : "4");
     }
 }
 

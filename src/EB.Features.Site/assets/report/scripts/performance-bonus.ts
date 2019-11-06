@@ -1,6 +1,4 @@
 ﻿"use strict";
-let periods: any;
-let NexDatePickerHelper: any;
 
 class PerformanceBonusReport {
     $: JQueryStatic;
@@ -9,6 +7,9 @@ class PerformanceBonusReport {
     $fromDateContainer: JQuery;
     $toDateContainer: JQuery;
     $dateRangePicker: JQuery;
+    $userName: JQuery;
+    $headlineStock: JQuery;
+    $dividendRate: JQuery;
 
     periodSelectionComponent: SingleSelectionDropdownComponent;
     currencySelectionComponent: SingleSelectionDropdownComponent;
@@ -41,51 +42,55 @@ class PerformanceBonusReport {
         this.$fromDateContainer = this.$("#from-date-container");
         this.$toDateContainer = this.$("#to-date-container");
         this.$dateRangePicker = this.$("#" + this.dateRangePickerComponent.options.selectorId);
+        this.$userName = this.$("#UserNames");
+        this.$headlineStock = this.$("#HeadlineStock");
+        this.$dividendRate = this.$("#DividendRate");
     }
 
     public registerEvents() {
-        this.$("#UserNames").on("change", this.CorrectUserName);
+        this.$userName.on("change", this.CorrectUserName);
         this.$reportForm.submit(this.onReportSubmit);
         this.$("#icon-excel").on("click", this.onExportExcel);
-        this.$("#HeadlineStock").on("keyup", this.CheckHeadlineStock);
-        new Cleave("#DividendRate", {
+        this.$headlineStock.on("keyup", this.CheckHeadlineStock);
+        new Cleave((this.$dividendRate[0]), {
             numeral: true,
             numeralDecimalScale: 4
         });
-        new Cleave("#HeadlineStock", {
+        new Cleave((this.$headlineStock[0]), {
             numeral: true,
             numeralThousandsGroupStyle: 'thousand'
         });
     }
 
     CheckHeadlineStock = (e: any) => {
-        const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
+        const headlineStock = this.$headlineStock.val().replace(/,/g, '');
         const newValue = Number(headlineStock);
-        if (newValue > 999999999999.99) {
-            this.$("#HeadlineStock").val(this.$("#HeadlineStock").data("oldvalue"));
-            new Cleave("#HeadlineStock", {
+        const maxStock = 999999999999.99;
+        if (newValue > maxStock) {
+            this.$headlineStock.val(this.$headlineStock.data("oldvalue"));
+            new Cleave((this.$headlineStock[0]), {
                 numeral: true,
                 numeralThousandsGroupStyle: 'thousand'
             });
         } else {
-            this.$("#HeadlineStock").data("oldvalue", newValue);
+            this.$headlineStock.data("oldvalue", newValue);
         }
     }
 
     CorrectUserName = () => {
-        let userNames = this.$("#UserNames").val();
+        let userNames = this.$userName.val();
         userNames = userNames.trim().split(/\r\n|\r|\n|\s/g).filter(function (el) {
-            return el != "";
+            return el !== "";
         }).join(",");
-        this.$("#UserNames").val(userNames);
+        this.$userName.val(userNames);
     }
 
     convertStringNumberToNumber = () => {
-        const headlineStock = this.$("#HeadlineStock").val().replace(/,/g, '');
-        this.$("#HeadlineStock").val(headlineStock);
+        const headlineStock = this.$headlineStock.val().replace(/,/g, '');
+        this.$headlineStock.val(headlineStock);
 
-        const bonusRate = this.$("#DividendRate").val().replace(/,/g, '');
-        this.$("#DividendRate").val(bonusRate);
+        const bonusRate = this.$dividendRate.val().replace(/,/g, '');
+        this.$dividendRate.val(bonusRate);
     }
     onExportExcel = () => {
         this.$exportExcelForm.submit();
@@ -109,9 +114,8 @@ class PerformanceBonusReport {
     onPeriodsChange(): void {
         const id = this.periodSelectionComponent.$dropdown.val();
 
-        for (var i = 0; i < periods.length; i++) {
-            if (periods[i].Id == id) {
-                const period = periods[i];
+        for (const period of window.periods) {
+            if (period.Id === id) {
                 this.changeDateRange(new Date(period.FromDate), new Date(period.ToDate));
                 break;
             }
@@ -121,8 +125,8 @@ class PerformanceBonusReport {
     changeDateRange(fromDate, toDate): void {
         const minDate = new Date(this.$dateRangePicker.data("mindate"));
         const maxDate = new Date(this.$dateRangePicker.data("maxdate"));
-        const fDate = NexDatePickerHelper.correctDateInRange(fromDate, minDate, maxDate);
-        const tDate = NexDatePickerHelper.correctDateInRange(toDate, minDate, maxDate);
+        const fDate = window.NexDatePickerHelper.correctDateInRange(fromDate, minDate, maxDate);
+        const tDate = window.NexDatePickerHelper.correctDateInRange(toDate, minDate, maxDate);
                 
         this.$fromDateContainer.data("DateTimePicker").maxDate(tDate);
         this.$fromDateContainer.data("DateTimePicker").date(fDate);

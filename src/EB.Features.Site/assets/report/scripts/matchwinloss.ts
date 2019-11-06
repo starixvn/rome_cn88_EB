@@ -1,13 +1,7 @@
 ﻿"use strict";
-var betTypes: any = betTypes;
-var allBetTypeText: any = allBetTypeText;
-
-class MatchWinLossReport {
-    $: JQueryStatic;
+class MatchWinLossReport extends ReportBase {
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
-    sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
-    betTypeSelectionComponent: SingleSelectionDropdownComponent;
     liveStatusSelectionComponent: SingleSelectionDropdownComponent;
     pagerComponent: ClientPagerComponent;
     datePickerComponent: DatePickerComponent;
@@ -20,9 +14,8 @@ class MatchWinLossReport {
         pagerComponent: ClientPagerComponent,
         toggleHandler: ToggleHandler,
         datePickerComponent: DatePickerComponent) {
+        super($, sportGroupSelectionComponent, betTypeSelectionComponent);
         this.$ = $;
-        this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
-        this.betTypeSelectionComponent = betTypeSelectionComponent;
         this.liveStatusSelectionComponent = liveStatusSelectionComponent;
         this.pagerComponent = pagerComponent;
         this.pagerComponent.pageList = this.pagerComponent.smallPageList;
@@ -47,9 +40,9 @@ class MatchWinLossReport {
         this.datePickerComponent.render(new DatePickerOption($, "date-container"));
 
         $(".group").click(function (): void {
-            let $this: JQuery = $(this);
-            let icon: JQuery = $this.find(".group-name-wrapper").children().first();
-            let children: any = $this.siblings(`.childrow-${$this.data("leagueid")}`);
+            const $this: JQuery = $(this);
+            const icon: JQuery = $this.find(".group-name-wrapper").children().first();
+            const children: any = $this.siblings(`.childrow-${$this.data("leagueid")}`);
 
             if (icon.hasClass("icon-chevron-down")) {
                 icon.removeClass().addClass("icon-chevron-right");
@@ -68,7 +61,7 @@ class MatchWinLossReport {
     }
 
     onReportSubmit = (e: any) => {
-        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");
             e.preventDefault();
@@ -80,41 +73,10 @@ class MatchWinLossReport {
         this.liveStatusSelectionComponent.updateSelectedValue();
     }
 
-    renderComponents(): void {        
-        this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids", () => { this.onchangeSportGroup(); }));        
-        this.betTypeSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-bettype", "UserSelectedBetTypeId"));
+    renderComponents(): void {
+        super.renderComponents();
         this.liveStatusSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-livestatus", "UserSelectedLiveStatusId"));
         this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
-    }
-
-    onchangeSportGroup(): void {
-        let sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
-        if (this.betTypeSelectionComponent.$dropdown != null) {
-            this.betTypeSelectionComponent.$dropdown.empty();
-            this.betTypeSelectionComponent.$dropdown.append('<option value = 0>' + allBetTypeText + '</option>');
-
-            const exists = [];
-            for (const betType of betTypes) {
-                if (sportGroups.indexOf(betType.SportTypeGroup.toString()) != -1) {
-                    var key = betType.Value;
-
-                    if (exists[key]) {
-                        continue;
-                    }
-
-                    exists[key] = true;
-                    this.betTypeSelectionComponent.$dropdown.append(`<option value="${betType.Value}">${betType.Text}</option>`);
-                }
-            }
-            
-            this.betTypeSelectionComponent.$dropdown.multiselect('destroy')
-            this.betTypeSelectionComponent.$dropdown.multiselect({
-                multiple: false,
-                maxHeight: 300,
-                numberDisplayed: 1,
-                includeSelectAllOption: false
-            });
-        }
     }
 }
 

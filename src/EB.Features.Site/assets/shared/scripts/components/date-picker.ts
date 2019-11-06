@@ -1,7 +1,7 @@
 ﻿class DatePickerOption {
     constructor(
         public $: JQueryStatic = null,
-        public pickerId: string = "date-container") {
+        public pickerId = "date-container") {
     }
 }
 
@@ -12,7 +12,7 @@ class DatePickerComponent {
 
     render = (options: DatePickerOption = new DatePickerOption()) => {
         this.$ = options.$;
-        this.options = <DatePickerOption>this.$.extend({}, this.options, options);
+        this.options = this.$.extend({}, this.options, options) as DatePickerOption;
 
         this.$dateContainer = this.$("#" + this.options.pickerId);
         this.$dateContainer.datepicker({

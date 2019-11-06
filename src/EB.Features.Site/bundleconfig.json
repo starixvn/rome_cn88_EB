@@ -59,7 +59,8 @@
       "assets/common/js/components/resizable/resizable.js",
       "assets/common/js/components/popup-manager/popup-manager.js",
       "assets/main/scripts/site-infrastructure.js",
-      "assets/main/scripts/default/index-manager.js"
+      "assets/main/scripts/default/index-manager.js",
+      "assets/main/scripts/default/http-status.js"
     ]
   },
   {
@@ -106,6 +107,7 @@
       "assets/shared/scripts/components/date-picker.js",
       "assets/report/scripts/core.js",
       "assets/report/components/sport-group-multiselection.js",
+      "assets/report/scripts/ReportBase.js",
       "assets/report/scripts/matchwinloss.js"
     ]
   },
@@ -133,6 +135,7 @@
       "assets/report/scripts/core.js",
       "assets/shared/scripts/components/date-picker.js",
       "assets/report/components/sport-group-multiselection.js",
+      "assets/report/scripts/ReportBase.js",
       "assets/report/scripts/housewinloss.js"
     ]
   },

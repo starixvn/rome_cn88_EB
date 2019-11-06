@@ -1,11 +1,12 @@
 ﻿"use strict";
+
 class MultiSelectionDropdownOption {
     constructor(
-        public checkboxAllId: string = "checkbox-all",
+        public checkboxAllId = "checkbox-all",
         public items: any = [],
-        public hiddenInputId: string = "HiddenInputId",
-        public searchTextbox: string = "txt-search",
-        public clearSearchId: string = "clear-search") {
+        public hiddenInputId = "HiddenInputId",
+        public searchTextbox = "txt-search",
+        public clearSearchId = "clear-search") {
     }
 }
 
@@ -23,37 +24,39 @@ class MultiSelectionDropdownComponent {
     }
 
     render = (options: MultiSelectionDropdownOption = new MultiSelectionDropdownOption()) => {
-        this.options = <MultiSelectionDropdownOption>this.$.extend({}, this.options, options);
+        this.options = this.$.extend({}, this.options, options) as MultiSelectionDropdownOption;
         this.$leaves = [];
 
         this.$hiddenInput = this.$("#" + this.options.hiddenInputId);
         this.$checkboxAll = this.$("#" + this.options.checkboxAllId);
-        let $searchTextbox = this.$("#" + this.options.searchTextbox);
+        const $searchTextbox = this.$("#" + this.options.searchTextbox);
 
-        let self = this;
+        const this$ = this.$;
+        const search = this.search;
+        const leaves = this.$leaves;
+
         if (this.options.items.length) {
             this.bindParentChildEvent(this.options.items[0]);
         }
 
         $searchTextbox.on("change keyup", function () {
-            var text = self.$(this).val();
-            self.search(text);
+            const text = this$(this).val();
+            search(text);
         });
 
         this.$("#" + this.options.clearSearchId).on("click touchend", () => {
             $searchTextbox.val("");
-            self.$leaves.removeClass("hide");
+            leaves.removeClass("hide");
         });
     };
 
     bindParentChildEvent = (parent) => {
-        var self = this;
-        var $parent = this.$(parent.id);
-        var $childs = [];
+        const countChildCheck = this.countChildCheck;
+        const $parent = this.$(parent.id);
 
         $parent.change(function () {
-            for (var i = 0; i < parent.childs.length; i++) {
-                var $child = this.$(parent.childs[i].id);
+            for (const child of parent.childs) {
+                const $child = this.$(child.id);
                 if (this.checked) {
                     $child.attr("disabled", "disabled");
                 } else {
@@ -62,21 +65,18 @@ class MultiSelectionDropdownComponent {
             }
         });
 
-        if (parent.childs.length == 0) {
+        if (parent.childs.length === 0) {
             this.$leaves.push($parent);
             return;
         }
 
-        for (var i = 0; i < parent.childs.length; i++) {
-            var child = parent.childs[i];
-            var $child = this.$(parent.childs[i].id);
+        for (const child of parent.childs) {
+            const $child = this.$(child.id);
             $child.click(function () {
-                if (this.checked && self.countChildCheck(parent.childs) == parent.childs.length) {
+                if (this.checked && countChildCheck(parent.childs) === parent.childs.length) {
                     $parent.prop("checked", true);
-
-                    for (var i = 0; i < parent.childs.length; i++) {
-                        var $child = this.$(parent.childs[i].id);
-                        $child.attr("disabled", "disabled");
+                    for (const newChild of parent.childs) {
+                        this.$(newChild.id).attr("disabled", "disabled");
                     }
                 }
             });
@@ -85,10 +85,10 @@ class MultiSelectionDropdownComponent {
         }
     };
     countChildCheck = (childs) => {
-        var count = 0;
+        let count = 0;
 
-        for (var i = 0; i < childs.length; i++) {
-            var $child = this.$(childs[i].id);
+        for (const child of childs) {
+            const $child = this.$(child.id);
             if ($child.is(":checked")) {
                 count++;
             }
@@ -98,13 +98,13 @@ class MultiSelectionDropdownComponent {
     };
 
     getSelectedItems = () => {
-        let selected = [];
+        const selected = [];
 
         if (this.$(this.options.items[0].id).is(":checked")) {
             return selected;
         }
 
-        let this$ = this.$;
+        const this$ = this.$;
 
         this.$leaves.each(function () {
             selected.push(this$(this).val());
@@ -114,13 +114,13 @@ class MultiSelectionDropdownComponent {
     };
 
     getSelectedItemTexts = () => {
-        let selected = [];
+        const selected = [];
 
         if (this.$(this.options.items[0].id).is(":checked")) {
             return selected;
         }
 
-        let this$ = this.$;
+        const this$ = this.$;
 
         this.$leaves.each(function () {
             selected.push(this$(this).attr("data-text"));
@@ -133,12 +133,12 @@ class MultiSelectionDropdownComponent {
         this.$hiddenInput.val(this.getSelectedItems().join(","));
     };
     search = (text) => {
-        var lowerCaseText = text.toLowerCase();
-        var this$ = this.$;
+        const lowerCaseText = text.toLowerCase();
+        const this$ = this.$;
         this.$leaves.each(function () {
-            var chk = this$(this);
-            var chkValue = chk.attr("data-text").toLowerCase();
-            if (chkValue.indexOf(lowerCaseText) == -1) {
+            const chk = this$(this);
+            const chkValue = chk.attr("data-text").toLowerCase();
+            if (chkValue.indexOf(lowerCaseText) === -1) {
                 chk.parent().addClass("hide");
             } else {
                 chk.parent().removeClass("hide");

@@ -5,10 +5,10 @@ interface JQuery {
 
 class ToggleHandlerOption {
     constructor(
-        public toggleIconId: string = "toggleIconId",
-        public sourceId: string = "sourceId",
-        public targetId: string = "targetId",
-        public hideSourceElement: boolean = true) {
+        public toggleIconId = "toggleIconId",
+        public sourceId = "sourceId",
+        public targetId = "targetId",
+        public hideSourceElement = true) {
     }
 }
 
@@ -18,13 +18,18 @@ class ToggleHandler {
     $sourceElement: JQuery;
     $targetElement: JQuery;
     options = new ToggleHandlerOption();
-
+    slideUpTime = 210;
+    slideDownTime = 200;
+    eventName: {
+        IconFilterDown: "icon-filter-down",
+        IconFilterUp: "icon-filter-up",
+    };
     constructor($: JQueryStatic) {
         this.$ = $;
     }
 
     render = (options: ToggleHandlerOption) => {
-        this.options = <ToggleHandlerOption>this.$.extend({}, this.options, options);
+        this.options = this.$.extend({}, this.options, options) as ToggleHandlerOption;
 
         this.$filterToggleIcon = this.$("#" + this.options.toggleIconId);
         this.$sourceElement = this.$("#" + this.options.sourceId);
@@ -36,39 +41,39 @@ class ToggleHandler {
 
         this.$filterToggleIcon.on("click touchend", (e) => {
             e.preventDefault();
-            let isCollapsed = this.$filterToggleIcon.hasClass("icon-filter-down");
+            const isCollapsed = this.$filterToggleIcon.hasClass(this.eventName.IconFilterDown);
 
             if (isCollapsed) {
                 this.$sourceElement
-                    .slideDown(200);
+                    .slideDown(this.slideDownTime);
                 this.$targetElement
-                    .slideUp(210);
+                    .slideUp(this.slideUpTime);
                 this.$filterToggleIcon
-                    .removeClass("icon-filter-down")
-                    .addClass("icon-filter-up");
+                    .removeClass(this.eventName.IconFilterDown)
+                    .addClass(this.eventName.IconFilterUp);
             }
             else {
-                this.$sourceElement.slideUp(200);
+                this.$sourceElement.slideUp(this.slideDownTime);
                 this.$targetElement
-                    .slideDown(210);
+                    .slideDown(this.slideUpTime);
                 this.$filterToggleIcon
-                    .removeClass("icon-filter-up")
-                    .addClass("icon-filter-down");
+                    .removeClass(this.eventName.IconFilterUp)
+                    .addClass(this.eventName.IconFilterDown);
             }
         });
     };
 
     hideFilter = () => {
-        let isCollapsed = this.$filterToggleIcon.hasClass("icon-filter-down");
+        const isCollapsed = this.$filterToggleIcon.hasClass(this.eventName.IconFilterDown);
         if (isCollapsed) {
             return;
         }
 
-        this.$sourceElement.slideUp(200);
+        this.$sourceElement.slideUp(this.slideDownTime);
         this.$targetElement
-            .slideDown(210);
+            .slideDown(this.slideUpTime);
         this.$filterToggleIcon
-            .removeClass("icon-filter-up")
-            .addClass("icon-filter-down");
+            .removeClass(this.eventName.IconFilterUp)
+            .addClass(this.eventName.IconFilterDown);
     };
 }

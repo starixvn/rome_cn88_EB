@@ -12,32 +12,33 @@
     init = () => {
         this.markMessageAsReadPath = this.$("#MarkMessageAsReadPath").val();
         siteInfrastructure.loadInfo(this.$, "#announcements", this.initAnnouncements);
-        var self = this;
+        const topWindow = this.topWindow;
+        const this$ = this.$;
         this.$("#generalinformation a").on("click touchend", function () {
-            var url = self.$(this).attr("data-url");
+            const url = this$(this).attr("data-url");
 
-            self.topWindow.indexManager.activeMainMenu("menu-ACCOUNTMANAGEMENT");
-            self.topWindow.indexManager.activeSubMenu("sub-menu-DOWNLINELIST", "menu-ACCOUNTMANAGEMENT");
+            topWindow.indexManager.activeMainMenu("menu-ACCOUNTMANAGEMENT");
+            topWindow.indexManager.activeSubMenu("sub-menu-DOWNLINELIST", "menu-ACCOUNTMANAGEMENT");
             window.location.href = url;
-        })
+        });
     };
 
     initAnnouncements = () => {
-        var self = this;
+        const indexManager = this.topWindow.indexManager;
+        const topWindow = this.topWindow;
+        const this$ = this.$;
 
         this.onToggleMessage(this.markMessageAsRead);
         this.$("#view-announcements").on("click touchend", function () {
-            self.topWindow.indexManager.activeMainMenu("menu-ANNOUNCEMENT");
-
-            var target = self.$(this).attr("data-target");
-
-            self.topWindow.$("#main").attr("src", target);
+            indexManager.activeMainMenu("menu-ANNOUNCEMENT");
+            const target = this$(this).attr("data-target");
+            topWindow.$("#main").attr("src", target);
         });
     };
 
     onToggleMessage = (markMessageAsRead: (message: JQuery) => void) => {
         this.$(".message").each((index: number, element: Element) => {
-            let $this = this.$(element),
+            const $this = this.$(element),
                 shortContent = $this.children(".short-content"),
                 fullContent = $this.children(".full-content"),
                 icon = $this.find(".icon");
@@ -77,10 +78,10 @@
             });
         }
     }
-};
+}
 
 
 $(function () {
-    var homeIndex = new HomeIndex($, top);
+    const homeIndex = new HomeIndex($, top);
     homeIndex.init();
 });

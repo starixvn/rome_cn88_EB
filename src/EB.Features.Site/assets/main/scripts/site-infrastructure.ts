@@ -20,7 +20,7 @@ top.showCN88CancelButton = true;
 top.showCN88SaveAndNewButton = true;
 
 class Result {
-    static warningCode: number = -1000;
+    static warningCode = -1000;
 
     Code: number;
     Message: string;
@@ -40,12 +40,12 @@ class Result {
 class SiteInfrastructure {
     localStorage = {
         get: (key: string) => {
-            var result = store.enabled ? store.get(key) : $.cookie(key);
+            const result = store.enabled ? store.get(key) : $.cookie(key);
             return result ? JSON.parse(result) : undefined;
         },
 
         set: (key: string, value: any) => {
-            var data = JSON.stringify(value);
+            const data = JSON.stringify(value);
             store.enabled ? store.set(key, data) : $.cookie(key, data, this.localStorage.getCookieExpireOptions());
         },
 
@@ -54,16 +54,17 @@ class SiteInfrastructure {
         },
 
         getCookieExpireOptions: () => {
-            var cookieExpire: any = { expires: 365, path: window.location.pathname };
+            const cookieExpire: any = { expires: 365, path: window.location.pathname };
 
             return cookieExpire;
         },
         clear: () => {
             if (store.enabled) {                
-                var allKeys = store.getAll();
-                for (var key in allKeys) {
-                    if (key != "LANGUAGE")
+                const allKeys = store.getAll();
+                for (const key in allKeys) {
+                    if (key !== "LANGUAGE") {
                         store.remove(key);
+                    }                        
                 }
             }
         },
@@ -72,20 +73,20 @@ class SiteInfrastructure {
         },
 
         shiftStorage: (prefixKey: string, value: any, maxIndex: number) => {
-            for (var i = 1; i < maxIndex - 1; i++) {
-                var oldValue = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName + "_" + (i + 1));
-                siteInfrastructure.localStorage.set(indexManager.elements.currentURLCookieName + "_" + i, oldValue);
+            for (let i = 1; i < maxIndex - 1; i++) {
+                const oldValue = siteInfrastructure.localStorage.get(`${indexManager.elements.currentURLCookieName}_${(i + 1)}`);
+                siteInfrastructure.localStorage.set(`${indexManager.elements.currentURLCookieName}_${i}`, oldValue);
             }
 
-            siteInfrastructure.localStorage.set(indexManager.elements.currentURLCookieName + "_" + (maxIndex - 1), value);
+            siteInfrastructure.localStorage.set(`${indexManager.elements.currentURLCookieName}_${(maxIndex - 1)}`, value);
         }
     };
 
     loadInfo = ($: any, id: string, handleOnSuccessLoading: any) => {
-        let $component = $(id),
+        const $component = $(id),
             url = $component.attr('action-url');
 
-        if (url == '' || typeof url == 'undefined') {
+        if (url === '' || typeof url === 'undefined') {
             return;
         }
 
@@ -128,44 +129,40 @@ class SiteInfrastructure {
     };
 
     logout = () => {
-        var index: any = window;
-        while (index != index.parent) {
+        let index: any = window;
+        while (index !== index.parent) {
             index = index.parent;
         }
 
-        const isInternalElement = (<HTMLInputElement>top.document.getElementById("IsInternal"));
+        const mainRootPath = $("#mainRootPath").val();
+        const isInternalElement = (top.document.getElementById("IsInternal") as HTMLInputElement);
         const isInternal = isInternalElement ? isInternalElement.value : "0";
-        index.location.href = $("#mainRootPath").val() + "Login/Logout";
+        index.location.href = `${mainRootPath}Login/Logout`;
         siteInfrastructure.localStorage.clear();
 
         if (isInternal === "1") {
             index.close();
         }
     };
+
+    returnCurrentPage = () => {
+        const data = (window.top.siteInfrastructure.localStorage || siteInfrastructure.localStorage).get("reloadCN88CustomerListCallBackUrl");
+
+        if (data === undefined || !data.currentPage) {
+            return;
+        }
+
+        window.top.$("#main").attr("src", data.currentPage);
+    };
 }
 
 const siteInfrastructure = new SiteInfrastructure();
 
-window.top.cn88SuccessfulUpdatingCallback = function () {
-    var data = (window.top.siteInfrastructure.localStorage || siteInfrastructure.localStorage).get("reloadCN88CustomerListCallBackUrl");
+window.top.cn88SuccessfulUpdatingCallback = siteInfrastructure.returnCurrentPage;
 
-    if (data == undefined || !data.currentPage) {
-        return;
-    }
-
-    window.top.$("#main").attr("src", data.currentPage);
-}
-
-window.top.cn88CancelCallback = function () {
-    var data = (window.top.siteInfrastructure.localStorage || siteInfrastructure.localStorage).get("reloadCN88CustomerListCallBackUrl");
-
-    if (data == undefined || !data.currentPage) {
-        return;
-    }
-
-    window.top.$("#main").attr("src", data.currentPage);
-}
+window.top.cn88CancelCallback = siteInfrastructure.returnCurrentPage;
 
 window.top.cn88SaveAndNewCallback = function () {
-    location.reload(true);
-}
+    const mainiFrame: JQuery = window.top.$("#main");
+    mainiFrame.attr("src", mainiFrame.attr("src"));
+};

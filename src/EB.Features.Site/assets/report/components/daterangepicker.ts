@@ -8,8 +8,8 @@ interface JQuery {
 
 class DateRangePickerOption {
     constructor(
-        public selectorId: string = "daterange-picker",
-        public reportFormId: string = "report-form",
+        public selectorId = "daterange-picker",
+        public reportFormId = "report-form",
         public onChange: Function = null) {
         this.selectorId = selectorId;
         this.reportFormId = reportFormId;
@@ -34,10 +34,10 @@ class DateRangePickerComponent {
     render = (options: DateRangePickerOption = new DateRangePickerOption()) => {
         this.options = this.$.extend({}, this.options, options);
 
-        let dateRangePicker = this.$("#" + this.options.selectorId);
-        let currentDate = dateRangePicker.data("currentdate");
-        let minDate = dateRangePicker.data("mindate");
-        let maxDate = dateRangePicker.data("maxdate");
+        const dateRangePicker = this.$("#" + this.options.selectorId);
+        const currentDate = dateRangePicker.data("currentdate");
+        const minDate = dateRangePicker.data("mindate");
+        const maxDate = dateRangePicker.data("maxdate");
         this.$reportForm = this.$("#" + this.options.reportFormId);
 
         dateRangePicker.nexDatePicker({

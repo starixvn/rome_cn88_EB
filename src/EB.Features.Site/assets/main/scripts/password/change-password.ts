@@ -27,20 +27,16 @@ class ChangePassword {
     }
 
     init(): void {
-        const this$ = this.$;
-        const elements = this.elements;
-        const validatePasswords = this.validatePasswords;
-        const top: any = this.top;
-
         this.cacheElements();
-        this.$("#formPassword").submit(function (): boolean {
-            this$.blockUI();
-            const $currentPassword: JQuery = elements.currentPassword;
-            const $newPassword: JQuery = elements.newPassword;
-            const $confirmPassword: JQuery = elements.confirmPassword;
 
-            if (!validatePasswords($currentPassword, $newPassword, $confirmPassword, elements.isResetMemberPassword)) {
-                this$.unblockUI();
+        this.$("#formPassword").submit(() => {
+            this.$.blockUI();
+            const $currentPassword: JQuery = this.elements.currentPassword;
+            const $newPassword: JQuery = this.elements.newPassword;
+            const $confirmPassword: JQuery = this.elements.confirmPassword;
+
+            if (!this.validatePasswords($currentPassword, $newPassword, $confirmPassword, this.elements.isResetMemberPassword)) {
+                this.$.unblockUI();
                 return false;
             }
 
@@ -57,7 +53,7 @@ class ChangePassword {
             if (self.$("#mainRootPath").length > 0) {
                 siteInfrastructure.logout();
             } else {
-                top.popupManager.close();
+                this.top.popupManager.close();
             }
         });
 

@@ -12,7 +12,6 @@ class MatchWinLossReport extends ReportBase {
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         pagerComponent: ClientPagerComponent,
-        toggleHandler: ToggleHandler,
         datePickerComponent: DatePickerComponent) {
         super($, sportGroupSelectionComponent, betTypeSelectionComponent);
         this.$ = $;
@@ -87,7 +86,6 @@ $(function () {
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new ClientPagerComponent($),
-        new ToggleHandler($),
         new DatePickerComponent());
 
     matchWinLossReport.init();

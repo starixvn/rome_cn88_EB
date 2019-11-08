@@ -42,7 +42,7 @@ let indexManager = {
         changeSecurityCode: null
     },
     topWindow: null,
-    init: function (topWindow: any) {
+    init: function (topWindow: Window) {
         indexManager.topWindow = topWindow;
 
         indexManager.cacheElements();
@@ -60,7 +60,7 @@ let indexManager = {
         displayNone: "display-none",
         hasSubMenu: "has-submenu"
     },
-    
+
     cacheElements: function () {
         indexManager.elements.isNotHeadLine = parseInt($("#IsNotHeadLine").val());
         indexManager.elements.intervalToGetTotalOnlineMember = parseInt($("#IntervalToGetTotalOnlineMember").val());
@@ -236,7 +236,7 @@ let indexManager = {
             type: "POST",
             url: indexManager.urls.changeLanguage,
             data: { languageCode: lang },
-            success: function (result: any) {
+            success: function (result: string) {
                 if (result !== undefined) {
                     // remove www so that subdomain can override LANGUAGE value
                     const domain = window.location.hostname.replace(/([a-zA-Z0-9]+.)/, "").replace("www.", "");
@@ -263,7 +263,7 @@ let indexManager = {
     reloadPage: () => {
         top.location.href = indexManager.removeBookmarksInUrl(top.location.href);
     },
-    removeBookmarksInUrl: (url: any) => {
+    removeBookmarksInUrl: (url: string) => {
         if (typeof url !== "string") {
             return null;
         }
@@ -327,7 +327,7 @@ let indexManager = {
             ($("#main")[0] as HTMLIFrameElement).src = ($this[0] as HTMLLinkElement).href;
         }
     },
-    addHistory: (newEvent: any) => {
+    addHistory: (newEvent: object) => {
         const history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
         let historyIndex = history ? parseInt(history, 0) : 0;
         historyIndex++;
@@ -391,19 +391,10 @@ let indexManager = {
             type: "POST",
             url: indexManager.urls.reCheckin,
             data: { onid: indexManager.elements.onlineUserId },
-            success: (isKickout: any) => {
-                try {
-                    if (isKickout) {
-                        alert((document.getElementById("KickoutMessage") as HTMLInputElement).value);
-                        siteInfrastructure.logout();
-                    }
-                }
-                catch (e) {
-                    if (typeof (isKickout) === "string"
-                        && isKickout.indexOf("Oops... you are here because of a system error") > 0) {
-                        siteInfrastructure.logout();
-                        alert((document.getElementById("errorMessage") as HTMLInputElement).value);
-                    }
+            success: (isKickout: boolean) => {
+                if (isKickout) {
+                    alert((document.getElementById("KickoutMessage") as HTMLInputElement).value);
+                    siteInfrastructure.logout();
                 }
             },
             error: (xhr) => {

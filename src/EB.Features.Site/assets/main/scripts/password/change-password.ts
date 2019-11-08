@@ -3,8 +3,22 @@
 class ChangePassword {
     $: JQueryStatic;
     top: Window;
-    resources: any;
-    elements: any;
+    resources: {
+        pleaseEnterOldPassword: string,
+        passwordCannotEmpty: string,
+        confirmPasswordNotCorret: string,
+        newPassMustbeDiffOldPass: string,
+        validLengthPassword: string
+    };
+    elements: {
+        currentPassword: JQuery,
+        newPassword: JQuery,
+        confirmPassword: JQuery,
+        messsageContainer: JQuery,
+        hashKey: string,
+        isResetMemberPassword: boolean
+    };
+
     minLenghtPassword = 2;
     maxLenghtPassword = 50;
     constructor($: JQueryStatic, top: Window) {

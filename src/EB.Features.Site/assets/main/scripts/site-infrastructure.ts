@@ -1,7 +1,4 @@
-﻿declare var numeral: any;
-
-
-interface JQuery {
+﻿interface JQuery {
     stickyTableHeaders(): void;
 }
 
@@ -13,7 +10,9 @@ interface Window {
     showCN88SaveAndNewButton: boolean,
     $: JQueryStatic;
     main: any;
-    siteInfrastructure: any;
+    siteInfrastructure: SiteInfrastructure;
+    indexManager: IndexManager;
+    popupManager: PopupManager;
 }
 
 top.showCN88CancelButton = true;
@@ -28,7 +27,7 @@ class Result {
     IsFailed: boolean;
     IsWarning: boolean;
 
-    constructor(data?: any) {
+    constructor(data?: CodeResponse) {
         this.Code = data.Code;
         this.Message = data.Message || "";
         this.IsSuccessful = this.Code === 0;
@@ -54,7 +53,7 @@ class SiteInfrastructure {
         },
 
         getCookieExpireOptions: () => {
-            const cookieExpire: any = { expires: 365, path: window.location.pathname };
+            const cookieExpire = { expires: 365, path: window.location.pathname };
 
             return cookieExpire;
         },
@@ -72,7 +71,7 @@ class SiteInfrastructure {
             store.enabled ? store.remove(key) : $.cookie(key, undefined, this.localStorage.getCookieExpireOptions());
         },
 
-        shiftStorage: (prefixKey: string, value: any, maxIndex: number) => {
+        shiftStorage: (prefixKey: string, value: object, maxIndex: number) => {
             for (let i = 1; i < maxIndex - 1; i++) {
                 const oldValue = siteInfrastructure.localStorage.get(`${indexManager.elements.currentURLCookieName}_${(i + 1)}`);
                 siteInfrastructure.localStorage.set(`${indexManager.elements.currentURLCookieName}_${i}`, oldValue);
@@ -82,7 +81,7 @@ class SiteInfrastructure {
         }
     };
 
-    loadInfo = ($: any, id: string, handleOnSuccessLoading: any) => {
+    loadInfo = ($: any, id: string, handleOnSuccessLoading: Function) => {
         const $component = $(id),
             url = $component.attr('action-url');
 
@@ -104,7 +103,7 @@ class SiteInfrastructure {
         });
     };
 
-    showMessage = ($target: any, result: Result) => {
+    showMessage = ($target: JQuery, result: Result) => {
         $target.empty();
 
         if (result.IsSuccessful) {
@@ -116,20 +115,20 @@ class SiteInfrastructure {
         }
     };
 
-    showSuccess = ($target: any, message: string) => {
+    showSuccess = ($target: JQuery, message: string) => {
         $target.html("<div class='msg msg-success'>" + message + "</div>");
     };
 
-    showError = ($target: any, error: string) => {
+    showError = ($target: JQuery, error: string) => {
         $target.html("<div class='msg msg-error'>" + error + "</div>");
     };
 
-    showWarn = ($target: any, warning: string) => {
+    showWarn = ($target: JQuery, warning: string) => {
         $target.html("<div class='msg msg-warning'>" + warning + "</div>");
     };
 
     logout = () => {
-        let index: any = window;
+        let index = window;
         while (index !== index.parent) {
             index = index.parent;
         }
@@ -154,6 +153,142 @@ class SiteInfrastructure {
 
         window.top.$("#main").attr("src", data.currentPage);
     };
+}
+
+
+class IndexManager {
+    urls: {
+        mainRootPath: string,
+        changeLanguage: string,
+        getTotalOnlineMemberUrl: string,
+        onlineList: string,
+        liveChat: string,
+        contactUs: string,
+        reCheckin: string,
+        changePassword: string,
+        changeSecurityCode: string,
+        onlineMembersPath: string,
+        oldReportsPath: string,
+        wagerMonitoringConsolePath: string,
+        troubleshootingPath: string
+    };
+    elements: {
+        mainMenu: JQuery,
+        subMenu: JQuery,
+        currentURLCookieName: string,
+        subMenuItems: JQuery,
+        mainFrame: JQuery,
+        menuBar: JQuery,
+        onlineUserId: object,
+        clearClientData: string,
+        isNotHeadLine: number,
+        intervalToGetTotalOnlineMember: number,
+        header: JQuery,
+        content: JQuery,
+        listMenu: JQuery,
+        hamburgerContainer: JQuery,
+        hamburgerIcon: JQuery,
+        isDevice: boolean,
+        pageTitle: JQuery,
+        announcementPath: string,
+        initMainFrameLink: string,
+        problemAccountPath: string
+    };
+    currentState: {
+        mainMenuId: string,
+        isOpenPopup: boolean,
+        isMainMenuClick: boolean,
+        isScrolling: boolean,
+        isClearActiveMenu: boolean,
+        wagerMonitoringWindow: Window
+    };
+    resources: {
+        changePassword: string,
+        changeSecurityCode: string,
+        mobileHeaderName: "mobileHeaderName"
+    };
+    topWindow: Window;
+
+    init: (topWindow: object) => void;
+
+    cacheElements: () => void;
+
+    bindEvents: () => void;
+
+    initForMobile: () => void;
+
+    changeLanguage: (lang: string) => void;
+
+    GetTotalOnlineMember: () => void;
+
+    reloadPage: () => void;
+
+    removeBookmarksInUrl: (url: string) => string;
+
+    viewOnlineList: () => void;
+
+    viewOldReport: () => void;
+
+    viewTroubleshooting: () => void;
+
+    viewWagerMonitoringConsole: () => void;
+
+    mainMenuClick: (id: string) => void;
+
+    subMenuClick: (id: string) => void;
+
+    addHistory: (newEvent: object) => void;
+
+    restoreUrl: () => void;
+
+    reCheckin: () => void;
+
+    activeMainMenu: (id: string) => void;
+
+    closePopupAndReloadMainIframe: () => void;
+
+    activeSubMenu: (id: string, mainMenuId: string) => void;
+
+    calculateMainFrameHeight: () => void;
+
+    closeMenuBarOnMobile: () => void;
+
+    calculateMenuBarHeight: (subMenu) => void;
+
+    clearAllActiveMenu: () => void;
+
+    isMySettingsPage: (currentUrl: string) => boolean;
+
+    setMobileHeaderName: (text) => void;
+
+    calculateUserMobileHeight: () => void;
+
+    hideUserMobileDropdown: () => void;
+
+    locationReload: () => void;
+
+    selector: {
+        firstItemRedirect: string,
+        mobileMenuDropdown: string
+    };
+}
+
+class PopupManager {
+    popupOptions: { preUrl: string }[];
+    init: (jquery: JQueryStatic, window: Window) => void;
+    open: (element: object) => void;
+    close: () => void;
+    revertLatestPopupTitle: () => void;
+    setLatestPopupTitle: (title: string) => void;
+}
+
+class CodeResponse {
+    Code: number;
+    Message: string;
+}
+
+class ResponseError {
+    status: number;
 }
 
 const siteInfrastructure = new SiteInfrastructure();

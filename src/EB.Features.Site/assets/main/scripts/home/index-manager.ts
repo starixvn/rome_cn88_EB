@@ -1,10 +1,10 @@
 ﻿class HomeIndex {
     protected $: JQueryStatic;
-    protected topWindow: any;
+    protected topWindow: Window;
 
     markMessageAsReadPath = null;
 
-    constructor($: JQueryStatic, topWindow: any) {
+    constructor($: JQueryStatic, topWindow: Window) {
         this.$ = $;
         this.topWindow = topWindow;
     }
@@ -12,27 +12,20 @@
     init = () => {
         this.markMessageAsReadPath = this.$("#MarkMessageAsReadPath").val();
         siteInfrastructure.loadInfo(this.$, "#announcements", this.initAnnouncements);
-        const topWindow = this.topWindow;
-        const this$ = this.$;
-        this.$("#generalinformation a").on("click touchend", function () {
-            const url = this$(this).attr("data-url");
-
-            topWindow.indexManager.activeMainMenu("menu-ACCOUNTMANAGEMENT");
-            topWindow.indexManager.activeSubMenu("sub-menu-DOWNLINELIST", "menu-ACCOUNTMANAGEMENT");
+        this.$("#generalinformation a").on("click touchend", (event) => {
+            this.topWindow.indexManager.activeMainMenu("menu-ACCOUNTMANAGEMENT");
+            this.topWindow.indexManager.activeSubMenu("sub-menu-DOWNLINELIST", "menu-ACCOUNTMANAGEMENT");
+            const url = event.target.attributes["data-url"].nodeValue;
             window.location.href = url;
         });
     };
 
     initAnnouncements = () => {
-        const indexManager = this.topWindow.indexManager;
-        const topWindow = this.topWindow;
-        const this$ = this.$;
-
         this.onToggleMessage(this.markMessageAsRead);
-        this.$("#view-announcements").on("click touchend", function () {
-            indexManager.activeMainMenu("menu-ANNOUNCEMENT");
-            const target = this$(this).attr("data-target");
-            topWindow.$("#main").attr("src", target);
+        this.$("#view-announcements").on("click touchend", (event) => {
+            this.topWindow.indexManager.activeMainMenu("menu-ANNOUNCEMENT");
+            const target = event.target.attributes["data-target"].nodeValue;
+            this.topWindow.$("#main").attr("src", target);
         });
     };
 
@@ -62,7 +55,7 @@
         const isUnRead: boolean = message.hasClass("bold");
 
         if (isUnRead) {
-            const onSuccess = (isMarkedSuccess: any) => {
+            const onSuccess = (isMarkedSuccess: boolean) => {
                 if (isMarkedSuccess) {
                     message.removeClass("bold");
                 }

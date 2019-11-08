@@ -62,7 +62,7 @@ class PerformanceBonusReport {
         });
     }
 
-    CheckHeadlineStock = (e: any) => {
+    CheckHeadlineStock = (e: JQueryEventObject) => {
         const headlineStock = this.$headlineStock.val().replace(/,/g, '');
         const newValue = Number(headlineStock);
         const maxStock = 999999999999.99;
@@ -96,7 +96,7 @@ class PerformanceBonusReport {
         this.$exportExcelForm.submit();
     }
 
-    onReportSubmit = (e: any) => {
+    onReportSubmit = (e: JQueryEventObject) => {
         this.$.blockUI();
         this.convertStringNumberToNumber();
         this.periodSelectionComponent.updateSelectedValue();

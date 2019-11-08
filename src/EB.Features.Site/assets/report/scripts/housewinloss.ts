@@ -16,19 +16,18 @@ class HouseWinLossReport extends ReportBase{
     $tableReport: JQuery;
 
     $loadLegendURL: JQuery;
-    topWindow: JQuery;
+    topWindow: Window;
     $isHistoryReport: JQuery;
     $internalLoginForm: JQuery;
 
     constructor($: JQueryStatic,
-        topWindow: any,
+        topWindow: Window,
         dateRangePickerComponent: DateRangePickerComponent,
         sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
         viewerSelectionComponent: SingleSelectionDropdownComponent,
         betTypeSelectionComponent: SingleSelectionDropdownComponent,
         liveStatusSelectionComponent: SingleSelectionDropdownComponent,
         ticketStatusSelectionComponent: SingleSelectionDropdownComponent,
-        toggleHandler: ToggleHandler,
         sortComponent: SortComponent,
         linkBuilderComponent: LinkBuilderComponent,
         datePickerComponent: DatePickerComponent) {
@@ -159,7 +158,7 @@ class HouseWinLossReport extends ReportBase{
         this.$exportExcelForm.submit();
     }
 
-    onReportSubmit = (e: any) => {
+    onReportSubmit = (e: JQueryEventObject) => {
         this.$.blockUI();
         const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
         this.viewerSelectionComponent.updateSelectedValue();
@@ -221,7 +220,6 @@ $(function () {
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
-        new ToggleHandler($),
         new SortComponent($, linkBuilderComponent),
         linkBuilderComponent,
         new DatePickerComponent());

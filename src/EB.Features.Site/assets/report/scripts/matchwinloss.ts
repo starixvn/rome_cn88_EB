@@ -42,7 +42,7 @@ class MatchWinLossReport extends ReportBase {
         $(".group").click(function (): void {
             const $this: JQuery = $(this);
             const icon: JQuery = $this.find(".group-name-wrapper").children().first();
-            const children: any = $this.siblings(`.childrow-${$this.data("leagueid")}`);
+            const children: JQuery = $this.siblings(`.childrow-${$this.data("leagueid")}`);
 
             if (icon.hasClass("icon-chevron-down")) {
                 icon.removeClass().addClass("icon-chevron-right");
@@ -60,7 +60,7 @@ class MatchWinLossReport extends ReportBase {
         this.$exportExcelForm.submit();
     }
 
-    onReportSubmit = (e: any) => {
+    onReportSubmit = (e: JQueryEventObject) => {
         const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");

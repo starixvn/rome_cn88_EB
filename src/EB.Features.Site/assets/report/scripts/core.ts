@@ -1,11 +1,20 @@
 ﻿"use strict";
 interface Window {
-    betTypes: any;
-    allBetTypeText: any;
-    periods: any;
+    betTypes: BetType[];
+    allBetTypeText: string;
+    periods: Period[];
     NexDatePickerHelper: any;
 }
-
+class BetType {
+    SportTypeGroup: number;
+    Value: string;
+    Text: string;
+}
+class Period {
+    Id: string;
+    FromDate: string;
+    ToDate: string;
+}
 class CN88Features {
     $: JQueryStatic;
     store: StoreJSStatic;
@@ -103,19 +112,17 @@ class CN88Features {
             return result ? JSON.parse(result) : undefined;
         },
 
-        set: (key: string, value: any) => {
+        set: (key: string, value: object) => {
             const data = JSON.stringify(value);
             this.store.enabled ? this.store.set(key, data) : this.$.cookie(key, data, this.localStorage.getCookieExpireOptions());
         },
 
         getCookieExpireOptions: () => {
-            let cookieExpire: any = { expires: 365, path: window.location.pathname };
-
             if (this.isIe()) {
-                cookieExpire = { expires: 365 };
+                return { expires: 365 };
             }
 
-            return cookieExpire;
+            return { expires: 365, path: window.location.pathname };
         }
     };
     isIe = () => {
@@ -124,7 +131,7 @@ class CN88Features {
 
         return msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./);
     };
-    replaceQueryStringValue = (queryString: string, paramName: string, paramValue: any) => {
+    replaceQueryStringValue = (queryString: string, paramName: string, paramValue: string) => {
         if (typeof queryString === "undefined"
             || queryString === null) {
             return "";

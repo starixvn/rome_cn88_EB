@@ -1,5 +1,5 @@
-﻿let hrefHandler = {    
-    init: function (topWindow: any) {
+﻿let hrefHandler = {
+    init: function (topWindow: Window) {
         const urlLoginPage = "Login/Index";
         const href = window.location.href;
         if (topWindow.location.href.indexOf(urlLoginPage) <= 0 &&

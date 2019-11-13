@@ -68,7 +68,6 @@
     "inputFiles": [
       "assets/main/scripts/site-infrastructure.js",
       "assets/main/scripts/aes.js",
-      "assets/main/scripts/security-helper.js",
       "assets/main/scripts/password/change-password.js",
       "assets/login/scripts/libs/cryptojs/CryptoJS.js"
     ]

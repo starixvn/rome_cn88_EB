@@ -3,7 +3,7 @@
 "use strict";
 
 interface JQuery {
-    nexDatePicker(option: any): void;
+    nexDatePicker(option: object): void;
 }
 
 class DateRangePickerOption {

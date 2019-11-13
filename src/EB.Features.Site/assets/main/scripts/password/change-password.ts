@@ -31,6 +31,7 @@ class ChangePassword {
 
         this.$("#formPassword").submit(() => {
             this.$.blockUI();
+
             const $currentPassword: JQuery = this.elements.currentPassword;
             const $newPassword: JQuery = this.elements.newPassword;
             const $confirmPassword: JQuery = this.elements.confirmPassword;
@@ -41,8 +42,8 @@ class ChangePassword {
             }
 
             if ($currentPassword.length > 0) {
-                const encryptedPwd = CryptoJS.CfsEnCode($currentPassword.val());
-                const hashPwd = CryptoJS.SHA256(encryptedPwd);
+                const encryptedPwd = window.CryptoJS.CfsEnCode($currentPassword.val());
+                const hashPwd = window.CryptoJS.SHA256(encryptedPwd);
                 $currentPassword.val(hashPwd);
             }
 

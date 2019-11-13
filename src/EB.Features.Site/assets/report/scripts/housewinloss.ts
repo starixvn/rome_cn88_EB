@@ -1,5 +1,5 @@
 ﻿"use strict";
-class HouseWinLossReport extends ReportBase{
+class HouseWinLossReport extends ReportBase {
     $reportForm: JQuery;
     $exportExcelForm: JQuery;
     $dateRangeContainer: JQuery;
@@ -22,25 +22,17 @@ class HouseWinLossReport extends ReportBase{
 
     constructor($: JQueryStatic,
         topWindow: Window,
-        dateRangePickerComponent: DateRangePickerComponent,
-        sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
-        viewerSelectionComponent: SingleSelectionDropdownComponent,
-        betTypeSelectionComponent: SingleSelectionDropdownComponent,
-        liveStatusSelectionComponent: SingleSelectionDropdownComponent,
-        ticketStatusSelectionComponent: SingleSelectionDropdownComponent,
-        sortComponent: SortComponent,
-        linkBuilderComponent: LinkBuilderComponent,
-        datePickerComponent: DatePickerComponent) {
-        super($, sportGroupSelectionComponent, betTypeSelectionComponent);
+        option: HouseWinLossOption) {
+        super($, option.sportGroupSelectionComponent, option.betTypeSelectionComponent);
         this.$ = $;
         this.topWindow = topWindow;
-        this.dateRangePickerComponent = dateRangePickerComponent;
-        this.liveStatusSelectionComponent = liveStatusSelectionComponent;
-        this.ticketStatusSelectionComponent = ticketStatusSelectionComponent;
-        this.viewerSelectionComponent = viewerSelectionComponent;
-        this.sortComponent = sortComponent;
-        this.linkBuilderComponent = linkBuilderComponent;
-        this.datePickerComponent = datePickerComponent;
+        this.dateRangePickerComponent = option.dateRangePickerComponent;
+        this.liveStatusSelectionComponent = option.liveStatusSelectionComponent;
+        this.ticketStatusSelectionComponent = option.ticketStatusSelectionComponent;
+        this.viewerSelectionComponent = option.viewerSelectionComponent;
+        this.sortComponent = option.sortComponent;
+        this.linkBuilderComponent = option.linkBuilderComponent;
+        this.datePickerComponent = option.datePickerComponent;
     }
 
     init = () => {
@@ -59,7 +51,7 @@ class HouseWinLossReport extends ReportBase{
 
         this.$tableReport = this.$("#tbl-report");
         this.$isHistoryReport = this.$("#IsHistoricReport");
-        this.$loadLegendURL = this.$("#LoadLegendURL");        
+        this.$loadLegendURL = this.$("#LoadLegendURL");
         this.$internalLoginForm = this.$("#internal-login-form");
     }
 
@@ -68,7 +60,7 @@ class HouseWinLossReport extends ReportBase{
         this.datePickerComponent.render(new DatePickerOption($, "date-container"));
 
         this.$("#icon-excel").on("click", this.onExportExcel);
-        
+
         this.$("#ViewHistoryReport").click(() => {
             this.changeReportMode();
         });
@@ -103,7 +95,7 @@ class HouseWinLossReport extends ReportBase{
         this.switchCalendarType();
     }
 
-    viewbetlist = (options) => {        
+    viewbetlist = (options) => {
         this.$("#AfterLogInQuery").val(options.query);
         const url = this.$internalLoginForm.attr("action") + "?" + this.$internalLoginForm.serialize();
         window.open(url, "internallogin", "scrollbars=1,fullscreen=yes,top=290");
@@ -146,12 +138,12 @@ class HouseWinLossReport extends ReportBase{
             this.$dateRangeContainer.css('display', 'none');
         }
     }
-    
+
     UpdateFromDateToDate = () => {
         if (this.$isHistoryReport.val() === "False") {
             this.$("#fromDate").val(this.$("#date").val());
             this.$("#toDate").val(this.$("#date").val());
-        } 
+        }
     }
 
     onExportExcel = () => {
@@ -174,10 +166,10 @@ class HouseWinLossReport extends ReportBase{
         } else {
             this.$("#RoleId").val("4"); //SMA
         }
-        
+
         this.betTypeSelectionComponent.updateSelectedValue();
         this.liveStatusSelectionComponent.updateSelectedValue();
-        this.ticketStatusSelectionComponent.updateSelectedValue();        
+        this.ticketStatusSelectionComponent.updateSelectedValue();
         this.UpdateFromDateToDate();
     }
 
@@ -191,14 +183,14 @@ class HouseWinLossReport extends ReportBase{
         const headers = this.$custLevelId.val() === "4"
             ? { 0: { sorter: "text" }, 1: { sorter: "text" } }
             : { 0: { sorter: "text" } };
-            this.sortComponent.render(
-                new SortOption(
-                    this.$tableReport,
-                    parseInt(this.$tableReport.data("totalrecords"), 0) > 1,
-                    true,
-                    this.sortComponent.afterSort,
-                    headers,
-                    this.$reportForm));
+        this.sortComponent.render(
+            new SortOption(
+                this.$tableReport,
+                parseInt(this.$tableReport.data("totalrecords"), 0) > 1,
+                true,
+                this.sortComponent.afterSort,
+                headers,
+                this.$reportForm));
 
         this.linkBuilderComponent.render();
     }
@@ -209,20 +201,34 @@ class HouseWinLossReport extends ReportBase{
     }
 }
 
+class HouseWinLossOption {
+    dateRangePickerComponent: DateRangePickerComponent;
+    sportGroupSelectionComponent: SportGroupMultiSelectionComponent;
+    viewerSelectionComponent: SingleSelectionDropdownComponent;
+    betTypeSelectionComponent: SingleSelectionDropdownComponent;
+    liveStatusSelectionComponent: SingleSelectionDropdownComponent;
+    ticketStatusSelectionComponent: SingleSelectionDropdownComponent;
+    sortComponent: SortComponent;
+    linkBuilderComponent: LinkBuilderComponent;
+    datePickerComponent: DatePickerComponent;
+}
+
 $(function () {
     const linkBuilderComponent = new LinkBuilderComponent($);
-    const houseWinLossReport = new HouseWinLossReport(
-        $,
-        window.top,
-        new DateRangePickerComponent($),
-        new SportGroupMultiSelectionComponent($),
-        new SingleSelectionDropdownComponent($),
-        new SingleSelectionDropdownComponent($),
-        new SingleSelectionDropdownComponent($),
-        new SingleSelectionDropdownComponent($),
-        new SortComponent($, linkBuilderComponent),
-        linkBuilderComponent,
-        new DatePickerComponent());
+    const houseWinLossOption = {
+        dateRangePickerComponent: new DateRangePickerComponent($),
+        sportGroupSelectionComponent: new SportGroupMultiSelectionComponent($),
+        viewerSelectionComponent: new SingleSelectionDropdownComponent($),
+        betTypeSelectionComponent: new SingleSelectionDropdownComponent($),
+        liveStatusSelectionComponent: new SingleSelectionDropdownComponent($),
+        ticketStatusSelectionComponent: new SingleSelectionDropdownComponent($),
+        sortComponent: new SortComponent($, linkBuilderComponent),
+        linkBuilderComponent: linkBuilderComponent,
+        datePickerComponent: new DatePickerComponent()
+    };
+
+    const houseWinLossReport = new HouseWinLossReport($, window.top, houseWinLossOption);
 
     houseWinLossReport.init();
 });
+

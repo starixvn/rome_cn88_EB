@@ -3,7 +3,10 @@ interface Window {
     betTypes: BetType[];
     allBetTypeText: string;
     periods: Period[];
-    NexDatePickerHelper: any;
+    NexDatePickerHelper: NexDatePicker;
+}
+class NexDatePicker {
+    correctDateInRange: (fromDate: Date, toDate: Date, maxDate: Date) => string;
 }
 class BetType {
     SportTypeGroup: number;
@@ -68,44 +71,7 @@ class CN88Features {
             this$(combinedCells[index]).before(oldCells);
         });
     };
-
-    combineConsecutiveCells = (
-        firstCells: any,
-        numberOfCombinedCells: number,
-        combinedCellClass: string,
-        combinedCellColSpan = 1) => {
-        if (numberOfCombinedCells <= 1) {
-            return;
-        }
-
-        const this$ = this.$;
-
-        firstCells.each(function (index: number) {
-            let newCell = `<td class="visible-stack-mode combinedcell ${combinedCellClass}" colspan="${combinedCellColSpan}"><ul>`;
-
-            let currentCell = this$(firstCells[index]);
-
-            let isLastCell = false;
-            for (let i = 0; i < numberOfCombinedCells; i++) {
-                newCell += "<li>" + currentCell.html() + "</li>";
-
-                if (currentCell.next().length) {
-                    currentCell = currentCell.next();
-                } else {
-                    isLastCell = true;
-                }
-            }
-
-            newCell += "</ul></td>";
-
-            if (isLastCell) {
-                currentCell.after(newCell);
-            } else {
-                currentCell.prev().after(newCell);
-            }
-        });
-    };
-
+        
     localStorage = {
         get: (key: string) => {
             const result = this.store.enabled ? this.store.get(key) : this.$.cookie(key);

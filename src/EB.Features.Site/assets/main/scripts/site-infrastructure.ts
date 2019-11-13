@@ -9,10 +9,11 @@ interface Window {
     cn88SaveAndNewCallback(): void;
     showCN88SaveAndNewButton: boolean,
     $: JQueryStatic;
-    main: any;
+    main: Window;
     siteInfrastructure: SiteInfrastructure;
     indexManager: IndexManager;
     popupManager: PopupManager;
+    CryptoJS: Cryptor;
 }
 
 top.showCN88CancelButton = true;
@@ -43,7 +44,7 @@ class SiteInfrastructure {
             return result ? JSON.parse(result) : undefined;
         },
 
-        set: (key: string, value: any) => {
+        set: (key: string, value: string | number | object) => {
             const data = JSON.stringify(value);
             store.enabled ? store.set(key, data) : $.cookie(key, data, this.localStorage.getCookieExpireOptions());
         },
@@ -58,12 +59,12 @@ class SiteInfrastructure {
             return cookieExpire;
         },
         clear: () => {
-            if (store.enabled) {                
+            if (store.enabled) {
                 const allKeys = store.getAll();
                 for (const key in allKeys) {
                     if (key !== "LANGUAGE") {
                         store.remove(key);
-                    }                        
+                    }
                 }
             }
         },
@@ -81,7 +82,7 @@ class SiteInfrastructure {
         }
     };
 
-    loadInfo = ($: any, id: string, handleOnSuccessLoading: Function) => {
+    loadInfo = ($: JQueryStatic, id: string, handleOnSuccessLoading: Function) => {
         const $component = $(id),
             url = $component.attr('action-url');
 
@@ -289,6 +290,11 @@ class CodeResponse {
 
 class ResponseError {
     status: number;
+}
+
+class Cryptor {
+    CfsEnCode: (value: string) => string;
+    SHA256: (value: string) => string;
 }
 
 const siteInfrastructure = new SiteInfrastructure();

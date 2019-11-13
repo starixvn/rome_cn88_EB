@@ -249,7 +249,10 @@ describe("SubAccount", () => {
         it("_data is Empty Show Error Message", () => {
             // arrange
             spyOn(subacc, "showInvalidSMASubAccountMessage");
-            const data = { CustId: 0, SubAccId: 0, UserName: "" };
+            const data = new SubAccountItem();
+            data.CustId = 0;
+            data.SubAccId = 0;
+            data.UserName = "";
 
             // act
             subacc.showSubAccountInfoOnUI(data);
@@ -306,7 +309,7 @@ describe("SubAccount", () => {
             const custId = 1;
             const subAccId = 0;
             subacc.updateData.custId = custId;
-            subacc.updateData.subAccId = subAccId;            
+            subacc.updateData.subAccId = subAccId;
 
             // act
             const isInvalid = subacc.isInvalidUpdateData();
@@ -320,7 +323,7 @@ describe("SubAccount", () => {
             const custId = 1;
             const subAccId = 2;
             subacc.updateData.custId = custId;
-            subacc.updateData.subAccId = subAccId;                  
+            subacc.updateData.subAccId = subAccId;
 
             // act
             const isInvalid = subacc.isInvalidUpdateData();

@@ -1,6 +1,6 @@
 ﻿"use strict";
 interface JQuery {
-    pagination(option: any): void;
+    pagination(option: object): void;
 
 }
 

@@ -2,7 +2,7 @@
 
 "use strict";
 interface JQuery {
-    multiselect(option: any): void;
+    multiselect(option: object | string): void;
 }
 
 class SportGroupMultiSelectionOption {
@@ -53,7 +53,7 @@ class SportGroupMultiSelectionComponent {
         return this.$dropdown;
     };
 
-    onChange = (option: any, checked: boolean) => {
+    onChange = (option: JQuery, checked: boolean) => {
         this.validate();
         this.$hiddenInput.val(this.getSelectedItems().join(","));
 

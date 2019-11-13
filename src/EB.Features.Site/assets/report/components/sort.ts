@@ -1,15 +1,15 @@
 ﻿"use strict";
 interface JQuery {
-    tablesorter(option: any): void;
+    tablesorter(option: object): void;
 }
 
 class SortOption {
     constructor(
-        public sortContainer: any = null,
+        public sortContainer: JQuery = null,
         public canSort = true,
         public hasAllDataOnClient = false,
-        public afterSortFunction: any = null,
-        public headers: any = null,
+        public afterSortFunction: Function = null,
+        public headers: object = null,
         public reportForm: JQuery = null) {
     }
 }
@@ -139,7 +139,7 @@ class SortComponent {
         });
     };
 
-    textExtraction = (node: any) => {
+    textExtraction = (node: string) => {
         const $node = this.$(node);
 
         if ($node.data("islink")) {

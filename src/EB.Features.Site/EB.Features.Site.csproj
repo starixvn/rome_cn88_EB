@@ -811,13 +811,11 @@
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
     <TypeScriptCompile Include="assets\main\scripts\http-status.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
     <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
     <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
     <TypeScriptCompile Include="assets\report\components\daterangepicker.ts" />
     <TypeScriptCompile Include="assets\report\components\link-builder.ts" />
     <TypeScriptCompile Include="assets\report\components\message.ts" />
-    <TypeScriptCompile Include="assets\report\components\multi-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\pager.ts" />
     <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\sort.ts" />
@@ -908,17 +906,31 @@
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\BrowserHelperImpl.cs" />
-    <Compile Include="Shared\Filters\AntiForgeryValidator.cs" />
-    <Compile Include="Shared\Filters\AntiXSRFFilter.cs" />
-    <Compile Include="Shared\Helpers\AuthInfoHelper.cs" />
-    <Compile Include="Shared\Helpers\BrowserHelper.cs" />
-    <Compile Include="Shared\Helpers\CookieHelper.cs" />
-    <Compile Include="Shared\Helpers\JsonHelper.cs" />
+    <Compile Include="Shared\Filters\AntiForgeryValidator.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Filters\AntiXSRFFilter.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\AuthInfoHelper.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\BrowserHelper.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\CookieHelper.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\JsonHelper.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="Shared\Helpers\StaticResources.cs" />
+    <Compile Include="Shared\Helpers\StaticResources.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Home\HomeController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
@@ -938,7 +950,9 @@
     <Compile Include="Reports\ReportsController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="Shared\Helpers\UrlHelper.cs" />
+    <Compile Include="Shared\Helpers\UrlHelper.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Models\UserSession.cs" />
     <Compile Include="Shared\MultipleLanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
@@ -1361,15 +1375,7 @@ assets.build.cmd
 if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
 start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PostBuildEvent>
   </PropertyGroup>
-  <PropertyGroup>
-    <PreBuildEvent>cd $(ProjectDir)
-cd ..
-cd ..
-cd build
-assets.build.cmd
-if not exist "$(WebProjectOutputDir)\bin\Roslyn" md "$(WebProjectOutputDir)\bin\Roslyn"
-start /MIN xcopy /s /y /R "$(OutDir)roslyn\*.*" "$(WebProjectOutputDir)\bin\Roslyn"</PreBuildEvent>
-  </PropertyGroup>
+  
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

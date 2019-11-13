@@ -1,7 +1,7 @@
 ﻿"use strict";
 interface JQuery {
-    multiselect(option: any): void;
-    multiselect(func: string, options: any): void;
+    multiselect(option: object): void;
+    multiselect(func: string, options: object): void;
 }
 
 class SingleSelectionDropdownOption {
@@ -66,11 +66,5 @@ class SingleSelectionDropdownComponent {
         if (this.options.onChange) {
             this.options.onChange();
         }
-    };
-    changeSelection = (selection: any) => {
-        this.$dropdown.val(selection);
-        this.$hiddenInput.val(selection);
-        this.$dropdown.multiselect("select", [selection]);
-        this.$dropdown.multiselect("refresh");
     };
 }

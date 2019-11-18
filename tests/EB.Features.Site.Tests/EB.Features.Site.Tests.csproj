@@ -123,6 +123,7 @@
     <Compile Include="Main\Handlers\UserInfoHandlerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\Handler\PerformanceBonus\PerformanceBonusHandlerTest.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLoss\CountHouseWinLossViewModelTest.cs" />
     <Compile Include="Shared\Helpers\LanguageHelperTests.cs" />
   </ItemGroup>
   <ItemGroup>

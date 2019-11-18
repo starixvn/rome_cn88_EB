@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Text;
     using EB.Features.Reports;
     using EB.Features.Reports.Constants;
     using EB.Features.Reports.Extension;
@@ -18,6 +19,7 @@
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel;
+    using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
     using MediatR;
     using ONEbook.SpreadSheets;
     using static ONEbook.SpreadSheets.Column;
@@ -59,7 +61,7 @@
                 Date = message.Date
             };
             var reportData = houseWinLossService.Get(param);
-            var countUsers = houseWinLossService.CountUsers(param);
+            var countUsers = new CountHouseWinLossViewModel(houseWinLossService.CountUsers(param), message.Role);
 
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total, message.Role.IsSuperLevel())
@@ -250,12 +252,12 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        internal string GetReportTitle(HouseWinLossExcelQuery param, CountHouseWinLossModel countUsers)
+        internal string GetReportTitle(HouseWinLossExcelQuery param, CountHouseWinLossViewModel countUsers)
         {
-            var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}";
+            var title = new StringBuilder($"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}");
             if (param.IsHistoricReport)
             {
-                title = $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
+                title = new StringBuilder($"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}");
             }
 
             var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
@@ -263,12 +265,14 @@
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
             var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 
-            title = $"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)} {Environment.NewLine}";
-            title += $"{ ReportResources.Headline}: { countUsers.HeadlineCount} | { ReportResources.SMA}: { countUsers.SuperCount}";
-            title += $"| { ReportResources.MA}: { countUsers.MasterCount} | { ReportResources.Agent}: { countUsers.AgentCount}";
-            title += $"| { AppResources.Member}: { countUsers.MemberCount}";
+            title = new StringBuilder($"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)} {Environment.NewLine}");
+            foreach (var user in countUsers.Users)
+            {
+                title.Append($"{user.Key}: {user.Value}");
+                title.Append(!user.Key.Equals(AppResources.Member) ? " | " : string.Empty);
+            }
 
-            return title;
+            return title.ToString();
         }
 
         private static string GetResourcesText(string key)

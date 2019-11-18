@@ -15,6 +15,7 @@ using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
 using EB.Features.Site.Reports.Request.HouseWinLoss;
+using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
 using EB.Features.Site.Shared.Models;
 using Fanex.NAP.Core.Web.Session;
 using NSubstitute;
@@ -337,7 +338,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 Date = new DateTime(2019, 1, 1),
                 IsHistoricReport = true
             };
-            var countUsers = new CountHouseWinLossModel
+            var countUserModel = new CountHouseWinLossModel
             {
                 AgentCount = 10,
                 HeadlineCount = 11,
@@ -345,11 +346,14 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 MemberCount = 13,
                 SuperCount = 14
             };
+
+            var countUsers = new CountHouseWinLossViewModel(countUserModel,UserLevel.Headline);
+
             var expectedTitle = $"{ReportResources.HouseWinLossReport} {query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
             expectedTitle += $" - {AppResources.Settled} - Headline - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets} {Environment.NewLine}";
-            expectedTitle += $"{ ReportResources.Headline}: { countUsers.HeadlineCount} | { ReportResources.SMA}: { countUsers.SuperCount}";
-            expectedTitle += $"| { ReportResources.MA}: { countUsers.MasterCount} | { ReportResources.Agent}: { countUsers.AgentCount}";
-            expectedTitle += $"| { AppResources.Member}: { countUsers.MemberCount}";
+            expectedTitle += $"{ ReportResources.Headline}: { countUserModel.HeadlineCount} | { ReportResources.SMA}: { countUserModel.SuperCount}";
+            expectedTitle += $" | { ReportResources.MA}: { countUserModel.MasterCount} | { ReportResources.Agent}: { countUserModel.AgentCount}";
+            expectedTitle += $" | { AppResources.Member}: { countUserModel.MemberCount}";
 
             // Act
             var act = handler.GetReportTitle(query, countUsers);

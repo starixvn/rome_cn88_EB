@@ -1,16 +1,14 @@
 ﻿namespace EB.Features.Site.Reports.Request.HouseWinLoss
 {
     using System;
-    using System.Collections.Generic;
-    using EB.Features.Reports.Extension;
-    using EB.Features.Reports.Model;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Model;
     using EB.Features.Shared.Utilities;
+    using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
     using EB.Features.Site.Shared.Models;
     using MediatR;
 
-    public class CountHouseWinLossQuery : ReportBaseQuery, IRequest<CountHouseWinLossModel>
+    public class CountHouseWinLossQuery : ReportBaseQuery, IRequest<CountHouseWinLossViewModel>
     {
         public CountHouseWinLossQuery(UserSession currentSession)
             : base(currentSession)

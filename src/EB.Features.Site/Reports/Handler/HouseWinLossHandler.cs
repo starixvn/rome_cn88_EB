@@ -2,13 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using EB.Features.Reports;
-    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
-    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
@@ -18,7 +15,7 @@
     public class HouseWinLossHandler : ReportsBaseHandler,
         IRequestHandler<HouseWinLossQuery, HouseWinLossReportViewModel>,
         IRequestHandler<ReportLegendQuery, IEnumerable<string>>,
-        IRequestHandler<CountHouseWinLossQuery, CountHouseWinLossModel>
+        IRequestHandler<CountHouseWinLossQuery, CountHouseWinLossViewModel>
     {
         private readonly ISportGroupService sportGroupService;
         private readonly IBettypeGroupService betTypeService;
@@ -77,12 +74,12 @@
                 userSession.Language);
         }
 
-        public CountHouseWinLossModel Handle(CountHouseWinLossQuery message)
+        public CountHouseWinLossViewModel Handle(CountHouseWinLossQuery message)
         {
             var sportGroups = sportGroupService.GetSportGroups();
             message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
 
-            return houseWinLossService.CountUsers(new HouseWinLossParam
+            var model = houseWinLossService.CountUsers(new HouseWinLossParam
             {
                 HeadlineId = message.HeadlineId,
                 CustId = message.CustId,
@@ -98,6 +95,8 @@
                 ToDate = message.ToDate,
                 Date = message.Date
             });
+
+            return new CountHouseWinLossViewModel(model, message.Role);
         }
     }
 }

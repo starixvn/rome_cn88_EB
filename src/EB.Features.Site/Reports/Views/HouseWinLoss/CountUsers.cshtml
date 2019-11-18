@@ -1,15 +1,18 @@
-﻿@using EB.Features.Reports.Model;
+﻿@using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
 @using EB.Features.Reports.Resources
 
-@model CountHouseWinLossModel
+@model CountHouseWinLossViewModel
 @{
     Layout = null;
 }
 
 <div class="countUsers">
-    @ReportResources.Headline: <b>@Model.HeadlineCount</b> |
-    @ReportResources.SMA: <b>@Model.SuperCount</b> |
-    @ReportResources.MA: <b>@Model.MasterCount</b> |
-    @ReportResources.Agent: <b>@Model.AgentCount</b> |
-    @AppResources.Member: <b>@Model.MemberCount</b>
+    @foreach (var user in Model.Users)
+    {
+        <span>@user.Key:</span><b>@user.Value</b>
+        if (!user.Key.Equals(AppResources.Member))
+        {
+            <span> | </span>
+        }
+    }
 </div>

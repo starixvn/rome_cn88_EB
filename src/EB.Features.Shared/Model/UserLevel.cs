@@ -75,6 +75,12 @@
 
         public bool IsNot(Enumeration level) => !Is(level);
 
+        public bool IsDownlineOf(byte uplineLevelValue)
+            => GapBetweenTwoLevels(Value, uplineLevelValue) <= 1;
+
+        public bool IsDownlineOf(Enumeration uplineLevel)
+            => (uplineLevel != null) && IsDownlineOf(uplineLevel.Value);
+
         private static int GapBetweenTwoLevels(byte uplineLevelValue, byte downlineLevelValue)
             => uplineLevelValue - downlineLevelValue;
     }

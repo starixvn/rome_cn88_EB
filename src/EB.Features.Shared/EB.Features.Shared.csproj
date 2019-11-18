@@ -110,6 +110,7 @@
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\DeviceInfo.cs" />
     <Compile Include="Model\Enumeration.cs" />
+    <Compile Include="Model\ItemModel.cs" />
     <Compile Include="Model\Result.cs" />
     <Compile Include="Model\SportGroup.cs" />
     <Compile Include="Model\UserLevel.cs" />

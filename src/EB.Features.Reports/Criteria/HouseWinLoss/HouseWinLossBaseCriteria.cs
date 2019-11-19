@@ -15,12 +15,8 @@
             BetTypeGroup = param.BetTypeGroup;
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
-            MoveBetsDay = param.MoveBetsDay;
-            ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
         }
-        public int ReportMode { get; }
-
-        public DateTime MoveBetsDay { get; }
+        
 
         public DateTime FromDate { get; }
 

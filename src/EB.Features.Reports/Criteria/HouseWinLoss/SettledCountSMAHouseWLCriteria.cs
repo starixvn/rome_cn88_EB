@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Reports.Criteria
 {
+    using System;
     using EB.Features.Reports.Params;
     using EB.Features.Shared.Model;
     using Fanex.Data;
@@ -12,7 +13,13 @@
             Role = param.Role;
             CustId = param.CustId;
             HeadlineId = param.HeadlineId;
+            ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
+            MoveBetsDay = param.MoveBetsDay;
         }
+
+        public int ReportMode { get; }
+
+        public DateTime MoveBetsDay { get; }
 
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }

@@ -4,7 +4,6 @@
     using EB.Features.Reports.Params;
     using EB.Features.Shared.Model;
     using Fanex.Data;
-    using Fanex.Data.Repository;
 
     public class SettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
@@ -13,12 +12,18 @@
         {
             Role = param.Role;
             CustId = param.CustId;
+            MoveBetsDay = param.MoveBetsDay;
+            ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
         }
 
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }
 
         public int CustId { get; }
+
+        public int ReportMode { get; }
+
+        public DateTime MoveBetsDay { get; }
 
         public override bool IsValid() => base.IsValid() && CustId >= 0;
 

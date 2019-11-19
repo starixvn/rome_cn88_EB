@@ -17,20 +17,20 @@
 
     public class PerformanceBonusExcelHandler : ExcelBaseHandler, IRequestHandler<PerformanceBonusExcelQuery, ExcelFileViewModel>
     {
-        private readonly IPerformanceBonusService matchWinLossService;
+        private readonly IPerformanceBonusService service;
         private readonly IPerformanceBonusWorkbook workbook;
 
         public PerformanceBonusExcelHandler(
             IPerformanceBonusService matchWinLossService,
             IPerformanceBonusWorkbook workbook)
         {
-            this.matchWinLossService = matchWinLossService;
+            this.service = matchWinLossService;
             this.workbook = workbook;
         }
 
         public ExcelFileViewModel Handle(PerformanceBonusExcelQuery message)
         {
-            var reportData = matchWinLossService.Get(new PerformanceBonusParam
+            var reportData = service.Get(new PerformanceBonusParam
             {
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,

@@ -45,6 +45,7 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
+            message.UserSelectedTicketStatusId = message.IsHistoricReport ? TicketStatusConstants.Settled : TicketStatusConstants.UnSettled;
             var param = new HouseWinLossParam
             {
                 HeadlineId = message.HeadlineId,

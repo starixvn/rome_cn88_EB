@@ -354,4 +354,7 @@
   <data name="PerformanceBonusTooltip" xml:space="preserve">
     <value>帐户 (以逗号分隔 ',')</value>
   </data>
+  <data name="MA" xml:space="preserve">
+    <value>总代理</value>
+  </data>
 </root>

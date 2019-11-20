@@ -354,4 +354,7 @@
   <data name="PerformanceBonusTooltip" xml:space="preserve">
     <value>帳戶 (以逗號分隔 ',')</value>
   </data>
+  <data name="MA" xml:space="preserve">
+    <value>總代理</value>
+  </data>
 </root>

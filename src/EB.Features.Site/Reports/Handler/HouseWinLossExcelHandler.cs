@@ -45,7 +45,7 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            message.UserSelectedTicketStatusId = message.IsHistoricReport ? TicketStatusConstants.Settled : TicketStatusConstants.UnSettled;
+            message.UserSelectedTicketStatusId = message.IsHistoricReport ? TicketStatusConstants.Settled : message.UserSelectedTicketStatusId;
             var param = new HouseWinLossParam
             {
                 HeadlineId = message.HeadlineId,
@@ -68,8 +68,8 @@
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total, message.Role.IsSuperLevel())
                 .SetRowMappers(
-                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.NormalRow),
-                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.GrandTotal),
+                    GetRowMapper(reportData.Total, message.Role, RowTypeConstant.NormalRow),
+                    GetRowMapper(reportData.Total, message.Role, RowTypeConstant.GrandTotal),
                     GetFooterRowMapper())
                 .UseTemplate(GetTemplateInfo(message.Role))
                 .Sheet("ReportData")
@@ -80,10 +80,10 @@
             return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
-        internal static Mapper<HouseWinLossModel> GetRowMapper(decimal totalStock, UserLevel role, int rowType)
-            => role.IsHeadline() ? GetRowMapperHeadline(totalStock, rowType)
-            : role.IsSuperLevel() ? GetRowMapperSuper(totalStock, rowType)
-            : role.IsMasterLevel() ? GetRowMapperMaster(totalStock, rowType)
+        internal static Mapper<HouseWinLossModel> GetRowMapper(HouseWinLossModel model, UserLevel role, int rowType)
+            => role.IsHeadline() ? GetRowMapperHeadline(model.HeadlineStock, rowType)
+            : role.IsSuperLevel() ? GetRowMapperSuper(model.HeadlineStock, rowType)
+            : role.IsMasterLevel() ? GetRowMapperMaster(model.SuperStock, rowType)
             : role.IsAgentLevel() ? GetRowMapperAgent(rowType)
             : GetRowMapperMember(rowType);
 
@@ -179,7 +179,8 @@
                 .Map(H, betTypeWinLoss => betTypeWinLoss.MasterResult / AppSettings.ReduceNumber)
                 .Map(I, betTypeWinLoss => betTypeWinLoss.Super / AppSettings.ReduceNumber)
                 .Map(J, betTypeWinLoss => betTypeWinLoss.SuperResult / AppSettings.ReduceNumber)
-                .Map(L, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber);
+                .Map(K, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber)
+                .Map(L, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.SuperStock / totalStock * 100));
 
             return mapper;
         }

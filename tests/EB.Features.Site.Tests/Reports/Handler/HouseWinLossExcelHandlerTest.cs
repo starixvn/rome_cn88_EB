@@ -495,7 +495,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.MasterResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.Super / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.SuperResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
-            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[L](match) == match.SuperStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == match.SuperStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
         }
 
         [Test]

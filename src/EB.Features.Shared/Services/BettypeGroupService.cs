@@ -35,10 +35,13 @@
         }
 
         public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(IEnumerable<int> sportGroupIds)
-            => GetBetTypeGroups()
-            .Where(b => sportGroupIds.Contains(b.SportTypeGroup))
-            .GroupBy(i => i.Id)
-            .Select(i => i.First());
+        {
+            var betTypes = GetBetTypeGroups()
+                .Where(b => sportGroupIds.Contains(b.SportTypeGroup));
+
+            return betTypes ?? betTypes.GroupBy(i => i.Id).Select(i => i.First());
+        }
+
 
         public IEnumerable<BetTypeGroup> GetBetTypeGroupsBySport(int sportGroupId = 0)
             => sportGroupId == 0
@@ -55,7 +58,8 @@
                     return betTypes
                     .Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName))
                     .OrderBy(i => i.SportTypeGroup)
-                    .ThenBy(i => i.Id);
+                    .ThenBy(i => i.Id)
+                    .ToList();
                 },
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
     }

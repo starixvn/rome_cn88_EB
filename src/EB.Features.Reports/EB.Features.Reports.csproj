@@ -154,9 +154,15 @@
     <Compile Include="Services\AccountingPeriodService.cs" />
     <Compile Include="Services\HouseWinLossService.cs" />
     <Compile Include="Services\MatchWinLossService.cs" />
-    <Compile Include="Services\HouseWinLossWorkbook.cs" />
-    <Compile Include="Services\MatchWinLossWorkbook.cs" />
-    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs" />
+    <Compile Include="Services\HouseWinLossWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="Services\MatchWinLossWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
     <Compile Include="Services\PerformanceBonus\PerformanceBonusService.cs" />
     <Compile Include="ViewModel\HouseWinLossViewModel.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModel.cs" />

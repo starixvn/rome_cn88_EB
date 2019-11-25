@@ -43,7 +43,7 @@
                     <tr>
                         <td>@row.HeadlineUserName</td>
                         <td class="text-left">
-                            <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Master.Value, row.HeadlineId)"> @row.UserName </a>
+                            <a class="downline-link" href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Master.Value, row.HeadlineId)"> @row.UserName </a>
                         </td>
                         <td class="col-link">
                             <span class="icon-link lnk-report"

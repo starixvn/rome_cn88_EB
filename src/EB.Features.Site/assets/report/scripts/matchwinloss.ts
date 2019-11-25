@@ -60,10 +60,12 @@ class MatchWinLossReport extends ReportBase {
     }
 
     onReportSubmit = (e: JQueryEventObject) => {
+        this.$.blockUI();
         const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
         if (sportGroups.length <= 0) {
             this.$buttonSportGroup.addClass("error");
             e.preventDefault();
+            this.$.unblockUI();
 
             return;
         }

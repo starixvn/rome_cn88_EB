@@ -319,7 +319,7 @@
     <value>利用目前的注單報表來與正確數據相互比較。</value>
   </data>
   <data name="RebateRoundDown10" xml:space="preserve">
-    <value>無條件捨去股東的總返水金額(正負10%)</value>
+    <value>返水(正負10%)無條件捨去</value>
   </data>
   <data name="And" xml:space="preserve">
     <value>和</value>

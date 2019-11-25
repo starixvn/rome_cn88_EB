@@ -88,6 +88,11 @@ class HouseWinLossReport extends ReportBase {
                 roleId: elm.attr("data-role-id")
             });
         });
+
+        this.$(".downline-link, .breadcrumb-link").on("click", function () {
+            this$.blockUI();
+        });
+
     }
     changeReportMode = () => {
         this.$isHistoryReport.val(this.$isHistoryReport.val() === "True" ? "False" : "True");

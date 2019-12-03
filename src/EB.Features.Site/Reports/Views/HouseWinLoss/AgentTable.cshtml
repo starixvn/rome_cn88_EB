@@ -1,6 +1,6 @@
 ﻿@using EB.Features.Shared.Model;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
-@using EB.Features.Reports;
+@using EB.Features.Reports.Resources
 
 @model HouseWinLossReportViewModel
 @{
@@ -30,19 +30,19 @@
             <tbody>
                 @foreach (var row in Model.ReportData.Matches)
                 {
-                    <tr>
-                        <td class="text-left">
-                            <a href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Member.Value)"> @row.UserName </a>
-                        </td>
-                        @HtmlHelpers.RenderWagerCell(row.Wagers)
-                        @HtmlHelpers.RenderNumberCell(row.Stake)
-                        @HtmlHelpers.RenderNumberCell(row.ValidStake)
-                        @HtmlHelpers.RenderNumberCell(row.MemberIncome)
-                        @HtmlHelpers.RenderNumberCell(row.Agent)
-                        @HtmlHelpers.RenderNumberCell(row.AgentResult)
-                        @HtmlHelpers.RenderNumberCell(row.MasterResult)
-                        @HtmlHelpers.RenderNumberCell(row.AgentStock)
-                    </tr>
+                <tr>
+                    <td class="text-left">
+                        <a class="downline-link" href="@Model.GetDownlineLink(row.CustId, row.UserName, UserLevel.Member.Value, Model.Query.HeadlineId)"> @row.UserName </a>
+                    </td>
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.Agent)
+                    @HtmlHelpers.RenderNumberCell(row.AgentResult)
+                    @HtmlHelpers.RenderNumberCell(row.MasterResult)
+                    @HtmlHelpers.RenderNumberCell(row.AgentStock)
+                </tr>
                 }
             </tbody>
         }
@@ -78,4 +78,3 @@
         }
     </table>
 </div>
-

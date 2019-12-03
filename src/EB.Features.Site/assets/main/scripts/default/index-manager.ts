@@ -1,4 +1,7 @@
-﻿let indexManager = {
+﻿const recheckinTimeout = 30000;
+const maxHistoryIndex = 21;
+let indexManager = {
+    closePopupAndReloadMainIframeTime: 3000,
     urls: {
         mainRootPath: null,
         changeLanguage: null,
@@ -39,7 +42,7 @@
         changeSecurityCode: null
     },
     topWindow: null,
-    init: function (topWindow: any) {
+    init: function (topWindow: Window) {
         indexManager.topWindow = topWindow;
 
         indexManager.cacheElements();
@@ -51,19 +54,26 @@
 
         indexManager.restoreUrl();
     },
+    eventName: {
+        clickTouchendEventName: "click touchend",
+        redirectItemFirst: ">.redirect-item:first",
+        displayNone: "display-none",
+        hasSubMenu: "has-submenu"
+    },
+
     cacheElements: function () {
         indexManager.elements.isNotHeadLine = parseInt($("#IsNotHeadLine").val());
         indexManager.elements.intervalToGetTotalOnlineMember = parseInt($("#IntervalToGetTotalOnlineMember").val());
         indexManager.urls.mainRootPath = $("#mainRootPath").val();
 
-        indexManager.urls.changeLanguage = indexManager.urls.mainRootPath + "Language/Change";
-        indexManager.urls.getTotalOnlineMemberUrl = indexManager.urls.mainRootPath + "Default/GetTotalOnlineMember";
+        indexManager.urls.changeLanguage = `${indexManager.urls.mainRootPath}Language/Change`;
+        indexManager.urls.getTotalOnlineMemberUrl = `${indexManager.urls.mainRootPath}Default/GetTotalOnlineMember`;
         indexManager.urls.onlineList = $("#OnlineMembersPath").val();
-        indexManager.urls.liveChat = indexManager.urls.mainRootPath + "CustomerList/LiveChat";
-        indexManager.urls.contactUs = indexManager.urls.mainRootPath + "Help/ContactUs";
-        indexManager.urls.reCheckin = indexManager.urls.mainRootPath + "Login/ReCheckin";
-        indexManager.urls.changePassword = indexManager.urls.mainRootPath + "UserInfo/ChangePassword";
-        indexManager.urls.changeSecurityCode = indexManager.urls.mainRootPath + "SecurityCode/ChangeSecurityCode";
+        indexManager.urls.liveChat = `${indexManager.urls.mainRootPath}CustomerList/LiveChat`;
+        indexManager.urls.contactUs = `${indexManager.urls.mainRootPath}Help/ContactUs`;
+        indexManager.urls.reCheckin = `${indexManager.urls.mainRootPath}Login/ReCheckin`;
+        indexManager.urls.changePassword = `${indexManager.urls.mainRootPath}UserInfo/ChangePassword`;
+        indexManager.urls.changeSecurityCode = `${indexManager.urls.mainRootPath}SecurityCode/ChangeSecurityCode`;
         indexManager.urls.oldReportsPath = $("#OldReportsPath").val();
         indexManager.urls.wagerMonitoringConsolePath = $("#WagerMonitoringConsolePath").val();
         indexManager.urls.troubleshootingPath = $("#TroubleshootingPath").val();
@@ -82,43 +92,43 @@
         indexManager.elements.content = $("#content");
     },
     bindEvents: function () {
-        $(".changelanguage-link").on("click touchend", (event: JQueryEventObject) => {
+        $(".changelanguage-link").on(indexManager.eventName.clickTouchendEventName, (event: JQueryEventObject) => {
             indexManager.changeLanguage($(event.target).data("value"));
         });
-        $(".online-member").on("click touchend", () => {
+        $(".online-member").on(indexManager.eventName.clickTouchendEventName, () => {
             indexManager.viewOnlineList();
         });
-        $("#lnk-personal-announcement").on("click touchend", function () {
+        $("#lnk-personal-announcement").on(indexManager.eventName.clickTouchendEventName, function () {
             $.blockUI();
             indexManager.activeMainMenu("menu-ANNOUNCEMENT");
             $("#main").attr("src", $(this).children("a").attr("href"));
         });
-        indexManager.elements.mainMenu.on("click touchend", function () {
+        indexManager.elements.mainMenu.on(indexManager.eventName.clickTouchendEventName, function () {
             $.blockUI();
             const $this = $(this);
             indexManager.mainMenuClick($this.attr("id"));
         });
-        indexManager.elements.subMenuItems.on("click touchend", function () {
+        indexManager.elements.subMenuItems.on(indexManager.eventName.clickTouchendEventName, function () {
             $.blockUI();
             const $this = $(this);
-            indexManager.subMenuClick($this.find(">.redirect-item:first").attr("id"));
+            indexManager.subMenuClick($this.find(indexManager.eventName.redirectItemFirst).attr("id"));
         });
 
-        $("#lnk-new-url").on("click touchend", () => {
+        $("#lnk-new-url").on(indexManager.eventName.clickTouchendEventName, () => {
             $("#menu-HELP").click();
         });
 
-        $("#lnk-live-chat").on("click touchend", () => {
+        $("#lnk-live-chat").on(indexManager.eventName.clickTouchendEventName, () => {
             window.open(indexManager.urls.liveChat, "LiveChat", "height=600,width=800");
         });
-        $("#lnk-contact-us").on("click touchend", () => {
+        $("#lnk-contact-us").on(indexManager.eventName.clickTouchendEventName, () => {
             indexManager.elements.mainMenu.removeClass("active");
-            indexManager.elements.subMenu.addClass("display-none");
+            indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
 
-            indexManager.elements.menuBar.removeClass("has-submenu");
+            indexManager.elements.menuBar.removeClass(indexManager.eventName.hasSubMenu);
             indexManager.elements.mainFrame.attr("src", indexManager.urls.contactUs);
         });
-        $("#menu-back").on("click touchend", () => {
+        $("#menu-back").on(indexManager.eventName.clickTouchendEventName, () => {
             const history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
             let historyIndex = history ? parseInt(history, 0) : 0;
 
@@ -126,7 +136,7 @@
                 return;
             }
 
-            const key = indexManager.elements.currentURLCookieName + "_" + historyIndex;
+            const key = `${indexManager.elements.currentURLCookieName}_${historyIndex}`;
             historyIndex--;
 
             siteInfrastructure.localStorage.remove(key);
@@ -135,13 +145,13 @@
             indexManager.restoreUrl();
         });
 
-        $("#lnk-my-setting").on("click touchend", () => {
+        $("#lnk-my-setting").on(indexManager.eventName.clickTouchendEventName, () => {
             indexManager.topWindow.showCN88CancelButton = false;
             indexManager.currentState.isClearActiveMenu = true;
             indexManager.clearAllActiveMenu();
         });
 
-        $("#lnk-changepassword").on("click touchend", () => {
+        $("#lnk-changepassword").on(indexManager.eventName.clickTouchendEventName, () => {
             indexManager.topWindow.popupManager.init($, top);
             indexManager.topWindow.popupManager.open({
                 title: indexManager.resources.changePassword,
@@ -152,7 +162,7 @@
             });
         });
 
-        $("#lnk-security-code").on("click touchend", () => {
+        $("#lnk-security-code").on(indexManager.eventName.clickTouchendEventName, () => {
             indexManager.topWindow.popupManager.init($, top);
             indexManager.topWindow.popupManager.open({
                 title: indexManager.resources.changeSecurityCode,
@@ -162,35 +172,35 @@
                 height: 420
             });
         });
-        $("#lnk-logout").on("click touchend", () => {
+        $("#lnk-logout").on(indexManager.eventName.clickTouchendEventName, () => {
             siteInfrastructure.logout();
         });
 
-        $("#sub-menu-OLDREPORT").parent().off("click touchend").on("click touchend", () => {
+        $("#sub-menu-OLDREPORT").parent().off(indexManager.eventName.clickTouchendEventName).on(indexManager.eventName.clickTouchendEventName, () => {
             $.blockUI();
             indexManager.currentState.isOpenPopup = true;
             const $this = $(this);
-            indexManager.subMenuClick($this.find(">.redirect-item:first").attr("id"));
+            indexManager.subMenuClick($this.find(indexManager.eventName.redirectItemFirst).attr("id"));
             $.unblockUI();
             indexManager.currentState.isOpenPopup = false;
             indexManager.viewOldReport();
         });
 
-        $("#sub-menu-WAGERMONITORINGCONSOLE").parent().off("click touchend").on("click touchend", () => {
+        $("#sub-menu-WAGERMONITORINGCONSOLE").parent().off(indexManager.eventName.clickTouchendEventName).on(indexManager.eventName.clickTouchendEventName, () => {
             $.blockUI();
             indexManager.currentState.isOpenPopup = true;
             const $this = $(this);
-            indexManager.subMenuClick($this.find(">.redirect-item:first").attr("id"));
+            indexManager.subMenuClick($this.find(indexManager.eventName.redirectItemFirst).attr("id"));
             $.unblockUI();
             indexManager.currentState.isOpenPopup = false;
             indexManager.viewWagerMonitoringConsole();
         });
 
-        $("#sub-menu-TROUBLESHOOTING").parent().off("click touchend").on("click touchend", () => {
+        $("#sub-menu-TROUBLESHOOTING").parent().off(indexManager.eventName.clickTouchendEventName).on(indexManager.eventName.clickTouchendEventName, () => {
             $.blockUI();
             indexManager.currentState.isOpenPopup = true;
             const $this = $(this);
-            indexManager.subMenuClick($this.find(">.redirect-item:first").attr("id"));
+            indexManager.subMenuClick($this.find(indexManager.eventName.redirectItemFirst).attr("id"));
             $.unblockUI();
             indexManager.currentState.isOpenPopup = false;
             indexManager.viewTroubleshooting();
@@ -216,7 +226,7 @@
             indexManager.calculateMainFrameHeight();
         });
 
-        setTimeout(indexManager.reCheckin, 30000);
+        setTimeout(indexManager.reCheckin, recheckinTimeout);
         if (indexManager.elements.isNotHeadLine === 1) {
             setTimeout(indexManager.GetTotalOnlineMember, indexManager.elements.intervalToGetTotalOnlineMember);
         }
@@ -226,7 +236,7 @@
             type: "POST",
             url: indexManager.urls.changeLanguage,
             data: { languageCode: lang },
-            success: function (result: any) {
+            success: function (result: string) {
                 if (result !== undefined) {
                     // remove www so that subdomain can override LANGUAGE value
                     const domain = window.location.hostname.replace(/([a-zA-Z0-9]+.)/, "").replace("www.", "");
@@ -253,12 +263,12 @@
     reloadPage: () => {
         top.location.href = indexManager.removeBookmarksInUrl(top.location.href);
     },
-    removeBookmarksInUrl: (url: any) => {
+    removeBookmarksInUrl: (url: string) => {
         if (typeof url !== "string") {
             return null;
         }
 
-        let i = url.indexOf("#");
+        const i = url.indexOf("#");
         if (i === -1) {
             return url;
         }
@@ -291,46 +301,46 @@
         }
 
         indexManager.elements.mainMenu.removeClass("active");
-        let $this = $("#" + id);
+        const $this = $("#" + id);
 
         $this.addClass("active");
 
         indexManager.currentState.mainMenuId = id;
-        indexManager.elements.subMenu.addClass("display-none");
-        indexManager.elements.menuBar.removeClass("has-submenu");
+        indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
+        indexManager.elements.menuBar.removeClass(indexManager.eventName.hasSubMenu);
 
-        let subMenu = $(".sub-menu[data-main-menu='" + id + "']");
+        const subMenu = $(".sub-menu[data-main-menu='" + id + "']");
         if (subMenu && subMenu.length) {
-            subMenu.removeClass("display-none");
-            indexManager.elements.menuBar.addClass("has-submenu");
-            subMenu.find(".sub-menu-item >.redirect-item:first")[0].click();
+            subMenu.removeClass(indexManager.eventName.displayNone);
+            indexManager.elements.menuBar.addClass(indexManager.eventName.hasSubMenu);
+            subMenu.find(`.sub-menu-item ${indexManager.eventName.redirectItemFirst}`)[0].click();
         } else {
-            (<HTMLIFrameElement>$("#main")[0]).src = (<HTMLLinkElement>$this[0].childNodes[1]).href;
+            ($("#main")[0] as HTMLIFrameElement).src = ($this[0].childNodes[1] as HTMLLinkElement).href;
         }
     },
     subMenuClick: (id: string) => {
         indexManager.elements.subMenuItems.removeClass("active");
-        let $this = $("#" + id);
+        const $this = $("#" + id);
 
         $this.parent().addClass("active");
         if (!indexManager.currentState.isOpenPopup) {
-            (<HTMLIFrameElement>$("#main")[0]).src = (<HTMLLinkElement>$this[0]).href;
+            ($("#main")[0] as HTMLIFrameElement).src = ($this[0] as HTMLLinkElement).href;
         }
     },
-    addHistory: (newEvent: any) => {
-        let history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
+    addHistory: (newEvent: object) => {
+        const history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
         let historyIndex = history ? parseInt(history, 0) : 0;
         historyIndex++;
-        if (historyIndex === 21) {
+        if (historyIndex === maxHistoryIndex) {
             siteInfrastructure.localStorage.shiftStorage(indexManager.elements.currentURLCookieName, newEvent, historyIndex);
             return;
         }
 
         siteInfrastructure.localStorage.set(indexManager.elements.currentURLCookieName, historyIndex);
-        siteInfrastructure.localStorage.set(indexManager.elements.currentURLCookieName + "_" + historyIndex, newEvent);
+        siteInfrastructure.localStorage.set(`${indexManager.elements.currentURLCookieName}_${historyIndex}`, newEvent);
     },
     restoreUrl: () => {
-        let history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
+        const history = siteInfrastructure.localStorage.get(indexManager.elements.currentURLCookieName);
         let historyIndex = history ? parseInt(history, 0) : 0;
 
         if (historyIndex === 0) {
@@ -338,8 +348,8 @@
             return;
         }
 
-        let key = indexManager.elements.currentURLCookieName + "_" + historyIndex;
-        let currentPage = siteInfrastructure.localStorage.get(key);
+        const key = `${indexManager.elements.currentURLCookieName}_${historyIndex}`;
+        const currentPage = siteInfrastructure.localStorage.get(key);
         historyIndex--;
 
         siteInfrastructure.localStorage.remove(key);
@@ -357,21 +367,21 @@
         }
 
         indexManager.elements.mainMenu.removeClass("active");
-        $("#" + currentPage.mainMenu).addClass("active");
+        $(`#${currentPage.mainMenu}`).addClass("active");
 
-        indexManager.elements.subMenu.addClass("display-none");
-        indexManager.elements.menuBar.removeClass("has-submenu");
+        indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
+        indexManager.elements.menuBar.removeClass(indexManager.eventName.hasSubMenu);
 
         indexManager.elements.subMenuItems.removeClass("active");
 
-        let subMenu = $(".sub-menu[data-main-menu='" + currentPage.mainMenu + "']");
+        const subMenu = $(`.sub-menu[data-main-menu='${currentPage.mainMenu}']`);
         if (subMenu && subMenu.length) {
-            subMenu.removeClass("display-none");
-            indexManager.elements.menuBar.addClass("has-submenu");
+            subMenu.removeClass(indexManager.eventName.displayNone);
+            indexManager.elements.menuBar.addClass(indexManager.eventName.hasSubMenu);
         }
 
         if (currentPage.subMenu != null) {
-            $("#" + currentPage.subMenu).parent().addClass("active");
+            $(`#${currentPage.subMenu}`).parent().addClass("active");
         }
 
         $("#main").attr("src", currentPage.url);
@@ -381,52 +391,43 @@
             type: "POST",
             url: indexManager.urls.reCheckin,
             data: { onid: indexManager.elements.onlineUserId },
-            success: (isKickout: any) => {
-                try {
-                    if (isKickout) {
-                        alert((<HTMLInputElement>document.getElementById("KickoutMessage")).value);
-                        siteInfrastructure.logout();
-                    }
-                }
-                catch (e) {
-                    if (typeof (isKickout) === "string"
-                        && isKickout.indexOf("Oops... you are here because of a system error") > 0) {
-                        siteInfrastructure.logout();
-                        alert((<HTMLInputElement>document.getElementById("errorMessage")).value);
-                    }
+            success: (isKickout: boolean) => {
+                if (isKickout) {
+                    alert((document.getElementById("KickoutMessage") as HTMLInputElement).value);
+                    siteInfrastructure.logout();
                 }
             },
             error: (xhr) => {
-                if (xhr.status === 500) {
+                if (xhr.status === HttpStatusCode.INTERNAL_SERVER_ERROR) {
                     siteInfrastructure.logout();
-                    alert((<HTMLInputElement>document.getElementById("errorMessage")).value);
-                } else if (xhr.status === 401 || xhr.status === 403 || xhr.status === 503) {
+                    alert((document.getElementById("errorMessage") as HTMLInputElement).value);
+                } else if (xhr.status === HttpStatusCode.UNAUTHORIZED || xhr.status === HttpStatusCode.FORBIDDEN || xhr.status === HttpStatusCode.SERVICE_UNAVAILABLE) {
                     siteInfrastructure.logout();
                 }
             },
             complete: () => {
-                setTimeout(indexManager.reCheckin, 30000);
+                setTimeout(indexManager.reCheckin, recheckinTimeout);
             }
         });
     },
     activeMainMenu: (id: string) => {
         indexManager.elements.mainMenu.removeClass("active");
-        indexManager.elements.subMenu.addClass("display-none");
-        indexManager.elements.menuBar.removeClass("has-submenu");
+        indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
+        indexManager.elements.menuBar.removeClass(indexManager.eventName.hasSubMenu);
 
         indexManager.currentState.mainMenuId = id;
-        $("#" + id).addClass("active");
+        $(`#${id}`).addClass("active");
     },
     closePopupAndReloadMainIframe: () => {
         setTimeout(() => {
             indexManager.topWindow.popupManager.close();
             indexManager.elements.mainFrame[0].contentWindow.location.reload(true);
-        }, 1000 * 3);
+        }, indexManager.closePopupAndReloadMainIframeTime);
     },
     activeSubMenu: (id: string, mainMenuId: string) => {
-        indexManager.elements.subMenu.addClass("display-none");
-        indexManager.elements.menuBar.addClass("has-submenu");
-        $(".sub-menu[data-main-menu='" + mainMenuId + "']").removeClass("display-none");
+        indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
+        indexManager.elements.menuBar.addClass(indexManager.eventName.hasSubMenu);
+        $(`.sub-menu[data-main-menu='${mainMenuId}']`).removeClass(indexManager.eventName.displayNone);
 
         $("#" + id).parent().addClass("active");
     },
@@ -438,8 +439,8 @@
     },
     clearAllActiveMenu: () => {
         indexManager.elements.mainMenu.removeClass("active");
-        indexManager.elements.subMenu.addClass("display-none");
-        indexManager.elements.menuBar.removeClass("has-submenu");
+        indexManager.elements.subMenu.addClass(indexManager.eventName.displayNone);
+        indexManager.elements.menuBar.removeClass(indexManager.eventName.hasSubMenu);
     },
     isMySettingsPage: (currentUrl: string) => {
         return currentUrl.toLowerCase().indexOf("cn88customersetting/viewcn88customersetting/mysetting") > -1;

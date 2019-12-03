@@ -121,18 +121,24 @@
     <Compile Include="Constants\ConjunctionConstant.cs" />
     <Compile Include="Constants\ReportMode.cs" />
     <Compile Include="Constants\RowTypeConstant.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossOfSMACriteria.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossOfSMACriteria.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\HouseWinLossBaseCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\SettledCountSMAHouseWLCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\SettledCountHeadlineHouseWLCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\SettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\UnsettledCountSMAHouseWLCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\UnsettledCountHeadlineHouseWLCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\UnsettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\UnsettledHouseWinLossOfHeadlineCriteria.cs" />
     <Compile Include="Criteria\PerformanceBonus\CheckValidSuperUserNameCommand.cs" />
     <Compile Include="Criteria\PerformanceBonus\GetAccountingPeriodsCriteria.cs" />
     <Compile Include="Criteria\PerformanceBonus\PerformanceBonusCriteria.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\SettledHouseWinLossOfHeadlineCriteria.cs" />
     <Compile Include="Criteria\MatchWinLossCriteria.cs" />
     <Compile Include="Extension\EnumerableExtensions.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\AccountingPeriod.cs" />
+    <Compile Include="Model\CountHouseWinLossModel.cs" />
     <Compile Include="Model\HouseWinLossModel.cs" />
     <Compile Include="Model\MatchWinLossModel.cs" />
     <Compile Include="Model\PerformanceBonusModel.cs" />
@@ -140,7 +146,7 @@
     <Compile Include="Params\MatchWinLossParam.cs" />
     <Compile Include="Params\PerformanceBonusParam.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReportResources.Designer.cs">
+    <Compile Include="Resources\ReportResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportResources.resx</DependentUpon>
@@ -148,9 +154,15 @@
     <Compile Include="Services\AccountingPeriodService.cs" />
     <Compile Include="Services\HouseWinLossService.cs" />
     <Compile Include="Services\MatchWinLossService.cs" />
-    <Compile Include="Services\HouseWinLossWorkbook.cs" />
-    <Compile Include="Services\MatchWinLossWorkbook.cs" />
-    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs" />
+    <Compile Include="Services\HouseWinLossWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="Services\MatchWinLossWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
+    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs" >
+		<SonarQubeExclude>true</SonarQubeExclude>
+	</Compile>
     <Compile Include="Services\PerformanceBonus\PerformanceBonusService.cs" />
     <Compile Include="ViewModel\HouseWinLossViewModel.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModel.cs" />
@@ -169,12 +181,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ReportResources.resx">
+    <EmbeddedResource Include="Resources\ReportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReportResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportResources.zh-Hans.resx" />
-    <EmbeddedResource Include="ReportResources.zh-TW.resx" />
+    <EmbeddedResource Include="Resources\ReportResources.zh-Hans.resx" />
+    <EmbeddedResource Include="Resources\ReportResources.zh-TW.resx" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />

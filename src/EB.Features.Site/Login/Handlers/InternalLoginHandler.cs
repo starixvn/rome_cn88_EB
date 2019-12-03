@@ -25,6 +25,7 @@
                 message.InternalLogInURL,
                 InternalLoginQuery.InternalLogInUMToken,
                 message.IP,
+                message.IsHideTopMenu,
                 message.AfterLogInSite,
                 message.AfterLogInQuery,
                 InternalLoginQuery.KeyPath,

@@ -1,6 +1,8 @@
 ﻿@using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
 @using EB.Features.Shared.Model;
+@using EB.Features.Shared.Configuration;
+@using EB.Features.Reports.Resources
 
 @model HouseWinLossReportViewModel
 @{
@@ -24,17 +26,17 @@
         <tbody>
             @foreach (var row in Model.ReportData.Matches)
             {
-            <tr>
-                <td class="text-left">
-                    <a href="javascript:void(0);" class="lnk-internal"
-                       data-query="@Model.GetInternalLoginLink(row.CustId,row.UserName)">@row.UserName</a>
-                </td>
-                @HtmlHelpers.RenderWagerCell(row.Wagers)
-                @HtmlHelpers.RenderNumberCell(row.Stake)
-                @HtmlHelpers.RenderNumberCell(row.ValidStake)
-                @HtmlHelpers.RenderNumberCell(row.MemberIncome)
-                @HtmlHelpers.RenderNumberCell(row.AgentResult)
-            </tr>
+                <tr>
+                    <td class="text-left">
+                        <a href="javascript:void(0);" class="lnk-betlist"
+                           data-query="@Model.GetBetlistLink(row.CustId,row.UserName)">@row.UserName</a>
+                    </td>
+                    @HtmlHelpers.RenderWagerCell(row.Wagers)
+                    @HtmlHelpers.RenderNumberCell(row.Stake)
+                    @HtmlHelpers.RenderNumberCell(row.ValidStake)
+                    @HtmlHelpers.RenderNumberCell(row.MemberIncome)
+                    @HtmlHelpers.RenderNumberCell(row.AgentResult)
+                </tr>
             }
         </tbody>
         @if (Model.ReportData.IsShowTotalRow)
@@ -64,4 +66,14 @@
         }
     </table>
 </div>
+
+<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
+    <input type="hidden" id="custId" name="custId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustId:0)" />
+    <input type="hidden" id="custName" name="custName" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustName:"")" />
+    <input type="hidden" id="roleId" name="roleId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()? Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().RoleId:0)" />
+    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />
+    <input type="hidden" id="IsHideTopMenu" name="IsHideTopMenu" value="@bool.TrueString" />
+    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
+    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
+</form>
 

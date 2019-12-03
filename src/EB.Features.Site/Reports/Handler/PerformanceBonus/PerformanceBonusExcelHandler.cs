@@ -1,11 +1,11 @@
 ﻿namespace EB.Features.Site.Reports
 {
     using System.Linq;
-    using EB.Features.Reports;
     using EB.Features.Reports.Constants;
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
+    using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
@@ -17,20 +17,20 @@
 
     public class PerformanceBonusExcelHandler : ExcelBaseHandler, IRequestHandler<PerformanceBonusExcelQuery, ExcelFileViewModel>
     {
-        private readonly IPerformanceBonusService matchWinLossService;
+        private readonly IPerformanceBonusService service;
         private readonly IPerformanceBonusWorkbook workbook;
 
         public PerformanceBonusExcelHandler(
             IPerformanceBonusService matchWinLossService,
             IPerformanceBonusWorkbook workbook)
         {
-            this.matchWinLossService = matchWinLossService;
+            this.service = matchWinLossService;
             this.workbook = workbook;
         }
 
         public ExcelFileViewModel Handle(PerformanceBonusExcelQuery message)
         {
-            var reportData = matchWinLossService.Get(new PerformanceBonusParam
+            var reportData = service.Get(new PerformanceBonusParam
             {
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,

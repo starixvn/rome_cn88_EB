@@ -371,6 +371,11 @@ body {
     > thead > tr.total > th.negative-value {
         color: #ffbeb4;
     }
+
+    .col-link {
+        width: 20px;
+        padding: 0 !important;
+    }
 }
 
 .tblAccountingSheet {
@@ -784,4 +789,12 @@ body.phone {
     font-weight: bold;
     text-align: left;
     text-transform: uppercase;
+}
+
+// View history report
+
+.lnk-report {
+    display: flex;
+    font-size: 20px;
+    color: #2489ce;
 }

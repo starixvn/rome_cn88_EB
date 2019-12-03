@@ -8,17 +8,25 @@
     <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
     <Setting Key="CS_SelArchiveDate" SpName="CS_SelArchiveDate" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
   </Function>
-  
-  <Function Name="Reports">
+
+  <Function Name="House Win Loss Reports">
     <Setting Key="CS_Rpt_EBWinloss_Headline" SpName="CS_Rpt_EBWinloss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_EBWinloss_Super" SpName="CS_Rpt_EBWinloss_Super" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_EBWinloss_Master" SpName="CS_Rpt_EBWinloss_Master" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_EBWinloss_Agent" SpName="CS_Rpt_EBWinloss_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Rpt_EBWinloss_Member" SpName="CS_Rpt_EBWinloss_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+
+    <Setting Key="CS_EB_Rpt_Winloss_Headline_CustCount" SpName="CS_EB_Rpt_Winloss_Headline_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Super_CustCount" SpName="CS_EB_Rpt_Winloss_Super_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Master_CustCount" SpName="CS_EB_Rpt_Winloss_Master_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Agent_CustCount" SpName="CS_EB_Rpt_Winloss_Agent_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Member_CustCount" SpName="CS_EB_Rpt_Winloss_Member_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+  </Function>
+
+  <Function Name="Reports">
     <Setting Key="CS_Rpt_MatchWinLoss_Headline" SpName="CS_Rpt_MatchWinLoss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Customer_CheckValidUsername" SpName="CS_Customer_CheckValidUsername" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
     <Setting Key="CS_EB_Rpt_PerformanceBonus" SpName="CS_EB_Rpt_PerformanceBonus" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
-
   </Function>
 
 </Functions>

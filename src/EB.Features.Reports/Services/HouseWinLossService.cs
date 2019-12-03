@@ -1,5 +1,6 @@
 ﻿namespace EB.Features.Reports.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using EB.Features.Reports.Criteria;
@@ -14,6 +15,8 @@
     public interface IHouseWinLossService
     {
         HouseWinLossViewModel Get(HouseWinLossParam param);
+
+        CountHouseWinLossModel CountUsers(HouseWinLossParam param);
     }
 
     public class HouseWinLossService : IHouseWinLossService
@@ -27,6 +30,24 @@
         {
             this.dynamicRepository = dynamicRepository;
             this.reportDateService = reportDateService;
+        }
+
+        public CountHouseWinLossModel CountUsers(HouseWinLossParam param)
+        {
+            param.MoveBetsDay = reportDateService.GetMoveBetsDay();
+            param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
+            param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;
+
+            if (param.Role.IsHeadline())
+            {
+                return IsSettled(param) ?
+                   dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountHeadlineHouseWLCriteria(param)) :
+                   dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountHeadlineHouseWLCriteria(param));
+            }
+
+            return IsSettled(param) ?
+                dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountSMAHouseWLCriteria(param)) :
+                dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountSMAHouseWLCriteria(param));
         }
 
         public HouseWinLossViewModel Get(HouseWinLossParam param)
@@ -49,7 +70,13 @@
                 dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossOfSMACriteria(param));
             }
 
-            return new HouseWinLossViewModel(reportData.OrderBy(i => i.UserName));
+            return new HouseWinLossViewModel(reportData
+                .Select(i =>
+                {
+                    i.Rebate = -1 * i.HeadlineResult * 10 / 100;
+                    i.RebateRoundDown = Math.Sign(i.Rebate) * Math.Floor(Math.Abs(i.Rebate / 100)) * 100;
+                    return i;
+                }).OrderBy(i => i.UserName));
         }
 
         private static bool IsSettled(HouseWinLossParam param)

@@ -3,6 +3,7 @@
     using System;
     using System.Web;
     using EB.Features.Shared.Configuration;
+    using EB.Features.Shared.Model;
     using EB.Features.Site.Shared;
     using EB.Features.Site.Shared.Models;
     using MediatR;
@@ -14,6 +15,8 @@
             : base(currentSession)
         {
         }
+
+        public bool IsHideTopMenu { get; set; }
 
         public int CustId { get; set; }
 
@@ -42,6 +45,6 @@
         public string IP => CurrentSession.Ip;
 
         public string InternalLogInURL
-            => RoleId == 0 ? AppSettings.InternalLogInURLHeadline : AppSettings.InternalLogInURL;
+            => RoleId == UserLevel.Headline.Value ? AppSettings.InternalLogInURLHeadline : AppSettings.InternalLogInURL;
     }
 }

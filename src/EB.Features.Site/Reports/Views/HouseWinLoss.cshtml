@@ -2,9 +2,8 @@
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
 @using EB.Features.Reports;
 @using EB.Features.Shared.Extensions;
-@using EB.Features.Shared.Configuration;
 @using EB.Features.Site.Reports.ViewModel.HouseWinLoss
-@using EB.Features.Reports;
+@using EB.Features.Reports.Resources
 
 @model HouseWinLossReportViewModel
 @{
@@ -80,7 +79,10 @@
         @Html.Hidden("UserSelectedTicketStatusId", Model.Query.UserSelectedTicketStatusId)
         @Html.Hidden("IsTest", Model.ReportFilterViewModel.IsTest)
         @Html.Hidden("CustId", Model.Query.CustId)
+        @Html.Hidden("HeadlineId", Model.Query.HeadlineId)
     </form>
+
+    @Html.Action("CountHouseWinLoss")
 
     @if (Model.Query.Role.IsHeadline())
     {
@@ -104,15 +106,6 @@
     }
 
 </div>
-
-<form id="internal-login-form" method="get" action="@HouseWinLossReportViewModel.InternalLoginAction" target="_blank">
-    <input type="hidden" id="custId" name="custId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustId:0)" />
-    <input type="hidden" id="custName" name="custName" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()?Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().CustName:"")" />
-    <input type="hidden" id="roleId" name="roleId" value="@(Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Any()? Model.BreadcrumbLevelViewModel.BreadcrumbLevel.Last().RoleId:0)" />
-    <input type="hidden" id="languageKey" name="languageKey" value="@Model.LanguageCode" />
-    <input type="hidden" id="AfterLogInSite" name="AfterLogInSite" value="@AppSettings.FeaturesAppPath" />
-    <input type="hidden" id="AfterLogInQuery" name="AfterLogInQuery" value="" />
-</form>
 
 @section Scripts{
     @StaticResources.RenderScripts("~/assets/report/bundles/housewinloss")

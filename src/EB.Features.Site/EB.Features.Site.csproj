@@ -477,10 +477,6 @@
     <Content Include="assets\common\styles\components\tooltip.css" />
     <Content Include="assets\common\styles\components\tooltip.min.css" />
     <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.svg" />
-    <Content Include="assets\common\styles\fonts\iconalpha\demo-files\demo.js" />
-    <Content Include="assets\common\styles\fonts\iconalpha\demo.html" />
-    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.svg" />
-    <Content Include="assets\common\styles\fonts\iconalpha\Read Me.txt" />
     <Content Include="assets\common\styles\fonts\iconcn88\demo-files\demo.css" />
     <Content Include="assets\common\styles\fonts\iconcn88\demo-files\demo.js" />
     <Content Include="assets\common\styles\fonts\iconcn88\demo.html" />
@@ -671,9 +667,7 @@
     <Content Include="assets\main\bundles\password\change-password.min.js">
       <DependentUpon>change-password.js</DependentUpon>
     </Content>
-    <Content Include="assets\main\scripts\auth\kickout.js" />
     <Content Include="assets\main\scripts\default\index-manager.js" />
-    <Content Include="assets\main\scripts\home\index-manager.js" />
     <Content Include="assets\main\scripts\password\change-password.js" />
     <Content Include="assets\main\styles\error-page.css" />
     <Content Include="assets\main\styles\error-page.min.css" />
@@ -814,28 +808,27 @@
     <Content Include="Web.config" />
     <TypeScriptCompile Include="AccountManagement\Scripts\subaccount.ts" />
     <TypeScriptCompile Include="assets\login\scripts\login\href-handler.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\auth\kickout.ts" />
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\home\index-manager.ts" />
     <TypeScriptCompile Include="assets\main\scripts\password\change-password.ts" />
-    <TypeScriptCompile Include="assets\main\scripts\security-helper.ts" />
+    <TypeScriptCompile Include="assets\main\scripts\http-status.ts" />
     <TypeScriptCompile Include="assets\main\scripts\site-infrastructure.ts" />
     <TypeScriptCompile Include="assets\report\components\client-pager.ts" />
     <TypeScriptCompile Include="assets\report\components\daterangepicker.ts" />
-    <TypeScriptCompile Include="assets\report\components\filter-toggle.ts" />
     <TypeScriptCompile Include="assets\report\components\link-builder.ts" />
     <TypeScriptCompile Include="assets\report\components\message.ts" />
-    <TypeScriptCompile Include="assets\report\components\multi-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\pager.ts" />
     <TypeScriptCompile Include="assets\report\components\single-selection-dropdown.ts" />
     <TypeScriptCompile Include="assets\report\components\sort.ts" />
     <TypeScriptCompile Include="assets\report\components\sport-group-multiselection.ts" />
+    <TypeScriptCompile Include="assets\report\scripts\ReportBase.ts" />
     <TypeScriptCompile Include="assets\report\scripts\housewinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\performance-bonus.ts" />
     <TypeScriptCompile Include="assets\report\scripts\matchwinloss.ts" />
     <TypeScriptCompile Include="assets\report\scripts\core.ts" />
     <TypeScriptCompile Include="assets\shared\scripts\components\date-picker.ts" />
-    <TypeScriptCompile Include="assets\tests\apps\features\subaccount-tests.ts" />
+    <TypeScriptCompile Include="assets\tests\apps\features\subaccount-tests.ts">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="typings\globals\bootstrap\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\cleave.js\index.d.ts" />
     <TypeScriptCompile Include="typings\globals\cleave.js\options\creditCard.d.ts" />
@@ -895,6 +888,7 @@
     <Compile Include="Reports\ReportsBaseHandler.cs" />
     <Compile Include="Reports\Handler\HouseWinLossHandler.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossExcelQuery.cs" />
+    <Compile Include="Reports\Request\HouseWinLoss\CountHouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\ReportLegendQuery.cs" />
     <Compile Include="Reports\Request\HouseWinLoss\HouseWinLossQuery.cs" />
     <Compile Include="Reports\Request\MatchWinLoss\MatchWinLossExcelQuery.cs" />
@@ -903,6 +897,7 @@
     <Compile Include="Reports\Request\PerformanceBonus\PerformanceBonusQuery.cs" />
     <Compile Include="Reports\Request\ReportBaseQuery.cs" />
     <Compile Include="Reports\ViewModel\ExcelFileViewModel.cs" />
+    <Compile Include="Reports\ViewModel\HouseWinLoss\CountHouseWinLossViewModel.cs" />
     <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossReportViewModel.cs" />
     <Compile Include="Reports\ViewModel\HouseWinLoss\HouseWinLossFilterViewModel.cs" />
     <Compile Include="Reports\ViewModel\MatchWinLossFilterViewModel.cs" />
@@ -912,17 +907,31 @@
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
     <Compile Include="Shared\BrowserHelperImpl.cs" />
-    <Compile Include="Shared\Filters\AntiForgeryValidator.cs" />
-    <Compile Include="Shared\Filters\AntiXSRFFilter.cs" />
-    <Compile Include="Shared\Helpers\AuthInfoHelper.cs" />
-    <Compile Include="Shared\Helpers\BrowserHelper.cs" />
-    <Compile Include="Shared\Helpers\CookieHelper.cs" />
-    <Compile Include="Shared\Helpers\JsonHelper.cs" />
+    <Compile Include="Shared\Filters\AntiForgeryValidator.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Filters\AntiXSRFFilter.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\AuthInfoHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\BrowserHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\CookieHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Shared\Helpers\JsonHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Helpers\LanguageHelper.cs" />
     <Compile Include="Shared\Helpers\QueryEntityModelBinder.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="Shared\Helpers\StaticResources.cs" />
+    <Compile Include="Shared\Helpers\StaticResources.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Home\HomeController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
@@ -942,7 +951,9 @@
     <Compile Include="Reports\ReportsController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
     </Compile>
-    <Compile Include="Shared\Helpers\UrlHelper.cs" />
+    <Compile Include="Shared\Helpers\UrlHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Shared\Models\UserSession.cs" />
     <Compile Include="Shared\MultipleLanguageController.cs">
       <SonarQubeExclude>true</SonarQubeExclude>
@@ -994,35 +1005,10 @@
     <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.woff" />
     <Content Include="assets\common\styles\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
-    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.eot" />
-    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.ttf" />
-    <Content Include="assets\common\styles\fonts\iconalpha\fonts\Iconalpha.woff" />
-    <Content Include="assets\common\styles\fonts\iconalpha\selection.json" />
     <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.eot" />
     <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.ttf" />
     <Content Include="assets\common\styles\fonts\iconcn88\fonts\CN88Icon.woff" />
     <Content Include="assets\common\styles\fonts\iconcn88\selection.json" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.eot" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.woff" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Bold.woff2" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Italic.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.eot" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.woff" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Light.woff2" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.eot" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.woff" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Medium.woff2" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.eot" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.woff" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Regular.woff2" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.eot" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.ttf" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff" />
-    <Content Include="assets\common\styles\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="assets\common\styles\layout\before-home-page\before-home-page.scss" />
     <Content Include="assets\common\styles\layout\default-layout\header.scss" />
     <Content Include="assets\common\styles\layout\default-layout\navigation.scss" />
@@ -1217,9 +1203,7 @@
     <Content Include="assets\login\styles\vendors\bootstrap\_variables.scss" />
     <Content Include="assets\login\styles\vendors\bootstrap\_wells.scss" />
     <Content Include="Home\Views\index.cshtml" />
-    <Content Include="assets\main\scripts\auth\kickout.js.map" />
     <Content Include="assets\main\scripts\default\index-manager.js.map" />
-    <Content Include="assets\main\scripts\home\index-manager.js.map" />
     <Content Include="assets\main\scripts\password\change-password.js.map" />
     <Content Include="assets\main\styles\error-page.scss" />
     <Content Include="assets\main\styles\home.scss" />
@@ -1322,6 +1306,7 @@
     <Content Include="typings\globals\cleave.js\README.md" />
     <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
     <Content Include="Reports\Views\ReportLegend.cshtml" />
+    <Content Include="Reports\Views\HouseWinLoss\CountUsers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />

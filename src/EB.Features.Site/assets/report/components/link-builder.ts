@@ -20,12 +20,13 @@ class LinkBuilderComponent {
     };
 
     updateParam = (name: string, value: string) => {
-        let me = this;
+        const this$ = this.$;
+
         this.options.linkClasses.forEach((className: string) => {
-            let $linkClass = this.$(className);
+            const $linkClass = this.$(className);
 
             $linkClass.each((index: number, element: Element) => {
-                let $link = me.$(element);
+                const $link = this$(element);
                 let currentUrl = $link.attr("href");
 
                 currentUrl = cn88Features.replaceQueryStringValue(currentUrl, name, value);

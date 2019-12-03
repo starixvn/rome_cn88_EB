@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using EB.Features.Main.Criteria.InternalLogin;
     using EB.Features.Main.DataAccesses;
+    using EB.Features.Main.Model;
     using EB.Features.Main.Params;
+    using Newtonsoft.Json;
 
     public interface InternalLoginService
     {
@@ -22,22 +24,20 @@
 
         public string GetInternalLogInLink(InternalLoginParam param)
         {
-            const bool isHideTopMenu = true;
             var time = dataAccess.GetDBTime(new GetDBTimeCriteria()).Ticks;
-            var queryParam = string.Join("&", new List<object>
+            var internalLoginModel = new InternalLoginModel
             {
-                param.CustName,
-                param.AccId,
-                time,
-                string.Empty,
-                param.AfterLogInSite,
-                param.AfterLogInQuery.Replace("&", "|"),
-                string.Empty,
-                param.Language,
-                isHideTopMenu
-            });
+                AdminId = param.AccId,
+                AdminName = param.CustName,
+                AfterLoginQuery = param.AfterLogInQuery,
+                AfterLogInSite = param.AfterLogInSite,
+                IsHideTopMenu = param.IsHideTopMenu,
+                Language = param.Language,
+                SystemLogin = "EB",
+                TimeTick = time
+            };
 
-            var encryptedParams = param.EncryptParamFunc(queryParam, 1024, param.KeyPath);
+            var encryptedParams = param.EncryptParamFunc(JsonConvert.SerializeObject(internalLoginModel), 1024, param.KeyPath);
 
             var result = string.Format(
                 "{0}?{1}params={2}&isVpn={3}",

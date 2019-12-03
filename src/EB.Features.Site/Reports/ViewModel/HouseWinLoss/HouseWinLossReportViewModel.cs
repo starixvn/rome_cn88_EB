@@ -6,6 +6,7 @@
     using System.Web;
     using System.Web.Mvc;
     using EB.Features.Reports;
+    using EB.Features.Reports.Resources;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
@@ -97,13 +98,14 @@
 
         public static string InternalLoginAction => HttpContext.Current.Response.ApplyAppPathModifier("~/InternalLogin/Index");
 
-        public string GetDownlineLink(int custId, string custName, byte roleId)
+        public string GetDownlineLink(int custId, string custName, byte roleId, int headlineId)
         {
             var breadscrumbToDonwline = breadcrumbLevel.ToList();
             breadscrumbToDonwline.Add(new CustInfo(Query.CustId, custName, Query.RoleId));
 
             var param = new Dictionary<string, object>
             {
+                ["HeadlineId"] = headlineId,
                 ["RoleId"] = roleId,
                 ["UserSelectedViewer"] = Query.UserSelectedViewer,
                 ["UserSelectedSportGroupIds"] = Query.UserSelectedSportGroupIds,
@@ -123,7 +125,7 @@
             return HttpContext.Current.Response.ApplyAppPathModifier("~/Reports/HouseWinLoss?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value)));
         }
 
-        public string GetInternalLoginLink(int custId, string custName)
+        public string GetBetlistLink(int custId, string custName)
         {
             var param = new Dictionary<string, object>
             {
@@ -139,6 +141,17 @@
             };
 
             return "~/BetLists/BetListOfEBReport?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
+        }
+
+        public static string GetReportLink()
+        {
+            var param = new Dictionary<string, object>
+            {
+                ["DisplayMode"] = 1,
+                ["IsSetMenu"] = true
+            };
+
+            return "~/Reports/Index?" + string.Join("&", param.Select(kp => kp.Key + "=" + kp.Value));
         }
 
         public string LanguageCode { get; }

@@ -96,7 +96,7 @@ class SubAccount {
             type: formSearch.attr("method"),
             url: url,
             dataType: "json",
-            success: (data: any) => this.showSubAccountInfoOnUI(data),
+            success: (data: SubAccountItem) => this.showSubAccountInfoOnUI(data),
             complete: this.$.unblockUI
         });
     }
@@ -107,7 +107,7 @@ class SubAccount {
         this.elements.name.focus();
     }
 
-    showSubAccountInfoOnUI(data: any): void {
+    showSubAccountInfoOnUI(data: SubAccountItem): void {
         this.updateData.custId = data.CustId;
         this.updateData.subAccId = data.SubAccId;
         this.updateData.username = data.UserName;
@@ -183,3 +183,20 @@ class SubAccount {
 $(() => {
     new SubAccount($).init();
 });
+
+class PageAccess {
+    ViewTotalBets: boolean;
+    ViewMemberInfo: boolean;
+    UpdateAccount: boolean;
+    ViewReports: boolean;
+}
+
+class SubAccountItem {
+    SMAUsername: string;
+    SMANickname: string;
+    CustId: number;
+    SubAccId: number;
+    UserName: string;
+    NickName: string;
+    Permissions: PageAccess;    
+}

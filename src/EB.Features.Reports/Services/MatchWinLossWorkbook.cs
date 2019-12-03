@@ -10,6 +10,7 @@
     using ONEbook.SpreadSheets;
     using ONEbook.SpreadSheets.NPOI;
     using EB.Features.Reports.Extension;
+    using EB.Features.Reports.Resources;
 
     public interface IMatchWinLossWorkbook
     {

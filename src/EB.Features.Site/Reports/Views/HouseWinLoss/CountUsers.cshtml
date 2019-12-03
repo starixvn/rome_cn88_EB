@@ -1,0 +1,18 @@
+﻿@using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
+@using EB.Features.Reports.Resources
+
+@model CountHouseWinLossViewModel
+@{
+    Layout = null;
+}
+
+<div class="countUsers">
+    @foreach (var user in Model.Users)
+    {
+        <span>@user.Key:</span><b>@user.Value</b>
+        if (!user.Key.Equals(AppResources.Member))
+        {
+            <span> | </span>
+        }
+    }
+</div>

@@ -1,16 +1,22 @@
 ﻿"use strict";
 interface JQuery {
-    pagination(option: any): void;
+    pagination(option: object): void;
+
 }
 
 class PagerOption {
     constructor(
         public onSelectPage: () => void = null,
-        public pagerId: string = "report-pager",
-        public formId: string = "report-form",
-        public pageIndexId: string = "PageIndex",
-        public pageSizeId: string = "PageSize",
-        public pageList: number[] = [10, 50, 100, 500]) {
+        public pagerId = "report-pager",
+        public formId = "report-form",
+        public pageIndexId = "PageIndex",
+        public pageSizeId = "PageSize",
+        public pageList: number[] = []) {
+        const item10 = 10;
+        const item50 = 50;
+        const item100 = 100;
+        const item500 = 500;
+        pageList = pageList || [item10, item50, item100, item500];
     }
 }
 
@@ -31,9 +37,10 @@ class PagerComponent {
     }
 
     render = (options: PagerOption = this.options) => {
-        let self = this;
-        let pagerOption = <PagerOption>this.$.extend({}, this.options, options);
-        let pager = this.$("#" + pagerOption.pagerId);
+        const updateHiddenFields = this.updateHiddenFields;
+
+        const pagerOption = this.$.extend({}, this.options, options) as PagerOption;
+        const pager = this.$("#" + pagerOption.pagerId);
 
         this.$reportForm = this.$("#" + pagerOption.formId);
         this.totalRecords = pager.data("totalrecords");
@@ -56,13 +63,13 @@ class PagerComponent {
 
                 showRefresh: false,
                 onSelectPage: function (pageNumber: number, pageSize: number) {
-                    self.updateHiddenFields(pageNumber, pageSize);
-                    if (pagerOption.onSelectPage && typeof (pagerOption.onSelectPage) == "function") {
+                    updateHiddenFields(pageNumber, pageSize);
+                    if (pagerOption.onSelectPage && typeof (pagerOption.onSelectPage) === "function") {
                         pagerOption.onSelectPage();
                     }
                 },
                 beforePageText: pager.data("labelpage"),
-                afterPageText: pager.data("labelof") + " {pages}",
+                afterPageText: `${pager.data("labelof")} {pages}`,
                 displayMsg: pager.data("labeldisplayitems")
             });
 

@@ -25,6 +25,10 @@
           => await ViewAsync(query, $"{ViewsPath}/HouseWinLoss.cshtml");
 
         [NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
+        public async Task<ActionResult> CountHouseWinLoss(CountHouseWinLossQuery query)
+          => await ViewAsync(query, $"{ViewsPath}/HouseWinLoss/CountUsers.cshtml");
+
+        [NapAuth(FunctionKey = SiteFunctionKeys.HouseWinLoss, Policy = Constant.Policy.Read)]
         public async Task<ActionResult> ExportHouseWinLoss(HouseWinLossExcelQuery query)
             => await ExcelView(query);
 

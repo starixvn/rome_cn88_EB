@@ -1,11 +1,14 @@
 ﻿namespace EB.Features.Site.Reports
 {
+    using System;
     using System.Linq;
+    using System.Text;
     using EB.Features.Reports;
     using EB.Features.Reports.Constants;
     using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
+    using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
     using EB.Features.Shared;
     using EB.Features.Shared.Configuration;
@@ -16,6 +19,7 @@
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel;
+    using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
     using MediatR;
     using ONEbook.SpreadSheets;
     using static ONEbook.SpreadSheets.Column;
@@ -41,8 +45,10 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            var reportData = houseWinLossService.Get(new HouseWinLossParam
+            message.UserSelectedTicketStatusId = message.IsHistoricReport ? TicketStatusConstants.Settled : message.UserSelectedTicketStatusId;
+            var param = new HouseWinLossParam
             {
+                HeadlineId = message.HeadlineId,
                 CustId = message.CustId,
                 Role = message.Role,
                 Viewer = message.UserSelectedViewer,
@@ -55,27 +61,29 @@
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
                 Date = message.Date
-            });
+            };
+            var reportData = houseWinLossService.Get(param);
+            var countUsers = new CountHouseWinLossViewModel(houseWinLossService.CountUsers(param), message.Role);
 
             var fileContent = workbook
                 .SetData(reportData.Matches, reportData.Total, message.Role.IsSuperLevel())
                 .SetRowMappers(
-                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.NormalRow),
-                    GetRowMapper(reportData.Total.HeadlineStock, message.Role, RowTypeConstant.GrandTotal),
+                    GetRowMapper(reportData.Total, message.Role, RowTypeConstant.NormalRow),
+                    GetRowMapper(reportData.Total, message.Role, RowTypeConstant.GrandTotal),
                     GetFooterRowMapper())
                 .UseTemplate(GetTemplateInfo(message.Role))
                 .Sheet("ReportData")
-                .Title(GetReportTitle(message))
+                .Title(GetReportTitle(message, countUsers))
                 .Header(ReportResources.ResourceManager.GetString)
                 .ExportToBytes();
 
             return new ExcelFileViewModel(GetExcelFileName(message), fileContent);
         }
 
-        internal static Mapper<HouseWinLossModel> GetRowMapper(decimal totalStock, UserLevel role, int rowType)
-            => role.IsHeadline() ? GetRowMapperHeadline(totalStock, rowType)
-            : role.IsSuperLevel() ? GetRowMapperSuper(totalStock, rowType)
-            : role.IsMasterLevel() ? GetRowMapperMaster(totalStock, rowType)
+        internal static Mapper<HouseWinLossModel> GetRowMapper(HouseWinLossModel model, UserLevel role, int rowType)
+            => role.IsHeadline() ? GetRowMapperHeadline(model.HeadlineStock, rowType)
+            : role.IsSuperLevel() ? GetRowMapperSuper(model.HeadlineStock, rowType)
+            : role.IsMasterLevel() ? GetRowMapperMaster(model.SuperStock, rowType)
             : role.IsAgentLevel() ? GetRowMapperAgent(rowType)
             : GetRowMapperMember(rowType);
 
@@ -142,11 +150,8 @@
                 .Map(K, betTypeWinLoss => betTypeWinLoss.SuperResult / AppSettings.ReduceNumber)
                 .Map(L, betTypeWinLoss => betTypeWinLoss.HeadlineIncome / AppSettings.ReduceNumber)
                 .Map(M, betTypeWinLoss => betTypeWinLoss.HeadlineResult / AppSettings.ReduceNumber)
-                .Map(N, betTypeWinLoss => betTypeWinLoss.Rebate / AppSettings.ReduceNumber)
-                .Map(O, betTypeWinLoss => betTypeWinLoss.RebateRoundDown / AppSettings.ReduceNumber)
-                .Map(P, betTypeWinLoss => betTypeWinLoss.HeadlineResultNet / AppSettings.ReduceNumber)
-                .Map(Q, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
-                .Map(R, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
+                .Map(N, betTypeWinLoss => betTypeWinLoss.HeadlineStock / AppSettings.ReduceNumber)
+                .Map(O, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.HeadlineStock / totalStock * 100));
 
             return mapper;
         }
@@ -174,7 +179,8 @@
                 .Map(H, betTypeWinLoss => betTypeWinLoss.MasterResult / AppSettings.ReduceNumber)
                 .Map(I, betTypeWinLoss => betTypeWinLoss.Super / AppSettings.ReduceNumber)
                 .Map(J, betTypeWinLoss => betTypeWinLoss.SuperResult / AppSettings.ReduceNumber)
-                .Map(L, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber);
+                .Map(K, betTypeWinLoss => betTypeWinLoss.SuperStock / AppSettings.ReduceNumber)
+                .Map(L, betTypeWinLoss => (totalStock == 0 ? 0 : betTypeWinLoss.SuperStock / totalStock * 100));
 
             return mapper;
         }
@@ -230,8 +236,8 @@
         internal static Mapper<HouseWinLossModel> GetFooterRowMapper()
         {
             var mapper = new Mapper<HouseWinLossModel>();
-            mapper.Map(Q, data => ReportResources.ProfitMargin);
-            mapper.Map(R, data => data.SuperStock != 0 ? data.SuperResult / data.SuperStock : 0);
+            mapper.Map(N, data => ReportResources.ProfitMargin);
+            mapper.Map(O, data => data.SuperStock != 0 ? data.SuperResult / data.SuperStock : 0);
 
             return mapper;
         }
@@ -249,12 +255,12 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        internal string GetReportTitle(HouseWinLossExcelQuery param)
+        internal string GetReportTitle(HouseWinLossExcelQuery param, CountHouseWinLossViewModel countUsers)
         {
-            var title = $"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}";
+            var title = new StringBuilder($"{ReportResources.HouseWinLossReport} {ReportResources.Of} {param.Date.ToShortDate()}");
             if (param.IsHistoricReport)
             {
-                title = $"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}";
+                title = new StringBuilder($"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}");
             }
 
             var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
@@ -262,7 +268,14 @@
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
             var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 
-            return $"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)}";
+            title = new StringBuilder($"{title} - {GetResourcesText(ticketStatus)} - {param.Role.DisplayName} - {sportGroup} - {betType} - {GetResourcesText(liveStatus)} {Environment.NewLine}");
+            foreach (var user in countUsers.Users)
+            {
+                title.Append($"{user.Key}: {user.Value}");
+                title.Append(!user.Key.Equals(AppResources.Member) ? " | " : string.Empty);
+            }
+
+            return title.ToString();
         }
 
         private static string GetResourcesText(string key)

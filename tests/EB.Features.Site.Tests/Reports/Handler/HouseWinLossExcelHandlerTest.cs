@@ -5,6 +5,7 @@ using AutoFixture;
 using EB.Features.Reports;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
+using EB.Features.Reports.Resources;
 using EB.Features.Reports.Services;
 using EB.Features.Reports.ViewModel;
 using EB.Features.Shared.Configuration;
@@ -14,6 +15,7 @@ using EB.Features.Shared.Resources;
 using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
 using EB.Features.Site.Reports.Request.HouseWinLoss;
+using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
 using EB.Features.Site.Shared.Models;
 using Fanex.NAP.Core.Web.Session;
 using NSubstitute;
@@ -56,6 +58,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
 
             // Act
             handler.Handle(new HouseWinLossExcelQuery(currentSession));
@@ -71,6 +74,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
 
             // Act
             handler.Handle(new HouseWinLossExcelQuery(currentSession));
@@ -86,6 +90,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
 
@@ -103,6 +108,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
@@ -122,6 +128,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
@@ -141,6 +148,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
@@ -161,6 +169,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
@@ -182,6 +191,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Arrange
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             workbook.SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>())
@@ -198,7 +208,6 @@ namespace EB.Features.Site.Tests.Reports.Handler
             // Assert
             onebookWorkbook.Received().ExportToBytes();
         }
-
 
         [Test]
         public void Handle_Number_MustBeDivide100WhenExport()
@@ -222,6 +231,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             };
             var viewModel = new HouseWinLossViewModel(matches);
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
             var appSettingValues = new NameValueCollection
@@ -263,6 +273,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             };
             var viewModel = new HouseWinLossViewModel(matches);
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
 
@@ -285,6 +296,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             };
             var viewModel = new HouseWinLossViewModel(matches);
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
 
@@ -304,6 +316,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             var match = new HouseWinLossModel();
             var viewModel = fixture.Create<HouseWinLossViewModel>();
             houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
             workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
                 .Returns(workbook);
 
@@ -325,11 +338,25 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 Date = new DateTime(2019, 1, 1),
                 IsHistoricReport = true
             };
+            var countUserModel = new CountHouseWinLossModel
+            {
+                AgentCount = 10,
+                HeadlineCount = 11,
+                MasterCount = 12,
+                MemberCount = 13,
+                SuperCount = 14
+            };
+
+            var countUsers = new CountHouseWinLossViewModel(countUserModel,UserLevel.Headline);
+
             var expectedTitle = $"{ReportResources.HouseWinLossReport} {query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
-            expectedTitle += $" - {AppResources.Settled} - Headline - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets}";
+            expectedTitle += $" - {AppResources.Settled} - Headline - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets} {Environment.NewLine}";
+            expectedTitle += $"{ ReportResources.Headline}: { countUserModel.HeadlineCount} | { ReportResources.SMA}: { countUserModel.SuperCount}";
+            expectedTitle += $" | { ReportResources.MA}: { countUserModel.MasterCount} | { ReportResources.Agent}: { countUserModel.AgentCount}";
+            expectedTitle += $" | { AppResources.Member}: { countUserModel.MemberCount}";
 
             // Act
-            var act = handler.GetReportTitle(query);
+            var act = handler.GetReportTitle(query, countUsers);
 
             // Assert
             Assert.AreEqual(expectedTitle, act);
@@ -369,6 +396,195 @@ namespace EB.Features.Site.Tests.Reports.Handler
 
             // Assert
             Assert.AreEqual(expectedFileName, act);
+        }
+
+        [Test]
+        public void Handle_Super_MapCorrectColumn()
+        {
+            // Arrange
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Super.Value };
+            var match = new HouseWinLossModel
+            {
+                Wagers = 1,
+                Stake = 2,
+                ValidStake = 3,
+                MemberIncome = 4,
+                Agent = 5,
+                AgentResult = 6,
+                MasterResult = 7,
+                Super = 8,
+                SuperResult = 9,
+                HeadlineIncome = 10,
+                HeadlineResult = 11,
+                HeadlineStock = 12
+            };
+            var matches = new List<HouseWinLossModel> { match };
+            var viewModel = new HouseWinLossViewModel(matches);
+            houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
+            workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
+                .Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "100" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
+
+            // Act
+            handler.Handle(query);
+
+            // Assert
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (int)i.Mappings[C](match) == match.Wagers), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.Agent / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.AgentResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.MasterResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.Super / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == match.SuperResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[L](match) == match.HeadlineIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[M](match) == match.HeadlineResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[N](match) == match.HeadlineStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[O](match) == 100m), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+        }
+
+        [Test]
+        public void Handle_Master_MapCorrectColumn()
+        {
+            // Arrange
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Master.Value };
+            var match = new HouseWinLossModel
+            {
+                Wagers = 1,
+                Stake = 2,
+                ValidStake = 3,
+                MemberIncome = 4,
+                Agent = 5,
+                AgentResult = 6,
+                MasterResult = 7,
+                Super = 8,
+                SuperResult = 9,
+                HeadlineIncome = 10,
+                HeadlineResult = 11,
+                HeadlineStock = 12,
+                SuperStock = 13,
+            };
+            var matches = new List<HouseWinLossModel> { match };
+            var viewModel = new HouseWinLossViewModel(matches);
+            houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
+            workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
+                .Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "100" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
+
+            // Act
+            handler.Handle(query);
+
+            // Assert
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (int)i.Mappings[B](match) == match.Wagers), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.Agent / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.AgentResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.MasterResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.Super / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[J](match) == match.SuperResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[K](match) == match.SuperStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+        }
+
+        [Test]
+        public void Handle_Agent_MapCorrectColumn()
+        {
+            // Arrange
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Agent.Value };
+            var match = new HouseWinLossModel
+            {
+                Wagers = 1,
+                Stake = 2,
+                ValidStake = 3,
+                MemberIncome = 4,
+                Agent = 5,
+                AgentResult = 6,
+                MasterResult = 7,
+                Super = 8,
+                SuperResult = 9,
+                HeadlineIncome = 10,
+                HeadlineResult = 11,
+                HeadlineStock = 12,
+                AgentStock = 13
+            };
+            var matches = new List<HouseWinLossModel> { match };
+            var viewModel = new HouseWinLossViewModel(matches);
+            houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
+            workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
+                .Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "1" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
+            // Act
+            handler.Handle(query);
+
+            // Assert
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (int)i.Mappings[B](match) == match.Wagers), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.Agent / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[G](match) == match.AgentResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[H](match) == match.MasterResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[I](match) == match.AgentStock / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+        }
+
+        [Test]
+        public void Handle_Member_MapCorrectColumn()
+        {
+            // Arrange
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Member.Value };
+            var match = new HouseWinLossModel
+            {
+                Wagers = 1,
+                Stake = 2,
+                ValidStake = 3,
+                MemberIncome = 4,
+                Agent = 5,
+                AgentResult = 6,
+                MasterResult = 7,
+                Super = 8,
+                SuperResult = 9,
+                HeadlineIncome = 10,
+                HeadlineResult = 11,
+                HeadlineStock = 12
+            };
+            var matches = new List<HouseWinLossModel> { match };
+            var viewModel = new HouseWinLossViewModel(matches);
+            houseWinLossService.Get(Arg.Any<HouseWinLossParam>()).Returns(viewModel);
+            houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
+            workbook.SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>())
+                .Returns(workbook);
+            var appSettingValues = new NameValueCollection
+            {
+                { "ReduceNumber", "100" }
+            };
+            AppSettings.AppSettingValues = appSettingValues;
+
+            // Act
+            handler.Handle(query);
+
+            // Assert
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (int)i.Mappings[B](match) == match.Wagers), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[D](match) == match.ValidStake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[E](match) == match.MemberIncome / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
+            workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[F](match) == match.AgentResult / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
         }
     }
 }

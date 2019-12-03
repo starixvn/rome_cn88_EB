@@ -95,6 +95,7 @@
     <Compile Include="Criteria\InternalLogin\GetDBTimeCriteria.cs" />
     <Compile Include="DataAccesses\InternalLoginDataAccess.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Model\InternalLoginModel.cs" />
     <Compile Include="Params\ChangePasswordParam.cs" />
     <Compile Include="Resources\MainResource.Designer.cs">
       <AutoGen>True</AutoGen>

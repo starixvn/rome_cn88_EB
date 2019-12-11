@@ -14,6 +14,7 @@
             HeadlineStock = param.HeadlineStock;
             SuperUsernames = param.UserNames;
             Conjunction = param.ConjunctionId;
+            SporttypeGroups = param.SporttypeGroups;
         }
 
         public DateTime FromDate { get; }
@@ -27,6 +28,8 @@
         public string SuperUsernames { get; }
 
         public int Conjunction { get; }
+
+        public string SporttypeGroups { get; }
 
         public override bool IsValid()
             => FromDate <= ToDate && Currency > 0;

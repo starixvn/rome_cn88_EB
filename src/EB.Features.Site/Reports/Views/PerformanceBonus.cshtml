@@ -25,6 +25,7 @@
         @PeriodSelection.Render(Model.PeriodSelectionViewModel, true)
         @DateRangePicker.Render(Model.DateRangePickerViewModel)
         @CurrencySelection.Render(Model.CurrencySelectionViewModel, true)
+        @SportGroupMultiSelection.Render(Model.SportGroupMultiSelectionViewModel)
         <div class="form-group">
             <label>@($"{ReportResources.DividendRate} (%)")</label>
             <input type="text" name="DividendRate" id="DividendRate" value="@Model.Query.DividendRate" maxlength="10" />
@@ -61,6 +62,7 @@
         @Html.Hidden("UserSelectedConjunctionId", Model.Query.UserSelectedConjunctionId)
         @Html.Hidden("UserNames", Model.Query.UserNames)
         @Html.Hidden("DividendRate", Model.Query.DividendRate)
+        @Html.Hidden("UserSelectedSportGroupIds", Model.Query.UserSelectedSportGroupIds)
     </form>
 
     <div class="tab-content main-content" id="tab-main-content">

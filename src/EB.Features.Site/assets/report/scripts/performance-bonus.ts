@@ -10,18 +10,22 @@ class PerformanceBonusReport {
     $userName: JQuery;
     $headlineStock: JQuery;
     $dividendRate: JQuery;
+    $buttonSportGroup: JQuery;
 
     periodSelectionComponent: SingleSelectionDropdownComponent;
     currencySelectionComponent: SingleSelectionDropdownComponent;
     conjunctionSelectionComponent: SingleSelectionDropdownComponent;
     dateRangePickerComponent: DateRangePickerComponent;
+    sportGroupMultiSelectionComponent: SportGroupMultiSelectionComponent;
 
     constructor($: JQueryStatic,
+        sportGroupSelectionComponent: SportGroupMultiSelectionComponent,
         periodSelectionComponent: SingleSelectionDropdownComponent,
         currencySelectionComponent: SingleSelectionDropdownComponent,
         conjunctionSelectionComponent: SingleSelectionDropdownComponent,
         dateRangePickerComponent: DateRangePickerComponent) {
         this.$ = $;
+        this.sportGroupMultiSelectionComponent = sportGroupSelectionComponent;
         this.periodSelectionComponent = periodSelectionComponent;
         this.currencySelectionComponent = currencySelectionComponent;
         this.conjunctionSelectionComponent = conjunctionSelectionComponent;
@@ -102,13 +106,23 @@ class PerformanceBonusReport {
         this.periodSelectionComponent.updateSelectedValue();
         this.currencySelectionComponent.updateSelectedValue();
         this.conjunctionSelectionComponent.updateSelectedValue();
+        const sportGroups = this.sportGroupMultiSelectionComponent.getSelectedItems();
+        if (sportGroups.length <= 0) {
+            this.$buttonSportGroup.addClass("error");
+            e.preventDefault();
+            this.$.unblockUI();
+
+            return;
+        }
     }
 
     renderComponents(): void {
+        this.sportGroupMultiSelectionComponent.render(new SportGroupMultiSelectionOption("dropdown-sportgroup", true, "sportgroup-ids"));
         this.periodSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-period", "UserSelectedPeriodId", () => { this.onPeriodsChange(); }));
         this.currencySelectionComponent.render(new SingleSelectionDropdownOption("dropdown-currency", "UserSelectedCurrencyId"));
         this.conjunctionSelectionComponent.render(new SingleSelectionDropdownOption("dropdown-conjunction", "UserSelectedConjunctionId"));
         this.dateRangePickerComponent.render();
+        this.$buttonSportGroup = this.$("#dropdown-sportgroup").parent().find(".multiselect.btn");
     }
 
     onPeriodsChange(): void {
@@ -139,6 +153,7 @@ class PerformanceBonusReport {
 $(function () {
     const performanceBonusReport = new PerformanceBonusReport(
         $,
+        new SportGroupMultiSelectionComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),
         new SingleSelectionDropdownComponent($),

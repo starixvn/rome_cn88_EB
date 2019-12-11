@@ -25,6 +25,6 @@
   <Function Name="Reports">
     <Setting Key="CS_Rpt_MatchWinLoss_Headline" SpName="CS_Rpt_MatchWinLoss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_Customer_CheckValidUsername" SpName="CS_Customer_CheckValidUsername" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
-    <Setting Key="CS_EB_Rpt_PerformanceBonus" SpName="CS_EB_Rpt_PerformanceBonus" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
+    <Setting Key="CS_EB_Rpt_PerformanceBonus" SpName="CS_EB_Rpt_PerformanceBonus_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
   </Function>
 </Functions>

@@ -7,6 +7,7 @@ using EB.Features.Reports.Resources;
 using EB.Features.Reports.Services;
 using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Resources;
+using EB.Features.Shared.Services;
 using EB.Features.Site.Reports;
 using EB.Features.Site.Reports.Request;
 using EB.Features.Site.Shared.Models;
@@ -20,6 +21,7 @@ namespace EB.Features.Site.Tests.Reports.Handler.PerformanceBonus
     public class PerformanceBonusExcelHandlerTest
     {
         private IPerformanceBonusService service;
+        private ISportGroupService sportGroupService;
         private IPerformanceBonusWorkbook workbook;
         private PerformanceBonusExcelHandler handler;
         private UserSession currentSession;
@@ -28,11 +30,12 @@ namespace EB.Features.Site.Tests.Reports.Handler.PerformanceBonus
         [SetUp]
         public void SetUp()
         {
+            sportGroupService = Substitute.For<ISportGroupService>();
             service = Substitute.For<IPerformanceBonusService>();
             workbook = Substitute.For<IPerformanceBonusWorkbook>();
             currentSession = Substitute.For<UserSession>();
             onebookWorkbook = Substitute.For<Workbook<PerformanceBonusModel>>();
-            handler = new PerformanceBonusExcelHandler(service, workbook);
+            handler = new PerformanceBonusExcelHandler(service, workbook, sportGroupService);
             handler.MapPath = (path) => path;
             handler.IsFileExist = (path) => true;
         }
@@ -288,13 +291,14 @@ namespace EB.Features.Site.Tests.Reports.Handler.PerformanceBonus
                 UserSelectedCurrencyId = CurrencyConstant.UUS,
                 DividendRate = 1
             };
-            var currency = $"{ AppResources.Currency }: {"UUS"}";
+            var currency = $"{ AppResources.Currency }: UUS";
             var bonusRate = $"{ReportResources.DividendRate}: {1}%";
             var date = $"{DateTime.Now.ToShortDate()} --> {DateTime.Now.ToShortDate()}";
-            var expected = $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency}";
+            var sportGroup = "Sport: All Sports";
+            var expected = $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency} - {sportGroup}";
             
             // Act
-            var act = PerformanceBonusExcelHandler.GetReportTitle(query);
+            var act = handler.GetReportTitle(query);
 
             // Assert
             Assert.AreEqual(expected, act);

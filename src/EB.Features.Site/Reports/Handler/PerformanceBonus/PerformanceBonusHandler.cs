@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using EB.Features.Reports.Model;
 using EB.Features.Reports.Params;
 using EB.Features.Reports.Services;
+using EB.Features.Shared.Services;
 using EB.Features.Shared.Utilities;
 using EB.Features.Site.Reports.Request;
 using EB.Features.Site.Reports.ViewModel.PerformanceBonus;
@@ -16,13 +17,16 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
 {
     public class PerformanceBonusHandler : ReportsBaseHandler, IRequestHandler<PerformanceBonusQuery, PerformanceBonusViewModel>
     {
+        private readonly ISportGroupService sportGroupService;
         private readonly AccountingPeriodService accountingPeriodService;
         private readonly IPerformanceBonusService performanceBonusService;
 
         public PerformanceBonusHandler(
+            ISportGroupService sportGroupService,
             IPerformanceBonusService performanceBonusService,
             AccountingPeriodService accountingPeriodService)
         {
+            this.sportGroupService = sportGroupService;
             this.accountingPeriodService = accountingPeriodService;
             this.performanceBonusService = performanceBonusService;
         }
@@ -30,11 +34,14 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
         public PerformanceBonusViewModel Handle(PerformanceBonusQuery message)
         {
             var periods = accountingPeriodService.GetOldAccountingPeriods();
+            var sportGroups = sportGroupService.GetSportGroups();
+
             message.UserSelectedPeriodId = string.IsNullOrEmpty(message.UserSelectedPeriodId)?
                 accountingPeriodService.GetCurrentPeriod().Id :
                 message.UserSelectedPeriodId;
             message.FromDate = message.FromDate == DateTime.MinValue ? accountingPeriodService.GetCurrentPeriod().FromDate : message.FromDate;
             message.ToDate = message.ToDate == DateTime.MinValue ? accountingPeriodService.GetCurrentPeriod().ToDate : message.ToDate;
+            message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
 
             var periodSelectListItems = BuildPeriodSelectListItems(periods, message.UserSelectedPeriodId);
             var invalidSupersMessage = performanceBonusService.CheckValidSuper(message.UserNames);
@@ -45,6 +52,7 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
                     message,
                     periodSelectListItems,
                     periods,
+                    BuildSportGroupSelectListItems(sportGroups, message.SelectedSportGroupIds),
                     Enumerable.Empty<PerformanceBonusModel>(),
                     invalidSupersMessage);
             }
@@ -57,10 +65,16 @@ namespace EB.Features.Site.Reports.Handler.PerformanceBonus
                 CurrencyId = message.UserSelectedCurrencyId,
                 HeadlineStock = message.HeadlineStock,
                 UserNames = message.UserNames,
-                DividendRate = message.DividendRate
+                DividendRate = message.DividendRate,
+                SporttypeGroups = message.UserSelectedSportGroupIds
             });
 
-            return new PerformanceBonusViewModel(message, periodSelectListItems, periods, reports);
+            return new PerformanceBonusViewModel(
+                message, 
+                periodSelectListItems,
+                periods,
+                BuildSportGroupSelectListItems(sportGroups, message.SelectedSportGroupIds),
+                reports);
         }
 
         protected internal static IEnumerable<SelectListItemExt> BuildPeriodSelectListItems(

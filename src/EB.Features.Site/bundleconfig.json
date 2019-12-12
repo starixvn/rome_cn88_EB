@@ -38,6 +38,7 @@
   {
     "outputFileName": "assets/main/bundles/default-index.js",
     "inputFiles": [
+      "assets/main/scripts/http-status.js",
       "assets/common/js/libs/bootstrap/transition.js",
       "assets/common/js/libs/bootstrap/collapse.js",
       "assets/common/js/components/pagination/jquery.draggable.js",

@@ -1,6 +1,4 @@
-﻿"use strict";
-
-enum HttpStatusCode {
+﻿enum HttpStatusCode {
     OK = 200,
     NO_CONTENT = 204,
     UNAUTHORIZED = 401,

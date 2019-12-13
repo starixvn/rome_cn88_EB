@@ -7,7 +7,6 @@
 
     public class SettledCountSMAHouseWLCriteria : HouseWinLossBaseCriteria
     {
-
         public SettledCountSMAHouseWLCriteria(HouseWinLossParam param) : base(param)
         {
             Role = param.Role;

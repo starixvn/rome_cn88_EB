@@ -12,8 +12,6 @@
 
     public class HouseWinLossQuery : ReportBaseQuery, IRequest<HouseWinLossReportViewModel>
     {
-        private int headlineId;
-
         public HouseWinLossQuery(UserSession currentSession)
             : base(currentSession)
         {
@@ -31,18 +29,6 @@
             => UserSelectedSportGroupIds.ToListInt();
 
         public string UserSelectedSportGroupIds { get; set; }
-
-        public int HeadlineId
-        {
-            get
-            {
-                return Role.IsSuperLevel() ? CustId : headlineId;
-            }
-            set
-            {
-                headlineId = value;
-            }
-        }
 
         public int CustId { get; set; }
 

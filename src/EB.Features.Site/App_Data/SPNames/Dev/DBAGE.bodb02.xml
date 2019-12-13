@@ -15,11 +15,11 @@
     <Setting Key="CS_EB_Rpt_Winloss_Agent" SpName="CS_EB_Rpt_Winloss_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Member" SpName="CS_EB_Rpt_Winloss_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
 
-    <Setting Key="CS_EB_Rpt_Winloss_Headline_CustCount" SpName="CS_EB_Rpt_Winloss_Headline_CustCount_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_EB_Rpt_Winloss_Super_CustCount" SpName="CS_EB_Rpt_Winloss_Super_CustCount_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_EB_Rpt_Winloss_Master_CustCount" SpName="CS_EB_Rpt_Winloss_Master_CustCount_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_EB_Rpt_Winloss_Agent_CustCount" SpName="CS_EB_Rpt_Winloss_Agent_CustCount_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_EB_Rpt_Winloss_Member_CustCount" SpName="CS_EB_Rpt_Winloss_Member_CustCount_xtest" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Headline_CustCount" SpName="CS_EB_Rpt_Winloss_Headline_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Super_CustCount" SpName="CS_EB_Rpt_Winloss_Super_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Master_CustCount" SpName="CS_EB_Rpt_Winloss_Master_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Agent_CustCount" SpName="CS_EB_Rpt_Winloss_Agent_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_Member_CustCount" SpName="CS_EB_Rpt_Winloss_Member_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
   </Function>
   
   <Function Name="Reports">

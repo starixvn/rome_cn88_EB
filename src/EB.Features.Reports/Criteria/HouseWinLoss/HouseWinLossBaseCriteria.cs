@@ -6,7 +6,6 @@
 
     public class HouseWinLossBaseCriteria : CriteriaBase
     {
-
         public HouseWinLossBaseCriteria(HouseWinLossParam param)
         {            
             FromDate = param.FromDate;
@@ -16,7 +15,6 @@
             IsLive = param.IsLive;
             IsExcludedTest = param.IsExcludedTest;
         }
-        
 
         public DateTime FromDate { get; }
 

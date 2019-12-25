@@ -150,5 +150,31 @@ namespace EB.Features.Reports.Tests.Criteria
             // Assert
             Assert.AreEqual("CS_Rpt_EBOutstanding_Member", act);
         }
+
+        [Test]
+        public void GetSpParams_Always_ExistSettingKey()
+        {
+            // Arrange
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsTrue(act.ContainsKey("SettingKey"));
+        }
+
+        [Test]
+        public void GetSpParams_Always_NotExistSettingKey()
+        {
+            // Arrange
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsFalse(act.ContainsKey("HeadlineId"));
+        }
     }
 }

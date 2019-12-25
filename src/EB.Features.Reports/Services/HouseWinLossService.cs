@@ -1,14 +1,12 @@
 ﻿namespace EB.Features.Reports.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using EB.Features.Reports.Criteria;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
-    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using Fanex.Data.Repository;
 
@@ -34,44 +32,33 @@
 
         public CountHouseWinLossModel CountUsers(HouseWinLossParam param)
         {
+            param.IsCountUser = true;
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
             param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
             param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;
 
-            if (param.Role.IsHeadline())
-            {
-                return IsSettled(param) ?
-                   dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountHeadlineHouseWLCriteria(param)) :
-                   dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountHeadlineHouseWLCriteria(param));
-            }
+            var criteria = param.Role.IsHeadline() ?
+                GetHeadlineCriteriaByTicketStatus(param) :
+                GetSMACriteriaByTicketStatus(param);
 
-            return IsSettled(param) ?
-                dynamicRepository.Get<CountHouseWinLossModel>(new SettledCountSMAHouseWLCriteria(param)) :
-                dynamicRepository.Get<CountHouseWinLossModel>(new UnsettledCountSMAHouseWLCriteria(param));
+            return dynamicRepository.Get<CountHouseWinLossModel>(criteria);
         }
 
         public HouseWinLossViewModel Get(HouseWinLossParam param)
         {
+            param.IsCountUser = false;
             param.MoveBetsDay = reportDateService.GetMoveBetsDay();
             param.FromDate = param.IsHistoricReport ? param.FromDate : param.Date;
             param.ToDate = param.IsHistoricReport ? param.ToDate : param.Date;
 
-            IEnumerable<HouseWinLossModel> reportData;
-            if (param.Role.IsHeadline())
-            {
-                reportData = IsSettled(param) ?
-                   dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossOfHeadlineCriteria(param)) :
-                   dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossOfHeadlineCriteria(param));
-            }
-            else
-            {
-                reportData = IsSettled(param) ?
-                dynamicRepository.Fetch<HouseWinLossModel>(new SettledHouseWinLossOfSMACriteria(param)) :
-                dynamicRepository.Fetch<HouseWinLossModel>(new UnsettledHouseWinLossOfSMACriteria(param));
-            }
+            var criteria = param.Role.IsHeadline() ?
+                GetHeadlineCriteriaByTicketStatus(param) :
+                GetSMACriteriaByTicketStatus(param);
 
-            return new HouseWinLossViewModel(reportData
-                .Select(i =>
+            var reportData = dynamicRepository.Fetch<HouseWinLossModel>(criteria.GetSpParams());
+
+            return new HouseWinLossViewModel(
+                reportData.Select(i =>
                 {
                     i.Rebate = -1 * i.HeadlineResult * 10 / 100;
                     i.RebateRoundDown = Math.Sign(i.Rebate) * Math.Floor(Math.Abs(i.Rebate / 100)) * 100;
@@ -79,8 +66,34 @@
                 }).OrderBy(i => i.UserName));
         }
 
-        private static bool IsSettled(HouseWinLossParam param)
-            => param.IsHistoricReport || param.TicketStatusId == TicketStatusConstants.Settled;
+        internal static CriteriaBase GetHeadlineCriteriaByTicketStatus(HouseWinLossParam param)
+        {
+            switch (param.TicketStatusId)
+            {
+                case TicketStatusConstants.AbnormalBets:
+                    return new AbnormalWinLossOfHeadlineCriteria(param);
+                case TicketStatusConstants.ProblemAccounts:
+                    return new ProblemAccountWinLossOfHeadlineCriteria(param);
+                case TicketStatusConstants.UnSettled:
+                    return new UnsettledHouseWinLossOfHeadlineCriteria(param);
+                default:
+                    return new SettledHouseWinLossOfHeadlineCriteria(param);
+            }
+        }
 
+        internal static CriteriaBase GetSMACriteriaByTicketStatus(HouseWinLossParam param)
+        {
+            switch (param.TicketStatusId)
+            {
+                case TicketStatusConstants.AbnormalBets:
+                    return new AbnormalWinLossOfSMACriteria(param);
+                case TicketStatusConstants.ProblemAccounts:
+                    return new ProblemAccountWinLossOfSMACriteria(param);
+                case TicketStatusConstants.UnSettled:
+                    return new UnsettledHouseWinLossOfSMACriteria(param);
+                default:
+                    return new SettledHouseWinLossOfSMACriteria(param);
+            }
+        }
     }
 }

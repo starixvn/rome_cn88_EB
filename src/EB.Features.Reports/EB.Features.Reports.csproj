@@ -121,18 +121,18 @@
     <Compile Include="Constants\ConjunctionConstant.cs" />
     <Compile Include="Constants\ReportMode.cs" />
     <Compile Include="Constants\RowTypeConstant.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Abnormal\AbnormalWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Abnormal\AbnormalWinLossOfSMACriteria.cs" />
     <Compile Include="Criteria\HouseWinLoss\HouseWinLossBaseCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\SettledCountSMAHouseWLCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\SettledCountHeadlineHouseWLCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\SettledHouseWinLossOfSMACriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\UnsettledCountSMAHouseWLCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\UnsettledCountHeadlineHouseWLCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\UnsettledHouseWinLossOfSMACriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\UnsettledHouseWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\ProblemAccount\ProblemAccountWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\ProblemAccount\ProblemAccountWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Settled\SettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Unsettled\UnsettledHouseWinLossOfSMACriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Unsettled\UnsettledHouseWinLossOfHeadlineCriteria.cs" />
     <Compile Include="Criteria\PerformanceBonus\CheckValidSuperUserNameCommand.cs" />
     <Compile Include="Criteria\PerformanceBonus\GetAccountingPeriodsCriteria.cs" />
     <Compile Include="Criteria\PerformanceBonus\PerformanceBonusCriteria.cs" />
-    <Compile Include="Criteria\HouseWinLoss\SettledHouseWinLossOfHeadlineCriteria.cs" />
+    <Compile Include="Criteria\HouseWinLoss\Settled\SettledHouseWinLossOfHeadlineCriteria.cs" />
     <Compile Include="Criteria\MatchWinLossCriteria.cs" />
     <Compile Include="Extension\EnumerableExtensions.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
@@ -154,15 +154,15 @@
     <Compile Include="Services\AccountingPeriodService.cs" />
     <Compile Include="Services\HouseWinLossService.cs" />
     <Compile Include="Services\MatchWinLossService.cs" />
-    <Compile Include="Services\HouseWinLossWorkbook.cs" >
-		<SonarQubeExclude>true</SonarQubeExclude>
-	</Compile>
-    <Compile Include="Services\MatchWinLossWorkbook.cs" >
-		<SonarQubeExclude>true</SonarQubeExclude>
-	</Compile>
-    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs" >
-		<SonarQubeExclude>true</SonarQubeExclude>
-	</Compile>
+    <Compile Include="Services\HouseWinLossWorkbook.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Services\MatchWinLossWorkbook.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+    <Compile Include="Services\PerformanceBonus\PerformanceBonusWorkbook.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Services\PerformanceBonus\PerformanceBonusService.cs" />
     <Compile Include="ViewModel\HouseWinLossViewModel.cs" />
     <Compile Include="ViewModel\MatchWinLossViewModel.cs" />
@@ -193,5 +193,6 @@
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.CSharp.dll" />
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\SonarAnalyzer.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

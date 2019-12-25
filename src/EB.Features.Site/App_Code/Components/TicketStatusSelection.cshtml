@@ -10,7 +10,7 @@
         <select id="dropdown-ticketstatus">
             @foreach (var group in model.Items)
             {
-                <option value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
+                <option class="@group.Text.Replace(" ","_")" value="@group.Value" @(group.Selected ? " selected=\"selected\"" : string.Empty)>@group.Text</option>
             }
         </select>
         <input type="hidden" name="UserSelectedTicketStatusId" id="UserSelectedTicketStatusId" value="@model.UserSelectedId" />

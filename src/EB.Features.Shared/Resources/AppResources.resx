@@ -232,4 +232,10 @@
   <data name="Conjunction" xml:space="preserve">
     <value>Conjunction</value>
   </data>
+  <data name="AbnormalBets" xml:space="preserve">
+    <value>Abnormal Bets</value>
+  </data>
+  <data name="ProblemAccounts" xml:space="preserve">
+    <value>Problem Accounts (Settled)</value>
+  </data>
 </root>

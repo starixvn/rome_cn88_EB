@@ -5,10 +5,9 @@
     using EB.Features.Shared.Model;
     using Fanex.Data;
 
-    public class SettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
+    public class ProblemAccountWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
-
-        public SettledHouseWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
+        public ProblemAccountWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
         {
             Role = param.Role;
             CustId = param.CustId;
@@ -28,12 +27,16 @@
         public override bool IsValid() => base.IsValid() && CustId >= 0;
 
         public override string GetSettingKey()
-            => Role.IsSuperLevel() ?
-            "CS_Rpt_EBWinloss_Super" :
+        {
+            var key = Role.IsSuperLevel() ?
+            "CS_EB_Rpt_Winloss_ProblemAccount_Super" :
              Role.IsMasterLevel() ?
-            "CS_Rpt_EBWinloss_Master" :
+            "CS_EB_Rpt_Winloss_ProblemAccount_Master" :
             Role.IsAgentLevel() ?
-            "CS_Rpt_EBWinloss_Agent" :
-            "CS_Rpt_EBWinloss_Member";
+            "CS_EB_Rpt_Winloss_ProblemAccount_Agent" :
+            "CS_EB_Rpt_Winloss_ProblemAccount_Member";
+
+            return IsCountUser ? $"{key}_CustCount" : key;
+        }
     }
 }

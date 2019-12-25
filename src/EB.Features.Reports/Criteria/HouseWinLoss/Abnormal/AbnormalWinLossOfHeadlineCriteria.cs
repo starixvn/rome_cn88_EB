@@ -3,10 +3,11 @@
     using System;
     using EB.Features.Reports.Params;
 
-    public class SettledCountHeadlineHouseWLCriteria : HouseWinLossBaseCriteria
+    public class AbnormalWinLossOfHeadlineCriteria : HouseWinLossBaseCriteria
     {
+        private const int AbnormalReportTypeInDB = 2;
 
-        public SettledCountHeadlineHouseWLCriteria(HouseWinLossParam param) : base(param)
+        public AbnormalWinLossOfHeadlineCriteria(HouseWinLossParam param) : base(param)
         {
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
             MoveBetsDay = param.MoveBetsDay;
@@ -16,7 +17,9 @@
 
         public int ReportMode { get; }
 
+        public int ReportType { get; } = AbnormalReportTypeInDB;
+
         public override string GetSettingKey()
-            => "CS_EB_Rpt_Winloss_Headline_CustCount";
+            => IsCountUser ? "CS_EB_Rpt_Cancelled_Headline_CustCount" : "CS_EB_Rpt_Cancelled_Headline";
     }
 }

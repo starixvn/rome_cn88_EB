@@ -1,15 +1,10 @@
 ﻿namespace EB.Features.Site.Reports
 {
-    using System.Linq;
-    using EB.Features.Reports;
     using EB.Features.Reports.Constants;
-    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
-    using EB.Features.Reports.ViewModel;
-    using EB.Features.Shared;
     using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;

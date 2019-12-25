@@ -133,14 +133,14 @@ class HouseWinLossReport extends ReportBase {
             this.$("#GroupBackToCurrent").css("display", "block");
             this.$('.date-box').css('display', 'none');
             this.$dateRangeContainer.css('display', inlineBlock);
-            this.$("#ticketStatusContainer").css("display", "none");
+            this.$reportForm.addClass("history-mode");
         }
         else {
-            this.$("#ticketStatusContainer").css("display", inlineBlock);
             this.$("#GroupViewHistory").css("display", "block");
             this.$("#GroupBackToCurrent").css("display", "none");
             this.$('.date-box').css('display', inlineBlock);
             this.$dateRangeContainer.css('display', 'none');
+            this.$reportForm.removeClass("history-mode");
         }
     }
 

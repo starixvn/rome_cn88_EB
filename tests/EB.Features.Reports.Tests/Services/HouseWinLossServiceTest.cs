@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using EB.Features.Reports.Criteria;
@@ -142,7 +143,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -160,7 +161,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -178,7 +179,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -196,7 +197,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -214,7 +215,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -232,7 +233,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.Get(param);
 
             // Assert
-            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Fetch<HouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
 
@@ -245,14 +246,15 @@ namespace EB.Features.Reports.Tests.Services
                 new HouseWinLossModel{UserName = "razor"},
                 new HouseWinLossModel{UserName = "azor"}
             };
-            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>())
+            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<Hashtable>())
                 .Returns(houseWinLoss);
 
             // Act
             var act = reportService.Get(new HouseWinLossParam
             {
                 IsHistoricReport = true,
-                Role = UserLevel.Headline
+                Role = UserLevel.Headline,
+                TicketStatusId = TicketStatusConstants.Settled
             });
 
             // Assert
@@ -269,7 +271,7 @@ namespace EB.Features.Reports.Tests.Services
                 new HouseWinLossModel{UserName = "razor"},
                 new HouseWinLossModel{UserName = "azor"}
             };
-            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>())
+            dynamicRepository.Fetch<HouseWinLossModel>(Arg.Any<Hashtable>())
                 .Returns(houseWinLoss);
 
             // Act
@@ -392,14 +394,15 @@ namespace EB.Features.Reports.Tests.Services
             var param = new HouseWinLossParam
             {
                 IsHistoricReport = true,
-                Role = UserLevel.Headline
+                Role = UserLevel.Headline,
+                IsCountUser = true
             };
 
             // Act
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountHeadlineHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
         }
 
         [Test]
@@ -410,14 +413,15 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 TicketStatusId = TicketStatusConstants.Settled,
-                Role = UserLevel.Headline
+                Role = UserLevel.Headline,
+                IsCountUser = true
             };
 
             // Act
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountHeadlineHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
         }
 
         [Test]
@@ -428,14 +432,15 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 TicketStatusId = TicketStatusConstants.UnSettled,
-                Role = UserLevel.Headline
+                Role = UserLevel.Headline,
+                IsCountUser = true
             };
 
             // Act
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledCountHeadlineHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>());
         }
 
 
@@ -446,7 +451,8 @@ namespace EB.Features.Reports.Tests.Services
             var param = new HouseWinLossParam
             {
                 IsHistoricReport = true,
-                Role = UserLevel.Super
+                Role = UserLevel.Super,
+                IsCountUser = true
             };
 
 
@@ -454,7 +460,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountSMAHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
         }
 
         [Test]
@@ -465,14 +471,15 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 TicketStatusId = TicketStatusConstants.Settled,
-                Role = UserLevel.Super
+                Role = UserLevel.Super,
+                IsCountUser = true
             };
 
             // Act
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledCountSMAHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
         }
 
         [Test]
@@ -483,14 +490,148 @@ namespace EB.Features.Reports.Tests.Services
             {
                 IsHistoricReport = false,
                 TicketStatusId = TicketStatusConstants.UnSettled,
-                Role = UserLevel.Super
+                Role = UserLevel.Super,
+                IsCountUser = true
             };
 
             // Act
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledCountSMAHouseWLCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfSMACriteria>());
         }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void Get_Always_SetIsCounterUser_False(bool isCountUser)
+        {
+            // Arrange
+            var param = new HouseWinLossParam { IsCountUser = isCountUser, Role = UserLevel.Super };
+
+            // Act
+            reportService.Get(param);
+
+            // Assert
+            Assert.IsFalse(param.IsCountUser);
+        }
+
+        [TestCase(true)]
+        [TestCase(false)]
+        public void CountUsers_Always_SetIsCounterUser_True(bool isCountUser)
+        {
+            // Arrange
+            var param = new HouseWinLossParam { IsCountUser = isCountUser, Role = UserLevel.Headline };
+
+            // Act
+            reportService.CountUsers(param);
+
+            // Assert
+            Assert.IsTrue(param.IsCountUser);
+        }
+
+        [Test]
+        public void GetHeadlineCriteriaByTicketStatus_AbnormalBets_AbnormalBetCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.AbnormalBets };
+
+            // Act
+            var act = HouseWinLossService.GetHeadlineCriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(AbnormalWinLossOfHeadlineCriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetHeadlineCriteriaByTicketStatus_ProblemAccount_ProblemAccountCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.ProblemAccounts };
+
+            // Act
+            var act = HouseWinLossService.GetHeadlineCriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(ProblemAccountWinLossOfHeadlineCriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetHeadlineCriteriaByTicketStatus_Unsettled_UnsettledCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.UnSettled };
+
+            // Act
+            var act = HouseWinLossService.GetHeadlineCriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(UnsettledHouseWinLossOfHeadlineCriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetHeadlineCriteriaByTicketStatus_Settled_SettledCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.Settled };
+
+            // Act
+            var act = HouseWinLossService.GetHeadlineCriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(SettledHouseWinLossOfHeadlineCriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetSMACriteriaByTicketStatus_AbnormalBets_AbnormalBetCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.AbnormalBets };
+
+            // Act
+            var act = HouseWinLossService.GetSMACriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(AbnormalWinLossOfSMACriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetSMACriteriaByTicketStatus_ProblemAccount_ProblemAccountCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.ProblemAccounts };
+
+            // Act
+            var act = HouseWinLossService.GetSMACriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(ProblemAccountWinLossOfSMACriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetSMACriteriaByTicketStatus_Unsettled_UnsettledCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.UnSettled };
+
+            // Act
+            var act = HouseWinLossService.GetSMACriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(UnsettledHouseWinLossOfSMACriteria), act.GetType());
+        }
+
+        [Test]
+        public void GetSMACriteriaByTicketStatus_Settled_SettledCriteria()
+        {
+            // Arrange
+            var param = new HouseWinLossParam { TicketStatusId = TicketStatusConstants.Settled };
+
+            // Act
+            var act = HouseWinLossService.GetSMACriteriaByTicketStatus(param);
+
+            // Assert
+            Assert.AreEqual(typeof(SettledHouseWinLossOfSMACriteria), act.GetType());
+        }
+
     }
 }

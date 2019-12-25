@@ -79,19 +79,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Criteria\Abnormal\AbnormalWinLossOfSMACriteriaTest.cs" />
+    <Compile Include="Criteria\Abnormal\AbnormalWinLossOfHeadlineCriteriaTest.cs" />
     <Compile Include="Criteria\HouseWinLossBaseCriteriaTest.cs" />
     <Compile Include="Criteria\MatchWinLossCriteriaCriteriaTest.cs" />
     <Compile Include="Criteria\PerformanceBonus\CheckValidSuperUserNameCommandTest.cs" />
     <Compile Include="Criteria\PerformanceBonus\GetAccountingPeriodsCriteriaTest.cs" />
     <Compile Include="Criteria\PerformanceBonus\PerformanceBonusCriteriaTest.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossOfHeadlineCriteriaTest.cs" />
-    <Compile Include="Criteria\UnsettledCountHeadlineHouseWLCriteriaTest.cs" />
-    <Compile Include="Criteria\UnsettledCountSMAHouseWLCriteriaTest.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossOfHeadlineCriteriaTest.cs" />
-    <Compile Include="Criteria\SettledCountSMAHouseWLCriteriaTest.cs" />
-    <Compile Include="Criteria\SettledCountHeadlineHouseWLCriteriaTest.cs" />
-    <Compile Include="Criteria\SettledHouseWinLossOfSMACriteriaTest.cs" />
-    <Compile Include="Criteria\UnsettledHouseWinLossOfSMACriteriaTest.cs" />
+    <Compile Include="Criteria\ProblemAccount\ProblemAccountWinLossOfHeadlineCriteriaTest.cs" />
+    <Compile Include="Criteria\ProblemAccount\ProblemAccountWinLossOfSMACriteriaTest.cs" />
+    <Compile Include="Criteria\Settled\SettledHouseWinLossOfHeadlineCriteriaTest.cs" />
+    <Compile Include="Criteria\Unsettled\UnsettledCountHeadlineHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\Unsettled\UnsettledCountSMAHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\Unsettled\UnsettledHouseWinLossOfHeadlineCriteriaTest.cs" />
+    <Compile Include="Criteria\Settled\SettledCountSMAHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\Settled\SettledCountHeadlineHouseWLCriteriaTest.cs" />
+    <Compile Include="Criteria\Settled\SettledHouseWinLossOfSMACriteriaTest.cs" />
+    <Compile Include="Criteria\Unsettled\UnsettledHouseWinLossOfSMACriteriaTest.cs" />
     <Compile Include="Model\MatchWinLossModelTest.cs" />
     <Compile Include="Model\HouseWinLossModelTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,6 +120,7 @@
       <Name>EB.Features.Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

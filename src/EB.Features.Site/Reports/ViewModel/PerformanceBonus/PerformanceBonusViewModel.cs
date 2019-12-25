@@ -1,18 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Mvc;
-using EB.Features.Reports;
-using EB.Features.Reports.Constants;
-using EB.Features.Reports.Extension;
-using EB.Features.Reports.Model;
-using EB.Features.Reports.Resources;
-using EB.Features.Shared.Utilities;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Shared.ViewModels;
-using EB.Features.Site.Shared.ViewModels.Components;
-
-namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
+﻿namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Extension;
+    using EB.Features.Reports.Model;
+    using EB.Features.Reports.Resources;
+    using EB.Features.Shared.Utilities;
+    using EB.Features.Site.Reports.Request;
+    using EB.Features.Site.Shared.ViewModels;
+    using EB.Features.Site.Shared.ViewModels.Components;
+
     public class PerformanceBonusViewModel
     {
         public PerformanceBonusViewModel(

@@ -14,5 +14,8 @@
             [PreMatch] = nameof(PreMatch),
             [InPlay] = nameof(InPlay)
         };
+
+        public static string GetLiveStatus(int key)
+            => LiveStatuses.ContainsKey(key) ? LiveStatuses[key] : LiveStatuses[AllMarkets];
     }
 }

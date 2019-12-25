@@ -1,10 +1,8 @@
 ﻿namespace EB.Features.Site.Reports
 {
     using System.Linq;
-    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Services;
-    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;

@@ -61,6 +61,15 @@ namespace EB.Features.Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Abnormal Bets.
+        /// </summary>
+        public static string AbnormalBets {
+            get {
+                return ResourceManager.GetString("AbnormalBets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Agent.
         /// </summary>
         public static string Agent {
@@ -273,6 +282,15 @@ namespace EB.Features.Shared.Resources {
         public static string PreMatch {
             get {
                 return ResourceManager.GetString("PreMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Problem Accounts (Settled).
+        /// </summary>
+        public static string ProblemAccounts {
+            get {
+                return ResourceManager.GetString("ProblemAccounts", resourceCulture);
             }
         }
         

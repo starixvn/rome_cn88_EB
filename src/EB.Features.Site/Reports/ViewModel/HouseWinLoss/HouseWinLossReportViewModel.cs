@@ -1,11 +1,9 @@
 ﻿namespace EB.Features.Site.Reports.ViewModel.HouseWinLoss
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using EB.Features.Reports;
     using EB.Features.Reports.Resources;
     using EB.Features.Reports.ViewModel;
     using EB.Features.Shared.Constants;
@@ -136,7 +134,7 @@
                 ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupIds,
                 ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
                 ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
-                ["Type"] = Query.IsHistoricReport || Query.UserSelectedTicketStatusId == TicketStatusConstants.Settled ? 1 : 3,
+                ["Type"] = Query.UserSelectedTicketStatusId,
                 ["ExcludeDataTest"] = Query.IsTest,
             };
 

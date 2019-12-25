@@ -9,6 +9,7 @@ using EB.Features.Reports.Resources;
 using EB.Features.Reports.Services;
 using EB.Features.Reports.ViewModel;
 using EB.Features.Shared.Configuration;
+using EB.Features.Shared.Constants;
 using EB.Features.Shared.Extensions;
 using EB.Features.Shared.Model;
 using EB.Features.Shared.Resources;
@@ -61,7 +62,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             houseWinLossService.Received().Get(Arg.Any<HouseWinLossParam>());
@@ -77,7 +78,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             houseWinLossService.CountUsers(Arg.Any<HouseWinLossParam>()).Returns(new CountHouseWinLossModel());
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetData(Arg.Any<IEnumerable<HouseWinLossModel>>(), Arg.Any<HouseWinLossModel>(), Arg.Any<bool>());
@@ -95,7 +96,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 .Returns(workbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
@@ -115,7 +116,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 .Returns(workbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().UseTemplate(Arg.Any<TemplateInfo>());
@@ -136,7 +137,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             workbook.UseTemplate(Arg.Any<TemplateInfo>()).Returns(onebookWorkbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             onebookWorkbook.Received().Sheet(Arg.Is<string>(i => i == "ReportData"));
@@ -157,7 +158,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             onebookWorkbook.Sheet(Arg.Is<string>(i => i == "ReportData")).Returns(onebookWorkbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             onebookWorkbook.Received().Title(Arg.Any<string>());
@@ -179,7 +180,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             onebookWorkbook.Title(Arg.Any<string>()).Returns(onebookWorkbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             onebookWorkbook.Received().Header(Arg.Any<Func<string, string>>());
@@ -203,7 +204,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             onebookWorkbook.Footer(Arg.Any<HouseWinLossModel>(), Arg.Any<Mapper<HouseWinLossModel>>()).Returns(onebookWorkbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             onebookWorkbook.Received().ExportToBytes();
@@ -241,7 +242,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
             AppSettings.AppSettingValues = appSettingValues;
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (decimal)i.Mappings[C](match) == match.Stake / AppSettings.ReduceNumber), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
@@ -278,7 +279,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 .Returns(workbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (int)i.Mappings[B](match) == 1), Arg.Any<Mapper<HouseWinLossModel>>(), Arg.Any<Mapper<HouseWinLossModel>>());
@@ -301,12 +302,12 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 .Returns(workbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Is<Mapper<HouseWinLossModel>>(i => (string)i.Mappings[A](match) == "username")
-                , Arg.Any<Mapper<HouseWinLossModel>>()
-                , Arg.Any<Mapper<HouseWinLossModel>>());
+                    , Arg.Any<Mapper<HouseWinLossModel>>()
+                    , Arg.Any<Mapper<HouseWinLossModel>>());
         }
 
         [Test]
@@ -321,7 +322,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 .Returns(workbook);
 
             // Act
-            handler.Handle(new HouseWinLossExcelQuery(currentSession));
+            handler.Handle(new HouseWinLossExcelQuery(currentSession) { UserSelectedTicketStatusId = TicketStatusConstants.Settled });
 
             // Assert
             workbook.Received().SetRowMappers(Arg.Any<Mapper<HouseWinLossModel>>()
@@ -336,7 +337,8 @@ namespace EB.Features.Site.Tests.Reports.Handler
             var query = new HouseWinLossExcelQuery(currentSession)
             {
                 Date = new DateTime(2019, 1, 1),
-                IsHistoricReport = true
+                IsHistoricReport = true,
+                UserSelectedTicketStatusId = TicketStatusConstants.Settled
             };
             var countUserModel = new CountHouseWinLossModel
             {
@@ -347,7 +349,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
                 SuperCount = 14
             };
 
-            var countUsers = new CountHouseWinLossViewModel(countUserModel,UserLevel.Headline);
+            var countUsers = new CountHouseWinLossViewModel(countUserModel, UserLevel.Headline);
 
             var expectedTitle = $"{ReportResources.HouseWinLossReport} {query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
             expectedTitle += $" - {AppResources.Settled} - Headline - {AppResources.AllSports} - {AppResources.AllBetTypes} - {AppResources.AllMarkets} {Environment.NewLine}";
@@ -402,7 +404,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
         public void Handle_Super_MapCorrectColumn()
         {
             // Arrange
-            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Super.Value };
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Super.Value, UserSelectedTicketStatusId = TicketStatusConstants.Settled };
             var match = new HouseWinLossModel
             {
                 Wagers = 1,
@@ -453,7 +455,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
         public void Handle_Master_MapCorrectColumn()
         {
             // Arrange
-            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Master.Value };
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Master.Value, UserSelectedTicketStatusId = TicketStatusConstants.Settled };
             var match = new HouseWinLossModel
             {
                 Wagers = 1,
@@ -502,7 +504,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
         public void Handle_Agent_MapCorrectColumn()
         {
             // Arrange
-            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Agent.Value };
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Agent.Value, UserSelectedTicketStatusId = TicketStatusConstants.Settled };
             var match = new HouseWinLossModel
             {
                 Wagers = 1,
@@ -548,7 +550,7 @@ namespace EB.Features.Site.Tests.Reports.Handler
         public void Handle_Member_MapCorrectColumn()
         {
             // Arrange
-            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Member.Value };
+            var query = new HouseWinLossExcelQuery(currentSession) { RoleId = UserLevel.Member.Value, UserSelectedTicketStatusId = TicketStatusConstants.Settled };
             var match = new HouseWinLossModel
             {
                 Wagers = 1,

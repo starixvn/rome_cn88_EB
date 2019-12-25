@@ -1,16 +1,12 @@
 ﻿namespace EB.Features.Site.Reports
 {
     using System;
-    using System.Linq;
     using System.Text;
-    using EB.Features.Reports;
     using EB.Features.Reports.Constants;
-    using EB.Features.Reports.Extension;
     using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
-    using EB.Features.Shared;
     using EB.Features.Shared.Configuration;
     using EB.Features.Shared.Constants;
     using EB.Features.Shared.Extensions;
@@ -45,7 +41,6 @@
 
         public ExcelFileViewModel Handle(HouseWinLossExcelQuery message)
         {
-            message.UserSelectedTicketStatusId = message.IsHistoricReport ? TicketStatusConstants.Settled : message.UserSelectedTicketStatusId;
             var param = new HouseWinLossParam
             {
                 HeadlineId = message.HeadlineId,
@@ -263,8 +258,8 @@
                 title = new StringBuilder($"{ReportResources.HouseWinLossReport} {param.FromDate.ToShortDate()} --> {param.ToDate.ToShortDate()}");
             }
 
-            var liveStatus = LiveStatusConstants.LiveStatuses[param.UserSelectedLiveStatusId];
-            var ticketStatus = TicketStatusConstants.TicketStatuses[param.UserSelectedTicketStatusId];
+            var liveStatus = LiveStatusConstants.GetLiveStatus(param.UserSelectedLiveStatusId);
+            var ticketStatus = TicketStatusConstants.GetTicketStatus(param.UserSelectedTicketStatusId);
             var betType = param.UserSelectedBetTypeId == 0 ? AppResources.AllBetTypes : cacheRefService.GetBetTypeName(param.UserSelectedBetTypeId);
             var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), param.SelectedSportGroupIds);
 

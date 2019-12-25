@@ -22,9 +22,7 @@
     </div>
     <form class="form-inline filter report-form" role="form" id="report-form">
         @ViewerSelection.Render(Model.ReportFilterViewModel.ViewerSelectionViewModel, true)
-        <div id="ticketStatusContainer" style="display:@(Model.Query.IsHistoricReport?"none":"inline-block")">
-            @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
-        </div>
+        @TicketStatusSelection.Render(Model.ReportFilterViewModel.TicketStatusSelectionViewModel, true)
         @SportGroupMultiSelection.Render(Model.ReportFilterViewModel.SportGroupMultiSelectionViewModel)
         <div id="dateRangeContainer" style="display:none">
             @DateRangePicker.Render(Model.ReportFilterViewModel.DateRangePickerViewModel)
@@ -61,8 +59,6 @@
             </div>
         </div>
         @Html.Hidden("LoadLegendURL", Url.Action("LegendHouseWinLoss", "Reports"))
-        <input type="hidden" name="FromDate" id="fromDate" />
-        <input type="hidden" name="ToDate" id="toDate" />
         <input type="hidden" name="IsHistoricReport" id="IsHistoricReport" value="@Model.Query.IsHistoricReport.ToString()" />
         <input type="hidden" name="RoleId" id="RoleId" value="@Model.Query.RoleId" />
     </form>

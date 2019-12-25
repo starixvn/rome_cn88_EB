@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using EB.Features.Reports.Constants;
 using EB.Features.Reports.Criteria;
 using EB.Features.Reports.Params;
@@ -168,6 +169,32 @@ namespace EB.Features.Reports.Tests.Criteria
 
             // Assert
             Assert.AreEqual("CS_Rpt_EBWinloss_Member", act);
+        }
+
+        [Test]
+        public void GetSpParams_Always_NotExistHeadlineId()
+        {
+            // Arrange
+            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsFalse(act.ContainsKey("HeadlineId"));
+        }
+
+        [Test]
+        public void GetSpParams_Always_ExistSettingKey()
+        {
+            // Arrange
+            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsTrue(act.ContainsKey("SettingKey"));
         }
     }
 }

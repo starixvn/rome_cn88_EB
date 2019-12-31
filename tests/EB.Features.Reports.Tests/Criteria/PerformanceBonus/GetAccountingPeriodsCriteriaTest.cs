@@ -34,7 +34,7 @@ namespace EB.Features.Reports.Tests.Criteria.PerformanceBonus
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_AccountingPeriod_Sel", act);
+            Assert.AreEqual("CS_EB_Period_Sel", act);
         }
     }
 }

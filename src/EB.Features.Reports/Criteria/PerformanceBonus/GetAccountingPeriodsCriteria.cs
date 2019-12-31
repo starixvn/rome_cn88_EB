@@ -4,7 +4,7 @@
 
     public class GetAccountingPeriodsCriteria : CriteriaBase
     {
-        public override string GetSettingKey() => "CS_AccountingPeriod_Sel";
+        public override string GetSettingKey() => "CS_EB_Period_Sel";
 
         public override bool IsValid() => true;
     }

@@ -13,7 +13,10 @@
             CustId = param.CustId;
             MoveBetsDay = param.MoveBetsDay;
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
+            HeadlineId = param.HeadlineId;
         }
+
+        public int HeadlineId { get; }
 
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }

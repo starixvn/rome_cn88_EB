@@ -61,7 +61,8 @@
                 SportTypeGroups = message.UserSelectedSportGroupIds,
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
-                Date = message.Date
+                Date = message.Date,
+                HeadlineId = message.HeadlineId
             });
 
             return new HouseWinLossReportViewModel(

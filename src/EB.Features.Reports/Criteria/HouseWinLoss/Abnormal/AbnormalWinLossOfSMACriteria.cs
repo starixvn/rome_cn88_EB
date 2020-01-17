@@ -48,5 +48,16 @@
 
             return IsCountUser ? $"{key}_CustCount" : key;
         }
+
+        public override Hashtable GetSpParams()
+        {
+            var spParams = base.GetSpParams();
+            if (Role.IsSuperLevel())
+            {
+                spParams.Remove("CustId");
+            }
+
+            return spParams;
+        }
     }
 }

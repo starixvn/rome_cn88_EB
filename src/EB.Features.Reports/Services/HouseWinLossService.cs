@@ -41,7 +41,7 @@
                 GetHeadlineCriteriaByTicketStatus(param) :
                 GetSMACriteriaByTicketStatus(param);
 
-            return dynamicRepository.Get<CountHouseWinLossModel>(criteria);
+            return dynamicRepository.Get<CountHouseWinLossModel>(criteria.GetSpParams());
         }
 
         public HouseWinLossViewModel Get(HouseWinLossParam param)

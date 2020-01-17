@@ -1,6 +1,7 @@
 ﻿namespace EB.Features.Reports.Criteria
 {
     using System;
+    using System.Collections;
     using EB.Features.Reports.Params;
     using EB.Features.Shared.Model;
     using Fanex.Data;
@@ -40,6 +41,17 @@
             "CS_EB_Rpt_Winloss_ProblemAccount_Member";
 
             return IsCountUser ? $"{key}_CustCount" : key;
+        }
+
+        public override Hashtable GetSpParams()
+        {
+            var spParams = base.GetSpParams();
+            if (Role.IsSuperLevel())
+            {
+                spParams.Remove("CustId");
+            }
+
+            return spParams;
         }
     }
 }

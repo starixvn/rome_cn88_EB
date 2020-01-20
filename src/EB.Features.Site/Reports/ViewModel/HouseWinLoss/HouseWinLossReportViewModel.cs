@@ -134,7 +134,7 @@
                 ["UserSelectedSportGroupId"] = Query.UserSelectedSportGroupIds,
                 ["UserSelectedBetTypeId"] = Query.UserSelectedBetTypeId,
                 ["UserSelectedLiveStatusId"] = Query.UserSelectedLiveStatusId,
-                ["Type"] = Query.UserSelectedTicketStatusId,
+                ["Type"] = Query.UserSelectedTicketStatusId == TicketStatusConstants.ProblemAccounts ? TicketStatusConstants.Settled : Query.UserSelectedTicketStatusId,
                 ["ExcludeDataTest"] = Query.IsTest,
             };
 

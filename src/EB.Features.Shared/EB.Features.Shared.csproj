@@ -106,6 +106,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Model\BalanceUpDayAndMoveBetsDay.cs" />
     <Compile Include="Model\BetTypeGroup.cs" />
+    <Compile Include="Model\BetTypeGroupComparer.cs" />
     <Compile Include="Model\CustInfo.cs" />
     <Compile Include="Model\Device.cs" />
     <Compile Include="Model\DeviceInfo.cs" />
@@ -124,9 +125,9 @@
     <Compile Include="Services\CacheRefService.cs" />
     <Compile Include="Services\ReportDateService.cs" />
     <Compile Include="Services\SportGroupService.cs" />
-    <Compile Include="Utilities\IPHelper.cs" >
-		<SonarQubeExclude>true</SonarQubeExclude>
-	</Compile>
+    <Compile Include="Utilities\IPHelper.cs">
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
     <Compile Include="Utilities\SystemTime.cs" />
   </ItemGroup>
   <ItemGroup>

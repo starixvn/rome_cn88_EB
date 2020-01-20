@@ -1,16 +1,20 @@
 ﻿namespace EB.Features.Shared.Tests.Services
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using EB.Features.Shared.Criteria;
     using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
+    using Fanex.Caching;
     using Fanex.Data.Repository;
     using NSubstitute;
     using NUnit.Framework;
 
     public class BettypeGroupServiceTest
     {
+        private const string BetTypesCacheKey = "EB.Features.Shared.Services.Bettypes";
+        private ICacheService fanexCacheService;
         private IDynamicRepository dynamicRepository;
         private IBettypeGroupService bettypeGroupService;
         private ICacheRefService cacheRefService;
@@ -19,6 +23,7 @@
         [SetUp]
         public void SetUp()
         {
+            fanexCacheService = Substitute.For<ICacheService>();
             dynamicRepository = Substitute.For<IDynamicRepository>();
             cacheRefService = Substitute.For<ICacheRefService>();
             bettypeGroups = new List<BetTypeGroup>
@@ -27,8 +32,12 @@
                 new BetTypeGroup(2,2,cacheRefService.GetBetTypeName),
                 new BetTypeGroup(1,3,cacheRefService.GetBetTypeName),
             };
-            bettypeGroupService = new BettypeGroupServiceImpl(dynamicRepository, cacheRefService);
+            bettypeGroupService = new BettypeGroupServiceImpl(dynamicRepository, cacheRefService, fanexCacheService);
+
             dynamicRepository.Fetch<BetTypeGroup>(Arg.Any<GetBetTypeGroupBySportCriteria>())
+               .Returns(bettypeGroups);
+
+            fanexCacheService.GetOrSet(BetTypesCacheKey, Arg.Any<Func<IEnumerable<BetTypeGroup>>>(), Arg.Any<CacheItemOptions>())
                 .Returns(bettypeGroups);
         }
 

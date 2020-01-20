@@ -402,7 +402,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -421,7 +421,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -440,7 +440,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfHeadlineCriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
 
@@ -460,7 +460,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -479,7 +479,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<SettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [Test]
@@ -498,7 +498,7 @@ namespace EB.Features.Reports.Tests.Services
             reportService.CountUsers(param);
 
             // Assert
-            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<UnsettledHouseWinLossOfSMACriteria>());
+            dynamicRepository.Received().Get<CountHouseWinLossModel>(Arg.Any<Hashtable>());
         }
 
         [TestCase(true)]

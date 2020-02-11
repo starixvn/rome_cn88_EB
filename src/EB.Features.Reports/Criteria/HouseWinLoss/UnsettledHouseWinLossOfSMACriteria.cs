@@ -1,18 +1,19 @@
 ﻿namespace EB.Features.Reports.Criteria
 {
-    using System;
     using EB.Features.Reports.Params;
     using EB.Features.Shared.Model;
     using Fanex.Data;
-    using Fanex.Data.Repository;
 
     public class UnsettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
         public UnsettledHouseWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
         {
+            HeadlineId = param.HeadlineId;
             CustId = param.CustId;
             Role = param.Role;
         }
+
+        public int HeadlineId { get; }
 
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }
@@ -23,11 +24,11 @@
 
         public override string GetSettingKey()
             => Role.IsSuperLevel() ?
-            "CS_Rpt_EBOutstanding_Super" :
+            "CS_EB_Rpt_Outstanding_Super" :
             Role.IsMasterLevel() ?
-            "CS_Rpt_EBOutstanding_Master" :
+            "CS_EB_Rpt_Outstanding_Master" :
             Role.IsAgentLevel() ?
-            "CS_Rpt_EBOutstanding_Agent" :
-            "CS_Rpt_EBOutstanding_Member";
+            "CS_EB_Rpt_Outstanding_Agent" :
+            "CS_EB_Rpt_Outstanding_Member";
     }
 }

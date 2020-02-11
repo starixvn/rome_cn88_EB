@@ -9,6 +9,6 @@
         }
 
         public override string GetSettingKey()
-            => "CS_Rpt_EBOutstanding_Headline";
+            => "CS_EB_Rpt_Outstanding_Headline";
     }
 }

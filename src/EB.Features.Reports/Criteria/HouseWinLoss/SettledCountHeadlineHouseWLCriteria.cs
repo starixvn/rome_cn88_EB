@@ -5,7 +5,6 @@
 
     public class SettledCountHeadlineHouseWLCriteria : HouseWinLossBaseCriteria
     {
-
         public SettledCountHeadlineHouseWLCriteria(HouseWinLossParam param) : base(param)
         {
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;

@@ -14,10 +14,10 @@
             Role = param.Role;
         }
 
+        public int HeadlineId { get; }
+
         [SpParam(Ignored = true)]
         public UserLevel Role { get; }
-
-        public int HeadlineId { get; }
 
         public int CustId { get; }
 
@@ -26,25 +26,14 @@
         public override string GetSettingKey()
         {
             var key = Role.IsSuperLevel() ?
-            "CS_Rpt_EBOutstanding_Super" :
+            "CS_EB_Rpt_Outstanding_Super" :
             Role.IsMasterLevel() ?
-            "CS_Rpt_EBOutstanding_Master" :
+            "CS_EB_Rpt_Outstanding_Master" :
             Role.IsAgentLevel() ?
-            "CS_Rpt_EBOutstanding_Agent" :
-            "CS_Rpt_EBOutstanding_Member";
+            "CS_EB_Rpt_Outstanding_Agent" :
+            "CS_EB_Rpt_Outstanding_Member";
 
             return IsCountUser ? $"{key}_CustCount" : key;
-        }
-
-        public override Hashtable GetSpParams()
-        {
-            var spParams = base.GetSpParams();
-            if (!IsCountUser)
-            {
-                spParams.Remove("HeadlineId");
-            }
-
-            return spParams;
         }
     }
 }

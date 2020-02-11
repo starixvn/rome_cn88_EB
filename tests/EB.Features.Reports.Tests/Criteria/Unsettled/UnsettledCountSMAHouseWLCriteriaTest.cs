@@ -18,7 +18,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Super_CustCount", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Super_CustCount", act);
         }
 
         [Test]
@@ -31,7 +31,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Master_CustCount", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Master_CustCount", act);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Agent_CustCount", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Agent_CustCount", act);
         }
 
         [Test]
@@ -57,7 +57,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Member_CustCount", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Member_CustCount", act);
         }
 
         [Test]

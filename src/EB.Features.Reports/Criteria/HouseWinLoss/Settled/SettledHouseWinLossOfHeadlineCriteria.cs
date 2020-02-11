@@ -5,7 +5,6 @@
 
     public class SettledHouseWinLossOfHeadlineCriteria : HouseWinLossBaseCriteria
     {
-
         public SettledHouseWinLossOfHeadlineCriteria(HouseWinLossParam param) : base(param)
         {
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
@@ -17,6 +16,6 @@
         public int ReportMode { get; }
 
         public override string GetSettingKey()
-            => IsCountUser ? "CS_Rpt_EBWinloss_Headline_CustCount" : "CS_Rpt_EBWinloss_Headline";
+            => IsCountUser ? "CS_EB_Rpt_Winloss_Headline_CustCount" : "CS_EB_Rpt_Winloss_Headline";
     }
 }

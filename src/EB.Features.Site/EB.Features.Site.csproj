@@ -780,6 +780,9 @@
     <Content Include="Configurations\appSettings.local.config">
       <DependentUpon>appSettings.config</DependentUpon>
     </Content>
+    <Content Include="Configurations\appSettings.localmaster.config">
+      <DependentUpon>appSettings.config</DependentUpon>
+    </Content>
     <Content Include="Configurations\appSettings.pro.config">
       <DependentUpon>appSettings.config</DependentUpon>
     </Content>
@@ -789,6 +792,9 @@
     <Content Include="Configurations\appSettings.uat.config">
       <DependentUpon>appSettings.config</DependentUpon>
       <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Configurations\appSettings.uatmaster.config">
+      <DependentUpon>appSettings.config</DependentUpon>
     </Content>
     <Content Include="Configurations\connectionStrings.pro.config">
       <DependentUpon>connectionStrings.config</DependentUpon>
@@ -802,10 +808,17 @@
       <DependentUpon>connectionStrings.config</DependentUpon>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Configurations\connectionStrings.uatmaster.config">
+      <SubType>Designer</SubType>
+      <DependentUpon>connectionStrings.config</DependentUpon>
+    </Content>
     <Content Include="Error.aspx" />
     <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <Content Include="Web.uatmaster.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
     <TypeScriptCompile Include="AccountManagement\Scripts\subaccount.ts" />
     <TypeScriptCompile Include="assets\login\scripts\login\href-handler.ts" />
     <TypeScriptCompile Include="assets\main\scripts\default\index-manager.ts" />
@@ -1289,6 +1302,9 @@
     <Content Include="Reports\Views\MatchWinLoss.cshtml" />
     <Content Include="Shared\Views\_Layout.cshtml" />
     <Content Include="Shared\Views\web.config" />
+    <Content Include="Web.localmaster.config">
+      <DependentUpon>Web.uat.config</DependentUpon>
+    </Content>
     <Content Include="Web.pro.config">
       <DependentUpon>Web.uat.config</DependentUpon>
     </Content>

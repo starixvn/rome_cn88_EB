@@ -10,9 +10,9 @@
             Role = UserLevel.Headline;
         }
 
-        public UserLevel Role { get; set; }
-
         public int HeadlineId { get; set; }
+
+        public UserLevel Role { get; set; }
 
         public int CustId { get; set; }
 

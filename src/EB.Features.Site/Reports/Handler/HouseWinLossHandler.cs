@@ -51,6 +51,7 @@
 
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
+                HeadlineId = message.HeadlineId,
                 CustId = message.CustId,
                 Role = message.Role,
                 Viewer = message.UserSelectedViewer,
@@ -63,7 +64,6 @@
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
                 Date = message.Date,
-                HeadlineId = message.HeadlineId
             });
 
             return new HouseWinLossReportViewModel(

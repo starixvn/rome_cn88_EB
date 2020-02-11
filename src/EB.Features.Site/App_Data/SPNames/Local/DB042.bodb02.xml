@@ -1,17 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Functions>
   <Function Name="House Win Loss Reports">
-    <Setting Key="CS_Rpt_EBOutstanding_Headline" SpName="CS_Rpt_EBOutstanding_Headline" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Super" SpName="CS_Rpt_EBOutstanding_Super" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Master" SpName="CS_Rpt_EBOutstanding_Master" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Agent" SpName="CS_Rpt_EBOutstanding_Agent" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Member" SpName="CS_Rpt_EBOutstanding_Member" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Headline" SpName="CS_EB_Rpt_Outstanding_Headline" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Super" SpName="CS_EB_Rpt_Outstanding_Super" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Master" SpName="CS_EB_Rpt_Outstanding_Master" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Agent" SpName="CS_EB_Rpt_Outstanding_Agent" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Member" SpName="CS_EB_Rpt_Outstanding_Member" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
 
-    <Setting Key="CS_Rpt_EBOutstanding_Headline_CustCount" SpName="CS_EB_Rpt_Outstanding_Headline_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Super_CustCount" SpName="CS_EB_Rpt_Outstanding_Super_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Master_CustCount" SpName="CS_EB_Rpt_Outstanding_Master_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Agent_CustCount" SpName="CS_EB_Rpt_Outstanding_Agent_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
-    <Setting Key="CS_Rpt_EBOutstanding_Member_CustCount" SpName="CS_EB_Rpt_Outstanding_Member_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Headline_CustCount" SpName="CS_EB_Rpt_Outstanding_Headline_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Super_CustCount" SpName="CS_EB_Rpt_Outstanding_Super_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Master_CustCount" SpName="CS_EB_Rpt_Outstanding_Master_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Agent_CustCount" SpName="CS_EB_Rpt_Outstanding_Agent_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Outstanding_Member_CustCount" SpName="CS_EB_Rpt_Outstanding_Member_CustCount" DbName="DB042.bodb02.bodbAdminNet" Plain="0"/>
   </Function>
-
 </Functions>

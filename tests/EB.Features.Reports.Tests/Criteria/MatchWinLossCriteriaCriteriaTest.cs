@@ -105,7 +105,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_MatchWinLoss_Headline", act);
+            Assert.AreEqual("CS_EB_Rpt_MatchWinLoss_Headline", act);
         }
     }
 }

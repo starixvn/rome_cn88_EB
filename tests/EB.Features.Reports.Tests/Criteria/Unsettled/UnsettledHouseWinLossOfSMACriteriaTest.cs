@@ -109,7 +109,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Super", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Super", act);
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Master", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Master", act);
         }
 
         [Test]
@@ -135,7 +135,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Agent", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Agent", act);
         }
 
         [Test]
@@ -148,7 +148,7 @@ namespace EB.Features.Reports.Tests.Criteria
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_Rpt_EBOutstanding_Member", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Member", act);
         }
 
         [Test]
@@ -162,19 +162,6 @@ namespace EB.Features.Reports.Tests.Criteria
 
             // Assert
             Assert.IsTrue(act.ContainsKey("SettingKey"));
-        }
-
-        [Test]
-        public void GetSpParams_Always_NotExistSettingKey()
-        {
-            // Arrange
-            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
-
-            // Act
-            var act = criteria.GetSpParams();
-
-            // Assert
-            Assert.IsFalse(act.ContainsKey("HeadlineId"));
-        }
+        }       
     }
 }

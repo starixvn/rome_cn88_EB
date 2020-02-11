@@ -21,7 +21,6 @@
             IsCountUser = param.IsCountUser;
         }
 
-
         public DateTime FromDate { get; }
 
         public DateTime ToDate { get; }

@@ -6,7 +6,6 @@
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Sonar Code Smell", "S1118:Utility classes should not have public constructors", Justification = "<Pending>", Scope = "type", Target = "~T:EB.Features.Site.App_Start.DependencyConfig")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~P:EB.Features.Site.Main.ViewModel.IndexViewModel.InitialScaleViewPort")]
-
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~M:EB.Features.Site.Shared.Helpers.BrowserHelperImpl.IsMobile(System.Boolean)~System.Boolean")]
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used", Justification = "<Pending>", Scope = "member", Target = "~M:EB.Features.Site.Shared.Helpers.BrowserHelperImpl.IsTablet~System.Boolean")]

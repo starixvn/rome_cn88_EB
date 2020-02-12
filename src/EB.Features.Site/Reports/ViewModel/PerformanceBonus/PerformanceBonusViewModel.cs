@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using EB.Features.Reports;
-using EB.Features.Reports.Constants;
-using EB.Features.Reports.Extension;
-using EB.Features.Reports.Model;
-using EB.Features.Reports.Resources;
-using EB.Features.Shared.Utilities;
-using EB.Features.Site.Reports.Request;
-using EB.Features.Site.Shared.ViewModels;
-using EB.Features.Site.Shared.ViewModels.Components;
-
-namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
+﻿namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+    using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Extension;
+    using EB.Features.Reports.Model;
+    using EB.Features.Reports.Resources;
+    using EB.Features.Shared.Utilities;
+    using EB.Features.Site.Reports.Request;
+    using EB.Features.Site.Shared.ViewModels;
+    using EB.Features.Site.Shared.ViewModels.Components;
+
     public class PerformanceBonusViewModel
     {
         public PerformanceBonusViewModel(
             PerformanceBonusQuery query,
             IEnumerable<SelectListItemExt> periodItems,
             IEnumerable<AccountingPeriod> periods,
+            IEnumerable<SelectListItem> sportGroups,
             IEnumerable<PerformanceBonusModel> reports,
             string errorMessage = "")
         {
@@ -41,6 +42,7 @@ namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
             CurrencySelectionViewModel = new SingleSelectionViewModel(currencies, query.UserSelectedCurrencyId);
             ConjunctionSelectionViewModel = new SingleSelectionViewModel(conjunctions, query.UserSelectedConjunctionId);
             DateRangePickerViewModel = new DateRangePickerViewModel(SystemTime.MinDate, SystemTime.Yesterday, query.FromDate, query.ToDate, null);
+            SportGroupMultiSelectionViewModel = new SportGroupMultiSelectionViewModel(sportGroups, query.UserSelectedSportGroupIds, query.CurrentSession.Language);
             ErrorMessage = errorMessage;
             Reports = reports;
             Total = Reports.Sum();
@@ -60,6 +62,8 @@ namespace EB.Features.Site.Reports.ViewModel.PerformanceBonus
         public SingleSelectionViewModel CurrencySelectionViewModel { get; }
 
         public SingleSelectionViewModel ConjunctionSelectionViewModel { get; }
+
+        public SportGroupMultiSelectionViewModel SportGroupMultiSelectionViewModel { get; }
 
         public PerformanceBonusModel Total { get; }
 

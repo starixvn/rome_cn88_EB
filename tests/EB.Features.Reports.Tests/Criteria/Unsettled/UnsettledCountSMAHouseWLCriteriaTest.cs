@@ -12,7 +12,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_SuperRole_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria(new HouseWinLossParam { Role = UserLevel.Super });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Super, IsCountUser = true });
 
             // Act
             var act = criteria.GetSettingKey();
@@ -25,7 +25,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_MasterRole_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria(new HouseWinLossParam { Role = UserLevel.Master });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Master, IsCountUser = true });
 
             // Act
             var act = criteria.GetSettingKey();
@@ -38,7 +38,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_AgentRole_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria(new HouseWinLossParam { Role = UserLevel.Agent });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Agent, IsCountUser = true });
 
             // Act
             var act = criteria.GetSettingKey();
@@ -51,7 +51,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_MemberRole_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria(new HouseWinLossParam { Role = UserLevel.Member });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member, IsCountUser = true });
 
             // Act
             var act = criteria.GetSettingKey();
@@ -64,7 +64,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_CorrectInput_ReturnTrue()
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria
+            var criteria = new UnsettledHouseWinLossOfSMACriteria
             (
                 new HouseWinLossParam
                 {
@@ -74,7 +74,8 @@ namespace EB.Features.Reports.Tests.Criteria
                     FromDate = DateTime.Now,
                     ToDate = DateTime.Now,
                     HeadlineId = 0,
-                    CustId = 1
+                    CustId = 1,
+                    IsCountUser = true
                 }
             );
 
@@ -85,13 +86,13 @@ namespace EB.Features.Reports.Tests.Criteria
             Assert.IsTrue(act);
         }
 
-        [TestCase(-1,0)]
+        [TestCase(-1, 0)]
         [TestCase(0, -1)]
         [TestCase(-1, -1)]
         public void IsValid_IncorrectInput_ReturnFalse(int headlineId, int custId)
         {
             // Arrange
-            var criteria = new UnsettledCountSMAHouseWLCriteria
+            var criteria = new UnsettledHouseWinLossOfSMACriteria
             (
                 new HouseWinLossParam
                 {
@@ -101,7 +102,8 @@ namespace EB.Features.Reports.Tests.Criteria
                     FromDate = DateTime.Now,
                     ToDate = DateTime.Now,
                     HeadlineId = headlineId,
-                    CustId = custId
+                    CustId = custId,
+                    IsCountUser = true
                 }
             );
 

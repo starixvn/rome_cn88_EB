@@ -1,7 +1,9 @@
 ﻿namespace EB.Features.Site.Reports.Request
 {
     using System;
+    using System.Collections.Generic;
     using EB.Features.Reports.Constants;
+    using EB.Features.Reports.Extension;
     using EB.Features.Shared.Utilities;
     using EB.Features.Site.Reports.ViewModel.PerformanceBonus;
     using EB.Features.Site.Shared.Models;
@@ -31,6 +33,11 @@
         public decimal HeadlineStock { get; set; }
 
         public int UserSelectedConjunctionId { get; set; }
+
+        public IEnumerable<int> SelectedSportGroupIds
+            => UserSelectedSportGroupIds.ToListInt();
+
+        public string UserSelectedSportGroupIds { get; set; }
 
         public string UserNames { get; set; }
 

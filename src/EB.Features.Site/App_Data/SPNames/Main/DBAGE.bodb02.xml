@@ -8,19 +8,38 @@
     <Setting Key="Age_SelBalanceUpDay" SpName="Age_SelBalanceUpDay" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
     <Setting Key="CS_SelArchiveDate" SpName="CS_SelArchiveDate" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0" />
   </Function>
-
   <Function Name="House Win Loss Reports">
     <Setting Key="CS_EB_Rpt_Winloss_Headline" SpName="CS_EB_Rpt_Winloss_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Super" SpName="CS_EB_Rpt_Winloss_Super" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Master" SpName="CS_EB_Rpt_Winloss_Master" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Agent" SpName="CS_EB_Rpt_Winloss_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Member" SpName="CS_EB_Rpt_Winloss_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Agent" SpName="CS_EB_Rpt_Cancelled_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Headline" SpName="CS_EB_Rpt_Cancelled_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Master" SpName="CS_EB_Rpt_Cancelled_Master" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Member" SpName="CS_EB_Rpt_Cancelled_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Super" SpName="CS_EB_Rpt_Cancelled_Super" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Agent" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Agent" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Headline" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Headline" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Master" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Master" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Member" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Member" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Super" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Super" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
 
     <Setting Key="CS_EB_Rpt_Winloss_Headline_CustCount" SpName="CS_EB_Rpt_Winloss_Headline_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Super_CustCount" SpName="CS_EB_Rpt_Winloss_Super_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Master_CustCount" SpName="CS_EB_Rpt_Winloss_Master_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Agent_CustCount" SpName="CS_EB_Rpt_Winloss_Agent_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
     <Setting Key="CS_EB_Rpt_Winloss_Member_CustCount" SpName="CS_EB_Rpt_Winloss_Member_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Agent_CustCount" SpName="CS_EB_Rpt_Cancelled_Agent_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Headline_CustCount" SpName="CS_EB_Rpt_Cancelled_Headline_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Master_CustCount" SpName="CS_EB_Rpt_Cancelled_Master_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Member_CustCount" SpName="CS_EB_Rpt_Cancelled_Member_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Cancelled_Super_CustCount" SpName="CS_EB_Rpt_Cancelled_Super_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Agent_CustCount" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Agent_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Headline_CustCount" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Headline_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Master_CustCount" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Master_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Member_CustCount" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Member_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
+    <Setting Key="CS_EB_Rpt_Winloss_ProblemAccount_Super_CustCount" SpName="CS_EB_Rpt_Winloss_ProblemAccount_Super_CustCount" DbName="DBAGE.bodb02.bodbAdminNet" Plain="0"/>
   </Function>
 
   <Function Name="Reports">

@@ -118,6 +118,7 @@
       "assets/report/components/daterangepicker.js",
       "assets/report/libs/monthPicker/monPickr-0.0.1.js",
       "assets/report/scripts/core.js",
+      "assets/report/components/sport-group-multiselection.js",
       "assets/report/scripts/performance-bonus.js"
     ]
   },

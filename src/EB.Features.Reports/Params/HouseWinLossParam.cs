@@ -5,6 +5,11 @@
 
     public class HouseWinLossParam
     {
+        public HouseWinLossParam()
+        {
+            Role = UserLevel.Headline;
+        }
+
         public int HeadlineId { get; set; }
 
         public UserLevel Role { get; set; }
@@ -32,5 +37,7 @@
         public bool IsExcludedTest { get; set; }
 
         public DateTime MoveBetsDay { get; set; }
+
+        public bool IsCountUser { get; set; }
     }
 }

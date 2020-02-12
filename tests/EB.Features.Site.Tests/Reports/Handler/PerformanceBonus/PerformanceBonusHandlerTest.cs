@@ -9,12 +9,15 @@ using EB.Features.Site.Reports.Request;
 using EB.Features.Site.Shared.Models;
 using NSubstitute;
 using NUnit.Framework;
+using EB.Features.Shared.Services;
+using EB.Features.Shared.Model;
 
 namespace EB.Features.Site.Tests.Reports.Handler.PerformanceBonus
 {
     public class PerformanceBonusHandlerTest
     {
         private IPerformanceBonusService service;
+        private ISportGroupService sportGroupService;
         private AccountingPeriodService periodService;
         private PerformanceBonusHandler handler;
         private UserSession currentSession;
@@ -22,10 +25,26 @@ namespace EB.Features.Site.Tests.Reports.Handler.PerformanceBonus
         [SetUp]
         public void SetUp()
         {
+            sportGroupService = Substitute.For<ISportGroupService>();
             currentSession = Substitute.For<UserSession>();
             service = Substitute.For<IPerformanceBonusService>();
             periodService = Substitute.For<AccountingPeriodService>();
-            handler = new PerformanceBonusHandler(service, periodService);
+            handler = new PerformanceBonusHandler(sportGroupService, service, periodService);
+        }
+
+        [Test]
+        public void Handle_Awlays_CallGetSportGroups()
+        {
+            // Arrange
+            sportGroupService.GetSportGroups()
+                .Returns(new List<SportGroup>());
+            periodService.GetCurrentPeriod().Returns(new AccountingPeriod(1, 2019, DateTime.Now.AddDays(-30), DateTime.Now));
+
+            // Act
+            handler.Handle(new PerformanceBonusQuery(currentSession));
+
+            // Assert
+            sportGroupService.Received().GetSportGroups();
         }
 
         [Test]

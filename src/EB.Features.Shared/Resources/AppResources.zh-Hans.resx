@@ -228,4 +228,10 @@
   <data name="Currency" xml:space="preserve">
     <value>货币</value>
   </data>
+  <data name="ProblemAccounts" xml:space="preserve">
+    <value>问题帐号 (已结算)</value>
+  </data>
+  <data name="AbnormalBets" xml:space="preserve">
+    <value>非正规注单</value>
+  </data>
 </root>

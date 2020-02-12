@@ -9,6 +9,7 @@
     using EB.Features.Reports.Services;
     using EB.Features.Shared.Extensions;
     using EB.Features.Shared.Resources;
+    using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request;
     using EB.Features.Site.Reports.ViewModel;
     using MediatR;
@@ -19,13 +20,16 @@
     {
         private readonly IPerformanceBonusService service;
         private readonly IPerformanceBonusWorkbook workbook;
+        private readonly ISportGroupService sportGroupService;
 
         public PerformanceBonusExcelHandler(
             IPerformanceBonusService matchWinLossService,
-            IPerformanceBonusWorkbook workbook)
+            IPerformanceBonusWorkbook workbook,
+            ISportGroupService sportGroupService)
         {
             this.service = matchWinLossService;
             this.workbook = workbook;
+            this.sportGroupService = sportGroupService;
         }
 
         public ExcelFileViewModel Handle(PerformanceBonusExcelQuery message)
@@ -38,7 +42,8 @@
                 CurrencyId = message.UserSelectedCurrencyId,
                 HeadlineStock = message.HeadlineStock,
                 UserNames = message.UserNames,
-                DividendRate = message.DividendRate
+                DividendRate = message.DividendRate,
+                SporttypeGroups = message.UserSelectedSportGroupIds
             });
             var fileContent = workbook
                 .SetData(reportData)
@@ -92,13 +97,14 @@
               sheetIndex: 1,
               footerEndIndex: 5);
 
-        internal static string GetReportTitle(PerformanceBonusExcelQuery query)
+        internal string GetReportTitle(PerformanceBonusExcelQuery query)
         {
             var currency = $"{ AppResources.Currency }: { CurrencyConstant.List[query.UserSelectedCurrencyId]}";
             var bonusRate = $"{ReportResources.DividendRate}: {query.DividendRate}%";
             var date = $"{query.FromDate.ToShortDate()} --> {query.ToDate.ToShortDate()}";
+            var sportGroup = GetValidSportGroupNames(sportGroupService.GetSportGroups(), query.SelectedSportGroupIds);
 
-            return $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency}";
+            return $"{ReportResources.PerformanceBonusTitle} - {date} - {bonusRate} - {currency} - {AppResources.Sport}: {sportGroup}";
         }
 
 

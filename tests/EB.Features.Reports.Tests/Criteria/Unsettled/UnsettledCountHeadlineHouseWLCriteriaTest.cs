@@ -11,13 +11,26 @@ namespace EB.Features.Reports.Tests.Criteria
         public void GetSettingKey_Always_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new UnsettledCountHeadlineHouseWLCriteria(new HouseWinLossParam { Role = UserLevel.Super });
+            var criteria = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam { Role = UserLevel.Super, IsCountUser = true });
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
             Assert.AreEqual("CS_EB_Rpt_Outstanding_Headline_CustCount", act);
+        }
+
+        [Test]
+        public void GetSpParams_Always_ExistSettingKey()
+        {
+            // Arrange
+            var criteria = new UnsettledHouseWinLossOfHeadlineCriteria(new HouseWinLossParam { IsCountUser = true });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsTrue(act.ContainsKey("SettingKey"));
         }
     }
 }

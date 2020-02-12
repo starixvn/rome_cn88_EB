@@ -1,5 +1,4 @@
 ﻿using System;
-using EB.Features.Reports.Constants;
 using EB.Features.Reports.Criteria;
 using EB.Features.Reports.Params;
 using EB.Features.Shared.Model;
@@ -7,13 +6,13 @@ using NUnit.Framework;
 
 namespace EB.Features.Reports.Tests.Criteria
 {
-    public class SettledHouseWinLossOfSMACriteriaTest
+    public class UnsettledHouseWinLossOfSMACriteriaTest
     {
         [TestCase()]
         public void IsValid_ValidInput_ReturnTrue()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam
             {
                 SportTypeGroups = "0",
                 BetTypeGroup = 0,
@@ -34,7 +33,7 @@ namespace EB.Features.Reports.Tests.Criteria
         public void IsValid_InvalidInput_ReturnFalse(int betTypeGroup, int isLive, DateTime fromDate, DateTime toDate)
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam
             {
                 BetTypeGroup = betTypeGroup,
                 IsLive = isLive,
@@ -50,28 +49,11 @@ namespace EB.Features.Reports.Tests.Criteria
         }
 
         [Test]
-        public void MoveBetsDay_Always_SetInConstructor()
-        {
-            // Arrange
-            var expectedMoveBetsDayDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
-            {
-                MoveBetsDay = expectedMoveBetsDayDate
-            });
-
-            // Act
-            var act = criteia.MoveBetsDay;
-
-            // Assert
-            Assert.AreEqual(expectedMoveBetsDayDate, act);
-        }
-
-        [Test]
         public void FromDate_Always_SetInConstructor()
         {
             // Arrange
             var expectedFromDate = DateTime.Now;
-            var criteia = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
+            var criteia = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam
             {
                 FromDate = expectedFromDate
             });
@@ -84,11 +66,28 @@ namespace EB.Features.Reports.Tests.Criteria
         }
 
         [Test]
+        public void ToDate_Always_SetInConstructor()
+        {
+            // Arrange
+            var expectedToDate = DateTime.Now;
+            var criteia = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam
+            {
+                ToDate = expectedToDate
+            });
+
+            // Act
+            var act = criteia.ToDate;
+
+            // Assert
+            Assert.AreEqual(expectedToDate, act);
+        }
+
+        [Test]
         public void IsExcludedTest_Always_SetInConstructor()
         {
             // Arrange
             var expectedIsExcludedTest = true;
-            var criteia = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
+            var criteia = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam
             {
                 IsExcludedTest = expectedIsExcludedTest
             });
@@ -99,75 +98,70 @@ namespace EB.Features.Reports.Tests.Criteria
             // Assert
             Assert.AreEqual(expectedIsExcludedTest, act);
         }
-
-
-        [TestCase(true, ReportMode.History)]
-        [TestCase(false, ReportMode.Current)]
-        public void ReportMode_Always_SetInConstructor(bool isHistory, int expectedReportMode)
-        {
-            // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam
-            {
-                IsHistoricReport = isHistory
-            });
-
-            // Act
-            var act = criteria.ReportMode;
-
-            // Assert
-            Assert.AreEqual(expectedReportMode, act);
-        }
-
+                
         [Test]
         public void GetSettingKey_SuperAlways_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Super });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Super });
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_EB_Rpt_Winloss_Super", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Super", act);
         }
 
         [Test]
         public void GetSettingKey_MasterAlways_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Master });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Master });
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_EB_Rpt_Winloss_Master", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Master", act);
         }
 
         [Test]
         public void GetSettingKey_AgentAlways_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Agent });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Agent });
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_EB_Rpt_Winloss_Agent", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Agent", act);
         }
 
         [Test]
         public void GetSettingKey_MemberAlways_ReturnCorrectKey()
         {
             // Arrange
-            var criteria = new SettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
 
             // Act
             var act = criteria.GetSettingKey();
 
             // Assert
-            Assert.AreEqual("CS_EB_Rpt_Winloss_Member", act);
+            Assert.AreEqual("CS_EB_Rpt_Outstanding_Member", act);
         }
+
+        [Test]
+        public void GetSpParams_Always_ExistSettingKey()
+        {
+            // Arrange
+            var criteria = new UnsettledHouseWinLossOfSMACriteria(new HouseWinLossParam { Role = UserLevel.Member });
+
+            // Act
+            var act = criteria.GetSpParams();
+
+            // Assert
+            Assert.IsTrue(act.ContainsKey("SettingKey"));
+        }       
     }
 }

@@ -45,6 +45,7 @@ class SingleSelectionDropdownComponent {
             onChange: this.onchange
         });
     };
+
     getSelectedItem = () => {
         const selected = [];
         const selectedOptions = this.$dropdown.find("option:selected");

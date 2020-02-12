@@ -49,18 +49,16 @@
                 : GetBetTypeGroups().Where(bettype => bettype.SportTypeGroup == sportGroupId);
 
         private IEnumerable<BetTypeGroup> GetBetTypeGroups()
-            => fanexCacheService.GetOrSet(
+        {
+            var data = fanexCacheService.GetOrSet(
                 BetTypesCacheKey,
-                () =>
-                {
-                    var betTypes = dynamicRepository.Fetch<BetTypeGroup>(new GetBetTypeGroupBySportCriteria());
-
-                    return betTypes
-                    .Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName))
-                    .OrderBy(i => i.SportTypeGroup)
-                    .ThenBy(i => i.Id)
-                    .ToList();
-                },
+                () => { return dynamicRepository.Fetch<BetTypeGroup>(new GetBetTypeGroupBySportCriteria()); },
                 new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(CachedDay)));
+
+            return data.Select(bettype => new BetTypeGroup(bettype.SportTypeGroup, bettype.Id, cacheRefService.GetBetTypeName))
+                .OrderBy(i => i.SportTypeGroup)
+                .ThenBy(i => i.Id)
+                .ToList();
+        }
     }
 }

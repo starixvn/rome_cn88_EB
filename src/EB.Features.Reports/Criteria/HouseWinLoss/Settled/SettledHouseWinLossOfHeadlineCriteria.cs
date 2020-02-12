@@ -3,9 +3,9 @@
     using System;
     using EB.Features.Reports.Params;
 
-    public class SettledCountHeadlineHouseWLCriteria : HouseWinLossBaseCriteria
+    public class SettledHouseWinLossOfHeadlineCriteria : HouseWinLossBaseCriteria
     {
-        public SettledCountHeadlineHouseWLCriteria(HouseWinLossParam param) : base(param)
+        public SettledHouseWinLossOfHeadlineCriteria(HouseWinLossParam param) : base(param)
         {
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
             MoveBetsDay = param.MoveBetsDay;
@@ -16,6 +16,6 @@
         public int ReportMode { get; }
 
         public override string GetSettingKey()
-            => "CS_EB_Rpt_Winloss_Headline_CustCount";
+            => IsCountUser ? "CS_EB_Rpt_Winloss_Headline_CustCount" : "CS_EB_Rpt_Winloss_Headline";
     }
 }

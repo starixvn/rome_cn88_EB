@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using EB.Features.Shared.Criteria;
     using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using Fanex.Caching;
@@ -32,7 +33,11 @@
                 new BetTypeGroup(1,3,cacheRefService.GetBetTypeName),
             };
             bettypeGroupService = new BettypeGroupServiceImpl(dynamicRepository, cacheRefService, fanexCacheService);
-            fanexCacheService.GetOrSet(BetTypesCacheKey, Arg.Any<Func<List<BetTypeGroup>>>(), Arg.Any<CacheItemOptions>())
+
+            dynamicRepository.Fetch<BetTypeGroup>(Arg.Any<GetBetTypeGroupBySportCriteria>())
+               .Returns(bettypeGroups);
+
+            fanexCacheService.GetOrSet(BetTypesCacheKey, Arg.Any<Func<IEnumerable<BetTypeGroup>>>(), Arg.Any<CacheItemOptions>())
                 .Returns(bettypeGroups);
         }
 
@@ -40,7 +45,7 @@
         public void GetBetTypeGroupsBySport_SportGroupIdIs0_ReturnAll()
         {
             // Arrange
-            
+
 
             // Act
             var act = bettypeGroupService.GetBetTypeGroupsBySport(0);
@@ -53,7 +58,7 @@
         public void GetBetTypeGroupsBySport_Exist_ReturnExistList()
         {
             // Arrange
-            
+
 
             // Act
             var act = bettypeGroupService.GetBetTypeGroupsBySport(1);

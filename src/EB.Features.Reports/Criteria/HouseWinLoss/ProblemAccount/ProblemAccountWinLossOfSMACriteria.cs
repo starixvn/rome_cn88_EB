@@ -1,19 +1,20 @@
 ﻿namespace EB.Features.Reports.Criteria
 {
     using System;
+    using System.Collections;
     using EB.Features.Reports.Params;
     using EB.Features.Shared.Model;
     using Fanex.Data;
 
-    public class SettledHouseWinLossOfSMACriteria : HouseWinLossBaseCriteria
+    public class ProblemAccountWinLossOfSMACriteria : HouseWinLossBaseCriteria
     {
-        public SettledHouseWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
+        public ProblemAccountWinLossOfSMACriteria(HouseWinLossParam param) : base(param)
         {
-            HeadlineId = param.HeadlineId;
             Role = param.Role;
             CustId = param.CustId;
             MoveBetsDay = param.MoveBetsDay;
             ReportMode = param.IsHistoricReport ? Constants.ReportMode.History : Constants.ReportMode.Current;
+            HeadlineId = param.HeadlineId;
         }
 
         public int HeadlineId { get; }
@@ -30,12 +31,27 @@
         public override bool IsValid() => base.IsValid() && CustId >= 0;
 
         public override string GetSettingKey()
-            => Role.IsSuperLevel() ?
-            "CS_EB_Rpt_Winloss_Super" :
+        {
+            var key = Role.IsSuperLevel() ?
+            "CS_EB_Rpt_Winloss_ProblemAccount_Super" :
              Role.IsMasterLevel() ?
-            "CS_EB_Rpt_Winloss_Master" :
+            "CS_EB_Rpt_Winloss_ProblemAccount_Master" :
             Role.IsAgentLevel() ?
-            "CS_EB_Rpt_Winloss_Agent" :
-            "CS_EB_Rpt_Winloss_Member";
+            "CS_EB_Rpt_Winloss_ProblemAccount_Agent" :
+            "CS_EB_Rpt_Winloss_ProblemAccount_Member";
+
+            return IsCountUser ? $"{key}_CustCount" : key;
+        }
+
+        public override Hashtable GetSpParams()
+        {
+            var spParams = base.GetSpParams();
+            if (Role.IsSuperLevel())
+            {
+                spParams.Remove("CustId");
+            }
+
+            return spParams;
+        }
     }
 }

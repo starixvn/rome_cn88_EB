@@ -9,6 +9,6 @@
         }
 
         public override string GetSettingKey()
-            => "CS_EB_Rpt_Outstanding_Headline";
+            => IsCountUser ? "CS_EB_Rpt_Outstanding_Headline_CustCount" : "CS_EB_Rpt_Outstanding_Headline";
     }
 }

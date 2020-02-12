@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using EB.Features.Reports.Model;
     using EB.Features.Reports.Params;
     using EB.Features.Reports.Resources;
     using EB.Features.Reports.Services;
+    using EB.Features.Shared.Model;
     using EB.Features.Shared.Services;
     using EB.Features.Site.Reports.Request.HouseWinLoss;
     using EB.Features.Site.Reports.ViewModel.HouseWinLoss;
@@ -47,7 +47,7 @@
             var allBetTypes = betTypeService.GetBetTypeGroupsBySport();
             message.UserSelectedSportGroupIds = GetValidSportGroupIds(sportGroups.Select(i => i.Id), message.UserSelectedSportGroupIds);
 
-            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds);
+            var betTypes = betTypeService.GetBetTypeGroupsBySport(message.SelectedSportGroupIds).Distinct(new BetTypeGroupComparer());
 
             var reportData = houseWinLossService.Get(new HouseWinLossParam
             {
@@ -63,7 +63,7 @@
                 SportTypeGroups = message.UserSelectedSportGroupIds,
                 FromDate = message.FromDate,
                 ToDate = message.ToDate,
-                Date = message.Date
+                Date = message.Date,
             });
 
             return new HouseWinLossReportViewModel(

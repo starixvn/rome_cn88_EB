@@ -42,7 +42,7 @@
 
         public int UserSelectedLiveStatusId { get; set; }
 
-        public int UserSelectedTicketStatusId { get; set; }
+        public int UserSelectedTicketStatusId { get; set; } = 1;
 
         public DateTime Date { get; set; }
 

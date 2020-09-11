@@ -1323,6 +1323,7 @@
     <Content Include="Reports\Views\HouseWinLoss\MemberTable.cshtml" />
     <Content Include="Reports\Views\ReportLegend.cshtml" />
     <Content Include="Reports\Views\HouseWinLoss\CountUsers.cshtml" />
+    <Content Include="Shared\Views\Matomo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\SonarAnalyzer.CSharp.7.16.0.8981\analyzers\Google.Protobuf.dll" />

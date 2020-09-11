@@ -10,6 +10,7 @@
     @StaticResources.RenderStyles("~/assets/common/bundles/common/common")
     @StaticResources.RenderStyles("~/assets/common/bundles/site-features/default")
     @RenderSection("Styles", required: false)
+    @Html.Partial("~/Shared/Views/Matomo.cshtml")
 </head>
 <body @Html.Raw(EB.Features.Site.Shared.Helpers.BrowserManager.BuildMobileHtmlClass())>
     @RenderBody()

@@ -30,7 +30,7 @@
 
         public static int ReduceNumber => int.Parse(GetConfigValue("ReduceNumber"));
 
-        public static string GetConfigValue(string configName) => AppSettingValues[configName];
+        public static string GetConfigValue(string configName) =>  string.IsNullOrEmpty(AppSettingValues[configName]) ? "": AppSettingValues[configName];
 
         public static void Verify() => Require(StoredProcedurePath, nameof(StoredProcedurePath));
 
@@ -41,5 +41,7 @@
                 throw new ConfigurationErrorsException($"{keyName} is null or whitespace");
             }
         }
+
+        public static string MatomoSiteId => GetConfigValue("MatomoSiteId");
     }
 }

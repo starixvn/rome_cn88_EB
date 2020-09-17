@@ -1,6 +1,5 @@
-﻿@{
+﻿@using CommonAppSetting = EB.Features.Shared.Configuration.AppSettings
 
-}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +9,7 @@
     @StaticResources.RenderStyles("~/assets/common/bundles/common/common")
     @StaticResources.RenderStyles("~/assets/common/bundles/site-features/default")
     @RenderSection("Styles", required: false)
+    @Html.Partial("~/Shared/Views/Matomo.cshtml", CommonAppSetting.MatomoSiteId)
 </head>
 <body @Html.Raw(EB.Features.Site.Shared.Helpers.BrowserManager.BuildMobileHtmlClass())>
     @RenderBody()

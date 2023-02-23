@@ -76,13 +76,13 @@
 
         public bool CheckUserSitePermission(User user)
         {
-            var group = user.Group == null ? null : groupService.Get(user.Group.Id);
+            var group = groupService.Get(user.GroupId);
             var siteLevelList = userService.GetSiteLevel(user.Id, NapSettings.Settings.Environment);
             var menuList = userService.GetMenuItem(user.Id, NapSettings.Settings.SiteId);
 
             // gets all sites of logging-in user
             return (group == null || group.IsActive) &&
-                   siteLevelList.Any(x => x.Site.Id == NapSettings.Settings.SiteId && x.IsActive &&
+                   siteLevelList.Any(x => x.SiteId == NapSettings.Settings.SiteId && x.IsActive &&
                    menuList.Any());
         }
     }

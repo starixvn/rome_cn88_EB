@@ -39,7 +39,7 @@ namespace EB.Features.Main.Services
             var menuItems = new List<MenuItem>();
 
             napMenuItems
-                .Where(i => i.Parent == null)
+                .Where(i => i.ParentId == 0)
                 .OrderBy(i => i.DisplayOrder)
                 .ToList()
                 .ForEach(napMenuItem =>
@@ -47,7 +47,7 @@ namespace EB.Features.Main.Services
                     var menuItem = new MenuItem(napMenuItem)
                     {
                         SubMenus = napMenuItems
-                        .Where(i => i.Parent != null && i.Parent.Id == napMenuItem.Id)
+                        .Where(i => i.ParentId == napMenuItem.Id)
                         .OrderBy(i => i.DisplayOrder)
                         .Select(i => new MenuItem(i))
                         .ToList()

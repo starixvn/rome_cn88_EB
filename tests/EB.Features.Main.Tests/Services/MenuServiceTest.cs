@@ -44,7 +44,7 @@ namespace EB.Features.Main.Tests.Services
             // Arrange
             var menu = new List<NapMenuItem>
             {
-                new NapMenuItem { Parent = new NapMenuItem() },
+                new NapMenuItem { ParentId = 0 },
                 new NapMenuItem(),
             };
             napClientUserService.GetMenuItem(Arg.Any<int>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>())

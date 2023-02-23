@@ -147,7 +147,7 @@ namespace EB.Features.Main.Tests.Services
             userService.GetSiteLevel(Arg.Any<int>(), Arg.Any<string>())
                 .Returns(new List<SiteLevel>
                 {
-                    new SiteLevel { IsActive = false, Site = new Site{ Id = 67 }  }
+                    new SiteLevel { IsActive = false, SiteId = 67  }
                 });
             dynamicRepository.When(x => x.Execute(Arg.Any<CheckIPOfficeCommand>()))
                 .Do(x => ((CheckIPOfficeCommand)x.Args()[0]).IsAccess = true);
@@ -168,7 +168,7 @@ namespace EB.Features.Main.Tests.Services
             userService.GetSiteLevel(Arg.Any<int>(), Arg.Any<string>())
                 .Returns(new List<SiteLevel>
                 {
-                    new SiteLevel { IsActive = true, Site = new Site{ Id = 67 }  }
+                    new SiteLevel { IsActive = true, SiteId = 67  }
                 });
             userService.GetMenuItem(Arg.Any<int>(), Arg.Any<int>()).Returns(new List<MenuItem>());
             dynamicRepository.When(x => x.Execute(Arg.Any<CheckIPOfficeCommand>()))
@@ -190,7 +190,7 @@ namespace EB.Features.Main.Tests.Services
             userService.GetSiteLevel(Arg.Any<int>(), Arg.Any<string>())
                 .Returns(new List<SiteLevel>
                 {
-                    new SiteLevel { IsActive = true, Site = new Site{ Id = 67 } }
+                    new SiteLevel { IsActive = true, SiteId = 67 }
                 });
             userService.GetMenuItem(Arg.Any<int>(), Arg.Any<int>())
                 .Returns(new List<MenuItem> {

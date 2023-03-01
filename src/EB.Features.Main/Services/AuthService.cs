@@ -76,7 +76,7 @@
 
         public bool CheckUserSitePermission(User user)
         {
-            var group = groupService.Get(user.GroupId);
+            var group = user.GroupId == 0 ? null : groupService.Get(user.GroupId);
             var siteLevelList = userService.GetSiteLevel(user.Id, NapSettings.Settings.Environment);
             var menuList = userService.GetMenuItem(user.Id, NapSettings.Settings.SiteId);
 
